@@ -1,15 +1,23 @@
-/* Optional: local brand font (drop files in /public/fonts) */
+/* styles.css */
+:root {
+  --founders-black:  #121212;
+  --archival-slate:  #8A8D91;
+  --sandstone:       #F2E5D5;
+  --scholar-gold:    #D4AF37;
+  --hoyas-midnight:  #1B2A41;
+  --global-garnet:   #8C1E4A;
+}
+
+/* Optional: local brand font setup (drop files under /public/fonts) */
 /*
 @font-face {
   font-family: "FuturoSans";
-  src:
-    url("/fonts/FuturoSans-Regular.woff2") format("woff2"),
-    url("/fonts/FuturoSans-Regular.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+  src: url("/fonts/FuturoSans-Regular.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "FuturoSans";
+  src: url("/fonts/FuturoSans-Semibold.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
 }
 */
-
-/* Optional: quick palette var for future use */
-:root { --sandstone: #D4B996; }

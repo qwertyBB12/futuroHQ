@@ -1,17 +1,77 @@
 // theme.ts
 import {buildLegacyTheme} from 'sanity'
 
-const HOYA_BLUE = '#0057FF'
-const SANDSTONE = '#D4B996'
+// Brand palette (yours)
+const FOUNDERS_BLACK    = '#121212'
+const ARCHIVAL_SLATE    = '#8A8D91'
+const SANDSTONE_NEUTRAL = '#F2E5D5'
+const SCHOLAR_GOLD      = '#D4AF37'
+const HOYAS_MIDNIGHT    = '#1B2A41'
+const GLOBAL_GARNET     = '#8C1E4A'
 
-export const customTheme = buildLegacyTheme({
-  '--component-bg': '#FAFAFB',
-  '--component-text-color': '#0F1115',
-  '--brand-primary': HOYA_BLUE,
-  '--default-button-primary-color': HOYA_BLUE,
-  '--main-navigation-color': HOYA_BLUE,
-  '--main-navigation-color--inverted': '#FFFFFF',
-  '--focus-color': HOYA_BLUE,
-  /* you can override more CSS variables here as needed */
-})
+// Derived inks/surfaces
+const OFFWHITE     = '#F5F7FA'
+const CARD_BG      = '#22334E'
+const INPUT_BG     = '#263957'
+const INPUT_BORDER = '#314662'
+const DIVIDER      = '#2B3E5B'
 
+// Put your overrides in a plain record so TS doesn’t argue about keys
+const tokens = {
+  // App surfaces
+  '--component-bg': HOYAS_MIDNIGHT,      // main canvas
+  '--component-text-color': OFFWHITE,    // primary text
+
+  // Cards/panels
+  '--card-bg-color': CARD_BG,
+  '--card-fg-color': OFFWHITE,
+  '--card-muted-fg-color': ARCHIVAL_SLATE,
+  '--card-shadow-outline-color': 'rgba(0,0,0,0.35)',
+
+  // Navigation
+  '--main-navigation-color': HOYAS_MIDNIGHT,
+  '--main-navigation-color--inverted': OFFWHITE,
+
+  // Brand & focus
+  '--brand-primary': SCHOLAR_GOLD,
+  '--focus-color': SCHOLAR_GOLD,
+  '--link-color': SANDSTONE_NEUTRAL,
+
+  // Buttons
+  '--default-button-color': CARD_BG,
+  '--default-button-primary-color': SCHOLAR_GOLD,
+  '--default-button-danger-color': GLOBAL_GARNET,
+  '--default-button-success-color': SCHOLAR_GOLD,
+
+  // Inputs
+  '--input-bg': INPUT_BG,
+  '--input-border-color': INPUT_BORDER,
+  '--input-text-color': OFFWHITE,
+  '--input-placeholder-color': ARCHIVAL_SLATE,
+  '--input-shadow': 'none',
+
+  // Status mapping
+  '--state-success-color': SCHOLAR_GOLD,
+  '--state-info-color': SANDSTONE_NEUTRAL,
+  '--state-warning-color': SANDSTONE_NEUTRAL,
+  '--state-danger-color': GLOBAL_GARNET,
+
+  // Badges/labels
+  '--badge-default-bg': ARCHIVAL_SLATE,
+  '--badge-default-fg': FOUNDERS_BLACK,
+  '--badge-primary-bg': SCHOLAR_GOLD,
+  '--badge-primary-fg': FOUNDERS_BLACK,
+  '--badge-success-bg': SCHOLAR_GOLD,
+  '--badge-success-fg': FOUNDERS_BLACK,
+  '--badge-warning-bg': SANDSTONE_NEUTRAL,
+  '--badge-warning-fg': FOUNDERS_BLACK,
+  '--badge-danger-bg': GLOBAL_GARNET,
+  '--badge-danger-fg': OFFWHITE,
+
+  // Borders/Dividers
+  '--hairline-color': DIVIDER,
+  '--border-color': INPUT_BORDER,
+} as const
+
+// Cast so TS accepts all keys (runtime already does)
+export const customTheme = buildLegacyTheme(tokens as unknown as Record<string, string>)
