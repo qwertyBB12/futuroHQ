@@ -1,6 +1,4 @@
 // components/StudioLogo.tsx
-// With the React 17+ JSX transform you don't need to import React explicitly.
-
 export default function StudioLogo() {
   return (
     <div
@@ -13,7 +11,8 @@ export default function StudioLogo() {
         background: '#111',
         color: '#fff',
         fontWeight: 700,
-        fontFamily: "system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial"
+        fontFamily:
+          "system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial",
       }}
     >
       BeNeXT
