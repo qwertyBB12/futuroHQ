@@ -8,7 +8,7 @@ import './styles.css'
 
 export default defineConfig({
   name: 'default',
-  title: 'BeNeXT HQ Studio (TEST BUILD)',   // TEMP so we confirm the live build
+  title: 'HQ',   // TEMP so we confirm the live build
   projectId: 'fo6n8ceo',
   dataset: 'production',
   theme: customTheme,
