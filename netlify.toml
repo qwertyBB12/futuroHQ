@@ -12,7 +12,9 @@
     connect-src 'self'
       https://api.sanity.io
       https://*.sanity.io
+      https://fo6n8ceo.api.sanity.io
       wss://*.sanity.io
+      wss://fo6n8ceo.api.sanity.io
       https://sanity-cdn.com
       https://core.sanity-cdn.com
       https://modules.sanity-cdn.com
@@ -25,7 +27,7 @@
     frame-ancestors 'self';
   """
 
-# --- Favicon cache-busting (adds only headers; does not affect anything else) ---
+# --- Favicon cache-busting (unchanged) ---
 [[headers]]
   for = "/favicon.ico"
   [headers.values]
@@ -36,7 +38,7 @@
   [headers.values]
   Cache-Control = "no-cache, must-revalidate"
 
-# (Optional: uncomment if you also want to bust cache for apple icon)
+# (Optional)
 # [[headers]]
 #   for = "/apple-touch-icon.png"
 #   [headers.values]
