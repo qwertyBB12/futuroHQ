@@ -1,15 +1,14 @@
-// sanity.config.ts
 import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 import {customTheme} from './theme'
-import StudioLogo from './components/StudioLogo'   // ⬅️ add this line
+import StudioLogo from './components/StudioLogo'
 import './styles.css'
 
 export default defineConfig({
   name: 'default',
-  title: 'BeNeXT HQ Studio',
+  title: 'BeNeXT HQ Studio (TEST BUILD)',   // TEMP so we confirm the live build
   projectId: 'fo6n8ceo',
   dataset: 'production',
   theme: customTheme,
@@ -17,7 +16,7 @@ export default defineConfig({
   schema: {types: schemaTypes},
   studio: {
     components: {
-      logo: StudioLogo,    // ⬅️ add this block
+      logo: StudioLogo,
     },
   },
 })
