@@ -15,6 +15,23 @@
     frame-ancestors 'self';
   """
 
+# --- Favicon cache-busting (adds only headers; does not affect anything else) ---
+[[headers]]
+  for = "/favicon.ico"
+  [headers.values]
+  Cache-Control = "no-cache, must-revalidate"
+
+[[headers]]
+  for = "/favicon-32x32.png"
+  [headers.values]
+  Cache-Control = "no-cache, must-revalidate"
+
+# (Optional: uncomment if you also want to bust cache for apple icon)
+# [[headers]]
+#   for = "/apple-touch-icon.png"
+#   [headers.values]
+#   Cache-Control = "no-cache, must-revalidate"
+
 [build]
   command = "npm run build"
   publish = "dist"
@@ -26,4 +43,3 @@
   from = "/*"
   to = "/index.html"
   status = 200
-
