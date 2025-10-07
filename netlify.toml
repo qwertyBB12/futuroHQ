@@ -6,10 +6,10 @@
     base-uri 'self';
     object-src 'none';
     img-src * data: blob:;
-    font-src 'self' https://sanity-cdn.com https://core.sanity-cdn.com https://cdn.sanity.io data:;
-    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://sanity-cdn.com https://core.sanity-cdn.com https://cdn.sanity.io https://plasmic.app https://*.plasmic.app;
+    font-src 'self' https://studio-static.sanity.io https://sanity-cdn.com https://core.sanity-cdn.com https://cdn.sanity.io data:;
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://sanity-cdn.com https://core.sanity-cdn.com https://modules.sanity-cdn.com https://cdn.sanity.io https://plasmic.app https://*.plasmic.app;
     style-src 'self' 'unsafe-inline';
-    connect-src 'self' https://api.sanity.io https://*.sanity.io https://sanity-cdn.com https://core.sanity-cdn.com https://plasmic.app https://*.plasmic.app https://hq.benextglobal.com https://futurohq.netlify.app;
+    connect-src 'self' https://api.sanity.io https://*.sanity.io https://sanity-cdn.com https://core.sanity-cdn.com https://modules.sanity-cdn.com https://plasmic.app https://*.plasmic.app https://hq.benextglobal.com https://futurohq.netlify.app;
     worker-src 'self' blob:;
     frame-src 'self';
     frame-ancestors 'self';
@@ -26,3 +26,4 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
