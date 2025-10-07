@@ -1,3 +1,9 @@
+[[headers]]
+  for = "/*"
+  [headers.values]
+  # If you have a CSP, add/merge hq.benextglobal.com anywhere your policy mentions your domain:
+  # Example (yours may vary—edit don’t duplicate):
+  Content-Security-Policy = "default-src 'self' https://hq.benextglobal.com https://futurohq.netlify.app https://cdn.sanity.io https://*.sanity.io https://plasmic.app https://*.plasmic.app; img-src * data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.plasmic.app https://cdn.sanity.io; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.sanity.io https://*.sanity.io https://hq.benextglobal.com https://futurohq.netlify.app; frame-ancestors 'self';"
 [build]
   command = "npm run build"
   publish = "dist"
