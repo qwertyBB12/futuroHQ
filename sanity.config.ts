@@ -9,7 +9,7 @@ import './styles.css'
 
 export default defineConfig({
   name: 'default',
-  title: 'Futuro HQ Studio (TEST)',
+  title: 'BeNeXT HQ Studio',
   projectId: 'fo6n8ceo',
   dataset: 'production',
   theme: customTheme,
