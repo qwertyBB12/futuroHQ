@@ -198,11 +198,158 @@ export const paletteStorageKey = 'studio:palette'
 
 export const isValidPalette = isPaletteName
 
+type VisualOverrides = {
+  surface: string
+  surfaceText: string
+  pane: string
+  paneText: string
+  card: string
+  cardText: string
+  nav: string
+  navText: string
+  button: string
+  buttonText: string
+  buttonPrimary: string
+  buttonPrimaryText: string
+}
+
+const visualOverrides: Record<PaletteName, VisualOverrides> = {
+  midnightSlate: {
+    surface: '#0B1220',
+    surfaceText: '#F2E5D5',
+    pane: '#111A2C',
+    paneText: '#F2E5D5',
+    card: '#111A2C',
+    cardText: '#F2E5D5',
+    nav: '#0B1220',
+    navText: '#F2E5D5',
+    button: '#18243A',
+    buttonText: '#F2E5D5',
+    buttonPrimary: '#FF6F61',
+    buttonPrimaryText: '#0B1220',
+  },
+  sandstoneDawn: {
+    surface: '#F2E5D5',
+    surfaceText: '#0B1220',
+    pane: '#E8DAC3',
+    paneText: '#0B1220',
+    card: '#F8EFE2',
+    cardText: '#0B1220',
+    nav: '#E0CBB0',
+    navText: '#0B1220',
+    button: '#D8C9B4',
+    buttonText: '#0B1220',
+    buttonPrimary: '#8C1E4A',
+    buttonPrimaryText: '#F8EFE2',
+  },
+  garnetEmber: {
+    surface: '#1B2A41',
+    surfaceText: '#F2E5D5',
+    pane: '#162238',
+    paneText: '#F2E5D5',
+    card: '#0F1A2D',
+    cardText: '#F2E5D5',
+    nav: '#8C1E4A',
+    navText: '#F2E5D5',
+    button: '#22334E',
+    buttonText: '#F2E5D5',
+    buttonPrimary: '#FF6F61',
+    buttonPrimaryText: '#0B1220',
+  },
+  scholarNoir: {
+    surface: '#0B1220',
+    surfaceText: '#F5F7FA',
+    pane: '#111A2C',
+    paneText: '#F5F7FA',
+    card: '#141F33',
+    cardText: '#F5F7FA',
+    nav: '#FF6F61',
+    navText: '#0B1220',
+    button: '#1C2A42',
+    buttonText: '#F5F7FA',
+    buttonPrimary: '#D4AF37',
+    buttonPrimaryText: '#0B1220',
+  },
+}
+
+const assignStyles = (selector: string, styles: Record<string, string>) => {
+  if (typeof document === 'undefined') return
+  document.querySelectorAll<HTMLElement>(selector).forEach((element) => {
+    Object.entries(styles).forEach(([property, value]) => {
+      element.style.setProperty(property, value, 'important')
+    })
+  })
+}
+
+let currentPaletteName: PaletteName = defaultPaletteName
+let paletteObserver: MutationObserver | null = null
+
+const applyVisualOverrides = (name: PaletteName) => {
+  if (typeof document === 'undefined') return
+
+  const base = visualOverrides.midnightSlate
+  const overrides = visualOverrides[name] ?? base
+
+  assignStyles('body, #sanity', {
+    'background-color': overrides.surface,
+    color: overrides.surfaceText,
+  })
+
+  assignStyles(
+    [
+      '[data-ui="Pane"]',
+      '[data-ui="Pane"] [data-ui="Pane"]',
+      '[data-ui="PaneContent"]',
+      '[data-ui="PaneLayout"]',
+      '[data-ui="PaneItem"]',
+    ].join(','),
+    {
+      'background-color': overrides.pane,
+      color: overrides.paneText,
+    }
+  )
+
+  assignStyles('[data-ui="Card"], [data-ui="PaneContent"] [data-ui="Card"]', {
+    'background-color': overrides.card,
+    color: overrides.cardText,
+  })
+
+  assignStyles(
+    '[data-ui="Navbar"], [data-ui="Navbar"] > *, [data-ui="Navbar"] [data-ui="Card"], [data-ui="Navbar"] [data-ui="Box"]',
+    {
+      'background-color': overrides.nav,
+      color: overrides.navText,
+    }
+  )
+
+  assignStyles('[data-ui="Navbar"] *, [data-ui="Navbar"] [data-ui]', {
+    color: overrides.navText,
+  })
+
+  assignStyles('[data-ui="Button"]', {
+    'background-color': overrides.button,
+    color: overrides.buttonText,
+  })
+
+  assignStyles('[data-ui="Button"][data-tone="primary"]', {
+    'background-color': overrides.buttonPrimary,
+    color: overrides.buttonPrimaryText,
+  })
+}
+
+const ensurePaletteObserver = () => {
+  if (typeof document === 'undefined') return
+  if (paletteObserver) return
+
+  paletteObserver = new MutationObserver(() => applyVisualOverrides(currentPaletteName))
+  paletteObserver.observe(document.body, {childList: true, subtree: true})
+}
+
 export const applyPalette = (name: PaletteName) => {
   if (typeof document === 'undefined') return
   const palette = getPaletteTokens(name)
   const root = document.documentElement
-  let currentPaletteName: PaletteName = name
+  currentPaletteName = name
 
   root.dataset.palette = name
   Object.entries(palette).forEach(([token, value]) => {
@@ -216,6 +363,9 @@ export const applyPalette = (name: PaletteName) => {
         el.style.setProperty(token, value)
       })
     })
+
+  applyVisualOverrides(name)
+  ensurePaletteObserver()
 }
 
 export const ensurePaletteOnLoad = () => {
