@@ -1,9 +1,10 @@
 /* styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 :root {
-  --founders-black:  #121212;
+  --founders-black:  #0B1220;
   --archival-slate:  #8A8D91;
   --sandstone:       #F2E5D5;
   --scholar-gold:    #D4AF37;
@@ -37,6 +38,8 @@
 @layer base {
   body {
     @apply bg-surface text-white;
+    background-color: var(--component-bg, var(--founders-black)) !important;
+    color: var(--component-text-color, #F2E5D5) !important;
     font-family: 'Oswald', sans-serif !important;
   }
 }

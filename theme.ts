@@ -2,7 +2,7 @@
 import {buildLegacyTheme} from 'sanity'
 
 // Brand palette (yours)
-const FOUNDERS_BLACK    = '#121212'
+const FOUNDERS_BLACK    = '#0B1220'
 const ARCHIVAL_SLATE    = '#8A8D91'
 const SANDSTONE_NEUTRAL = '#F2E5D5'
 const SCHOLAR_GOLD      = '#D4AF37'
@@ -20,7 +20,7 @@ const DIVIDER      = '#2B3E5B'
 // Put your overrides in a plain record so TS doesn’t argue about keys
 const tokens = {
   // App surfaces
-  '--component-bg': HOYAS_MIDNIGHT,      // main canvas
+  '--component-bg': FOUNDERS_BLACK,      // main canvas
   '--component-text-color': SANDSTONE_NEUTRAL,    // primary text
 
   // Cards/panels
@@ -30,7 +30,7 @@ const tokens = {
   '--card-shadow-outline-color': 'rgba(0,0,0,0.35)',
 
   // Navigation
-  '--main-navigation-color': HOYAS_MIDNIGHT,
+  '--main-navigation-color': FOUNDERS_BLACK,
   '--main-navigation-color--inverted': SANDSTONE_NEUTRAL,
 
   // Brand & focus
