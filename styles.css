@@ -12,6 +12,40 @@
   --global-garnet:   #8C1E4A;
   --main-navigation-color: var(--founders-black);
   --main-navigation-color--inverted: var(--sandstone);
+  --component-bg: var(--founders-black);
+  --component-text-color: var(--sandstone);
+  --card-bg-color: #111A2C;
+  --card-fg-color: var(--sandstone);
+  --card-muted-fg-color: var(--archival-slate);
+  --card-shadow-outline-color: rgba(0, 0, 0, 0.35);
+  --brand-primary: #FF6F61;
+  --focus-color: #FF6F61;
+  --link-color: var(--sandstone);
+  --default-button-color: var(--archival-slate);
+  --default-button-primary-color: #FF6F61;
+  --default-button-danger-color: var(--global-garnet);
+  --default-button-success-color: #FF6F61;
+  --input-bg: #18243A;
+  --input-border-color: #1F2D46;
+  --input-text-color: var(--sandstone);
+  --input-placeholder-color: var(--archival-slate);
+  --input-shadow: none;
+  --state-success-color: #FF6F61;
+  --state-info-color: var(--sandstone);
+  --state-warning-color: var(--sandstone);
+  --state-danger-color: var(--global-garnet);
+  --badge-default-bg: var(--archival-slate);
+  --badge-default-fg: var(--hoyas-midnight);
+  --badge-primary-bg: #FF6F61;
+  --badge-primary-fg: var(--hoyas-midnight);
+  --badge-success-bg: #FF6F61;
+  --badge-success-fg: var(--hoyas-midnight);
+  --badge-warning-bg: var(--sandstone);
+  --badge-warning-fg: var(--hoyas-midnight);
+  --badge-danger-bg: var(--global-garnet);
+  --badge-danger-fg: var(--sandstone);
+  --hairline-color: #1C2A42;
+  --border-color: #1F2D46;
 }
 
 /* Optional: local brand font setup (drop files under /public/fonts) */
