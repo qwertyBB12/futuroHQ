@@ -37,7 +37,6 @@
 /* === Futuro / BeNeXT Brand Helpers === */
 @layer base {
   body {
-    @apply bg-surface text-white;
     background-color: var(--component-bg, var(--founders-black)) !important;
     color: var(--component-text-color, #F2E5D5) !important;
     font-family: 'Oswald', sans-serif !important;
@@ -46,11 +45,24 @@
 
 @layer components {
   .h1-brand {
-    @apply font-display font-bold tracking-wide text-3xl md:text-4xl;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.025em;
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    text-transform: uppercase;
   }
 
   .btn-brand {
-    @apply inline-flex items-center justify-center rounded-2xl bg-brand px-4 py-2 font-semibold text-onBrand shadow;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    background-color: var(--main-navigation-color, var(--hoyas-midnight));
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    color: var(--main-navigation-color--inverted, var(--sandstone));
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   }
 
   /* Unify the navbar background (use the Sanity theme token instead of a separate var) */
@@ -80,9 +92,26 @@
     color: #ffffff !important;
   }
 
-  /* Small helper: ensure our brand color utility exists if Tailwind didn't include it */
+}
+
+@media (min-width: 768px) {
+  .h1-brand {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+}
+
+@layer utilities {
+  .bg-surface {
+    background-color: var(--component-bg, var(--founders-black)) !important;
+  }
+
   .bg-brand {
     background-color: var(--main-navigation-color, var(--hoyas-midnight)) !important;
+  }
+
+  .text-onBrand {
+    color: var(--main-navigation-color--inverted, var(--sandstone)) !important;
   }
 
   .font-display {
