@@ -20,7 +20,7 @@ const DIVIDER      = '#2B3E5B'
 // Put your overrides in a plain record so TS doesn’t argue about keys
 const tokens = {
   // App surfaces
-  '--component-bg': FOUNDERS_BLACK,      // main canvas
+  '--component-bg': HOYAS_MIDNIGHT,      // main canvas
   '--component-text-color': SANDSTONE_NEUTRAL,    // primary text
 
   // Cards/panels
@@ -30,7 +30,7 @@ const tokens = {
   '--card-shadow-outline-color': 'rgba(0,0,0,0.35)',
 
   // Navigation
-  '--main-navigation-color': FOUNDERS_BLACK,
+  '--main-navigation-color': HOYAS_MIDNIGHT,
   '--main-navigation-color--inverted': SANDSTONE_NEUTRAL,
 
   // Brand & focus
@@ -59,13 +59,13 @@ const tokens = {
 
   // Badges/labels
   '--badge-default-bg': ARCHIVAL_SLATE,
-  '--badge-default-fg': FOUNDERS_BLACK,
+  '--badge-default-fg': HOYAS_MIDNIGHT,
   '--badge-primary-bg': CORAL,
-  '--badge-primary-fg': FOUNDERS_BLACK,
+  '--badge-primary-fg': HOYAS_MIDNIGHT,
   '--badge-success-bg': CORAL,
-  '--badge-success-fg': FOUNDERS_BLACK,
+  '--badge-success-fg': HOYAS_MIDNIGHT,
   '--badge-warning-bg': SANDSTONE_NEUTRAL,
-  '--badge-warning-fg': FOUNDERS_BLACK,
+  '--badge-warning-fg': HOYAS_MIDNIGHT,
   '--badge-danger-bg': GLOBAL_GARNET,
   '--badge-danger-fg': SANDSTONE_NEUTRAL,
 
