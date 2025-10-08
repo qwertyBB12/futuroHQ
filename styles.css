@@ -62,3 +62,15 @@ body {
 [data-ui="Navbar"]::after {
   background: var(--hoya-blue) !important;
 }
+/* Workspace name typography — Oswald Bold, uppercase */
+[data-ui="Navbar"] [data-testid="workspace-name"],
+[data-ui="Navbar"] [data-testid="workspace-name"] *,
+/* fallbacks when testid isn't present */
+[data-ui="Navbar"] button[aria-haspopup="menu"] span,
+[data-ui="Navbar"] button[aria-label*="workspace"] span {
+  font-family: 'Oswald', sans-serif !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  color: #ffffff !important;
+}
