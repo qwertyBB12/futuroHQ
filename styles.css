@@ -103,7 +103,7 @@
 
 @layer utilities {
   .bg-surface {
-    background-color: var(--component-bg, var(--founders-black)) !important;
+    background-color: var(--component-bg, var(--hoyas-midnight)) !important;
   }
 
   .bg-brand {
