@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^5.0.2",
+    "@tailwindcss/postcss": "^4.1.14",
     "@types/react": "^19.1",
     "@types/tailwindcss": "^3.0.11",
     "autoprefixer": "^10.4.21",
