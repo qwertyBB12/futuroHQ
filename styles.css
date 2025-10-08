@@ -1,5 +1,4 @@
 /* styles.css */
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,7 +7,7 @@
   --archival-slate:  #8A8D91;
   --sandstone:       #F2E5D5;
   --scholar-gold:    #D4AF37;
-  --hoyas-midnight:  #1B2A41;
+  --hoyas-midnight:  #1B2A41; /* keep as a fallback token */
   --global-garnet:   #8C1E4A;
 }
 
@@ -25,6 +24,7 @@
   font-weight: 600; font-style: normal; font-display: swap;
 }
 */
+
 /* Collapse any workspace switcher button that contains an SVG initials badge */
 [data-ui="Navbar"] button:has(svg text) {
   display: none !important;
@@ -34,43 +34,55 @@
   visibility: hidden !important;
 }
 /* === Futuro / BeNeXT Brand Helpers === */
-.h1-brand {
-  @apply font-display font-bold tracking-wide text-3xl md:text-4xl;
+@layer base {
+  body {
+    @apply bg-surface text-white;
+    font-family: 'Oswald', sans-serif !important;
+  }
 }
 
-.btn-brand {
-  @apply inline-flex items-center justify-center rounded-2xl bg-brand px-4 py-2 font-semibold text-onBrand shadow;
-}
-body {
-  @apply bg-surface text-white;
-  font-family: 'Oswald', sans-serif;
-}
-/* ---- Brand color token ---- */
-:root { --hoya-blue: #0f2136; } /* tweak to your exact blue */
+@layer components {
+  .h1-brand {
+    @apply font-display font-bold tracking-wide text-3xl md:text-4xl;
+  }
 
-/* Unify the navbar background (Sanity splits it across multiple child cards/boxes) */
-[data-ui="Navbar"],
-[data-ui="Navbar"] > *,
-[data-ui="Navbar"] [data-ui="Card"],
-[data-ui="Navbar"] [data-ui="Box"] {
-  background-color: var(--hoya-blue) !important;
-  background-image: none !important;
-}
+  .btn-brand {
+    @apply inline-flex items-center justify-center rounded-2xl bg-brand px-4 py-2 font-semibold text-onBrand shadow;
+  }
 
-/* Some builds add before/after layers; force them too */
-[data-ui="Navbar"]::before,
-[data-ui="Navbar"]::after {
-  background: var(--hoya-blue) !important;
-}
-/* Workspace name typography — Oswald Bold, uppercase */
-[data-ui="Navbar"] [data-testid="workspace-name"],
-[data-ui="Navbar"] [data-testid="workspace-name"] *,
-/* fallbacks when testid isn't present */
-[data-ui="Navbar"] button[aria-haspopup="menu"] span,
-[data-ui="Navbar"] button[aria-label*="workspace"] span {
-  font-family: 'Oswald', sans-serif !important;
-  font-weight: 700 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.5px !important;
-  color: #ffffff !important;
+  /* Unify the navbar background (use the Sanity theme token instead of a separate var) */
+  [data-ui="Navbar"],
+  [data-ui="Navbar"] > *,
+  [data-ui="Navbar"] [data-ui="Card"],
+  [data-ui="Navbar"] [data-ui="Box"] {
+    background-color: var(--main-navigation-color, var(--hoyas-midnight)) !important;
+    background-image: none !important;
+  }
+
+  /* Some builds add before/after layers; force them too */
+  [data-ui="Navbar"]::before,
+  [data-ui="Navbar"]::after {
+    background: var(--main-navigation-color, var(--hoyas-midnight)) !important;
+  }
+  /* Workspace name typography — Oswald Bold, uppercase */
+  [data-ui="Navbar"] [data-testid="workspace-name"],
+  [data-ui="Navbar"] [data-testid="workspace-name"] *,
+  /* fallbacks when testid isn't present */
+  [data-ui="Navbar"] button[aria-haspopup="menu"] span,
+  [data-ui="Navbar"] button[aria-label*="workspace"] span {
+    font-family: 'Oswald', sans-serif !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    color: #ffffff !important;
+  }
+
+  /* Small helper: ensure our brand color utility exists if Tailwind didn't include it */
+  .bg-brand {
+    background-color: var(--main-navigation-color, var(--hoyas-midnight)) !important;
+  }
+
+  .font-display {
+    font-family: 'Oswald', sans-serif !important;
+  }
 }
