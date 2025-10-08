@@ -1,15 +1,14 @@
-import React, {useEffect} from 'react'
+// components/MyNavbar.tsx
+import {useEffect} from 'react'
 
 function hideWorkspaceBadgeOnce() {
-  // Find any SVG <text> node that looks like a two-letter initials badge (e.g., FH)
+  // Find any SVG <text> node that looks like two-letter initials (e.g., FH)
   const texts = Array.from(document.querySelectorAll('svg text')) as SVGTextElement[]
-
   for (const t of texts) {
     const content = (t.textContent || '').trim()
-    // Adjust this test if your workspace name yields other patterns
     if (content && /^[A-Z]{2}$/.test(content)) {
-      // Walk up to find a reasonable container to hide
-      let el: HTMLElement | null = t as unknown as HTMLElement
+      // Walk up to a reasonable container (button/badge) and hide it
+      let el: HTMLElement | null = (t as unknown) as HTMLElement
       for (let i = 0; i < 8 && el; i++) {
         if (
           el.matches?.(
@@ -29,8 +28,8 @@ function hideWorkspaceBadgeOnce() {
       }
       // Fallback: hide the immediate SVG parent group/button-ish container
       const fallback = (t.closest('button,[role="button"]') ||
-                        t.parentElement?.parentElement ||
-                        t.parentElement) as HTMLElement | null
+        t.parentElement?.parentElement ||
+        t.parentElement) as HTMLElement | null
       if (fallback) {
         fallback.style.display = 'none'
         return true
@@ -40,59 +39,6 @@ function hideWorkspaceBadgeOnce() {
   return false
 }
 
-export default function MyNavbar(props: any) {
-  useEffect(() => {
-    // Hide immediately on mount
-    hideWorkspaceBadgeOnce()
-
-    // Keep it hidden on subsequent DOM updates
-    const mo = new MutationObserver(() => {
-      hideWorkspaceBadgeOnce()
-    })
-    mo.observe(document.body, {subtree: true, childList: true})
-    return () => mo.disconnect()
-  }, [])
-
-  return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '0.75rem',
-        padding: '0 1rem',
-      }}
-    >
-      {/* 🔴 Your custom logo */}
-      <img
-        src="/android-chrome-512x512.png"
-        alt="BeNeXT Logo"
-        width={28}
-        height={28}
-        style={{objectFit: 'contain', borderRadius: 6}}
-        decoding="async"
-        loading="eager"
-      />
-
-      {/* 🪶 Your custom Oswald title */}
-      <span
-        style={{
-          fontFamily: "'Oswald', sans-serif",
-          fontWeight: 700,
-          fontSize: '1.5rem',
-          textTransform: 'uppercase',
-          letterSpacing: '0.5px',
-          color: 'var(--card-fg-color, #F2E5D5)',
-          whiteSpace: 'nowrap',
-        }}
-      >
-        Autori Mandatum
-      </span>
-
-      {/* Default Sanity navbar contents (search, icons, etc.) */}
-      {props.renderDefault(props)}
-    </div>
-  )
-}
 function styleWorkspaceName() {
   const navbar = document.querySelector('[data-ui="Navbar"]') as HTMLElement | null
   if (!navbar) return
@@ -109,18 +55,63 @@ function styleWorkspaceName() {
       fontWeight: '700',
       textTransform: 'uppercase',
       letterSpacing: '0.5px',
-      color: 'var(--card-fg-color, #fff)',
-    })
+      color: '#ffffff',
+    } as CSSStyleDeclaration)
   }
 }
-useEffect(() => {
-  hideWorkspaceBadgeOnce()
-  styleWorkspaceName()
 
-  const mo = new MutationObserver(() => {
+export default function MyNavbar(props: any) {
+  useEffect(() => {
+    // run immediately
     hideWorkspaceBadgeOnce()
     styleWorkspaceName()
-  })
-  mo.observe(document.body, {subtree: true, childList: true, attributes: true})
-  return () => mo.disconnect()
-}, [])
+
+    // and keep applying on re-renders
+    const mo = new MutationObserver(() => {
+      hideWorkspaceBadgeOnce()
+      styleWorkspaceName()
+    })
+    mo.observe(document.body, {subtree: true, childList: true, attributes: true})
+    return () => mo.disconnect()
+  }, [])
+
+  return (
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.75rem',
+        padding: '0 1rem',
+      }}
+    >
+      {/* Brand logo (served from /static) */}
+      <img
+        src="/android-chrome-512x512.png"
+        alt="BeNeXT Logo"
+        width={28}
+        height={28}
+        style={{objectFit: 'contain', borderRadius: 6}}
+        decoding="async"
+        loading="eager"
+      />
+
+      {/* Oswald title */}
+      <span
+        style={{
+          fontFamily: "'Oswald', sans-serif",
+          fontWeight: 700,
+          fontSize: '1.5rem',
+          textTransform: 'uppercase',
+          letterSpacing: '0.5px',
+          color: '#F2E5D5', // your sand tone; change to #fff if you prefer
+          whiteSpace: 'nowrap',
+        }}
+      >
+        BeNeXT Global HQ
+      </span>
+
+      {/* Keep the default Sanity navbar (search, +, Drafts, icons) */}
+      {props.renderDefault(props)}
+    </div>
+  )
+}
