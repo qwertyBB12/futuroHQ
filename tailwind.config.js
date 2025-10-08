@@ -1,9 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
+    "./app/**/*.{ts,tsx,js,jsx,mdx}",
+    "./pages/**/*.{ts,tsx,js,jsx}",
     "./components/**/*.{ts,tsx}",
+    "./sanity.cli.{js,ts}",
     "./schemaTypes/**/*.{ts,js}",
-    "./sanity.config.{js,ts}"
+    "./styles.css",
+    "./sanity.config.{js,ts}",
+    "./theme.{js,ts}",
   ],
   safelist: [
     "bg-surface",
@@ -27,7 +32,7 @@ module.exports = {
         surface: 'var(--component-bg)',
         brand: 'var(--main-navigation-color)',
         onBrand: 'var(--main-navigation-color--inverted)',
-        foundersBlack: '#121212',
+        foundersBlack: '#0B1220',
         hoyasMidnight: '#1B2A41',
         archivalSlate: '#8A8D91',
         scholarGold: '#D4AF37',
