@@ -65,6 +65,7 @@ const paletteDefinitions = {
     '--card-bg-color': '#F5F7FA',
     '--card-fg-color': '#0B1220',
     '--card-muted-fg-color': '#8A8D91',
+    '--card-shadow-outline-color': 'rgba(0,0,0,0.15)',
     '--main-navigation-color': '#0B1220',
     '--main-navigation-color--inverted': '#F2E5D5',
     '--brand-primary': '#8C1E4A',
@@ -76,12 +77,20 @@ const paletteDefinitions = {
     '--input-border-color': '#8A8D91',
     '--input-text-color': '#0B1220',
     '--input-placeholder-color': '#8A8D91',
+    '--state-success-color': '#FF6F61',
+    '--state-info-color': '#0B1220',
+    '--state-warning-color': '#D4AF37',
+    '--state-danger-color': '#8C1E4A',
     '--badge-default-bg': '#8A8D91',
     '--badge-default-fg': '#F2E5D5',
     '--badge-primary-bg': '#8C1E4A',
     '--badge-primary-fg': '#F2E5D5',
     '--badge-success-bg': '#FF6F61',
     '--badge-success-fg': '#0B1220',
+    '--badge-warning-bg': '#D4AF37',
+    '--badge-warning-fg': '#0B1220',
+    '--badge-danger-bg': '#8C1E4A',
+    '--badge-danger-fg': '#F2E5D5',
     '--hairline-color': '#D4AF37',
     '--border-color': '#8A8D91',
   }),
@@ -90,13 +99,20 @@ const paletteDefinitions = {
     '--component-text-color': '#F2E5D5',
     '--card-bg-color': '#0B1220',
     '--card-muted-fg-color': '#8A8D91',
+    '--card-shadow-outline-color': 'rgba(0,0,0,0.45)',
     '--main-navigation-color': '#8C1E4A',
     '--main-navigation-color--inverted': '#0B1220',
     '--brand-primary': '#FF6F61',
     '--focus-color': '#FF6F61',
     '--link-color': '#F2E5D5',
+    '--default-button-color': '#0B1220',
     '--default-button-primary-color': '#8C1E4A',
     '--default-button-success-color': '#FF6F61',
+    '--input-bg': '#111A2C',
+    '--input-border-color': '#0B1220',
+    '--input-placeholder-color': '#8A8D91',
+    '--state-warning-color': '#D4AF37',
+    '--state-danger-color': '#8C1E4A',
     '--badge-default-bg': '#0B1220',
     '--badge-default-fg': '#F2E5D5',
     '--badge-primary-bg': '#8C1E4A',
@@ -105,6 +121,8 @@ const paletteDefinitions = {
     '--badge-success-fg': '#0B1220',
     '--badge-warning-bg': '#D4AF37',
     '--badge-warning-fg': '#0B1220',
+    '--badge-danger-bg': '#8C1E4A',
+    '--badge-danger-fg': '#F2E5D5',
     '--hairline-color': '#0B1220',
     '--border-color': '#0B1220',
   }),
@@ -119,15 +137,22 @@ const paletteDefinitions = {
     '--brand-primary': '#D4AF37',
     '--focus-color': '#D4AF37',
     '--link-color': '#FF6F61',
+    '--default-button-color': '#111A2C',
     '--default-button-primary-color': '#D4AF37',
     '--default-button-success-color': '#FF6F61',
     '--default-button-danger-color': '#8C1E4A',
+    '--state-warning-color': '#D4AF37',
+    '--state-danger-color': '#8C1E4A',
     '--badge-default-bg': '#111A2C',
     '--badge-default-fg': '#F5F7FA',
     '--badge-primary-bg': '#D4AF37',
     '--badge-primary-fg': '#0B1220',
     '--badge-success-bg': '#FF6F61',
     '--badge-success-fg': '#0B1220',
+    '--badge-warning-bg': '#D4AF37',
+    '--badge-warning-fg': '#0B1220',
+    '--badge-danger-bg': '#8C1E4A',
+    '--badge-danger-fg': '#F5F7FA',
     '--hairline-color': '#1F2D46',
     '--border-color': '#1F2D46',
   }),
@@ -171,14 +196,19 @@ export const applyPalette = (name: PaletteName) => {
   if (typeof document === 'undefined') return
   const palette = getPaletteTokens(name)
   const root = document.documentElement
+  root.dataset.palette = name
   Object.entries(palette).forEach(([token, value]) => {
     root.style.setProperty(token, value)
   })
 }
 
 export const ensurePaletteOnLoad = () => {
-  if (typeof document === 'undefined') return
-  applyPalette(defaultPaletteName)
+  if (typeof document === 'undefined') return defaultPaletteName
+  const stored =
+    typeof window !== 'undefined' ? window.localStorage.getItem(paletteStorageKey) : null
+  const initial = isValidPalette(stored) ? (stored as PaletteName) : defaultPaletteName
+  applyPalette(initial)
+  return initial
 }
 
 export const paletteStorageKey = 'studio:palette'
