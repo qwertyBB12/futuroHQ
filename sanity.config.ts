@@ -1,10 +1,10 @@
-// sanity.config.ts
+// components/MyNavbar.tsx
 import './styles.css'
-import {defineConfig} from 'sanity'
-import {structureTool} from 'sanity/structure'
-import {visionTool} from '@sanity/vision'
-import {schemaTypes} from './schemaTypes'
-import {customTheme} from './theme'
+import { defineConfig } from 'sanity'
+import { structureTool } from 'sanity/structure'
+import { visionTool } from '@sanity/vision'
+import { schemaTypes } from './schemaTypes'
+import { customTheme } from './theme'
 import StudioLogo from './components/StudioLogo'
 import MyNavbar from './components/MyNavbar'
 
@@ -15,10 +15,11 @@ export default defineConfig({
   dataset: 'production',
   theme: customTheme,
   plugins: [structureTool(), visionTool()],
-  schema: {types: schemaTypes},
+  schema: { types: schemaTypes },
   studio: {
     components: {
-      navbar: MyNavbar, // 👈 Custom navbar with your logo
+      logo: StudioLogo,
+      navbar: MyNavbar,
     },
   },
 })
