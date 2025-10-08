@@ -198,10 +198,105 @@ export const paletteStorageKey = 'studio:palette'
 
 export const isValidPalette = isPaletteName
 
+const assignStyles = (selector: string, styles: Record<string, string | undefined>) => {
+  const elements = typeof document === 'undefined' ? [] : document.querySelectorAll<HTMLElement>(selector)
+  elements.forEach((element) => {
+    Object.entries(styles).forEach(([property, value]) => {
+      if (value) {
+        element.style.setProperty(property, value, 'important')
+      }
+    })
+  })
+}
+
+let currentPaletteName: PaletteName = defaultPaletteName
+let paletteObserver: MutationObserver | null = null
+
+const applyDomOverrides = (palette: TokenMap) => {
+  assignStyles('body, #sanity', {
+    'background-color': palette['--component-bg'],
+    color: palette['--component-text-color'],
+  })
+
+  assignStyles('[data-ui="Pane"], [data-ui="PaneLayout"], [data-ui="PaneContent"], [data-ui="Card"]', {
+    'background-color': palette['--card-bg-color'],
+    color: palette['--card-fg-color'],
+    '--card-bg-color': palette['--card-bg-color'],
+    '--card-fg-color': palette['--card-fg-color'],
+  })
+
+  assignStyles('[data-ui="Navbar"], [data-ui="Navbar"] > *, [data-ui="Navbar"] [data-ui="Card"], [data-ui="Navbar"] [data-ui="Box"]', {
+    'background-color': palette['--main-navigation-color'],
+    color: palette['--main-navigation-color--inverted'],
+  })
+
+  assignStyles('[data-ui="Navbar"] button, [data-ui="Navbar"] span, [data-ui="Navbar"] label', {
+    color: palette['--main-navigation-color--inverted'],
+  })
+
+  assignStyles('[data-ui="Button"]', {
+    'background-color': palette['--default-button-color'],
+    color: palette['--component-text-color'],
+  })
+
+  assignStyles('[data-ui="Button"][data-tone="primary"]', {
+    'background-color': palette['--default-button-primary-color'],
+    color: palette['--main-navigation-color--inverted'],
+  })
+
+  assignStyles('[data-ui="Button"][data-tone="danger"]', {
+    'background-color': palette['--default-button-danger-color'],
+    color: palette['--badge-danger-fg'],
+  })
+
+  assignStyles('[data-ui="Badge"]', {
+    'background-color': palette['--badge-default-bg'],
+    color: palette['--badge-default-fg'],
+  })
+
+  assignStyles('[data-ui="Badge"][data-status="success"]', {
+    'background-color': palette['--badge-success-bg'],
+    color: palette['--badge-success-fg'],
+  })
+
+  assignStyles('[data-ui="Badge"][data-status="warning"]', {
+    'background-color': palette['--badge-warning-bg'],
+    color: palette['--badge-warning-fg'],
+  })
+
+  assignStyles('[data-ui="Badge"][data-status="danger"]', {
+    'background-color': palette['--badge-danger-bg'],
+    color: palette['--badge-danger-fg'],
+  })
+
+  assignStyles('[data-ui="TextInput"], [data-ui="Select"], [data-ui="MenuButton"], [data-ui="Tab"]', {
+    'background-color': palette['--input-bg'],
+    color: palette['--input-text-color'],
+    'border-color': palette['--input-border-color'],
+  })
+}
+
+const ensurePaletteObserver = () => {
+  if (typeof document === 'undefined') return
+  if (paletteObserver) return
+
+  paletteObserver = new MutationObserver(() => {
+    const palette = getPaletteTokens(currentPaletteName)
+    applyDomOverrides(palette)
+  })
+
+  paletteObserver.observe(document.body, {
+    subtree: true,
+    childList: true,
+  })
+}
+
 export const applyPalette = (name: PaletteName) => {
   if (typeof document === 'undefined') return
   const palette = getPaletteTokens(name)
   const root = document.documentElement
+  currentPaletteName = name
+
   root.dataset.palette = name
   Object.entries(palette).forEach(([token, value]) => {
     root.style.setProperty(token, value)
@@ -214,6 +309,9 @@ export const applyPalette = (name: PaletteName) => {
         el.style.setProperty(token, value)
       })
     })
+
+  applyDomOverrides(palette)
+  ensurePaletteObserver()
 }
 
 export const ensurePaletteOnLoad = () => {
