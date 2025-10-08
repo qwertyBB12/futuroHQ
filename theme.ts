@@ -24,7 +24,7 @@ const tokens = {
   '--component-text-color': SANDSTONE_NEUTRAL,    // primary text
 
   // Cards/panels
-  '--card-bg-color': CARD_BG,
+  '--card-bg-color': HOYAS_MIDNIGHT,
   '--card-fg-color': SANDSTONE_NEUTRAL,
   '--card-muted-fg-color': ARCHIVAL_SLATE,
   '--card-shadow-outline-color': 'rgba(0,0,0,0.35)',
