@@ -89,7 +89,7 @@
 
 :root[data-palette='sandstoneDawn'] {
   --component-bg: #F2E5D5;
-  --component-text-color: #1B2A41;
+  --component-text-color: #F2E5D5;
   --card-bg-color: #F2E5D5;
   --card-fg-color: #1B2A41;
   --card-muted-fg-color: #8A8D91;
