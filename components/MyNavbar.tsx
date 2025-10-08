@@ -64,7 +64,7 @@ function styleWorkspaceName() {
       fontWeight: '700',
       textTransform: 'uppercase',
       letterSpacing: '0.5px',
-      color: '#ffffff',
+      color: 'var(--main-navigation-color--inverted, #ffffff)',
     } as CSSStyleDeclaration)
   }
 }
@@ -133,10 +133,10 @@ export default function MyNavbar(props: any) {
           fontSize: '1.5rem',
           textTransform: 'uppercase',
           letterSpacing: '0.5px',
-          color: '#F2E5D5', // your sand tone; change to #fff if you prefer
-        whiteSpace: 'nowrap',
-      }}
-    >
+          color: 'var(--main-navigation-color--inverted, #F2E5D5)',
+          whiteSpace: 'nowrap',
+        }}
+      >
         Autori Mandatum
       </span>
 

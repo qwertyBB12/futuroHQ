@@ -307,3 +307,71 @@
     font-family: 'Oswald', sans-serif !important;
   }
 }
+
+:root[data-palette] {
+  color-scheme: only light;
+}
+
+:root[data-palette] body,
+:root[data-palette] [data-sanity-ui-theme="legacy"] {
+  background-color: var(--component-bg) !important;
+  color: var(--component-text-color) !important;
+}
+
+:root[data-palette] [data-ui="Pane"],
+:root[data-palette] [data-ui="Pane"] [data-ui="Card"],
+:root[data-palette] [data-ui="Pane"] [data-ui="Box"],
+:root[data-palette] [data-ui="Card"] {
+  background-color: var(--card-bg-color) !important;
+  color: var(--card-fg-color) !important;
+}
+
+:root[data-palette] [data-ui="Card"] [data-ui],
+:root[data-palette] [data-ui="Card"] * {
+  color: inherit;
+}
+
+:root[data-palette] [data-ui="Button"],
+:root[data-palette] [data-ui="MenuButton"],
+:root[data-palette] [data-ui="Tab"],
+:root[data-palette] [data-ui="TextInput"],
+:root[data-palette] [data-ui="Select"] {
+  background-color: var(--input-bg) !important;
+  color: var(--input-text-color) !important;
+  border-color: var(--input-border-color) !important;
+}
+
+:root[data-palette] [data-ui="Badge"] {
+  background-color: var(--badge-default-bg) !important;
+  color: var(--badge-default-fg) !important;
+}
+
+:root[data-palette] [data-ui="Badge"][data-status="success"] {
+  background-color: var(--badge-success-bg) !important;
+  color: var(--badge-success-fg) !important;
+}
+
+:root[data-palette] [data-ui="Badge"][data-status="warning"] {
+  background-color: var(--badge-warning-bg) !important;
+  color: var(--badge-warning-fg) !important;
+}
+
+:root[data-palette] [data-ui="Badge"][data-status="danger"] {
+  background-color: var(--badge-danger-bg) !important;
+  color: var(--badge-danger-fg) !important;
+}
+
+:root[data-palette] [data-ui="Pane"] [data-ui="Button"] {
+  background-color: var(--default-button-color) !important;
+  color: var(--component-text-color) !important;
+}
+
+:root[data-palette] [data-ui="Button"][data-tone="primary"] {
+  background-color: var(--default-button-primary-color) !important;
+  color: var(--main-navigation-color--inverted) !important;
+}
+
+:root[data-palette] [data-ui="Button"][data-tone="danger"] {
+  background-color: var(--default-button-danger-color) !important;
+  color: var(--badge-danger-fg) !important;
+}
