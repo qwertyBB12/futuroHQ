@@ -1,5 +1,8 @@
 /* styles.css */
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 :root {
   --founders-black:  #121212;
   --archival-slate:  #8A8D91;
@@ -30,4 +33,15 @@
   padding: 0 !important;
   visibility: hidden !important;
 }
+/* === Futuro / BeNeXT Brand Helpers === */
+.h1-brand {
+  @apply font-display font-bold tracking-wide text-3xl md:text-4xl;
+}
 
+.btn-brand {
+  @apply inline-flex items-center justify-center rounded-2xl bg-brand px-4 py-2 font-semibold text-onBrand shadow;
+}
+body {
+  @apply bg-surface text-white;
+  font-family: 'Oswald', sans-serif;
+}
