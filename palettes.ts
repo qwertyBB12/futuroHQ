@@ -8,35 +8,28 @@ type PaletteDefinition = {
 const baseTokens: TokenMap = {
   '--component-bg': '#0B1220',
   '--component-text-color': '#F2E5D5',
-
   '--card-bg-color': '#111A2C',
   '--card-fg-color': '#F2E5D5',
   '--card-muted-fg-color': '#8A8D91',
   '--card-shadow-outline-color': 'rgba(0,0,0,0.35)',
-
   '--main-navigation-color': '#0B1220',
   '--main-navigation-color--inverted': '#F2E5D5',
-
   '--brand-primary': '#FF6F61',
   '--focus-color': '#FF6F61',
   '--link-color': '#F2E5D5',
-
   '--default-button-color': '#8A8D91',
   '--default-button-primary-color': '#FF6F61',
   '--default-button-danger-color': '#8C1E4A',
   '--default-button-success-color': '#FF6F61',
-
   '--input-bg': '#18243A',
   '--input-border-color': '#1F2D46',
   '--input-text-color': '#F2E5D5',
   '--input-placeholder-color': '#8A8D91',
   '--input-shadow': 'none',
-
   '--state-success-color': '#FF6F61',
   '--state-info-color': '#F2E5D5',
   '--state-warning-color': '#F2E5D5',
   '--state-danger-color': '#8C1E4A',
-
   '--badge-default-bg': '#8A8D91',
   '--badge-default-fg': '#1B2A41',
   '--badge-primary-bg': '#FF6F61',
@@ -47,7 +40,6 @@ const baseTokens: TokenMap = {
   '--badge-warning-fg': '#1B2A41',
   '--badge-danger-bg': '#8C1E4A',
   '--badge-danger-fg': '#F2E5D5',
-
   '--hairline-color': '#1C2A42',
   '--border-color': '#1F2D46',
 }
@@ -110,7 +102,10 @@ const paletteDefinitions = {
     '--default-button-success-color': '#FF6F61',
     '--input-bg': '#111A2C',
     '--input-border-color': '#0B1220',
+    '--input-text-color': '#F2E5D5',
     '--input-placeholder-color': '#8A8D91',
+    '--state-success-color': '#FF6F61',
+    '--state-info-color': '#F2E5D5',
     '--state-warning-color': '#D4AF37',
     '--state-danger-color': '#8C1E4A',
     '--badge-default-bg': '#0B1220',
@@ -132,6 +127,7 @@ const paletteDefinitions = {
     '--card-bg-color': '#111A2C',
     '--card-fg-color': '#F5F7FA',
     '--card-muted-fg-color': '#8A8D91',
+    '--card-shadow-outline-color': 'rgba(0,0,0,0.35)',
     '--main-navigation-color': '#FF6F61',
     '--main-navigation-color--inverted': '#0B1220',
     '--brand-primary': '#D4AF37',
@@ -141,6 +137,12 @@ const paletteDefinitions = {
     '--default-button-primary-color': '#D4AF37',
     '--default-button-success-color': '#FF6F61',
     '--default-button-danger-color': '#8C1E4A',
+    '--input-bg': '#111A2C',
+    '--input-border-color': '#1F2D46',
+    '--input-text-color': '#F5F7FA',
+    '--input-placeholder-color': '#8A8D91',
+    '--state-success-color': '#FF6F61',
+    '--state-info-color': '#F5F7FA',
     '--state-warning-color': '#D4AF37',
     '--state-danger-color': '#8C1E4A',
     '--badge-default-bg': '#111A2C',
@@ -192,6 +194,10 @@ export const paletteLabels = paletteOrder.reduce<Record<PaletteName, string>>(
   {} as Record<PaletteName, string>
 )
 
+export const paletteStorageKey = 'studio:palette'
+
+export const isValidPalette = isPaletteName
+
 export const applyPalette = (name: PaletteName) => {
   if (typeof document === 'undefined') return
   const palette = getPaletteTokens(name)
@@ -210,7 +216,3 @@ export const ensurePaletteOnLoad = () => {
   applyPalette(initial)
   return initial
 }
-
-export const paletteStorageKey = 'studio:palette'
-
-export const isValidPalette = isPaletteName
