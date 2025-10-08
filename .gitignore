@@ -32,3 +32,4 @@ dist
 .env
 .DS_Store
 .netlify/
+.netlify/
