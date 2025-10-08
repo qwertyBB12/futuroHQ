@@ -217,9 +217,9 @@ const visualOverrides: Record<PaletteName, VisualOverrides> = {
   midnightSlate: {
     surface: '#0B1220',
     surfaceText: '#F2E5D5',
-    pane: '#111A2C',
+    pane: '#0B1220',
     paneText: '#F2E5D5',
-    card: '#111A2C',
+    card: '#0B1220',
     cardText: '#F2E5D5',
     nav: '#0B1220',
     navText: '#F2E5D5',
@@ -231,13 +231,13 @@ const visualOverrides: Record<PaletteName, VisualOverrides> = {
   sandstoneDawn: {
     surface: '#F2E5D5',
     surfaceText: '#0B1220',
-    pane: '#E8DAC3',
+    pane: '#F2E5D5',
     paneText: '#0B1220',
-    card: '#F8EFE2',
+    card: '#EADAC5',
     cardText: '#0B1220',
-    nav: '#E0CBB0',
+    nav: '#DEC7AC',
     navText: '#0B1220',
-    button: '#D8C9B4',
+    button: '#D2C0A8',
     buttonText: '#0B1220',
     buttonPrimary: '#8C1E4A',
     buttonPrimaryText: '#F8EFE2',
@@ -298,6 +298,8 @@ const applyVisualOverrides = (name: PaletteName) => {
   assignStyles(
     [
       '[data-ui="Pane"]',
+      '[data-ui="PaneHeader"]',
+      '[data-ui="PaneFooter"]',
       '[data-ui="Pane"] [data-ui="Pane"]',
       '[data-ui="PaneContent"]',
       '[data-ui="PaneLayout"]',
@@ -309,10 +311,20 @@ const applyVisualOverrides = (name: PaletteName) => {
     }
   )
 
-  assignStyles('[data-ui="Card"], [data-ui="PaneContent"] [data-ui="Card"]', {
-    'background-color': overrides.card,
-    color: overrides.cardText,
-  })
+  assignStyles(
+    [
+      '[data-ui="Card"]',
+      '[data-ui="PaneContent"] [data-ui="Card"]',
+      '[data-ui="PaneItem"] [data-ui="Card"]',
+      '[data-ui="ListItem"]',
+      '[data-ui="TreeItem"]',
+      '[data-ui="TreeItem"] [data-ui="Card"]',
+    ].join(','),
+    {
+      'background-color': overrides.card,
+      color: overrides.cardText,
+    }
+  )
 
   assignStyles(
     '[data-ui="Navbar"], [data-ui="Navbar"] > *, [data-ui="Navbar"] [data-ui="Card"], [data-ui="Navbar"] [data-ui="Box"]',
