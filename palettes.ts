@@ -65,8 +65,8 @@ const paletteDefinitions = {
     '--link-color': '#1B2A41',
     '--default-button-color': '#1B2A41',
     '--default-button-primary-color': '#FF6F61',
-    '--default-button-success-color': '#1B2A41',
     '--default-button-danger-color': '#FF6F61',
+    '--default-button-success-color': '#1B2A41',
     '--input-bg': '#F2E5D5',
     '--input-border-color': '#1B2A41',
     '--input-text-color': '#1B2A41',
@@ -101,6 +101,7 @@ const paletteDefinitions = {
     '--link-color': '#F2E5D5',
     '--default-button-color': '#0B1220',
     '--default-button-primary-color': '#8C1E4A',
+    '--default-button-danger-color': '#8C1E4A',
     '--default-button-success-color': '#FF6F61',
     '--input-bg': '#111A2C',
     '--input-border-color': '#0B1220',
@@ -137,8 +138,8 @@ const paletteDefinitions = {
     '--link-color': '#FF6F61',
     '--default-button-color': '#111A2C',
     '--default-button-primary-color': '#D4AF37',
-    '--default-button-success-color': '#FF6F61',
     '--default-button-danger-color': '#8C1E4A',
+    '--default-button-success-color': '#FF6F61',
     '--input-bg': '#111A2C',
     '--input-border-color': '#1F2D46',
     '--input-text-color': '#F5F7FA',
@@ -289,8 +290,7 @@ let paletteObserver: MutationObserver | null = null
 const applyVisualOverrides = (name: PaletteName) => {
   if (typeof document === 'undefined') return
 
-  const base = visualOverrides.midnightSlate
-  const overrides = visualOverrides[name] ?? base
+  const overrides = visualOverrides[name] ?? visualOverrides.midnightSlate
 
   assignStyles('body, #sanity', {
     'background-color': overrides.surface,
@@ -302,7 +302,6 @@ const applyVisualOverrides = (name: PaletteName) => {
       '[data-ui="Pane"]',
       '[data-ui="PaneHeader"]',
       '[data-ui="PaneFooter"]',
-      '[data-ui="Pane"] [data-ui="Pane"]',
       '[data-ui="PaneContent"]',
       '[data-ui="PaneLayout"]',
       '[data-ui="PaneItem"]',
