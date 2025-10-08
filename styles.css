@@ -45,3 +45,20 @@ body {
   @apply bg-surface text-white;
   font-family: 'Oswald', sans-serif;
 }
+/* ---- Brand color token ---- */
+:root { --hoya-blue: #0f2136; } /* tweak to your exact blue */
+
+/* Unify the navbar background (Sanity splits it across multiple child cards/boxes) */
+[data-ui="Navbar"],
+[data-ui="Navbar"] > *,
+[data-ui="Navbar"] [data-ui="Card"],
+[data-ui="Navbar"] [data-ui="Box"] {
+  background-color: var(--hoya-blue) !important;
+  background-image: none !important;
+}
+
+/* Some builds add before/after layers; force them too */
+[data-ui="Navbar"]::before,
+[data-ui="Navbar"]::after {
+  background: var(--hoya-blue) !important;
+}

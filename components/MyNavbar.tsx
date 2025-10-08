@@ -93,3 +93,34 @@ export default function MyNavbar(props: any) {
     </div>
   )
 }
+function styleWorkspaceName() {
+  const navbar = document.querySelector('[data-ui="Navbar"]') as HTMLElement | null
+  if (!navbar) return
+
+  const target =
+    (navbar.querySelector('[data-testid="workspace-name"]') as HTMLElement | null) ||
+    (Array.from(navbar.querySelectorAll('button,[role="button"]'))
+      .map((b) => b.querySelector('span'))
+      .find(Boolean) as HTMLElement | null)
+
+  if (target) {
+    Object.assign(target.style, {
+      fontFamily: "'Oswald', sans-serif",
+      fontWeight: '700',
+      textTransform: 'uppercase',
+      letterSpacing: '0.5px',
+      color: 'var(--card-fg-color, #fff)',
+    })
+  }
+}
+useEffect(() => {
+  hideWorkspaceBadgeOnce()
+  styleWorkspaceName()
+
+  const mo = new MutationObserver(() => {
+    hideWorkspaceBadgeOnce()
+    styleWorkspaceName()
+  })
+  mo.observe(document.body, {subtree: true, childList: true, attributes: true})
+  return () => mo.disconnect()
+}, [])
