@@ -3,7 +3,7 @@ module.exports = {
   content: [
     "./components/**/*.{ts,tsx}",
     "./schemaTypes/**/*.{ts,js}",
-    "./sanity.config.ts"
+    "./sanity.config.{js,ts}"
   ],
   safelist: [
     "bg-surface",
