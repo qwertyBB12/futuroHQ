@@ -12,25 +12,25 @@ const CORAL             = '#FF6F61'
 
 // Derived inks/surfaces
 const OFFWHITE     = '#F5F7FA'
-const CARD_BG      = '#22334E'
-const INPUT_BG     = '#263957'
-const INPUT_BORDER = '#314662'
-const DIVIDER      = '#2B3E5B'
+const CARD_BG      = '#111A2C'
+const INPUT_BG     = '#18243A'
+const INPUT_BORDER = '#1F2D46'
+const DIVIDER      = '#1C2A42'
 
 // Put your overrides in a plain record so TS doesn’t argue about keys
 const tokens = {
   // App surfaces
-  '--component-bg': HOYAS_MIDNIGHT,      // main canvas
+  '--component-bg': FOUNDERS_BLACK,      // main canvas
   '--component-text-color': SANDSTONE_NEUTRAL,    // primary text
 
   // Cards/panels
-  '--card-bg-color': HOYAS_MIDNIGHT,
+  '--card-bg-color': CARD_BG,
   '--card-fg-color': SANDSTONE_NEUTRAL,
   '--card-muted-fg-color': ARCHIVAL_SLATE,
   '--card-shadow-outline-color': 'rgba(0,0,0,0.35)',
 
   // Navigation
-  '--main-navigation-color': HOYAS_MIDNIGHT,
+  '--main-navigation-color': FOUNDERS_BLACK,
   '--main-navigation-color--inverted': SANDSTONE_NEUTRAL,
 
   // Brand & focus
