@@ -10,6 +10,8 @@
   --scholar-gold:    #D4AF37;
   --hoyas-midnight:  #1B2A41; /* keep as a fallback token */
   --global-garnet:   #8C1E4A;
+  --main-navigation-color: var(--founders-black);
+  --main-navigation-color--inverted: var(--sandstone);
 }
 
 /* Optional: local brand font setup (drop files under /public/fonts) */
@@ -58,7 +60,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 1rem;
-    background-color: var(--main-navigation-color, var(--hoyas-midnight));
+    background-color: var(--main-navigation-color, var(--founders-black));
     padding: 0.5rem 1rem;
     font-weight: 600;
     color: var(--main-navigation-color--inverted, var(--sandstone));
@@ -70,14 +72,14 @@
   [data-ui="Navbar"] > *,
   [data-ui="Navbar"] [data-ui="Card"],
   [data-ui="Navbar"] [data-ui="Box"] {
-    background-color: var(--main-navigation-color, var(--hoyas-midnight)) !important;
+    background-color: var(--main-navigation-color, var(--founders-black)) !important;
     background-image: none !important;
   }
 
   /* Some builds add before/after layers; force them too */
   [data-ui="Navbar"]::before,
   [data-ui="Navbar"]::after {
-    background: var(--main-navigation-color, var(--hoyas-midnight)) !important;
+    background: var(--main-navigation-color, var(--founders-black)) !important;
   }
   /* Workspace name typography — Oswald Bold, uppercase */
   [data-ui="Navbar"] [data-testid="workspace-name"],
@@ -103,11 +105,11 @@
 
 @layer utilities {
   .bg-surface {
-    background-color: var(--component-bg, var(--hoyas-midnight)) !important;
+    background-color: var(--component-bg, var(--founders-black)) !important;
   }
 
   .bg-brand {
-    background-color: var(--main-navigation-color, var(--hoyas-midnight)) !important;
+    background-color: var(--main-navigation-color, var(--founders-black)) !important;
   }
 
   .text-onBrand {
