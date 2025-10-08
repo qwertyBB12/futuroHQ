@@ -21,11 +21,9 @@ if (process.platform === 'linux' && process.arch === 'x64') {
       packages.push(`@rollup/rollup-linux-x64-gnu@${rollupVersion}`);
     }
 
-    try {
-      const {version: lightningcssVersion} = require('lightningcss/package.json');
+    const lightningcssVersion = versions.lightningcss;
+    if (lightningcssVersion) {
       packages.push(`lightningcss-linux-x64-gnu@${lightningcssVersion}`);
-    } catch (err) {
-      console.warn('Warning: unable to resolve lightningcss version, skipping native binary install.', err);
     }
 
     if (packages.length > 0) {
