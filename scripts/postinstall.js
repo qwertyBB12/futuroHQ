@@ -27,7 +27,14 @@ if (process.platform === 'linux' && process.arch === 'x64') {
     }
 
     if (packages.length > 0) {
-      execSync(`npm install --no-save ${packages.join(' ')}`, {stdio: 'inherit'});
+      execSync(`npm install --no-save ${packages.join(' ')}`, {
+        stdio: 'inherit',
+        env: {
+          ...process.env,
+          npm_config_omit: '',
+          NPM_CONFIG_OMIT: '',
+        },
+      });
     } else {
       console.log('No additional Linux native modules required.');
     }
