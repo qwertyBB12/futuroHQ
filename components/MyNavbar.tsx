@@ -107,7 +107,7 @@ export default function MyNavbar(props: any) {
           whiteSpace: 'nowrap',
         }}
       >
-        BeNeXT Global HQ
+        Autori Mandatum
       </span>
 
       {/* Keep the default Sanity navbar (search, +, Drafts, icons) */}
