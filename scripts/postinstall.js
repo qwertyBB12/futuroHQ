@@ -1,11 +1,38 @@
 // scripts/postinstall.js
 
-const { execSync } = require('child_process');
+const {execSync} = require('child_process');
+
+const pkg = require('../package.json');
 
 if (process.platform === 'linux' && process.arch === 'x64') {
   console.log('Detected Netlify (Linux x64), installing required native modules...');
   try {
-    execSync('npm install @esbuild/linux-x64 @rollup/rollup-linux-x64-gnu', { stdio: 'inherit' });
+    const versions = {...pkg.dependencies, ...pkg.devDependencies};
+
+    const packages = [];
+
+    const esbuildVersion = versions.esbuild;
+    if (esbuildVersion) {
+      packages.push(`@esbuild/linux-x64@${esbuildVersion}`);
+    }
+
+    const rollupVersion = versions.rollup;
+    if (rollupVersion) {
+      packages.push(`@rollup/rollup-linux-x64-gnu@${rollupVersion}`);
+    }
+
+    try {
+      const {version: lightningcssVersion} = require('lightningcss/package.json');
+      packages.push(`lightningcss-linux-x64-gnu@${lightningcssVersion}`);
+    } catch (err) {
+      console.warn('Warning: unable to resolve lightningcss version, skipping native binary install.', err);
+    }
+
+    if (packages.length > 0) {
+      execSync(`npm install --no-save ${packages.join(' ')}`, {stdio: 'inherit'});
+    } else {
+      console.log('No additional Linux native modules required.');
+    }
   } catch (err) {
     console.error('Failed to install Linux native modules:', err);
     process.exit(1);
