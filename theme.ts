@@ -8,6 +8,7 @@ const SANDSTONE_NEUTRAL = '#F2E5D5'
 const SCHOLAR_GOLD      = '#D4AF37'
 const HOYAS_MIDNIGHT    = '#1B2A41'
 const GLOBAL_GARNET     = '#8C1E4A'
+const CORAL             = '#FF6F61'
 
 // Derived inks/surfaces
 const OFFWHITE     = '#F5F7FA'
@@ -20,38 +21,38 @@ const DIVIDER      = '#2B3E5B'
 const tokens = {
   // App surfaces
   '--component-bg': HOYAS_MIDNIGHT,      // main canvas
-  '--component-text-color': OFFWHITE,    // primary text
+  '--component-text-color': SANDSTONE_NEUTRAL,    // primary text
 
   // Cards/panels
   '--card-bg-color': CARD_BG,
-  '--card-fg-color': OFFWHITE,
+  '--card-fg-color': SANDSTONE_NEUTRAL,
   '--card-muted-fg-color': ARCHIVAL_SLATE,
   '--card-shadow-outline-color': 'rgba(0,0,0,0.35)',
 
   // Navigation
   '--main-navigation-color': HOYAS_MIDNIGHT,
-  '--main-navigation-color--inverted': OFFWHITE,
+  '--main-navigation-color--inverted': SANDSTONE_NEUTRAL,
 
   // Brand & focus
-  '--brand-primary': SCHOLAR_GOLD,
-  '--focus-color': SCHOLAR_GOLD,
+  '--brand-primary': CORAL,
+  '--focus-color': CORAL,
   '--link-color': SANDSTONE_NEUTRAL,
 
   // Buttons
-  '--default-button-color': CARD_BG,
-  '--default-button-primary-color': SCHOLAR_GOLD,
+  '--default-button-color': ARCHIVAL_SLATE,
+  '--default-button-primary-color': CORAL,
   '--default-button-danger-color': GLOBAL_GARNET,
-  '--default-button-success-color': SCHOLAR_GOLD,
+  '--default-button-success-color': CORAL,
 
   // Inputs
   '--input-bg': INPUT_BG,
   '--input-border-color': INPUT_BORDER,
-  '--input-text-color': OFFWHITE,
+  '--input-text-color': SANDSTONE_NEUTRAL,
   '--input-placeholder-color': ARCHIVAL_SLATE,
   '--input-shadow': 'none',
 
   // Status mapping
-  '--state-success-color': SCHOLAR_GOLD,
+  '--state-success-color': CORAL,
   '--state-info-color': SANDSTONE_NEUTRAL,
   '--state-warning-color': SANDSTONE_NEUTRAL,
   '--state-danger-color': GLOBAL_GARNET,
@@ -59,14 +60,14 @@ const tokens = {
   // Badges/labels
   '--badge-default-bg': ARCHIVAL_SLATE,
   '--badge-default-fg': FOUNDERS_BLACK,
-  '--badge-primary-bg': SCHOLAR_GOLD,
+  '--badge-primary-bg': CORAL,
   '--badge-primary-fg': FOUNDERS_BLACK,
-  '--badge-success-bg': SCHOLAR_GOLD,
+  '--badge-success-bg': CORAL,
   '--badge-success-fg': FOUNDERS_BLACK,
   '--badge-warning-bg': SANDSTONE_NEUTRAL,
   '--badge-warning-fg': FOUNDERS_BLACK,
   '--badge-danger-bg': GLOBAL_GARNET,
-  '--badge-danger-fg': OFFWHITE,
+  '--badge-danger-fg': SANDSTONE_NEUTRAL,
 
   // Borders/Dividers
   '--hairline-color': DIVIDER,

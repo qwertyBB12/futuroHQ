@@ -1,4 +1,5 @@
 /* styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap');
 :root {
   --founders-black:  #121212;
   --archival-slate:  #8A8D91;
@@ -21,3 +22,12 @@
   font-weight: 600; font-style: normal; font-display: swap;
 }
 */
+/* Collapse any workspace switcher button that contains an SVG initials badge */
+[data-ui="Navbar"] button:has(svg text) {
+  display: none !important;
+  width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  visibility: hidden !important;
+}
+
