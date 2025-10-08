@@ -206,6 +206,14 @@ export const applyPalette = (name: PaletteName) => {
   Object.entries(palette).forEach(([token, value]) => {
     root.style.setProperty(token, value)
   })
+
+  document
+    .querySelectorAll<HTMLElement>('[data-sanity-ui-theme]')
+    .forEach((el) => {
+      Object.entries(palette).forEach(([token, value]) => {
+        el.style.setProperty(token, value)
+      })
+    })
 }
 
 export const ensurePaletteOnLoad = () => {
