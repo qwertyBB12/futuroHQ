@@ -1,27 +1,11 @@
 import { defineType, defineField } from 'sanity'
+import { commonMeta } from './blocks/commonMeta'
 
 export default defineType({
   name: 'podcastEpisode',
   title: 'Podcast Episode',
   type: 'document',
   fields: [
-    // --- Publish toggle pinned at top ---
-    defineField({
-      name: 'publish',
-      title: 'Publish?',
-      type: 'boolean',
-      initialValue: true,
-      description: 'Toggle to control if this episode is visible across ecosystem',
-    }),
-
-    // --- Order for manual prioritization ---
-    defineField({
-      name: 'order',
-      title: 'Order',
-      type: 'number',
-      description: 'Controls manual ordering across lists (e.g. override chronological)',
-    }),
-
     // --- Core ---
     defineField({
       name: 'title',
@@ -29,8 +13,48 @@ export default defineType({
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
+    defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: { source: 'title', maxLength: 96 },
+      description: 'URL path for the episode',
+    }),
     defineField({ name: 'description', title: 'Description', type: 'text' }),
     defineField({ name: 'pubDate', title: 'Publish Date', type: 'datetime' }),
+    defineField({
+      name: 'episodeNumber',
+      title: 'Episode Number',
+      type: 'number',
+    }),
+    defineField({
+      name: 'seasonNumber',
+      title: 'Season Number',
+      type: 'number',
+    }),
+    defineField({
+      name: 'duration',
+      title: 'Duration (HH:MM:SS)',
+      type: 'string',
+    }),
+    defineField({
+      name: 'language',
+      title: 'Language',
+      type: 'string',
+      options: { list: ['English', 'Spanish'] },
+    }),
+    defineField({
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [{ type: 'string' }],
+    }),
+    defineField({
+      name: 'tags_ref',
+      title: 'Tags (ref)',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'tag' }] }],
+    }),
 
     // --- Audio + Video ---
     defineField({
@@ -53,6 +77,7 @@ export default defineType({
       type: 'reference',
       to: [{ type: 'podcast' }],
     }),
+    ...commonMeta,
   ],
 
   preview: {

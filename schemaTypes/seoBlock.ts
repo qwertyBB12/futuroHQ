@@ -1,9 +1,13 @@
 import { defineType, defineField } from 'sanity'
+import { SeoGeneratorInput } from '../components/inputs/SeoGeneratorInput'
 
 export default defineType({
   name: 'seoBlock',
   title: 'SEO',
   type: 'object',
+  components: {
+    input: SeoGeneratorInput,
+  },
   fields: [
     defineField({
       name: 'slug',
@@ -16,6 +20,8 @@ export default defineType({
       name: 'titleTag',
       title: 'Title Tag',
       type: 'string',
+      initialValue: (_, context) =>
+        typeof context?.document?.title === 'string' ? context.document.title : undefined,
       validation: Rule => Rule.max(60).warning('Keep under 60 characters for best SEO'),
     }),
     defineField({
@@ -35,6 +41,7 @@ export default defineType({
       title: 'Keywords',
       type: 'array',
       of: [{ type: 'string' }],
+      validation: Rule => Rule.max(10).warning('Focus on the top 10 keywords.'),
     }),
   ],
 })
