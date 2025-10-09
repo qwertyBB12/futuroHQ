@@ -13,7 +13,7 @@
   --main-navigation-color: var(--founders-black);
   --main-navigation-color--inverted: var(--sandstone);
   --component-bg: var(--founders-black);
-  --component-text-color: var(--sandstone);
+  --component-text-color: #F2E5D5;
   --card-bg-color: #111A2C;
   --card-fg-color: var(--sandstone);
   --card-muted-fg-color: var(--archival-slate);
