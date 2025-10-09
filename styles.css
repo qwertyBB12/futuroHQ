@@ -320,6 +320,12 @@
   border-color: rgba(27, 42, 65, 0.1) !important;
 }
 
+:root[data-palette='sandstoneDawn'] div[aria-hidden="true"][data-enabled="true"] {
+  background-color: var(--sandstone) !important;
+  color: var(--hoyas-midnight) !important;
+  border-color: rgba(27, 42, 65, 0.1) !important;
+}
+
 :root[data-palette='sandstoneDawn'] [data-ui="ListItem"] *,
 :root[data-palette='sandstoneDawn'] [data-ui="TreeItem"] *,
 :root[data-palette='sandstoneDawn'] [data-ui="Card"] [data-ui],
