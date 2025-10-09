@@ -1,5 +1,8 @@
+import {config} from 'dotenv'
 import {createClient} from '@sanity/client'
 import {randomUUID} from 'node:crypto'
+
+config({path: '.env.local', override: false})
 
 type DocWithTags = {
   _id: string
