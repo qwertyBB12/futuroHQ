@@ -63,10 +63,10 @@ const paletteDefinitions = {
     '--brand-primary': '#FF6F61',
     '--focus-color': '#FF6F61',
     '--link-color': '#1B2A41',
-    '--default-button-color': '#1B2A41',
+    '--default-button-color': '#F2E5D5',
     '--default-button-primary-color': '#FF6F61',
     '--default-button-danger-color': '#FF6F61',
-    '--default-button-success-color': '#1B2A41',
+    '--default-button-success-color': '#F2E5D5',
     '--input-bg': '#F2E5D5',
     '--input-border-color': '#1B2A41',
     '--input-text-color': '#1B2A41',
@@ -223,6 +223,24 @@ const applyVisualOverrides = (name: PaletteName) => {
       color: overrides.cardText,
     }
   )
+
+  assignStyles('[data-ui="ListItem"] *', {
+    color: overrides.cardText,
+    fill: overrides.cardText,
+    stroke: overrides.cardText,
+  })
+
+  assignStyles('button[data-ui="PaneItem"]', {
+    'background-color': overrides.card,
+    color: overrides.cardText,
+    'border-color': `${overrides.paneText}1a`,
+  })
+
+  assignStyles('button[data-ui="PaneItem"] *', {
+    color: overrides.cardText,
+    fill: overrides.cardText,
+    stroke: overrides.cardText,
+  })
 
   assignStyles(
     '[data-ui="Navbar"], [data-ui="Navbar"] > *, [data-ui="Navbar"] [data-ui="Card"], [data-ui="Navbar"] [data-ui="Box"]',
