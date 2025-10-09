@@ -13,6 +13,7 @@ import vlog from './vlog'
 import clip from './clip'
 import curatedPost from './curatedPost'
 import socialPost from './socialPost'
+import tag from './tag'
 
 // --- Shared Objects ---
 import mediaBlock from './mediaBlock'
@@ -36,6 +37,7 @@ export const schemaTypes = [
   clip,
   curatedPost,
   socialPost,
+  tag,
 
   // Shared Objects
   mediaBlock,

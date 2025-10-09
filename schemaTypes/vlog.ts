@@ -1,27 +1,11 @@
 import { defineType, defineField } from 'sanity'
+import { commonMeta } from './blocks/commonMeta'
 
 export default defineType({
   name: 'vlog',
   title: 'Vlog',
   type: 'document',
   fields: [
-    // --- Publish toggle (pinned) ---
-    defineField({
-      name: 'publish',
-      title: 'Publish?',
-      type: 'boolean',
-      initialValue: true,
-      description: 'Toggle to control if this vlog is visible across the ecosystem',
-    }),
-
-    // --- Ordering ---
-    defineField({
-      name: 'order',
-      title: 'Order',
-      type: 'number',
-      description: 'Use lower numbers to pin/feature higher on lists',
-    }),
-
     // --- Core ---
     defineField({
       name: 'title',
@@ -78,6 +62,13 @@ export default defineType({
       type: 'array',
       of: [{ type: 'string' }],
     }),
+    defineField({
+      name: 'tags_ref',
+      title: 'Tags (ref)',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'tag' }] }],
+      description: 'Link to tag documents while existing string tags migrate in parallel',
+    }),
 
     // --- Media ---
     defineField({
@@ -111,6 +102,7 @@ export default defineType({
       title: 'SEO',
       type: 'seoBlock',
     }),
+    ...commonMeta,
   ],
 
   preview: {

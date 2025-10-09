@@ -1,27 +1,11 @@
 import { defineType, defineField } from 'sanity'
+import { commonMeta } from './blocks/commonMeta'
 
 export default defineType({
   name: 'project',
   title: 'Project',
   type: 'document',
   fields: [
-    // --- Publish toggle pinned at top ---
-    defineField({
-      name: 'publish',
-      title: 'Publish?',
-      type: 'boolean',
-      initialValue: true,
-      description: 'Toggle to control if this project is visible across the ecosystem',
-    }),
-
-    // --- Ordering ---
-    defineField({
-      name: 'order',
-      title: 'Order',
-      type: 'number',
-      description: 'Use lower numbers to feature/pin projects higher in lists',
-    }),
-
     // --- Status ---
     defineField({
       name: 'status',
@@ -111,6 +95,7 @@ export default defineType({
       title: 'SEO',
       type: 'seoBlock',
     }),
+    ...commonMeta,
   ],
 
   preview: {
