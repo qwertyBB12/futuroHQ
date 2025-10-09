@@ -51,44 +51,6 @@ const createPalette = (label: string, overrides: Partial<TokenMap>): PaletteDefi
 
 const paletteDefinitions = {
   midnightSlate: createPalette('Midnight Slate', {}),
-  sandstoneDawn: createPalette('Sandstone Dawn', {
-    '--component-bg': '#F6EDDF',
-    '--component-text-color': '#1B2A41',
-    '--card-bg-color': '#FFFFFF',
-    '--card-fg-color': '#1B2A41',
-    '--card-muted-fg-color': '#70727A',
-    '--card-shadow-outline-color': 'rgba(27,42,65,0.08)',
-    '--main-navigation-color': '#F2E5D5',
-    '--main-navigation-color--inverted': '#1B2A41',
-    '--brand-primary': '#D4AF37',
-    '--focus-color': '#D4AF37',
-    '--link-color': '#8C1E4A',
-    '--default-button-color': '#E4D6C5',
-    '--default-button-primary-color': '#D4AF37',
-    '--default-button-danger-color': '#8C1E4A',
-    '--default-button-success-color': '#2F7A6A',
-    '--input-bg': '#FFFFFF',
-    '--input-border-color': '#C9B69F',
-    '--input-text-color': '#1B2A41',
-    '--input-placeholder-color': '#8A8D91',
-    '--input-shadow': '0 0 0 1px rgba(27,42,65,0.04)',
-    '--state-success-color': '#2F7A6A',
-    '--state-info-color': '#1B2A41',
-    '--state-warning-color': '#D4AF37',
-    '--state-danger-color': '#8C1E4A',
-    '--badge-default-bg': '#1B2A41',
-    '--badge-default-fg': '#F2E5D5',
-    '--badge-primary-bg': '#D4AF37',
-    '--badge-primary-fg': '#1B2A41',
-    '--badge-success-bg': '#2F7A6A',
-    '--badge-success-fg': '#F2E5D5',
-    '--badge-warning-bg': '#D4AF37',
-    '--badge-warning-fg': '#1B2A41',
-    '--badge-danger-bg': '#8C1E4A',
-    '--badge-danger-fg': '#F2E5D5',
-    '--hairline-color': '#D1C1AF',
-    '--border-color': '#D1C1AF',
-  }),
 } as const satisfies Record<string, PaletteDefinition>
 
 export type PaletteName = keyof typeof paletteDefinitions
@@ -96,10 +58,7 @@ export type PaletteName = keyof typeof paletteDefinitions
 const isPaletteName = (value: unknown): value is PaletteName =>
   typeof value === 'string' && value in paletteDefinitions
 
-export const paletteOrder: PaletteName[] = [
-  'midnightSlate',
-  'sandstoneDawn',
-]
+export const paletteOrder: PaletteName[] = ['midnightSlate']
 
 export const defaultPaletteName: PaletteName = isPaletteName(process.env.SANITY_THEME)
   ? (process.env.SANITY_THEME as PaletteName)
@@ -156,20 +115,6 @@ const visualOverrides: Record<PaletteName, VisualOverrides> = {
     buttonText: '#F2E5D5',
     buttonPrimary: '#FF6F61',
     buttonPrimaryText: '#0B1220',
-  },
-  sandstoneDawn: {
-    surface: '#F6EDDF',
-    surfaceText: '#1B2A41',
-    pane: '#F6EDDF',
-    paneText: '#1B2A41',
-    card: '#FFFFFF',
-    cardText: '#1B2A41',
-    nav: '#F2E5D5',
-    navText: '#1B2A41',
-    button: '#E4D6C5',
-    buttonText: '#1B2A41',
-    buttonPrimary: '#D4AF37',
-    buttonPrimaryText: '#1B2A41',
   },
 }
 

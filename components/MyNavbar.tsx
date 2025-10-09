@@ -143,6 +143,7 @@ export default function MyNavbar(props: any) {
   }, [])
 
   const options = useMemo(() => paletteOptions, [])
+  const hasMultiplePalettes = options.length > 1
 
   const onPaletteChange = (value: PaletteName) => {
     setPalette(value)
@@ -197,49 +198,51 @@ export default function MyNavbar(props: any) {
           flexWrap: 'wrap',
         }}
       >
-        <label
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.375rem',
-            fontSize: '0.75rem',
-            textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-            color: 'var(--main-navigation-color--inverted, #F2E5D5)',
-            fontWeight: 600,
-          }}
-        >
-          Theme
-          <select
-            value={palette}
-            onChange={(event) => onPaletteChange(event.target.value as PaletteName)}
+        {hasMultiplePalettes && (
+          <label
             style={{
-              appearance: 'none',
-              WebkitAppearance: 'none',
-              MozAppearance: 'none',
-              padding: '0.35rem 1.75rem 0.35rem 0.75rem',
-              borderRadius: '0.75rem',
-              border: '1px solid rgba(255,255,255,0.25)',
-              backgroundColor: 'rgba(0,0,0,0.25)',
-              color: 'var(--main-navigation-color--inverted, #F2E5D5)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.375rem',
               fontSize: '0.75rem',
-              fontFamily: "'Oswald', sans-serif",
+              textTransform: 'uppercase',
+              letterSpacing: '0.08em',
+              color: 'var(--main-navigation-color--inverted, #F2E5D5)',
               fontWeight: 600,
-              letterSpacing: '0.05em',
-              position: 'relative',
             }}
           >
-            {options.map((option) => (
-              <option
-                key={option.value}
-                value={option.value}
-                style={{color: '#0B1220', fontFamily: "'Oswald', sans-serif"}}
-              >
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </label>
+            Theme
+            <select
+              value={palette}
+              onChange={(event) => onPaletteChange(event.target.value as PaletteName)}
+              style={{
+                appearance: 'none',
+                WebkitAppearance: 'none',
+                MozAppearance: 'none',
+                padding: '0.35rem 1.75rem 0.35rem 0.75rem',
+                borderRadius: '0.75rem',
+                border: '1px solid rgba(255,255,255,0.25)',
+                backgroundColor: 'rgba(0,0,0,0.25)',
+                color: 'var(--main-navigation-color--inverted, #F2E5D5)',
+                fontSize: '0.75rem',
+                fontFamily: "'Oswald', sans-serif",
+                fontWeight: 600,
+                letterSpacing: '0.05em',
+                position: 'relative',
+              }}
+            >
+              {options.map((option) => (
+                <option
+                  key={option.value}
+                  value={option.value}
+                  style={{color: '#0B1220', fontFamily: "'Oswald', sans-serif"}}
+                >
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
 
         {/* Keep the default Sanity navbar (search, +, Drafts, icons) */}
         {props.renderDefault(props)}

@@ -56,6 +56,13 @@ export default defineType({
       of: [{ type: 'string' }],
     }),
     defineField({ name: 'tags', title: 'Tags', type: 'array', of: [{ type: 'string' }] }),
+    defineField({
+      name: 'tags_ref',
+      title: 'Tags (ref)',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'tag' }] }],
+      description: 'Reusable tag references (keep legacy string tags during migration)',
+    }),
 
     // --- Narrative & SEO ---
     defineField({ name: 'narrative', title: 'Narrative Development', type: 'narrativeBlock' }),
