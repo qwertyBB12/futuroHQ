@@ -292,6 +292,14 @@ export const applyPalette = (name: PaletteName) => {
       })
     })
 
+  document
+    .querySelectorAll<HTMLElement>('[data-ui]')
+    .forEach((el) => {
+      Object.entries(palette).forEach(([token, value]) => {
+        el.style.setProperty(token, value)
+      })
+    })
+
   applyVisualOverrides(name)
   ensurePaletteObserver()
 }
