@@ -87,45 +87,6 @@
   --border-color: #1F2D46;
 }
 
-:root[data-palette='sandstoneDawn'] {
-  --component-bg: #F6EDDF;
-  --component-text-color: var(--hoyas-midnight);
-  --card-bg-color: #FFFFFF;
-  --card-fg-color: var(--hoyas-midnight);
-  --card-muted-fg-color: #70727A;
-  --card-shadow-outline-color: rgba(27, 42, 65, 0.08);
-  --main-navigation-color: var(--sandstone);
-  --main-navigation-color--inverted: var(--hoyas-midnight);
-  --brand-primary: var(--scholar-gold);
-  --focus-color: var(--scholar-gold);
-  --link-color: var(--global-garnet);
-  --default-button-color: #E4D6C5;
-  --default-button-primary-color: var(--scholar-gold);
-  --default-button-danger-color: var(--global-garnet);
-  --default-button-success-color: #2F7A6A;
-  --input-bg: #FFFFFF;
-  --input-border-color: #C9B69F;
-  --input-text-color: var(--hoyas-midnight);
-  --input-placeholder-color: var(--archival-slate);
-  --input-shadow: 0 0 0 1px rgba(27, 42, 65, 0.04);
-  --state-success-color: #2F7A6A;
-  --state-info-color: var(--hoyas-midnight);
-  --state-warning-color: var(--scholar-gold);
-  --state-danger-color: var(--global-garnet);
-  --badge-default-bg: var(--hoyas-midnight);
-  --badge-default-fg: var(--sandstone);
-  --badge-primary-bg: var(--scholar-gold);
-  --badge-primary-fg: var(--hoyas-midnight);
-  --badge-success-bg: #2F7A6A;
-  --badge-success-fg: var(--sandstone);
-  --badge-warning-bg: var(--scholar-gold);
-  --badge-warning-fg: var(--hoyas-midnight);
-  --badge-danger-bg: var(--global-garnet);
-  --badge-danger-fg: var(--sandstone);
-  --hairline-color: #D1C1AF;
-  --border-color: #D1C1AF;
-}
-
 /* Optional: local brand font setup (drop files under /public/fonts) */
 /*
 @font-face {
