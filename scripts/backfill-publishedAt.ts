@@ -1,4 +1,7 @@
+import {config} from 'dotenv'
 import {createClient} from '@sanity/client'
+
+config({path: '.env.local', override: false})
 
 type DocWithDates = {
   _id: string
