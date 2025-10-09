@@ -92,8 +92,8 @@
   --component-text-color: #1B2A41;
   --card-bg-color: #F2E5D5;
   --card-fg-color: #1B2A41;
-  --card-muted-fg-color: #8A8D91;
-  --card-shadow-outline-color: rgba(27, 42, 65, 0.12);
+  --card-muted-fg-color: #F2E5D5;
+  --card-shadow-outline-color: #F2E5D5;
   --main-navigation-color: #F2E5D5;
   --main-navigation-color--inverted: #1B2A41;
   --brand-primary: #FF6F61;
@@ -106,9 +106,9 @@
   --input-bg: #F2E5D5;
   --input-border-color: #1B2A41;
   --input-text-color: #1B2A41;
-  --input-placeholder-color: #8A8D91;
+  --input-placeholder-color: #F2E5D5;
   --state-success-color: #FF6F61;
-  --state-info-color: #1B2A41;
+  --state-info-color: #F2E5D5;
   --state-warning-color: #FF6F61;
   --state-danger-color: #FF6F61;
   --badge-default-bg: #1B2A41;
