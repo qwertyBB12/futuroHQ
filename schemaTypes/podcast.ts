@@ -1,27 +1,11 @@
 import { defineType, defineField } from 'sanity'
+import { commonMeta } from './blocks/commonMeta'
 
 export default defineType({
   name: 'podcast',
   title: 'Podcast Series',
   type: 'document',
   fields: [
-    // --- Publish toggle pinned at top ---
-    defineField({
-      name: 'publish',
-      title: 'Publish?',
-      type: 'boolean',
-      initialValue: true,
-      description: 'Toggle to control if this podcast is visible across ecosystem',
-    }),
-
-    // --- Order for manual prioritization ---
-    defineField({
-      name: 'order',
-      title: 'Order',
-      type: 'number',
-      description: 'Controls manual ordering across lists',
-    }),
-
     // --- Status ---
     defineField({
       name: 'status',
@@ -42,6 +26,12 @@ export default defineType({
       title: 'Title',
       type: 'string',
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: { source: 'title', maxLength: 96 },
     }),
     defineField({ name: 'description', title: 'Description', type: 'text' }),
 
@@ -65,6 +55,7 @@ export default defineType({
       title: 'Cover Media',
       type: 'mediaBlock', // ✅ unified
     }),
+    ...commonMeta,
   ],
 
   preview: {

@@ -1,33 +1,23 @@
 import { defineType, defineField } from 'sanity'
+import { commonMeta } from './blocks/commonMeta'
 
 export default defineType({
   name: 'opEd',
   title: 'Op-Ed',
   type: 'document',
   fields: [
-    // --- Publish toggle pinned at top ---
-    defineField({
-      name: 'publish',
-      title: 'Publish?',
-      type: 'boolean',
-      initialValue: true,
-      description: 'Toggle to control if this entry is visible across ecosystem'
-    }),
-
-    // --- Order for manual prioritization ---
-    defineField({
-      name: 'order',
-      title: 'Order',
-      type: 'number',
-      description: 'Controls manual ordering across the ecosystem'
-    }),
-
     // --- Core ---
-    defineField({ 
-      name: 'title', 
-      title: 'Title', 
+    defineField({
+      name: 'title',
+      title: 'Title',
       type: 'string',
       validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: { source: 'title', maxLength: 96 },
     }),
     defineField({
       name: 'language',
@@ -82,6 +72,7 @@ export default defineType({
       title: 'SEO',
       type: 'seoBlock',
     }),
+    ...commonMeta,
   ],
 
   preview: {

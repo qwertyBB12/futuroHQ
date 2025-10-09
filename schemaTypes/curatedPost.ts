@@ -1,31 +1,23 @@
 import { defineType, defineField } from 'sanity'
+import { commonMeta } from './blocks/commonMeta'
 
 export default defineType({
   name: 'curatedPost',
   title: 'Curated Post (Third-Party)',
   type: 'document',
   fields: [
-    // --- Publish & Order ---
-    defineField({ 
-      name: 'publish', 
-      title: 'Publish?', 
-      type: 'boolean', 
-      initialValue: true,
-      description: 'Toggle to control if this curated post is visible across ecosystem'
-    }),
-    defineField({ 
-      name: 'order', 
-      title: 'Order', 
-      type: 'number',
-      description: 'Controls sorting priority (lower = higher priority)'
-    }),
-
     // --- Core ---
-    defineField({ 
-      name: 'title', 
-      title: 'Your Headline', 
-      type: 'string', 
-      validation: Rule => Rule.required() 
+    defineField({
+      name: 'title',
+      title: 'Your Headline',
+      type: 'string',
+      validation: Rule => Rule.required()
+    }),
+    defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: { source: 'title', maxLength: 96 },
     }),
     defineField({ 
       name: 'body', 
@@ -79,10 +71,18 @@ export default defineType({
       of: [{ type: 'string' }],
       description: 'Keywords or themes for filtering'
     }),
+    defineField({
+      name: 'tags_ref',
+      title: 'Tags (ref)',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'tag' }] }],
+      description: 'Link to reusable tag documents while keeping legacy tags',
+    }),
 
     // --- Narrative & SEO ---
     defineField({ name: 'narrative', title: 'Narrative Development', type: 'narrativeBlock' }),
     defineField({ name: 'seo', title: 'SEO', type: 'seoBlock' }),
+    ...commonMeta,
   ],
 
   preview: {
