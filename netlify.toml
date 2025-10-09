@@ -9,7 +9,7 @@
     font-src 'self' https://studio-static.sanity.io https://sanity-cdn.com https://core.sanity-cdn.com https://cdn.sanity.io https://fonts.gstatic.com data:;
     script-src 'self' 'unsafe-inline' 'unsafe-eval' https://sanity-cdn.com https://core.sanity-cdn.com https://modules.sanity-cdn.com https://cdn.sanity.io https://plasmic.app https://*.plasmic.app;
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-    connect-src 'self' https://api.sanity.io https://*.sanity.io https://sanity-cdn.com https://core.sanity-cdn.com https://modules.sanity-cdn.com https://plasmic.app https://*.plasmic.app https://hq.benextglobal.com https://futurohq.netlify.app wss://api.sanity.io wss://*.sanity.io wss://sanity-cdn.com wss://core.sanity-cdn.com wss://modules.sanity-cdn.com;
+    connect-src 'self' https://api.sanity.io https://*.sanity.io https://*.api.sanity.io https://sanity-cdn.com https://core.sanity-cdn.com https://modules.sanity-cdn.com https://plasmic.app https://*.plasmic.app https://hq.benextglobal.com https://futurohq.netlify.app wss://api.sanity.io wss://*.sanity.io wss://*.api.sanity.io wss://sanity-cdn.com wss://core.sanity-cdn.com wss://modules.sanity-cdn.com;
     worker-src 'self' blob:;
     frame-src 'self';
     frame-ancestors 'self';
