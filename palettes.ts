@@ -183,6 +183,44 @@ const assignStyles = (selector: string, styles: Record<string, string>) => {
 
 let currentPaletteName: PaletteName = defaultPaletteName
 let paletteObserver: MutationObserver | null = null
+let pendingOverrideFrame = 0
+
+const overrideRootSelectors = [
+  '[data-ui="Pane"]',
+  '[data-ui="PaneHeader"]',
+  '[data-ui="PaneFooter"]',
+  '[data-ui="PaneContent"]',
+  '[data-ui="PaneLayout"]',
+  '[data-ui="PaneItem"]',
+  '[data-ui="Card"]',
+  '[data-ui="ListItem"]',
+  '[data-ui="TreeItem"]',
+  '[data-ui="Navbar"]',
+  '[data-ui="Button"]',
+  'button[data-ui="PaneItem"]',
+] as const
+
+const elementTouchesOverrideRoot = (element: HTMLElement, includeDescendants = false) => {
+  for (const selector of overrideRootSelectors) {
+    if (
+      element.matches(selector) ||
+      element.closest(selector) ||
+      (includeDescendants && element.querySelector(selector))
+    ) {
+      return true
+    }
+  }
+  return false
+}
+
+const scheduleVisualOverrides = () => {
+  if (typeof window === 'undefined') return
+  if (pendingOverrideFrame) return
+  pendingOverrideFrame = window.requestAnimationFrame(() => {
+    pendingOverrideFrame = 0
+    applyVisualOverrides(currentPaletteName)
+  })
+}
 
 const applyVisualOverrides = (name: PaletteName) => {
   if (typeof document === 'undefined') return
@@ -269,7 +307,29 @@ const ensurePaletteObserver = () => {
   if (typeof document === 'undefined') return
   if (paletteObserver) return
 
-  paletteObserver = new MutationObserver(() => applyVisualOverrides(currentPaletteName))
+  paletteObserver = new MutationObserver((records) => {
+    for (const record of records) {
+      if (record.type !== 'childList') continue
+
+      if (
+        record.target instanceof HTMLElement &&
+        elementTouchesOverrideRoot(record.target, false)
+      ) {
+        scheduleVisualOverrides()
+        return
+      }
+
+      for (const added of Array.from(record.addedNodes)) {
+        if (
+          added instanceof HTMLElement &&
+          elementTouchesOverrideRoot(added, true)
+        ) {
+          scheduleVisualOverrides()
+          return
+        }
+      }
+    }
+  })
   paletteObserver.observe(document.body, {childList: true, subtree: true})
 }
 

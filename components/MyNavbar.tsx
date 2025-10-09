@@ -10,6 +10,10 @@ import {
   type PaletteName,
 } from '../palettes'
 
+const NAVBAR_SELECTOR = '[data-ui="Navbar"]'
+
+const RUN_ONCE_ATTRIBUTE = 'data-branding-applied'
+
 function hideWorkspaceBadgeOnce() {
   // Find any SVG <text> node that looks like two-letter initials (e.g., FH)
   const texts = Array.from(document.querySelectorAll('svg text')) as SVGTextElement[]
@@ -49,7 +53,7 @@ function hideWorkspaceBadgeOnce() {
 }
 
 function styleWorkspaceName() {
-  const navbar = document.querySelector('[data-ui="Navbar"]') as HTMLElement | null
+  const navbar = document.querySelector(NAVBAR_SELECTOR) as HTMLElement | null
   if (!navbar) return
 
   const target =
@@ -58,7 +62,7 @@ function styleWorkspaceName() {
       .map((b) => b.querySelector('span'))
       .find(Boolean) as HTMLElement | null)
 
-  if (target) {
+  if (target && !target.hasAttribute(RUN_ONCE_ATTRIBUTE)) {
     Object.assign(target.style, {
       fontFamily: "'Oswald', sans-serif",
       fontWeight: '700',
@@ -66,6 +70,7 @@ function styleWorkspaceName() {
       letterSpacing: '0.5px',
       color: 'var(--main-navigation-color--inverted, #ffffff)',
     } as CSSStyleDeclaration)
+    target.setAttribute(RUN_ONCE_ATTRIBUTE, 'true')
   }
 }
 
@@ -73,17 +78,60 @@ export default function MyNavbar(props: any) {
   const [palette, setPalette] = useState<PaletteName>(defaultPaletteName)
 
   useEffect(() => {
-    // run immediately
-    hideWorkspaceBadgeOnce()
-    styleWorkspaceName()
-
-    // and keep applying on re-renders
-    const mo = new MutationObserver(() => {
+    const applyBranding = () => {
       hideWorkspaceBadgeOnce()
       styleWorkspaceName()
+    }
+
+    const scheduleBranding = (() => {
+      let rafHandle = 0
+      return () => {
+        if (rafHandle) return
+        rafHandle = window.requestAnimationFrame(() => {
+          rafHandle = 0
+          applyBranding()
+        })
+      }
+    })()
+
+    const mutationTouchesNavbar = (records: MutationRecord[]) => {
+      const touchesNode = (node: Node) => {
+        if (!(node instanceof HTMLElement)) return false
+        return Boolean(
+          node.matches(NAVBAR_SELECTOR) ||
+            node.closest(NAVBAR_SELECTOR) ||
+            node.querySelector(NAVBAR_SELECTOR)
+        )
+      }
+
+      for (const record of records) {
+        if (record.type !== 'childList') continue
+
+        if (record.target instanceof HTMLElement && record.target.closest(NAVBAR_SELECTOR)) {
+          return true
+        }
+
+        for (const added of Array.from(record.addedNodes)) {
+          if (touchesNode(added)) return true
+        }
+      }
+
+      return false
+    }
+
+    applyBranding()
+
+    const mo = new MutationObserver((records) => {
+      if (mutationTouchesNavbar(records)) {
+        scheduleBranding()
+      }
     })
-    mo.observe(document.body, {subtree: true, childList: true, attributes: true})
-    return () => mo.disconnect()
+
+    mo.observe(document.body, {subtree: true, childList: true})
+
+    return () => {
+      mo.disconnect()
+    }
   }, [])
 
   useEffect(() => {
