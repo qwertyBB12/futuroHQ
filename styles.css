@@ -327,6 +327,25 @@
   color: var(--hoyas-midnight) !important;
 }
 
+:root[data-palette='sandstoneDawn'] button[data-ui="PaneItem"],
+:root[data-palette='sandstoneDawn'] button[data-ui="PaneItem"]:hover,
+:root[data-palette='sandstoneDawn'] button[data-ui="PaneItem"]:focus {
+  background-color: var(--sandstone) !important;
+  color: var(--hoyas-midnight) !important;
+  border-color: rgba(27, 42, 65, 0.15) !important;
+  box-shadow: none !important;
+}
+
+:root[data-palette='sandstoneDawn'] button[data-ui="PaneItem"] * {
+  color: var(--hoyas-midnight) !important;
+}
+
+:root[data-palette='sandstoneDawn'] button[data-ui="PaneItem"]::before,
+:root[data-palette='sandstoneDawn'] button[data-ui="PaneItem"]::after {
+  background-color: var(--sandstone) !important;
+  border-color: rgba(27, 42, 65, 0.15) !important;
+}
+
 :root[data-palette='sandstoneDawn'] [data-ui="Button"][data-tone="primary"],
 :root[data-palette='sandstoneDawn'] [data-ui="Button"][data-tone="danger"] {
   background-color: var(--brand-primary) !important;
