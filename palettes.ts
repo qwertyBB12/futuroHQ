@@ -284,21 +284,11 @@ export const applyPalette = (name: PaletteName) => {
     root.style.setProperty(token, value)
   })
 
-  document
-    .querySelectorAll<HTMLElement>('[data-sanity-ui-theme]')
-    .forEach((el) => {
-      Object.entries(palette).forEach(([token, value]) => {
-        el.style.setProperty(token, value)
-      })
+  document.querySelectorAll<HTMLElement>('[data-sanity-ui-theme],[data-ui]').forEach((el) => {
+    Object.entries(palette).forEach(([token, value]) => {
+      el.style.setProperty(token, value, 'important')
     })
-
-  document
-    .querySelectorAll<HTMLElement>('[data-ui]')
-    .forEach((el) => {
-      Object.entries(palette).forEach(([token, value]) => {
-        el.style.setProperty(token, value)
-      })
-    })
+  })
 
   applyVisualOverrides(name)
   ensurePaletteObserver()
