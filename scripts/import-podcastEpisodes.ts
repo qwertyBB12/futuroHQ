@@ -86,6 +86,16 @@ function buildAudioBlock({
 }) {
   const sourceUrl = enclosureUrl || link
   if (!sourceUrl) return null
+  const trimmedGuid = guid?.trim()
+  const showId = process.env.CAPTIVATE_SHOW_ID?.trim()
+  const iframeSrc =
+    trimmedGuid && showId
+      ? `https://player.captivate.fm/episode/${encodeURIComponent(trimmedGuid)}`
+      : null
+  const iframeWrapper = iframeSrc
+    ? `<div style="width:100%;height:600px;margin-bottom:20px;border-radius:6px;overflow:hidden;"><iframe style="width:100%;height:600px;" frameborder="no" scrolling="no" allow="clipboard-write" seamless src="${iframeSrc}"></iframe></div>`
+    : null
+  const fallbackAudio = `<audio controls src="${sourceUrl}" style="width:100%"></audio>`
 
   return {
     _type: 'mediaBlock',
@@ -94,7 +104,7 @@ function buildAudioBlock({
     platform: 'captivate',
     platformId: sourceUrl,
     playerColor: '1B2A41',
-    embedCode: `<audio controls src="${sourceUrl}" style="width:100%"></audio>`,
+    embedCode: iframeWrapper ?? fallbackAudio,
   }
 }
 
