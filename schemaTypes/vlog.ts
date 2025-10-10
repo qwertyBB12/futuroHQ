@@ -47,6 +47,23 @@ export default defineType({
       to: [{ type: 'collaborator' }, { type: 'person' }],
     }),
     defineField({
+      name: 'contentFormat',
+      title: 'Content Format',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Longform', value: 'longform' },
+          { title: 'Short', value: 'short' },
+          { title: 'Live', value: 'live' },
+          { title: 'Clip', value: 'clip' },
+          { title: 'Other', value: 'other' },
+        ],
+        layout: 'radio',
+      },
+      description:
+        'Used to distinguish long videos, shorts, livestreams, etc. Adjust if the automatic import guess needs tweaking.',
+    }),
+    defineField({
       name: 'description',
       title: 'Description',
       type: 'text',

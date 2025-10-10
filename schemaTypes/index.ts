@@ -5,6 +5,8 @@ import ledgerPerson from './ledgerPerson'
 import opEd from './opEd'
 import person from './person'
 import project from './project'
+import siteSettings_futuro from './siteSettings_futuro'
+import futuroSummit from './futuroSummit'
 
 // --- Media / Publishing ---
 import podcast from './podcast'
@@ -29,6 +31,8 @@ export const schemaTypes = [
   opEd,
   person,
   project,
+  siteSettings_futuro,
+  futuroSummit,
   
   // Media / Publishing
   podcast,

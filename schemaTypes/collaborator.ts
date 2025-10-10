@@ -52,6 +52,13 @@ export default defineType({
       type: 'number',
       description: 'Controls sorting priority (lower = higher priority)',
     }),
+    defineField({
+      name: 'isFuturoHost',
+      title: 'Is Futuro Summit Host?',
+      type: 'boolean',
+      initialValue: false,
+      description: 'Flag collaborators that qualify as Futuro Summit host institutions',
+    }),
 
     // --- Media ---
     defineField({
