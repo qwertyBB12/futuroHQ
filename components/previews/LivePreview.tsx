@@ -111,123 +111,6 @@ const renderPortableText = (blocks?: any[]) => {
   )
 }
 
-const extractYouTubeId = (url: string) => {
-  const match = url.match(
-    /(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|v\/))([\w-]{11})/,
-  )
-  return match ? match[1] : null
-}
-
-const extractVimeoId = (url: string) => {
-  const match = url.match(/vimeo\.com\/(?:video\/)?(\d+)/)
-  return match ? match[1] : null
-}
-
-const renderMediaBlock = (block?: any, fallbackUrl?: string) => {
-  if (block?.embedCode) {
-    return <Box dangerouslySetInnerHTML={{ __html: block.embedCode }} />
-  }
-
-  if (block?.platform && block?.platformId) {
-    switch (block.platform) {
-      case 'youtube':
-        return (
-          <Box style={{ aspectRatio: '16 / 9', width: '100%' }}>
-            <iframe
-              src={`https://www.youtube.com/embed/${block.platformId}`}
-              title={block.title || 'YouTube preview'}
-              style={{ border: 0, width: '100%', height: '100%' }}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </Box>
-        )
-      case 'vimeo':
-        return (
-          <Box style={{ aspectRatio: '16 / 9', width: '100%' }}>
-            <iframe
-              src={`https://player.vimeo.com/video/${block.platformId}`}
-              title={block.title || 'Vimeo preview'}
-              style={{ border: 0, width: '100%', height: '100%' }}
-              allow="autoplay; fullscreen; picture-in-picture"
-              allowFullScreen
-            />
-          </Box>
-        )
-      case 'wistia':
-        return (
-          <Box style={{ aspectRatio: '16 / 9', width: '100%' }}>
-            <iframe
-              src={`https://fast.wistia.net/embed/iframe/${block.platformId}?seo=true&videoFoam=true`}
-              title={block.title || 'Wistia preview'}
-              style={{ border: 0, width: '100%', height: '100%' }}
-              allow="autoplay; fullscreen"
-              allowFullScreen
-            />
-          </Box>
-        )
-      default:
-        break
-    }
-  }
-
-  if (fallbackUrl) {
-    const youtubeId = extractYouTubeId(fallbackUrl)
-    if (youtubeId) {
-      return (
-        <Box style={{ aspectRatio: '16 / 9', width: '100%' }}>
-          <iframe
-            src={`https://www.youtube.com/embed/${youtubeId}`}
-            title="YouTube preview"
-            style={{ border: 0, width: '100%', height: '100%' }}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        </Box>
-      )
-    }
-
-    const vimeoId = extractVimeoId(fallbackUrl)
-    if (vimeoId) {
-      return (
-        <Box style={{ aspectRatio: '16 / 9', width: '100%' }}>
-          <iframe
-            src={`https://player.vimeo.com/video/${vimeoId}`}
-            title="Vimeo preview"
-            style={{ border: 0, width: '100%', height: '100%' }}
-            allow="autoplay; fullscreen; picture-in-picture"
-            allowFullScreen
-          />
-        </Box>
-      )
-    }
-
-    return (
-      <Text>
-        <a href={fallbackUrl} target="_blank" rel="noreferrer">
-          {fallbackUrl}
-        </a>
-      </Text>
-    )
-  }
-
-  if (!block) return null
-
-  return (
-    <Stack space={2}>
-      <Text>
-        {block.assetType ? `${block.assetType.toUpperCase()} asset` : 'Media asset'} via{' '}
-        {block.platform || 'custom source'}
-      </Text>
-      {block.title && (
-        <Text muted size={1}>
-          {block.title}
-        </Text>
-      )}
-    </Stack>
-  )
-}
-
 const PreviewField = ({ label, children }: { label: string; children?: ReactNode }) => {
   if (!children) return null
   return (
@@ -366,7 +249,6 @@ const LivePreview: ComponentType<LivePreviewProps> = ({ document, schemaType }) 
                 <Text size={2}>{data.narrative.openingPortrait}</Text>
               )}
             </PreviewField>
-            <PreviewField label="Primary Media">{renderMediaBlock(data.featuredMedia)}</PreviewField>
           </Stack>
         )
 
@@ -392,9 +274,6 @@ const LivePreview: ComponentType<LivePreviewProps> = ({ document, schemaType }) 
               items={data.platforms}
               getLabel={(item) => (typeof item === 'string' ? item : null)}
             />
-            <PreviewField label="Media">
-              {renderMediaBlock(data.mediaBlock, data.postUrl)}
-            </PreviewField>
           </Stack>
         )
 
@@ -414,9 +293,6 @@ const LivePreview: ComponentType<LivePreviewProps> = ({ document, schemaType }) 
               items={data.tags}
               getLabel={(item) => (typeof item === 'string' ? item : null)}
             />
-            <PreviewField label="Primary Video">
-              {renderMediaBlock(data.mediaBlock, data.videoUrl)}
-            </PreviewField>
           </Stack>
         )
 
@@ -429,7 +305,6 @@ const LivePreview: ComponentType<LivePreviewProps> = ({ document, schemaType }) 
             </PreviewField>
             <PreviewField label="RSS Feed">{data.rssFeedUrl}</PreviewField>
             <PreviewField label="YouTube Channel">{data.youtubeChannelUrl}</PreviewField>
-            <PreviewField label="Cover">{renderMediaBlock(data.cover)}</PreviewField>
           </Stack>
         )
 
@@ -444,8 +319,6 @@ const LivePreview: ComponentType<LivePreviewProps> = ({ document, schemaType }) 
               <PreviewField label="Publish Date">{formatDate(data.pubDate)}</PreviewField>
             </Grid>
             <PreviewField label="Series">{data.seriesRef?.title || '—'}</PreviewField>
-            <PreviewField label="Audio">{renderMediaBlock(data.audioBlock)}</PreviewField>
-            <PreviewField label="Video">{renderMediaBlock(data.videoBlock)}</PreviewField>
           </Stack>
         )
 
