@@ -73,23 +73,35 @@ function slugify(input: string) {
     .slice(0, 96)
 }
 
-function buildAudioBlock(params: {
+function buildAudioBlock({
+  title,
+  enclosureUrl,
+  link,
+  guid,
+}: {
   title: string
   enclosureUrl?: string
   link?: string
   guid?: string
 }) {
-  const {title, enclosureUrl, link, guid} = params
-  if (!enclosureUrl && !link) return null
   const sourceUrl = enclosureUrl || link
+  if (!sourceUrl) return null
+
+  const embedCode =
+    guid && guid.trim().length > 0
+      ? `<iframe src="https://player.captivate.fm/${encodeURIComponent(
+          guid,
+        )}" height="190" width="100%" frameborder="0" scrolling="no"></iframe>`
+      : `<audio controls src="${sourceUrl}" style="width:100%"></audio>`
+
   return {
     _type: 'mediaBlock',
     title,
     assetType: 'audio',
-    platform: 'other',
-    platformId: guid || sourceUrl || '',
+    platform: 'captivate',
+    platformId: guid || sourceUrl,
     playerColor: '1B2A41',
-    embedCode: sourceUrl ? `<audio controls src="${sourceUrl}"></audio>` : undefined,
+    embedCode,
   }
 }
 
@@ -128,7 +140,7 @@ async function run() {
     const legacyTags = Array.isArray(item.categories)
       ? Array.from(new Set(item.categories.filter(Boolean)))
       : []
-    const tagRefs = []
+    const tagRefs: Array<{_type: 'reference'; _ref: string; _key: string}> = []
     for (const tag of legacyTags) {
       const tagSlug = slugify(tag)
       if (!tagSlug) continue
@@ -147,67 +159,69 @@ async function run() {
       guid: item.guid,
     })
 
-    const episodeDoc = {
+    const existing = dryRun
+      ? null
+      : await client.getDocument<any>(docId).catch(() => null)
+
+    const nowIso = new Date().toISOString()
+
+    const existingStringTags = Array.isArray(existing?.tags) ? existing.tags : []
+    const mergedStringTags = Array.from(new Set([...existingStringTags, ...legacyTags]))
+
+    const existingTagRefs: typeof tagRefs = Array.isArray(existing?.tags_ref)
+      ? existing.tags_ref
+      : []
+    const mergedTagRefs: typeof tagRefs = [...existingTagRefs]
+    for (const ref of tagRefs) {
+      if (!mergedTagRefs.some(existingRef => existingRef?._ref === ref._ref)) {
+        mergedTagRefs.push(ref)
+      }
+    }
+
+    const episodeDoc: Record<string, unknown> = {
       _id: docId,
       _type: 'podcastEpisode',
       title: item.title || 'Untitled Episode',
       description: item.contentSnippet || item.content || item.contentEncoded || '',
       slug: {current: slug},
       publishedAt,
+      updatedAt: nowIso,
       pubDate: item.isoDate ? new Date(item.isoDate).toISOString() : null,
       episodeNumber,
       seasonNumber,
       duration,
-      audioEmbed: audioBlock,
-      videoEmbed: null,
+      audioEmbed: audioBlock ?? (existing as any)?.audioEmbed ?? null,
+      videoEmbed: (existing as any)?.videoEmbed ?? null,
       series: {
-        _type: 'reference',
+        _type: 'reference' as const,
         _ref: podcastId,
       },
-      tags: legacyTags,
-      tags_ref: tagRefs,
+      tags: mergedStringTags,
+      tags_ref: mergedTagRefs,
       language: defaultLanguage,
-      order: episodeNumber ?? 0,
+      publish: true,
+      order: episodeNumber ?? (existing as any)?.order ?? 0,
+      ai_derivatives:
+        (existing as any)?.ai_derivatives ?? {summary: '', quotes: [], captions: []},
+      distribution: (existing as any)?.distribution ?? [],
+      analytics:
+        (existing as any)?.analytics ?? {views: 0, likes: 0, shares: 0, source: 'unknown'},
     }
 
-    const patch = client
-      .patch(docId)
-      .setIfMissing({_type: 'podcastEpisode'})
-      .set({
-        title: episodeDoc.title,
-        description: episodeDoc.description,
-        slug: episodeDoc.slug,
-        pubDate: episodeDoc.pubDate,
-        publishedAt: episodeDoc.publishedAt,
-        updatedAt: new Date().toISOString(),
-        episodeNumber: episodeDoc.episodeNumber,
-        seasonNumber: episodeDoc.seasonNumber,
-        duration: episodeDoc.duration,
-        audioEmbed: episodeDoc.audioEmbed,
-        videoEmbed: episodeDoc.videoEmbed,
-        series: episodeDoc.series,
-        tags: episodeDoc.tags,
-        tags_ref: episodeDoc.tags_ref,
-        language: episodeDoc.language,
-        order: episodeDoc.order,
-      })
-      .setIfMissing({
-        publish: true,
-        order: episodeDoc.order ?? 0,
-        ai_derivatives: {summary: '', quotes: [], captions: []},
-        distribution: [],
-        analytics: {views: 0, likes: 0, shares: 0, source: 'unknown'},
-      })
-      .set({
-        publishedAt: episodeDoc.publishedAt,
-        updatedAt: new Date().toISOString(),
-        publish: true,
-      })
+    if (audioBlock) {
+      episodeDoc.audioEmbed = audioBlock
+    } else if (existing?.audioEmbed) {
+      episodeDoc.audioEmbed = existing.audioEmbed
+    }
+
+    if (existing?.videoEmbed) {
+      episodeDoc.videoEmbed = existing.videoEmbed
+    }
 
     console.log(`Upserting episode ${episodeDoc.title} (${docId})`)
 
     if (!dryRun) {
-      await patch.commit()
+      await client.createOrReplace(episodeDoc)
     }
   }
 
