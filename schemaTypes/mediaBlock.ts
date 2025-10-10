@@ -1,9 +1,13 @@
 import { defineType, defineField } from 'sanity'
+import { MediaBlockInput } from '../components/inputs/MediaBlockInput'
 
 export default defineType({
   name: 'mediaBlock',
   title: 'Media Block',
   type: 'object',
+  components: {
+    input: MediaBlockInput,
+  },
   fields: [
     defineField({ name: 'title', title: 'Title', type: 'string' }),
 
