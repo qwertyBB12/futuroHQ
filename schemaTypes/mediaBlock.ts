@@ -30,6 +30,7 @@ export default defineType({
       type: 'string',
       options: {
         list: [
+          { title: 'Captivate', value: 'captivate' },
           { title: 'Wistia', value: 'wistia' },
           { title: 'YouTube', value: 'youtube' },
           { title: 'Vimeo', value: 'vimeo' },
