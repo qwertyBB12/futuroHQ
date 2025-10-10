@@ -8,6 +8,7 @@ import { customTheme } from './theme'
 import StudioLogo from './components/StudioLogo'
 import MyNavbar from './components/MyNavbar'
 import StudioHead from './components/StudioHead'
+import deskStructure from './deskStructure'
 
 /**
  * Webhook reminders:
@@ -25,7 +26,7 @@ export default defineConfig({
   projectId: 'fo6n8ceo',
   dataset: 'production',
   theme: customTheme,
-  plugins: [structureTool(), visionTool()],
+  plugins: [structureTool({ structure: deskStructure }), visionTool()],
   schema: { types: schemaTypes },
   studio: {
     components: {
