@@ -7,6 +7,7 @@ import { schemaTypes } from './schemaTypes'
 import { customTheme } from './theme'
 import StudioLogo from './components/StudioLogo'
 import MyNavbar from './components/MyNavbar'
+import StudioHead from './components/StudioHead'
 
 /**
  * Webhook reminders:
@@ -30,6 +31,7 @@ export default defineConfig({
     components: {
       logo: StudioLogo,
       navbar: MyNavbar,
+      head: StudioHead,
     },
   },
 })
