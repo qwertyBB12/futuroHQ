@@ -87,21 +87,14 @@ function buildAudioBlock({
   const sourceUrl = enclosureUrl || link
   if (!sourceUrl) return null
 
-  const embedCode =
-    guid && guid.trim().length > 0
-      ? `<iframe src="https://player.captivate.fm/${encodeURIComponent(
-          guid,
-        )}" height="190" width="100%" frameborder="0" scrolling="no"></iframe>`
-      : `<audio controls src="${sourceUrl}" style="width:100%"></audio>`
-
   return {
     _type: 'mediaBlock',
     title,
     assetType: 'audio',
     platform: 'captivate',
-    platformId: guid || sourceUrl,
+    platformId: sourceUrl,
     playerColor: '1B2A41',
-    embedCode,
+    embedCode: `<audio controls src="${sourceUrl}" style="width:100%"></audio>`,
   }
 }
 
