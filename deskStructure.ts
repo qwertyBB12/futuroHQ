@@ -32,14 +32,19 @@ export const deskStructure = (S: StructureBuilder) => {
     S.view.component(LivePreview).title('Preview'),
   ]
 
-  const withPreview = (schemaType: string, title: string) =>
-    S.documentTypeListItem(schemaType)
+  const listWithPreview = (schemaType: string, title: string) =>
+    S.listItem()
       .title(title)
-      .child((documentId) =>
-        S.document()
-          .schemaType(schemaType)
-          .documentId(documentId)
-          .views(documentViews(schemaType)),
+      .schemaType(schemaType)
+      .child(
+        S.documentTypeList(schemaType)
+          .title(title)
+          .child((documentId) =>
+            S.document()
+              .schemaType(schemaType)
+              .documentId(documentId)
+              .views(documentViews(schemaType)),
+          ),
       )
 
   const allDocumentTypeListItems = S.documentTypeListItems()
@@ -67,7 +72,10 @@ export const deskStructure = (S: StructureBuilder) => {
         .child(
           S.list()
             .title('Projects & Events')
-            .items([withPreview('project', 'Projects'), withPreview('futuroSummit', 'Futuro Summits')]),
+            .items([
+              listWithPreview('project', 'Projects'),
+              listWithPreview('futuroSummit', 'Futuro Summits'),
+            ]),
         ),
 
       S.divider(),
@@ -95,11 +103,11 @@ export const deskStructure = (S: StructureBuilder) => {
           S.list()
             .title('Media & Content')
             .items([
-              withPreview('opEd', 'Op-Eds'),
-              withPreview('podcast', 'Podcasts'),
-              withPreview('podcastEpisode', 'Podcast Episodes'),
-              withPreview('vlog', 'Vlogs'),
-              withPreview('clip', 'Clips'),
+              listWithPreview('opEd', 'Op-Eds'),
+              listWithPreview('podcast', 'Podcasts'),
+              listWithPreview('podcastEpisode', 'Podcast Episodes'),
+              listWithPreview('vlog', 'Vlogs'),
+              listWithPreview('clip', 'Clips'),
               S.documentTypeListItem('curatedPost').title('Curated Posts'),
               S.documentTypeListItem('socialPost').title('Social Posts'),
             ]),
