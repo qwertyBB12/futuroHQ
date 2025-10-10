@@ -1,7 +1,13 @@
-import { StructureBuilder } from 'sanity/structure'
+import type { StructureBuilder } from 'sanity/structure'
+import {
+  ProjectsIcon,
+  UsersIcon,
+  VideoIcon,
+  CogIcon,
+  DocumentsIcon,
+} from '@sanity/icons'
 
-const groupedDocTypes = [
-  'siteSettings_futuro',
+const groupedDocTypes = new Set([
   'project',
   'futuroSummit',
   'person',
@@ -16,32 +22,32 @@ const groupedDocTypes = [
   'curatedPost',
   'socialPost',
   'tag',
-]
+  'siteSettings_futuro',
+])
 
-export const deskStructure = (S: StructureBuilder) =>
-  S.list()
+export const deskStructure = (S: StructureBuilder) => {
+  const allDocumentTypeListItems = S.documentTypeListItems()
+
+  const ungroupedDocItems = allDocumentTypeListItems.filter((listItem) => {
+    const typeNames =
+      typeof (listItem as any).getTypeNames === 'function'
+        ? (listItem as any).getTypeNames()
+        : typeof listItem.getId === 'function'
+        ? [listItem.getId() as string]
+        : []
+
+    return (
+      typeNames.length > 0 &&
+      typeNames.every((typeName: string) => !groupedDocTypes.has(typeName))
+    )
+  })
+
+  return S.list()
     .title('BeNeXT HQ')
     .items([
       S.listItem()
-        .title('📌 Singleton Settings')
-        .child(
-          S.list()
-            .title('Singleton Settings')
-            .items([
-              S.listItem()
-                .title('Futuro Site Settings')
-                .child(
-                  S.document()
-                    .schemaType('siteSettings_futuro')
-                    .documentId('siteSettings_futuro'),
-                ),
-            ]),
-        ),
-
-      S.divider(),
-
-      S.listItem()
         .title('🧩 Projects & Events')
+        .icon(ProjectsIcon)
         .child(
           S.list()
             .title('Projects & Events')
@@ -51,8 +57,11 @@ export const deskStructure = (S: StructureBuilder) =>
             ]),
         ),
 
+      S.divider(),
+
       S.listItem()
         .title('🧑‍🤝‍🧑 People & Collaborators')
+        .icon(UsersIcon)
         .child(
           S.list()
             .title('People & Collaborators')
@@ -64,8 +73,11 @@ export const deskStructure = (S: StructureBuilder) =>
             ]),
         ),
 
+      S.divider(),
+
       S.listItem()
         .title('📺 Media & Content')
+        .icon(VideoIcon)
         .child(
           S.list()
             .title('Media & Content')
@@ -80,57 +92,37 @@ export const deskStructure = (S: StructureBuilder) =>
             ]),
         ),
 
-      S.listItem()
-        .title('🏷️ Taxonomy & Metadata')
-        .child(
-          S.list()
-            .title('Taxonomy & Metadata')
-            .items([S.documentTypeListItem('tag').title('Tags')]),
-        ),
+      S.divider(),
 
       S.listItem()
-        .title('🧱 Reusable Blocks')
+        .title('🏷️ Taxonomy & Settings')
+        .icon(CogIcon)
         .child(
           S.list()
-            .title('Reusable Blocks')
+            .title('Taxonomy & Settings')
             .items([
               S.listItem()
-                .title('mediaBlock (object type)')
+                .title('Futuro Site Settings')
                 .child(
-                  S.component()
-                    .title('mediaBlock')
-                    .component(() => 'Object schema; reusable via field selectors'),
+                  S.document()
+                    .schemaType('siteSettings_futuro')
+                    .documentId('siteSettings_futuro'),
                 ),
-              S.listItem()
-                .title('narrativeBlock (object type)')
-                .child(
-                  S.component()
-                    .title('narrativeBlock')
-                    .component(() => 'Object schema; reusable via field selectors'),
-                ),
-              S.listItem()
-                .title('seoBlock (object type)')
-                .child(
-                  S.component()
-                    .title('seoBlock')
-                    .component(() => 'Object schema; reusable via field selectors'),
-                ),
+              S.documentTypeListItem('tag').title('Tags'),
             ]),
         ),
 
       S.divider(),
 
       S.listItem()
-        .title('📄 All Documents')
+        .title('📄 All Documents (Ungrouped)')
+        .icon(DocumentsIcon)
         .child(
           S.list()
-            .title('All Documents')
-            .items(
-              S.documentTypeListItems().filter(
-                (listItem) => !groupedDocTypes.includes(listItem.getId() || ''),
-              ),
-            ),
+            .title('All Documents (Ungrouped)')
+            .items(ungroupedDocItems),
         ),
     ])
+}
 
 export default deskStructure
