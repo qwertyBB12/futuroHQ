@@ -10,6 +10,12 @@ type MediaBlockValue = {
   playerColor?: string
 }
 
+type PreviewContent =
+  | {kind: 'iframe'; src: string; height?: number; allow?: string; allowFullscreen?: boolean}
+  | {kind: 'audio'; src: string}
+  | {kind: 'html'; markup: string}
+  | {kind: 'none'}
+
 function isUrl(candidate: string) {
   try {
     new URL(candidate)
@@ -19,15 +25,67 @@ function isUrl(candidate: string) {
   }
 }
 
-function buildCaptivateEmbed(platformId: string) {
+function parseHeight(value?: string | null) {
+  if (!value) return undefined
+  const fromStyle = value.match(/height\s*:\s*([0-9.]+)px/i)
+  if (fromStyle) return Number(fromStyle[1])
+  const pxMatch = value.match(/([0-9.]+)px/i)
+  if (pxMatch) return Number(pxMatch[1])
+  const numeric = Number(value)
+  return Number.isFinite(numeric) ? numeric : undefined
+}
+
+function parseEmbedCode(embed: string): PreviewContent {
+  const trimmed = embed.trim()
+  if (!trimmed) return {kind: 'none'}
+
+  if (typeof document === 'undefined') {
+    return {kind: 'html', markup: trimmed}
+  }
+
+  const container = document.createElement('div')
+  container.innerHTML = trimmed
+
+  const iframe = container.querySelector('iframe')
+  if (iframe?.src) {
+    const heightFromStyle = parseHeight(iframe.getAttribute('style') || '')
+    const heightAttr = parseHeight(iframe.getAttribute('height'))
+    const allow = iframe.getAttribute('allow') ?? undefined
+    const allowFullscreen =
+      iframe.hasAttribute('allowfullscreen') ||
+      iframe.getAttribute('allowFullScreen') === 'true' ||
+      iframe.getAttribute('allowfullscreen') === 'true'
+
+    return {
+      kind: 'iframe',
+      src: iframe.src,
+      height: heightFromStyle ?? heightAttr,
+      allow,
+      allowFullscreen,
+    }
+  }
+
+  const audio = container.querySelector('audio')
+  if (audio?.src) {
+    return {kind: 'audio', src: audio.src}
+  }
+
+  return {kind: 'html', markup: trimmed}
+}
+
+function buildCaptivateContent(platformId: string): PreviewContent {
   const url = platformId.trim()
-  if (!url) return ''
+  if (!url) return {kind: 'none'}
   const lower = url.toLowerCase()
   const isAudioFile =
-    lower.endsWith('.mp3') || lower.endsWith('.m4a') || lower.includes('.mp3?') || lower.includes('.m4a?')
+    lower.endsWith('.mp3') ||
+    lower.endsWith('.m4a') ||
+    lower.includes('.mp3?') ||
+    lower.includes('.m4a?')
   if (isAudioFile) {
-    return `<audio controls src="${url}" style="width:100%"></audio>`
+    return {kind: 'audio', src: url}
   }
+
   const embedUrl = url.includes('player.captivate.fm')
     ? url
     : (() => {
@@ -37,12 +95,18 @@ function buildCaptivateEmbed(platformId: string) {
         return `https://player.captivate.fm/episode/${encodeURIComponent(lastSegment)}`
       })()
 
-  return `<div style="width:100%;height:600px;margin-bottom:20px;border-radius:6px;overflow:hidden;"><iframe style="width:100%;height:600px;" frameborder="no" scrolling="no" allow="clipboard-write" seamless src="${embedUrl}"></iframe></div>`
+  return {
+    kind: 'iframe',
+    src: embedUrl,
+    height: 600,
+    allow: 'autoplay; clipboard-write; encrypted-media',
+    allowFullscreen: true,
+  }
 }
 
-function buildSpotifyEmbed(platformId: string) {
+function buildSpotifyContent(platformId: string): PreviewContent {
   const trimmed = platformId.trim()
-  if (!trimmed) return ''
+  if (!trimmed) return {kind: 'none'}
 
   const baseUrl = (() => {
     if (trimmed.includes('embed/episode')) return trimmed
@@ -57,70 +121,100 @@ function buildSpotifyEmbed(platformId: string) {
     return `https://open.spotify.com/embed/episode/${trimmed}`
   })()
 
-  return `<iframe style="border-radius:12px" src="${baseUrl}" width="100%" height="232" frameborder="0" allowtransparency="true" allow="clipboard-write; encrypted-media"></iframe>`
+  return {
+    kind: 'iframe',
+    src: baseUrl,
+    height: 232,
+    allow: 'autoplay; clipboard-write; encrypted-media',
+    allowFullscreen: false,
+  }
 }
 
-function buildSoundCloudEmbed(platformId: string) {
+function buildSoundCloudContent(platformId: string): PreviewContent {
   const trimmed = platformId.trim()
-  if (!trimmed) return ''
+  if (!trimmed) return {kind: 'none'}
 
   const trackUrl = isUrl(trimmed) ? trimmed : `https://soundcloud.com/${trimmed}`
-  const embedUrl = `https://w.soundcloud.com/player/?url=${encodeURIComponent(trackUrl)}&color=%23ff5500&inverse=false&auto_play=false&show_user=true`
+  const embedUrl = `https://w.soundcloud.com/player/?url=${encodeURIComponent(
+    trackUrl
+  )}&color=%23ff5500&inverse=false&auto_play=false&show_user=true`
 
-  return `<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="${embedUrl}"></iframe>`
+  return {
+    kind: 'iframe',
+    src: embedUrl,
+    height: 166,
+    allow: 'autoplay',
+    allowFullscreen: false,
+  }
 }
 
-function buildGenericAudioEmbed(platformId: string) {
+function buildGenericAudioContent(platformId: string): PreviewContent {
   const trimmed = platformId.trim()
-  if (!trimmed) return ''
-  return `<audio controls src="${trimmed}" style="width:100%"></audio>`
+  if (!trimmed) return {kind: 'none'}
+  return {kind: 'audio', src: trimmed}
 }
 
-function buildAudioPreviewMarkup(value: MediaBlockValue) {
+function buildAudioPreviewContent(value: MediaBlockValue): PreviewContent {
   const platformId = typeof value.platformId === 'string' ? value.platformId.trim() : ''
-  if (!platformId) return ''
+  if (!platformId) return {kind: 'none'}
 
   const platform = value.platform?.toLowerCase()
   switch (platform) {
     case 'captivate':
-      return buildCaptivateEmbed(platformId)
+      return buildCaptivateContent(platformId)
     case 'spotify':
-      return buildSpotifyEmbed(platformId)
+      return buildSpotifyContent(platformId)
     case 'soundcloud':
-      return buildSoundCloudEmbed(platformId)
+      return buildSoundCloudContent(platformId)
     default:
-      return buildGenericAudioEmbed(platformId)
+      return buildGenericAudioContent(platformId)
   }
+}
+
+function resolvePreviewContent(value?: MediaBlockValue | null): PreviewContent {
+  if (!value) return {kind: 'none'}
+  const embed = typeof value.embedCode === 'string' ? value.embedCode.trim() : ''
+  if (embed) {
+    return parseEmbedCode(embed)
+  }
+  if (value.assetType === 'audio') {
+    return buildAudioPreviewContent(value)
+  }
+  return {kind: 'none'}
 }
 
 export function MediaBlockInput(props: ObjectInputProps) {
   const {renderDefault, value} = props
 
-  const previewMarkup = useMemo(() => {
-    const embed = typeof value?.embedCode === 'string' ? value.embedCode.trim() : ''
-    if (embed) {
-      return embed
-    }
-    const platformId = typeof value?.platformId === 'string' ? value.platformId.trim() : ''
-    if (value?.assetType === 'audio' && platformId) {
-      return buildAudioPreviewMarkup(value as MediaBlockValue)
-    }
-    return ''
-  }, [value])
+  const previewContent = useMemo(() => resolvePreviewContent(value as MediaBlockValue), [value])
 
   return (
     <Stack space={4}>
       {renderDefault(props)}
-      {previewMarkup ? (
+      {previewContent.kind !== 'none' ? (
         <Card radius={2} shadow={1} padding={3} tone="primary">
           <Text size={1} weight="semibold">
             Preview
           </Text>
           <Box marginTop={3} style={{overflow: 'hidden'}}>
-            <div
-              style={{width: '100%'}}
-              dangerouslySetInnerHTML={{__html: previewMarkup}}
-            />
+            {previewContent.kind === 'iframe' ? (
+              <iframe
+                src={previewContent.src}
+                height={previewContent.height ?? 320}
+                style={{width: '100%', border: 0, borderRadius: '6px'}}
+                allow={previewContent.allow}
+                allowFullScreen={previewContent.allowFullscreen ?? true}
+                loading="lazy"
+                title="Media player preview"
+              />
+            ) : previewContent.kind === 'audio' ? (
+              <audio controls src={previewContent.src} style={{width: '100%'}} />
+            ) : (
+              <div
+                style={{width: '100%'}}
+                dangerouslySetInnerHTML={{__html: previewContent.markup}}
+              />
+            )}
           </Box>
         </Card>
       ) : null}
