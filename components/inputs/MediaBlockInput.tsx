@@ -16,6 +16,8 @@ type PreviewContent =
   | {kind: 'html'; markup: string}
   | {kind: 'none'}
 
+const CSP_BLOCKED_IFRAME_HOSTS = new Set(['player.captivate.fm'])
+
 function isUrl(candidate: string) {
   try {
     new URL(candidate)
@@ -171,11 +173,45 @@ function buildAudioPreviewContent(value: MediaBlockValue): PreviewContent {
   }
 }
 
+function buildBlockedIframeNotice(src: string): PreviewContent {
+  const safeSrc = isUrl(src) ? src : '#'
+  const markup = [
+    '<div style="width:100%;padding:12px;border-radius:6px;background:#f5f6fa;">',
+    '<strong>Preview blocked by Content Security Policy.</strong>',
+    '<div style="margin-top:8px;font-size:0.85rem;">',
+    'Open the player in a new tab to verify the embed:',
+    ` <a href="${safeSrc}" target="_blank" rel="noopener noreferrer">${safeSrc}</a>`,
+    '</div>',
+    '</div>',
+  ].join('')
+  return {kind: 'html', markup}
+}
+
+function safeHostname(url: string) {
+  try {
+    return new URL(url).hostname
+  } catch {
+    return ''
+  }
+}
+
 function resolvePreviewContent(value?: MediaBlockValue | null): PreviewContent {
   if (!value) return {kind: 'none'}
   const embed = typeof value.embedCode === 'string' ? value.embedCode.trim() : ''
   if (embed) {
-    return parseEmbedCode(embed)
+    const parsed = parseEmbedCode(embed)
+    if (parsed.kind === 'iframe') {
+      const host = safeHostname(parsed.src)
+      if (host && CSP_BLOCKED_IFRAME_HOSTS.has(host)) {
+        const fallback: PreviewContent =
+          value.assetType === 'audio' ? buildAudioPreviewContent(value) : {kind: 'none'}
+        if (fallback.kind !== 'none') {
+          return fallback
+        }
+        return buildBlockedIframeNotice(parsed.src)
+      }
+    }
+    return parsed
   }
   if (value.assetType === 'audio') {
     return buildAudioPreviewContent(value)
