@@ -7,6 +7,7 @@ const OUR_ICONS = [
   {rel: 'icon', type: 'image/png', sizes: '32x32', href: '/static/favicon-32x32.png'},
   {rel: 'icon', type: 'image/png', sizes: '16x16', href: '/static/favicon-16x16.png'},
   {rel: 'apple-touch-icon', sizes: '180x180', href: '/static/apple-touch-icon.png'},
+  {rel: 'shortcut icon', href: '/static/favicon.ico'},
   {rel: 'icon', href: '/static/favicon.ico'},
 ]
 
@@ -22,6 +23,21 @@ function pruneNode(node: any): any {
 
   if (node.type === 'title') {
     return null
+  }
+
+  if (node.type === 'meta' && node.props?.property === 'og:site_name') {
+    return cloneElement(node, {...node.props, content: 'BeNeXT Global HQ'})
+  }
+
+  if (node.type === 'meta' && node.props?.name === 'apple-mobile-web-app-title') {
+    return cloneElement(node, {...node.props, content: 'BeNeXT Global HQ'})
+  }
+
+  if (
+    node.type === 'meta' &&
+    node.props?.name === 'application-name'
+  ) {
+    return cloneElement(node, {...node.props, content: 'BeNeXT Global HQ'})
   }
 
   if (node.props?.children) {
