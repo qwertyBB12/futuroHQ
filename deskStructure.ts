@@ -6,6 +6,7 @@ import {
   CogIcon,
   DocumentsIcon,
 } from '@sanity/icons'
+import LivePreview from './components/previews/LivePreview'
 
 const groupedDocTypes = new Set([
   'project',
@@ -26,6 +27,21 @@ const groupedDocTypes = new Set([
 ])
 
 export const deskStructure = (S: StructureBuilder) => {
+  const documentViews = (schemaType: string) => [
+    S.view.form().title('Content'),
+    S.view.component(LivePreview).title('Preview'),
+  ]
+
+  const withPreview = (schemaType: string, title: string) =>
+    S.documentTypeListItem(schemaType)
+      .title(title)
+      .child((documentId) =>
+        S.document()
+          .schemaType(schemaType)
+          .documentId(documentId)
+          .views(documentViews(schemaType)),
+      )
+
   const allDocumentTypeListItems = S.documentTypeListItems()
 
   const ungroupedDocItems = allDocumentTypeListItems.filter((listItem) => {
@@ -46,21 +62,18 @@ export const deskStructure = (S: StructureBuilder) => {
     .title('BeNeXT HQ')
     .items([
       S.listItem()
-        .title('🧩 Projects & Events')
+        .title('Projects & Events')
         .icon(ProjectsIcon)
         .child(
           S.list()
             .title('Projects & Events')
-            .items([
-              S.documentTypeListItem('project').title('Projects'),
-              S.documentTypeListItem('futuroSummit').title('Futuro Summits'),
-            ]),
+            .items([withPreview('project', 'Projects'), withPreview('futuroSummit', 'Futuro Summits')]),
         ),
 
       S.divider(),
 
       S.listItem()
-        .title('🧑‍🤝‍🧑 People & Collaborators')
+        .title('People & Collaborators')
         .icon(UsersIcon)
         .child(
           S.list()
@@ -76,17 +89,17 @@ export const deskStructure = (S: StructureBuilder) => {
       S.divider(),
 
       S.listItem()
-        .title('📺 Media & Content')
+        .title('Media & Content')
         .icon(VideoIcon)
         .child(
           S.list()
             .title('Media & Content')
             .items([
-              S.documentTypeListItem('opEd').title('Op-Eds'),
-              S.documentTypeListItem('podcast').title('Podcasts'),
-              S.documentTypeListItem('podcastEpisode').title('Podcast Episodes'),
-              S.documentTypeListItem('vlog').title('Vlogs'),
-              S.documentTypeListItem('clip').title('Clips'),
+              withPreview('opEd', 'Op-Eds'),
+              withPreview('podcast', 'Podcasts'),
+              withPreview('podcastEpisode', 'Podcast Episodes'),
+              withPreview('vlog', 'Vlogs'),
+              withPreview('clip', 'Clips'),
               S.documentTypeListItem('curatedPost').title('Curated Posts'),
               S.documentTypeListItem('socialPost').title('Social Posts'),
             ]),
@@ -95,7 +108,7 @@ export const deskStructure = (S: StructureBuilder) => {
       S.divider(),
 
       S.listItem()
-        .title('🏷️ Taxonomy & Settings')
+        .title('Taxonomy & Settings')
         .icon(CogIcon)
         .child(
           S.list()
@@ -115,13 +128,9 @@ export const deskStructure = (S: StructureBuilder) => {
       S.divider(),
 
       S.listItem()
-        .title('📄 All Documents (Ungrouped)')
+        .title('All Documents (Ungrouped)')
         .icon(DocumentsIcon)
-        .child(
-          S.list()
-            .title('All Documents (Ungrouped)')
-            .items(ungroupedDocItems),
-        ),
+        .child(S.list().title('All Documents (Ungrouped)').items(ungroupedDocItems)),
     ])
 }
 
