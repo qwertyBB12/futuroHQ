@@ -1,5 +1,6 @@
 import { defineType, defineField } from 'sanity'
 import { commonMeta } from './blocks/commonMeta'
+import { governanceFields } from './blocks/governanceBlock'
 
 export default defineType({
   name: 'podcast',
@@ -56,6 +57,9 @@ export default defineType({
       type: 'mediaBlock', // ✅ unified
     }),
     ...commonMeta,
+
+    // --- Governance ---
+    ...governanceFields,
   ],
 
   preview: {

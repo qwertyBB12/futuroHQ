@@ -1,5 +1,6 @@
 // --- Core ---
 import alumni from './alumni'
+import alumniContinuum from './alumniContinuum'
 import collaborator from './collaborator'
 import ledgerPerson from './ledgerPerson'
 import opEd from './opEd'
@@ -15,6 +16,7 @@ import vlog from './vlog'
 import clip from './clip'
 import curatedPost from './curatedPost'
 import socialPost from './socialPost'
+import substackEssay from './substackEssay'
 import tag from './tag'
 
 // --- Shared Objects ---
@@ -26,6 +28,7 @@ import seoBlock from './seoBlock'
 export const schemaTypes = [
   // Core
   alumni,
+  alumniContinuum,
   collaborator,
   ledgerPerson,
   opEd,
@@ -33,7 +36,7 @@ export const schemaTypes = [
   project,
   siteSettings_futuro,
   futuroSummit,
-  
+
   // Media / Publishing
   podcast,
   podcastEpisode,
@@ -41,6 +44,7 @@ export const schemaTypes = [
   clip,
   curatedPost,
   socialPost,
+  substackEssay,
   tag,
 
   // Shared Objects
