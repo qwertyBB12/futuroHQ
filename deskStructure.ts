@@ -13,6 +13,7 @@ const groupedDocTypes = new Set([
   'futuroSummit',
   'person',
   'alumni',
+  'alumniContinuum',
   'ledgerPerson',
   'collaborator',
   'opEd',
@@ -22,6 +23,7 @@ const groupedDocTypes = new Set([
   'clip',
   'curatedPost',
   'socialPost',
+  'substackEssay',
   'tag',
   'siteSettings_futuro',
 ])
@@ -89,6 +91,7 @@ export const deskStructure = (S: StructureBuilder) => {
             .items([
               S.documentTypeListItem('person').title('People'),
               S.documentTypeListItem('alumni').title('Alumni'),
+              S.documentTypeListItem('alumniContinuum').title('Alumni Continuum'),
               S.documentTypeListItem('ledgerPerson').title('Ledger People'),
               S.documentTypeListItem('collaborator').title('Collaborators & Organizations'),
             ]),
@@ -103,6 +106,7 @@ export const deskStructure = (S: StructureBuilder) => {
           S.list()
             .title('Media & Content')
             .items([
+              listWithPreview('substackEssay', 'Substack Essays'),
               listWithPreview('opEd', 'Op-Eds'),
               listWithPreview('podcast', 'Podcasts'),
               listWithPreview('podcastEpisode', 'Podcast Episodes'),

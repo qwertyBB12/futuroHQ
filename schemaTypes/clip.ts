@@ -1,4 +1,5 @@
 import { defineType, defineField } from 'sanity'
+import { governanceFields } from './blocks/governanceBlock'
 
 export default defineType({
   name: 'clip',
@@ -56,6 +57,9 @@ export default defineType({
       title: 'SEO',
       type: 'seoBlock',
     }),
+
+    // --- Governance ---
+    ...governanceFields,
   ],
 
   preview: {

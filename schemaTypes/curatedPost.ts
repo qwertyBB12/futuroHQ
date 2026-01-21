@@ -1,5 +1,6 @@
 import { defineType, defineField } from 'sanity'
 import { commonMeta } from './blocks/commonMeta'
+import { governanceFields } from './blocks/governanceBlock'
 
 export default defineType({
   name: 'curatedPost',
@@ -83,6 +84,9 @@ export default defineType({
     defineField({ name: 'narrative', title: 'Narrative Development', type: 'narrativeBlock' }),
     defineField({ name: 'seo', title: 'SEO', type: 'seoBlock' }),
     ...commonMeta,
+
+    // --- Governance ---
+    ...governanceFields,
   ],
 
   preview: {

@@ -1,4 +1,5 @@
 import { defineType, defineField } from 'sanity'
+import { governanceFields } from './blocks/governanceBlock'
 
 export default defineType({
   name: 'socialPost',
@@ -67,6 +68,52 @@ export default defineType({
     // --- Narrative & SEO ---
     defineField({ name: 'narrative', title: 'Narrative Development', type: 'narrativeBlock' }),
     defineField({ name: 'seo', title: 'SEO', type: 'seoBlock' }),
+
+    // --- Governance ---
+    ...governanceFields,
+
+    // --- Institutional Post Context (conditional on postingEntity) ---
+    defineField({
+      name: 'institutionalContext',
+      title: 'Institutional Context',
+      type: 'object',
+      hidden: ({ parent }) => !parent?.postingEntity || parent?.postingEntity === 'hector-personal',
+      description: 'Additional context for institutional posts',
+      fields: [
+        {
+          name: 'approvalStatus',
+          title: 'Approval Status',
+          type: 'string',
+          options: {
+            list: [
+              { title: 'Draft', value: 'draft' },
+              { title: 'Pending Review', value: 'pending-review' },
+              { title: 'Approved', value: 'approved' },
+              { title: 'Rejected', value: 'rejected' },
+            ],
+            layout: 'radio',
+          },
+        },
+        {
+          name: 'approvedBy',
+          title: 'Approved By',
+          type: 'reference',
+          to: [{ type: 'person' }],
+        },
+        {
+          name: 'campaignId',
+          title: 'Campaign ID',
+          type: 'string',
+          description: 'Internal campaign or initiative identifier',
+        },
+        {
+          name: 'complianceNotes',
+          title: 'Compliance Notes',
+          type: 'text',
+          description: 'Any legal/compliance considerations for this post',
+        },
+      ],
+    }),
   ],
   preview: {
     select: { title: 'title', subtitle: 'platform', media: 'media.0.thumbnail' },
