@@ -16,7 +16,7 @@
     "sanity"
   ],
   "dependencies": {
-    "@sanity/client": "^6.21.3",
+    "@sanity/client": "^6.29.1",
     "@sanity/vision": "^4.10.2",
     "react": "^19.1",
     "react-dom": "^19.1",
@@ -30,7 +30,7 @@
     "@types/react": "^19.1",
     "@types/tailwindcss": "^3.0.11",
     "autoprefixer": "^10.4.21",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.6.1",
     "esbuild": "^0.25.10",
     "eslint": "^9.28",
     "lightningcss": "^1.30.1",

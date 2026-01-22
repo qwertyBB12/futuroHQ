@@ -4,6 +4,7 @@ import alumniContinuum from './alumniContinuum'
 import collaborator from './collaborator'
 import ledgerPerson from './ledgerPerson'
 import opEd from './opEd'
+import essay from './essay'
 import person from './person'
 import project from './project'
 import siteSettings_futuro from './siteSettings_futuro'
@@ -13,10 +14,9 @@ import futuroSummit from './futuroSummit'
 import podcast from './podcast'
 import podcastEpisode from './podcastEpisode'
 import vlog from './vlog'
-import clip from './clip'
+import video from './video'
 import curatedPost from './curatedPost'
 import socialPost from './socialPost'
-import substackEssay from './substackEssay'
 import tag from './tag'
 
 // --- Shared Objects ---
@@ -32,6 +32,7 @@ export const schemaTypes = [
   collaborator,
   ledgerPerson,
   opEd,
+  essay,
   person,
   project,
   siteSettings_futuro,
@@ -41,10 +42,9 @@ export const schemaTypes = [
   podcast,
   podcastEpisode,
   vlog,
-  clip,
+  video,
   curatedPost,
   socialPost,
-  substackEssay,
   tag,
 
   // Shared Objects
