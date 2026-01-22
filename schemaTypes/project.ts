@@ -43,6 +43,37 @@ export default defineType({
       type: 'text',
       description: 'Concise description of the project',
     }),
+    defineField({
+      name: 'publicNarrative',
+      title: 'Public Narrative',
+      type: 'object',
+      description: 'Public-facing copy only. Keep it clear, operational, and non-poetic.',
+      fields: [
+        defineField({
+          name: 'whatItIs',
+          title: 'What It Is',
+          type: 'text',
+          rows: 2,
+        }),
+        defineField({
+          name: 'whatHappens',
+          title: 'What Happens',
+          type: 'text',
+          rows: 2,
+        }),
+        defineField({
+          name: 'whatItProduces',
+          title: 'What It Produces',
+          type: 'text',
+          rows: 2,
+        }),
+        defineField({
+          name: 'communityLine',
+          title: 'Community Line (Optional)',
+          type: 'string',
+        }),
+      ],
+    }),
 
     // --- Dates (optional) ---
     defineField({
