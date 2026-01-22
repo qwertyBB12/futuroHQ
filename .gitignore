@@ -34,3 +34,4 @@ dist
 .netlify/
 .netlify/
 backups/
+.claude/
