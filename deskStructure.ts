@@ -16,14 +16,12 @@ const groupedDocTypes = new Set([
   'alumniContinuum',
   'ledgerPerson',
   'collaborator',
-  'opEd',
+  'essay',
   'podcast',
   'podcastEpisode',
-  'vlog',
-  'clip',
+  'video',
   'curatedPost',
   'socialPost',
-  'substackEssay',
   'tag',
   'siteSettings_futuro',
 ])
@@ -106,12 +104,10 @@ export const deskStructure = (S: StructureBuilder) => {
           S.list()
             .title('Media & Content')
             .items([
-              listWithPreview('substackEssay', 'Substack Essays'),
-              listWithPreview('opEd', 'Op-Eds'),
+              listWithPreview('essay', 'Essays'),
+              listWithPreview('video', 'Videos'),
               listWithPreview('podcast', 'Podcasts'),
               listWithPreview('podcastEpisode', 'Podcast Episodes'),
-              listWithPreview('vlog', 'Vlogs'),
-              listWithPreview('clip', 'Clips'),
               S.documentTypeListItem('curatedPost').title('Curated Posts'),
               S.documentTypeListItem('socialPost').title('Social Posts'),
             ]),
