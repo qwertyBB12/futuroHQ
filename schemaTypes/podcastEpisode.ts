@@ -42,17 +42,19 @@ export default defineType({
       name: 'language',
       title: 'Language',
       type: 'string',
-      options: { list: ['English', 'Spanish'] },
+      options: {
+        list: [
+          { title: 'English', value: 'en' },
+          { title: 'Spanish', value: 'es' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'en',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'tags',
       title: 'Tags',
-      type: 'array',
-      of: [{ type: 'string' }],
-    }),
-    defineField({
-      name: 'tags_ref',
-      title: 'Tags (ref)',
       type: 'array',
       of: [{ type: 'reference', to: [{ type: 'tag' }] }],
     }),

@@ -29,6 +29,13 @@ export default defineType({
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
+    defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: { source: 'name', maxLength: 96 },
+      description: 'URL-friendly identifier',
+    }),
     defineField({ name: 'role', title: 'Role', type: 'string' }),
     defineField({ name: 'bio', title: 'Bio', type: 'text' }),
 

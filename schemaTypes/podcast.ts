@@ -34,6 +34,21 @@ export default defineType({
       type: 'slug',
       options: { source: 'title', maxLength: 96 },
     }),
+    defineField({
+      name: 'language',
+      title: 'Language',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'English', value: 'en' },
+          { title: 'Spanish', value: 'es' },
+          { title: 'Bilingual', value: 'bilingual' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'en',
+      description: 'Primary language of this podcast series',
+    }),
     defineField({ name: 'description', title: 'Description', type: 'text' }),
 
     // --- Feeds ---
