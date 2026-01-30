@@ -22,16 +22,31 @@ export default defineType({
     defineField({
       name: 'language',
       title: 'Language',
-      type: 'string',
+      type: 'array',
+      of: [{ type: 'string' }],
       options: {
         list: [
           { title: 'English', value: 'en' },
           { title: 'Spanish', value: 'es' },
         ],
-        layout: 'radio',
+        layout: 'grid',
       },
-      initialValue: 'en',
-      validation: (Rule) => Rule.required(),
+      initialValue: ['en'],
+      validation: (Rule) => Rule.required().min(1),
+    }),
+    defineField({
+      name: 'titleEs',
+      title: 'Title (Spanish)',
+      type: 'string',
+      description: 'Spanish title for bilingual videos',
+      hidden: ({ document }) => !document?.language || !(document.language as string[]).includes('es'),
+    }),
+    defineField({
+      name: 'descriptionEs',
+      title: 'Description (Spanish)',
+      type: 'text',
+      description: 'Spanish description for bilingual videos',
+      hidden: ({ document }) => !document?.language || !(document.language as string[]).includes('es'),
     }),
     defineField({
       name: 'videoFormat',
