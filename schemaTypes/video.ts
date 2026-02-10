@@ -132,6 +132,14 @@ export default defineType({
       hidden: ({ document }) => document?.contentCategory !== 'keynote',
     }),
     defineField({
+      name: 'linkedPodcastEpisode',
+      title: 'Linked Podcast Episode',
+      type: 'reference',
+      to: [{ type: 'podcastEpisode' }],
+      description: 'Link to a podcast episode of this keynote speech, if one exists.',
+      hidden: ({ document }) => document?.contentCategory !== 'keynote',
+    }),
+    defineField({
       name: 'keynoteVenue',
       title: 'Venue',
       type: 'string',
