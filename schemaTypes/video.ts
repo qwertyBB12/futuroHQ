@@ -124,6 +124,14 @@ export default defineType({
       hidden: ({ document }) => document?.contentCategory !== 'keynote',
     }),
     defineField({
+      name: 'linkedReflection',
+      title: 'Linked Reflection',
+      type: 'reference',
+      to: [{ type: 'video' }],
+      description: 'Link to a video reflection related to this keynote, if one exists.',
+      hidden: ({ document }) => document?.contentCategory !== 'keynote',
+    }),
+    defineField({
       name: 'keynoteVenue',
       title: 'Venue',
       type: 'string',
