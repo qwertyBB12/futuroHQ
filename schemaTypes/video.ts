@@ -78,7 +78,13 @@ export default defineType({
       name: 'videoUrl',
       title: 'Video URL',
       type: 'url',
-      validation: (Rule) => Rule.required(),
+      description: 'Optional for keynotes without video recordings.',
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const doc = context?.document
+          if (doc?.contentCategory === 'keynote') return true
+          return value ? true : 'Video URL is required for non-keynote entries'
+        }),
     }),
     defineField({
       name: 'thumbnailImage',
