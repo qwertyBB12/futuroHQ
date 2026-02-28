@@ -76,34 +76,29 @@ export default defineType({
       options: { hotspot: true },
     }),
     defineField({
+      name: 'surfaceOn',
+      title: 'Surface On',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: {
+        list: [
+          { title: 'hectorhlopez.com', value: 'hectorhlopez' },
+          { title: 'Futuro.ngo', value: 'futuro' },
+          { title: 'BeNeXT Global', value: 'benext' },
+          { title: 'Mítikah', value: 'mitikah' },
+          { title: 'Medikah', value: 'medikah' },
+          { title: 'NeXT', value: 'next' },
+        ],
+        layout: 'grid',
+      },
+      description: 'Which ecosystem sites should display this essay',
+    }),
+    defineField({
       name: 'fiveYearTest',
       title: 'Five Year Test',
       type: 'boolean',
       initialValue: false,
       description: 'Will I be proud of this in 2030?',
-    }),
-    defineField({
-      name: 'institutionalReference',
-      title: 'Institutional Reference',
-      type: 'object',
-      fields: [
-        defineField({
-          name: 'includeReference',
-          title: 'Include Reference',
-          type: 'boolean',
-          initialValue: false,
-        }),
-        defineField({
-          name: 'referenceText',
-          title: 'Reference Text',
-          type: 'text',
-        }),
-        defineField({
-          name: 'referenceUrl',
-          title: 'Reference URL',
-          type: 'url',
-        }),
-      ],
     }),
     defineField({
       name: 'seoBlock',

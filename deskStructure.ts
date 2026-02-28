@@ -5,6 +5,9 @@ import {
   VideoIcon,
   CogIcon,
   DocumentsIcon,
+  RobotIcon,
+  StarIcon,
+  CreditCardIcon,
 } from '@sanity/icons'
 import LivePreview from './components/previews/LivePreview'
 
@@ -13,17 +16,26 @@ const groupedDocTypes = new Set([
   'futuroSummit',
   'person',
   'alumni',
-  'alumniContinuum',
   'ledgerPerson',
   'collaborator',
   'essay',
   'podcast',
   'podcastEpisode',
   'video',
-  'curatedPost',
-  'socialPost',
   'tag',
   'siteSettings_futuro',
+  // Companion Platform
+  'alumniDream',
+  'alumniConversation',
+  'projectUpdate',
+  'participantConnection',
+  // NeXT Accreditation
+  'accreditationRecord',
+  'credential',
+  'accreditationHourLog',
+  // Platform Business
+  'pricingTier',
+  'usageRecord',
 ])
 
 export const deskStructure = (S: StructureBuilder) => {
@@ -89,7 +101,6 @@ export const deskStructure = (S: StructureBuilder) => {
             .items([
               S.documentTypeListItem('person').title('People'),
               S.documentTypeListItem('alumni').title('Alumni'),
-              S.documentTypeListItem('alumniContinuum').title('Alumni Continuum'),
               S.documentTypeListItem('ledgerPerson').title('Ledger People'),
               S.documentTypeListItem('collaborator').title('Collaborators & Organizations'),
             ]),
@@ -108,8 +119,6 @@ export const deskStructure = (S: StructureBuilder) => {
               listWithPreview('video', 'Videos'),
               listWithPreview('podcast', 'Podcasts'),
               listWithPreview('podcastEpisode', 'Podcast Episodes'),
-              S.documentTypeListItem('curatedPost').title('Curated Posts'),
-              S.documentTypeListItem('socialPost').title('Social Posts'),
             ]),
         ),
 
@@ -130,6 +139,47 @@ export const deskStructure = (S: StructureBuilder) => {
                     .documentId('siteSettings_futuro'),
                 ),
               S.documentTypeListItem('tag').title('Tags'),
+            ]),
+        ),
+
+      S.divider(),
+
+      S.listItem()
+        .title('Companion Platform')
+        .icon(RobotIcon)
+        .child(
+          S.list()
+            .title('Companion Platform')
+            .items([
+              S.documentTypeListItem('alumniDream').title('Alumni Dreams'),
+              S.documentTypeListItem('alumniConversation').title('Conversations'),
+              S.documentTypeListItem('projectUpdate').title('Project Updates'),
+              S.documentTypeListItem('participantConnection').title('Participant Connections'),
+            ]),
+        ),
+
+      S.listItem()
+        .title('NeXT Accreditation')
+        .icon(StarIcon)
+        .child(
+          S.list()
+            .title('NeXT Accreditation')
+            .items([
+              S.documentTypeListItem('accreditationRecord').title('Accreditation Records'),
+              S.documentTypeListItem('credential').title('Credentials'),
+              S.documentTypeListItem('accreditationHourLog').title('Hour Logs'),
+            ]),
+        ),
+
+      S.listItem()
+        .title('Platform Business')
+        .icon(CreditCardIcon)
+        .child(
+          S.list()
+            .title('Platform Business')
+            .items([
+              S.documentTypeListItem('pricingTier').title('Pricing Tiers'),
+              S.documentTypeListItem('usageRecord').title('Usage Records'),
             ]),
         ),
 
