@@ -79,6 +79,19 @@ export default defineType({
       fieldset: 'companion',
     }),
     defineField({
+      name: 'generation',
+      title: 'Generation',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Emerging Leader', value: 'emerging' },
+          { title: 'Changemaker', value: 'changemaker' },
+          { title: 'Legacy Architect', value: 'legacy-architect' },
+        ],
+      },
+      fieldset: 'companion',
+    }),
+    defineField({
       name: 'convening',
       title: 'Convening (Futuro Summit)',
       type: 'reference',
@@ -190,6 +203,19 @@ export default defineType({
       name: 'narrative',
       title: 'Narrative Development',
       type: 'narrativeBlock',
+    }),
+
+    // --- External Identity ---
+    defineField({
+      name: 'externalIds',
+      title: 'External IDs',
+      type: 'object',
+      description: 'Deduplication keys for external system imports',
+      fields: [
+        defineField({ name: 'supabase', title: 'Supabase User ID', type: 'string' }),
+        defineField({ name: 'kajabi', title: 'Kajabi Contact ID', type: 'string' }),
+      ],
+      options: { collapsible: true, collapsed: true },
     }),
 
     // --- Governance ---
