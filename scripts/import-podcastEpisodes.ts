@@ -135,7 +135,7 @@ async function run() {
       ? `${item.isoDate}-${item.title}`
       : item.title || item.guid || crypto.randomUUID()
     const slug = slugify(baseSlug || crypto.randomUUID())
-    const docId = `podcastEpisode.${slug}`
+    const docId = `podcastEpisode-${slug}`
     const publishedAt = item.isoDate
       ? new Date(item.isoDate).toISOString()
       : new Date().toISOString()
