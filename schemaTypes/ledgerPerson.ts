@@ -112,15 +112,8 @@ export default defineType({
     }),
 
     // --- Meta ---
-    defineField({ 
-      name: 'publicationStatus', 
-      title: 'Publication Status', 
-      type: 'string', 
-      options: { list: ['DRAFT', 'REVIEW', 'PUBLISHED', 'ARCHIVED'] }, 
-      initialValue: 'DRAFT' 
-    }),
-    defineField({ 
-      name: 'visibility', 
+    defineField({
+      name: 'visibility',
       title: 'Visibility', 
       type: 'string', 
       options: { list: ['PUBLIC', 'REGISTERED', 'PRIVATE', 'EMBARGOED'] }, 
