@@ -65,7 +65,8 @@ const mapPlatform = (vlog) => {
 
 const normalizePublishDate = (value) => value || new Date().toISOString()
 
-const cleanId = (value) => value.replace(/^drafts\./, '')
+// Remove drafts prefix and replace dots with hyphens (dots in IDs make docs private in Sanity)
+const cleanId = (value) => value.replace(/^drafts\./, '').replace(/\./g, '-')
 
 const migrateOpEds = async () => {
   console.log('Fetching opEd documents...')

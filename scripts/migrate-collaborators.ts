@@ -218,22 +218,12 @@ async function run() {
       }
       console.log()
 
-      // -----------------------------------------------------------------
-      // Uncomment the block below to interactively delete duplicates.
-      // The script will ask for confirmation before each deletion.
-      // -----------------------------------------------------------------
-      // const answer = await askQuestion(
-      //   `  Delete ${remove.length} duplicate(s) and keep ${keep._id}? (y/n): `
-      // )
-      // if (answer.toLowerCase() === 'y') {
-      //   for (const r of remove) {
-      //     console.log(`    Deleting ${r._id}...`)
-      //     await client.delete(r._id)
-      //     console.log(`    Deleted.`)
-      //   }
-      // } else {
-      //   console.log('    Skipped.')
-      // }
+      // Auto-delete duplicates (keeping the one with the highest score)
+      for (const r of remove) {
+        console.log(`    Deleting ${r._id}...`)
+        await client.delete(r._id)
+        console.log(`    Deleted.`)
+      }
     }
     console.log('--- END DUPLICATES ---\n')
     console.log(
