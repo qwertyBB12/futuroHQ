@@ -32,6 +32,7 @@ export default defineType({
         list: [
           { title: 'Captivate', value: 'captivate' },
           { title: 'Wistia', value: 'wistia' },
+          { title: 'Bunny Stream', value: 'bunny' },
           { title: 'YouTube', value: 'youtube' },
           { title: 'Vimeo', value: 'vimeo' },
           { title: 'Spotify', value: 'spotify' },

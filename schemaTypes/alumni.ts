@@ -46,6 +46,12 @@ export default defineType({
       type: 'array',
       of: [{ type: 'mediaBlock' }, { type: 'image' }],
     }),
+    defineField({
+      name: 'heroVideoUrl',
+      title: 'Hero Video URL',
+      type: 'url',
+      description: 'Direct MP4 URL for the full-bleed profile hero background. Plays silently on loop. Use Bunny CDN, Cloudflare Stream, or any direct video link.',
+    }),
 
     // --- Project Links ---
     defineField({
@@ -63,6 +69,45 @@ export default defineType({
       description: 'Past projects this alumni has contributed to',
     }),
 
+    // --- Education ---
+    defineField({
+      name: 'education',
+      title: 'Education',
+      type: 'array',
+      of: [{
+        type: 'object',
+        fields: [
+          defineField({ name: 'institution', title: 'Institution', type: 'string', validation: Rule => Rule.required() }),
+          defineField({ name: 'school', title: 'School / College', type: 'string', description: 'e.g. Edmund A. Walsh School of Foreign Service' }),
+          defineField({ name: 'degree', title: 'Degree', type: 'string', description: 'e.g. Bachelor of Science in Foreign Service, Master of Arts' }),
+          defineField({ name: 'fieldOfStudy', title: 'Field of Study', type: 'string', description: 'e.g. International Politics, Strategic Communication' }),
+          defineField({ name: 'certificates', title: 'Additional Certificates', type: 'array', of: [{ type: 'string' }] }),
+          defineField({ name: 'startYear', title: 'Start Year', type: 'number' }),
+          defineField({ name: 'endYear', title: 'End Year', type: 'number' }),
+        ],
+        preview: {
+          select: { title: 'institution', subtitle: 'degree' },
+        },
+      }],
+      description: 'Educational background shown on public profile',
+    }),
+
+    // --- Featured Content (curated for public profile) ---
+    defineField({
+      name: 'featuredEssays',
+      title: 'Featured Essays',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'essay' }] }],
+      description: 'Curated essays shown on the public alumni profile',
+    }),
+    defineField({
+      name: 'featuredVideos',
+      title: 'Featured Videos',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'video' }] }],
+      description: 'Curated videos shown on the public alumni profile',
+    }),
+
     // --- Order ---
     defineField({
       name: 'order',
@@ -72,6 +117,13 @@ export default defineType({
     }),
 
     // --- Companion Platform (new fields — all optional) ---
+    defineField({
+      name: 'institutionalDesignation',
+      title: 'Institutional Designation',
+      type: 'string',
+      description: 'Dashboard dossier card title. E.g., "Founder | Legacy Architect", "Project Author | Emerging"',
+      fieldset: 'companion',
+    }),
     defineField({
       name: 'cohortYear',
       title: 'Cohort Year',
