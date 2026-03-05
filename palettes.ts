@@ -1,44 +1,43 @@
 /**
- * Hector Ecosystem — Civic Modern Studio Palette
+ * BeNeXT Global HQ — Midnight Teal Studio Palette
  *
- * These are the ONLY keys that buildLegacyTheme() actually reads.
- * Everything else must be handled via CSS custom properties in styles.css.
+ * The Studio is the "submarine" beneath the warm Civic Modern public sites.
+ * Cool, deep, operational. Copper stays as the single warm thread.
  *
- * Colors: Founder's Black, Copper, Vermillion, Sandstone, Archival Slate
- * Warm dark theme — no blue tint
+ * These are the ONLY keys that buildLegacyTheme() reads.
  */
 
 export const civicModernThemeProps = {
   /* Base scale */
-  '--black': '#0E0E0E',
+  '--black': '#080F0F',
   '--white': '#FFFFFF',
-  '--gray': '#8B8985',
-  '--gray-base': '#8B8985',
+  '--gray': '#7A8F8F',
+  '--gray-base': '#7A8F8F',
 
-  /* Component surfaces */
-  '--component-bg': '#1A1714',
-  '--component-text-color': '#F2E5D5',
+  /* Component surfaces — deep ocean */
+  '--component-bg': '#0D1F1F',
+  '--component-text-color': '#D4E0E0',
 
-  /* Brand — Vermillion */
-  '--brand-primary': '#C84841',
+  /* Brand — Teal (cool action) */
+  '--brand-primary': '#2C7A8C',
 
   /* Focus ring */
-  '--focus-color': '#C84841',
+  '--focus-color': '#2C7A8C',
 
-  /* Navigation */
-  '--main-navigation-color': '#0E0E0E',
-  '--main-navigation-color--inverted': '#F2E5D5',
+  /* Navigation — abyss */
+  '--main-navigation-color': '#080F0F',
+  '--main-navigation-color--inverted': '#D4E0E0',
 
   /* Buttons */
-  '--default-button-color': '#8B8985',
-  '--default-button-primary-color': '#C84841',
+  '--default-button-color': '#7A8F8F',
+  '--default-button-primary-color': '#2C7A8C',
   '--default-button-success-color': '#B17E68',
   '--default-button-warning-color': '#E8D5C0',
-  '--default-button-danger-color': '#813531',
+  '--default-button-danger-color': '#C84841',
 
   /* State feedback */
-  '--state-info-color': '#F2E5D5',
+  '--state-info-color': '#4DA8B8',
   '--state-success-color': '#B17E68',
   '--state-warning-color': '#E8D5C0',
-  '--state-danger-color': '#813531',
+  '--state-danger-color': '#C84841',
 }

@@ -53,7 +53,7 @@ export default function StudioHead(props: any) {
         <link key={index} {...icon} href={`${icon.href}${versionQuery}`} />
       ))}
       {/* Ecosystem-aligned theme color */}
-      <meta name="theme-color" content="#0E0E0E" />
+      <meta name="theme-color" content="#080F0F" />
       {/* Preconnect fonts */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
