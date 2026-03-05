@@ -18,11 +18,11 @@
   "dependencies": {
     "@sanity/assist": "^5.0.4",
     "@sanity/client": "^6.29.1",
-    "@sanity/vision": "^4.10.2",
-    "react": "^19.1",
-    "react-dom": "^19.1",
+    "@sanity/vision": "^5.13.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "rss-parser": "^3.13.0",
-    "sanity": "^4.10.2",
+    "sanity": "^5.13.0",
     "sanity-plugin-media": "^4.1.1",
     "styled-components": "^6.1.18"
   },
