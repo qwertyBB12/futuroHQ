@@ -8,17 +8,17 @@
 export const civicModernThemeProps = {
   '--black': '#0E0E0E',
   '--white': '#FFFFFF',
-  '--gray': '#8B8985',
-  '--gray-base': '#8B8985',
+  '--gray': '#A8A4A0',
+  '--gray-base': '#A8A4A0',
 
-  '--component-bg': '#1A1714',
-  '--component-text-color': '#F2E5D5',
+  '--component-bg': '#1E1B17',
+  '--component-text-color': '#F8F2EA',
 
   '--brand-primary': '#C84841',
   '--focus-color': '#C84841',
 
   '--main-navigation-color': '#0E0E0E',
-  '--main-navigation-color--inverted': '#F2E5D5',
+  '--main-navigation-color--inverted': '#F8F2EA',
 
   '--default-button-color': '#8B8985',
   '--default-button-primary-color': '#C84841',
