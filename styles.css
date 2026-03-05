@@ -74,11 +74,12 @@ body {
 }
 
 /* ---------------------------------------------------------------------------
-   Fix: Sanity UI Text strikethrough caused by theme contrast miscalculation
+   Fix: Sanity UI strikethrough caused by theme contrast miscalculation.
+   The theme engine applies line-through on text in certain color contexts.
    --------------------------------------------------------------------------- */
 
-[data-ui="Text"] {
-  text-decoration: none !important;
+*:not(a) {
+  text-decoration-line: none !important;
 }
 
 /* ---------------------------------------------------------------------------
