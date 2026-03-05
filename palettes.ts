@@ -8,11 +8,11 @@
 export const civicModernThemeProps = {
   '--black': '#0E0E0E',
   '--white': '#FFFFFF',
-  '--gray': '#A8A4A0',
-  '--gray-base': '#A8A4A0',
+  '--gray': '#B5B1AC',
+  '--gray-base': '#B5B1AC',
 
-  '--component-bg': '#1E1B17',
-  '--component-text-color': '#F8F2EA',
+  '--component-bg': '#262220',
+  '--component-text-color': '#FBF6F0',
 
   '--brand-primary': '#C84841',
   '--focus-color': '#C84841',
