@@ -383,9 +383,19 @@ button[data-ui="PaneItem"]:hover {
 }
 
 [data-ui="StatusButton"] span,
+[data-ui="StatusButton"] div,
 [data-ui="Avatar"] span,
-[data-ui="Avatar"] div {
+[data-ui="Avatar"] div,
+[data-ui="Avatar"] > span,
+[data-ui="Avatar"] > div {
   border-color: #C84841 !important;
+  outline-color: #C84841 !important;
+}
+
+/* Force --user-color on any element Sanity sets it on inline */
+[style*="--user-color"] {
+  --user-color: #C84841 !important;
+  --user-color-light: rgba(200, 72, 65, 0.4) !important;
 }
 
 /* ---------------------------------------------------------------------------
