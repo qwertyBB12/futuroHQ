@@ -1,6 +1,6 @@
 /* =============================================================================
    AUTORI MANDATUM — Civic Modern + Liquid Glass
-   Warm palette. Glass overlays. Writer's sanctuary.
+   Theme --black raised to #1C1916 for bright cards. Body stays #0E0E0E.
    ============================================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
@@ -35,7 +35,8 @@ body {
 }
 
 /* ---------------------------------------------------------------------------
-   AMBIENT GRADIENT — Background texture for glass to refract
+   BODY — Darker than card surfaces so depth is visible
+   The ambient gradient provides texture for glass overlays
    --------------------------------------------------------------------------- */
 
 body {
@@ -49,65 +50,16 @@ body {
 }
 
 /* ---------------------------------------------------------------------------
-   LAYOUT — Transparent wrappers so panes define surface
+   WRITER'S SANCTUARY — Editor pane (rightmost)
+   Visibly brighter than sidebar/list (#201D19). The lit desk.
    --------------------------------------------------------------------------- */
 
-[data-ui="ToolScreen"],
-[data-testid="tool-panel-canvas"],
-[data-ui="PaneLayout"] {
-  background: transparent !important;
-}
-
-/* Force ALL nested cards/containers transparent so pane background shows */
-[data-ui="PaneContent"],
-[data-ui="PaneFooter"],
-[data-ui="Pane"] > [data-ui="Card"],
-[data-ui="Pane"] [data-ui="Card"][data-scheme],
-[data-ui="PaneContent"] > div,
-[data-ui="PaneContent"] > [data-ui="Card"] {
-  background: transparent !important;
-  background-color: transparent !important;
-}
-
-/* ---------------------------------------------------------------------------
-   PANE SURFACES — Bold depth hierarchy
-   Sidebar: darkest  |  List: medium  |  Editor: brightest (the workspace)
-   Each step is a VISIBLE jump in lightness
-   --------------------------------------------------------------------------- */
-
-/* Sidebar nav (left) — darkest, peripheral */
-[data-ui="Pane"]:first-child {
-  background: #151311 !important;
-  border-right: 1px solid rgba(242, 229, 213, 0.06) !important;
-}
-
-/* Document list (middle) — warmer, browsing surface */
-[data-ui="Pane"]:nth-child(2) {
-  background: #1C1916 !important;
-  border-right: 1px solid rgba(242, 229, 213, 0.04) !important;
-}
-
-/* ---------------------------------------------------------------------------
-   WRITER'S SANCTUARY — Editor pane
-   Visibly brighter. Warm. The surface where thinking happens.
-   --------------------------------------------------------------------------- */
-
-[data-ui="Pane"]:last-child {
-  background:
-    radial-gradient(ellipse 100% 80% at 50% 20%, rgba(177, 126, 104, 0.04) 0%, transparent 70%),
-    #262220 !important;
-  box-shadow: inset 0 0 120px rgba(177, 126, 104, 0.015) !important;
-}
-
-/* Make editor's inner cards transparent so #262220 shows through */
-[data-ui="Pane"]:last-child [data-ui="Card"] {
-  background: transparent !important;
-  background-color: transparent !important;
-}
-
-/* Pane dividers */
-[data-ui="PaneLayout"] > div[style*="width"] {
-  opacity: 0.4;
+[data-ui="Pane"]:last-child,
+[data-ui="Pane"]:last-child > [data-ui="Card"],
+[data-ui="Pane"]:last-child [data-ui="PaneContent"] > [data-ui="Card"],
+[data-ui="Pane"]:last-child [data-ui="PaneContent"] > div > [data-ui="Card"] {
+  background: #2A2624 !important;
+  background-color: #2A2624 !important;
 }
 
 /* ---------------------------------------------------------------------------
@@ -117,7 +69,7 @@ body {
 [data-ui="Navbar"] {
   backdrop-filter: blur(40px) saturate(1.8) brightness(1.1) !important;
   -webkit-backdrop-filter: blur(40px) saturate(1.8) brightness(1.1) !important;
-  background: rgba(14, 14, 14, 0.6) !important;
+  background: rgba(21, 19, 17, 0.7) !important;
   border-bottom: 1px solid rgba(242, 229, 213, 0.08) !important;
   box-shadow:
     0 1px 0 rgba(242, 229, 213, 0.04) inset,
@@ -131,20 +83,14 @@ body {
 [data-ui="PaneHeader"] {
   backdrop-filter: blur(32px) saturate(1.5) !important;
   -webkit-backdrop-filter: blur(32px) saturate(1.5) !important;
-  background: rgba(20, 18, 15, 0.85) !important;
   border-bottom: 1px solid rgba(242, 229, 213, 0.06) !important;
   box-shadow:
     0 1px 0 rgba(242, 229, 213, 0.03) inset,
-    0 2px 12px rgba(0, 0, 0, 0.12) !important;
-}
-
-/* Editor pane header — slightly brighter to match sanctuary */
-[data-ui="Pane"]:last-child [data-ui="PaneHeader"] {
-  background: rgba(34, 30, 27, 0.9) !important;
+    0 2px 12px rgba(0, 0, 0, 0.10) !important;
 }
 
 /* ---------------------------------------------------------------------------
-   SELECTED PANE ITEM — Warm accent bar
+   SELECTED PANE ITEM — Vermillion accent bar
    --------------------------------------------------------------------------- */
 
 [data-ui="PaneItem"][data-selected],
@@ -170,7 +116,6 @@ button[data-ui="PaneItem"] {
   border-radius: 12px !important;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
   margin: 2px 6px !important;
-  background: transparent !important;
 }
 
 [data-ui="PaneItem"]:hover,
@@ -190,7 +135,7 @@ button[data-ui="PaneItem"]:hover {
 }
 
 /* ---------------------------------------------------------------------------
-   INPUT FIELDS — Recessed glass containers
+   INPUT FIELDS — Recessed glass with specular edges
    --------------------------------------------------------------------------- */
 
 [data-ui="TextInput"],
@@ -212,7 +157,6 @@ button[data-ui="PaneItem"]:hover {
 [data-ui="TextInput"]:focus-within,
 [data-ui="TextArea"]:focus-within,
 [data-ui="Select"]:focus-within {
-  background: rgba(14, 12, 10, 0.4) !important;
   border-color: rgba(200, 72, 65, 0.30) !important;
   border-top-color: rgba(200, 72, 65, 0.35) !important;
   box-shadow:
@@ -223,22 +167,13 @@ button[data-ui="PaneItem"]:hover {
 }
 
 /* ---------------------------------------------------------------------------
-   FORM FIELD CARDS
-   --------------------------------------------------------------------------- */
-
-[data-testid="field-wrapper"],
-[data-ui="FieldsetContent"] {
-  transition: all 0.2s ease;
-}
-
-/* ---------------------------------------------------------------------------
    LIQUID GLASS — Dialogs
    --------------------------------------------------------------------------- */
 
 [data-ui="Dialog"] [data-ui="Card"] {
   backdrop-filter: blur(48px) saturate(1.8) brightness(1.05) !important;
   -webkit-backdrop-filter: blur(48px) saturate(1.8) brightness(1.05) !important;
-  background: rgba(34, 30, 27, 0.88) !important;
+  background: rgba(34, 30, 27, 0.90) !important;
   border: 1px solid rgba(242, 229, 213, 0.12) !important;
   border-top-color: rgba(242, 229, 213, 0.18) !important;
   border-left-color: rgba(242, 229, 213, 0.14) !important;
@@ -257,7 +192,7 @@ button[data-ui="PaneItem"]:hover {
 [data-ui="Menu"] {
   backdrop-filter: blur(40px) saturate(1.7) brightness(1.05) !important;
   -webkit-backdrop-filter: blur(40px) saturate(1.7) brightness(1.05) !important;
-  background: rgba(34, 30, 27, 0.90) !important;
+  background: rgba(34, 30, 27, 0.92) !important;
   border: 1px solid rgba(242, 229, 213, 0.10) !important;
   border-top-color: rgba(242, 229, 213, 0.16) !important;
   border-radius: 20px !important;
@@ -316,15 +251,12 @@ button[data-ui="PaneItem"]:hover {
 }
 
 [data-ui="Button"][data-tone="default"] {
-  background: rgba(38, 34, 32, 0.7) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
   border: 1px solid rgba(242, 229, 213, 0.10) !important;
   border-top-color: rgba(242, 229, 213, 0.14) !important;
 }
 
 /* ---------------------------------------------------------------------------
-   TABS — Glass + active glow
+   TABS — Active glow
    --------------------------------------------------------------------------- */
 
 [data-ui="Tab"] {
@@ -334,8 +266,6 @@ button[data-ui="PaneItem"]:hover {
 
 [data-ui="Tab"][data-selected="true"],
 [data-ui="Tab"][aria-selected="true"] {
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
   box-shadow: 0 0 16px rgba(200, 72, 65, 0.15) !important;
 }
 
@@ -395,7 +325,7 @@ button[data-ui="PaneItem"]:hover {
 }
 
 [data-ui="Avatar"] {
-  box-shadow: 0 0 0 2px rgba(14, 14, 14, 0.8), 0 0 0 3px rgba(200, 72, 65, 0.12);
+  box-shadow: 0 0 0 2px rgba(28, 25, 22, 0.8), 0 0 0 3px rgba(200, 72, 65, 0.12);
   border-radius: 50%;
 }
 
