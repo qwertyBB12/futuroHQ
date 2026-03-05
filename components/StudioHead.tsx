@@ -82,12 +82,44 @@ function useFaviconEnforcer() {
 }
 
 
+/**
+ * Inject a <style> tag at the END of <head> after styled-components.
+ * This ensures our CSS overrides come last in the cascade.
+ */
+const AVATAR_STYLE_ID = 'am-avatar-override'
+function useAvatarColorOverride() {
+  useEffect(() => {
+    function injectOverride() {
+      const existing = document.getElementById(AVATAR_STYLE_ID)
+      if (existing) {
+        // Move to end of head to stay after styled-components
+        document.head.appendChild(existing)
+        return
+      }
+      const style = document.createElement('style')
+      style.id = AVATAR_STYLE_ID
+      style.textContent = `
+        [data-ui="Avatar"] ellipse[class] { stroke: #C84841 !important; }
+        [data-ui="Avatar"] svg ellipse { stroke: #C84841 !important; }
+      `
+      document.head.appendChild(style)
+    }
+
+    injectOverride()
+    // Re-inject whenever styled-components adds new <style> tags
+    const observer = new MutationObserver(injectOverride)
+    observer.observe(document.head, {childList: true})
+    return () => observer.disconnect()
+  }, [])
+}
+
 export default function StudioHead(props: any) {
   const versionQuery = `?v=${FAVICON_VERSION}`
   const defaultNodes = props.renderDefault(props)
   const filteredDefault = Children.toArray(defaultNodes).map(pruneNode).filter(Boolean)
 
   useFaviconEnforcer()
+  useAvatarColorOverride()
 
   return (
     <>
