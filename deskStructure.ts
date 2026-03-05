@@ -1,4 +1,4 @@
-import type { StructureBuilder } from 'sanity/structure'
+import type {StructureBuilder} from 'sanity/structure'
 import {
   ProjectsIcon,
   UsersIcon,
@@ -10,6 +10,27 @@ import {
   CreditCardIcon,
 } from '@sanity/icons'
 import LivePreview from './components/previews/LivePreview'
+import GovernanceView from './components/views/GovernanceView'
+import ReferencesView from './components/views/ReferencesView'
+
+// Types that get the full 4-tab view (Content + Preview + Governance + References)
+const GOVERNED_TYPES = new Set([
+  'essay',
+  'video',
+  'podcast',
+  'podcastEpisode',
+  'opEd',
+  'curatedPost',
+  'socialPost',
+  'project',
+  'futuroSummit',
+  'person',
+  'alumni',
+  'collaborator',
+  'alumniDream',
+  'alumniConversation',
+  'projectUpdate',
+])
 
 const groupedDocTypes = new Set([
   'project',
@@ -39,10 +60,20 @@ const groupedDocTypes = new Set([
 ])
 
 export const deskStructure = (S: StructureBuilder) => {
-  const documentViews = (schemaType: string) => [
-    S.view.form().title('Content'),
-    S.view.component(LivePreview).title('Preview'),
-  ]
+  // Build view tabs based on whether the type is governed
+  const documentViews = (schemaType: string) => {
+    const views = [
+      S.view.form().title('Content'),
+      S.view.component(LivePreview).title('Preview'),
+    ]
+
+    if (GOVERNED_TYPES.has(schemaType)) {
+      views.push(S.view.component(GovernanceView).title('Governance'))
+      views.push(S.view.component(ReferencesView).title('References'))
+    }
+
+    return views
+  }
 
   const listWithPreview = (schemaType: string, title: string) =>
     S.listItem()
@@ -99,10 +130,10 @@ export const deskStructure = (S: StructureBuilder) => {
           S.list()
             .title('People & Collaborators')
             .items([
-              S.documentTypeListItem('person').title('People'),
-              S.documentTypeListItem('alumni').title('Alumni'),
+              listWithPreview('person', 'People'),
+              listWithPreview('alumni', 'Alumni'),
               S.documentTypeListItem('ledgerPerson').title('Ledger People'),
-              S.documentTypeListItem('collaborator').title('Collaborators & Organizations'),
+              listWithPreview('collaborator', 'Collaborators & Organizations'),
             ]),
         ),
 
@@ -151,9 +182,9 @@ export const deskStructure = (S: StructureBuilder) => {
           S.list()
             .title('Companion Platform')
             .items([
-              S.documentTypeListItem('alumniDream').title('Alumni Dreams'),
-              S.documentTypeListItem('alumniConversation').title('Conversations'),
-              S.documentTypeListItem('projectUpdate').title('Project Updates'),
+              listWithPreview('alumniDream', 'Alumni Dreams'),
+              listWithPreview('alumniConversation', 'Conversations'),
+              listWithPreview('projectUpdate', 'Project Updates'),
               S.documentTypeListItem('participantConnection').title('Participant Connections'),
             ]),
         ),

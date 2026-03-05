@@ -44,6 +44,25 @@ export const commonMeta = [
     of: [{type: 'url'}],
   }),
   defineField({
+    name: 'socialTargets',
+    title: 'Social Distribution Targets',
+    type: 'array',
+    of: [{type: 'string'}],
+    options: {
+      list: [
+        {title: 'LinkedIn', value: 'linkedin'},
+        {title: 'X / Twitter', value: 'x'},
+        {title: 'Instagram', value: 'instagram'},
+        {title: 'TikTok', value: 'tiktok'},
+        {title: 'Facebook', value: 'facebook'},
+        {title: 'YouTube Community', value: 'youtube'},
+        {title: 'Substack Notes', value: 'substack'},
+      ],
+      layout: 'grid',
+    },
+    description: 'Select platforms for automated social distribution via Make.com',
+  }),
+  defineField({
     name: 'analytics',
     title: 'Analytics',
     type: 'object',

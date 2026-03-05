@@ -74,8 +74,8 @@ export default defineType({
       name: 'playerColor',
       title: 'Player Color',
       type: 'string',
-      initialValue: '1B2A41',
-      description: 'Defaults to Hoya Blue (#1B2A41)'
+      initialValue: '162931',
+      description: 'Defaults to Midnight (#162931)'
     }),
 
     defineField({
