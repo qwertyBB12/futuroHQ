@@ -25,13 +25,12 @@ export const SocialDistributeAction: DocumentActionComponent = (props) => {
       : undefined
 
   return {
-    label: sending ? 'Sending…' : 'Distribute to Social',
+    label: sending ? 'Sending...' : 'Distribute to Social',
     icon: ShareIcon,
     disabled: sending || !webhookUrl,
     title: webhookUrl
       ? 'Send to social media automation (Make.com)'
       : 'Set SANITY_STUDIO_SOCIAL_WEBHOOK_URL to enable',
-    group: 'paneActions',
     onHandle: async () => {
       if (!webhookUrl) return
 
@@ -45,7 +44,7 @@ export const SocialDistributeAction: DocumentActionComponent = (props) => {
             _type: props.type,
             title: doc.title,
             excerpt: doc.excerpt || doc.description,
-            slug: doc.slug?.current,
+            slug: (doc.slug as any)?.current,
             narrativeOwner: doc.narrativeOwner,
             postingEntity: doc.postingEntity,
             language: doc.language || 'en',
