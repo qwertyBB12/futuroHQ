@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import {useClient} from 'sanity'
-import {Card, Stack, Heading, Text, Flex, Box} from '@sanity/ui'
+import {Stack, Heading, Text, Flex, Box} from '@sanity/ui'
+import {glassPanel} from './glassStyles'
 
 type RecentDoc = {
   _id: string
@@ -61,7 +62,7 @@ export default function RecentActivityWidget() {
   }, [client])
 
   return (
-    <Card padding={4} radius={2} shadow={1}>
+    <div style={{...glassPanel, padding: 24}}>
       <Stack space={4}>
         <Heading size={1} style={{fontFamily: "'Oswald', sans-serif", textTransform: 'uppercase', letterSpacing: '0.05em'}}>
           Recent Activity
@@ -69,7 +70,14 @@ export default function RecentActivityWidget() {
 
         <Stack space={1}>
           {docs.map((doc) => (
-            <Card key={doc._id} padding={3} radius={2}>
+            <div
+              key={doc._id}
+              style={{
+                padding: '12px 14px',
+                borderRadius: 12,
+                transition: 'background 0.2s ease',
+              }}
+            >
               <Flex align="center" gap={3}>
                 <Box
                   style={{
@@ -91,7 +99,6 @@ export default function RecentActivityWidget() {
                       fontFamily: "'Mulish', sans-serif",
                       fontWeight: 600,
                       fontSize: 13,
-                      textDecoration: 'none',
                     }}
                   >
                     {doc.title || 'Untitled'}
@@ -104,10 +111,10 @@ export default function RecentActivityWidget() {
                   {timeAgo(doc._updatedAt)}
                 </Text>
               </Flex>
-            </Card>
+            </div>
           ))}
         </Stack>
       </Stack>
-    </Card>
+    </div>
   )
 }

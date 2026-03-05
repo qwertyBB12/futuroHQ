@@ -1,5 +1,6 @@
-import {Card, Stack, Heading, Text, Flex, Box, Grid} from '@sanity/ui'
+import {Stack, Heading, Text, Flex, Box, Grid} from '@sanity/ui'
 import {LinkIcon} from '@sanity/icons'
+import {glassPanel, glassCard} from './glassStyles'
 
 type Site = {
   name: string
@@ -27,7 +28,7 @@ const STATUS_STYLES: Record<string, {bg: string; text: string}> = {
 
 export default function EcosystemSitesWidget() {
   return (
-    <Card padding={4} radius={2} shadow={1}>
+    <div style={{...glassPanel, padding: 24}}>
       <Stack space={4}>
         <Heading size={1} style={{fontFamily: "'Oswald', sans-serif", textTransform: 'uppercase', letterSpacing: '0.05em'}}>
           Ecosystem Sites
@@ -37,7 +38,7 @@ export default function EcosystemSitesWidget() {
           {SITES.map((site) => {
             const statusStyle = STATUS_STYLES[site.status]
             return (
-              <Card key={site.name} padding={3} radius={2} border>
+              <div key={site.name} style={{...glassCard, padding: 14}}>
                 <Stack space={2}>
                   <Flex align="center" gap={2}>
                     <Box
@@ -65,8 +66,8 @@ export default function EcosystemSitesWidget() {
                     <span
                       style={{
                         display: 'inline-block',
-                        padding: '2px 8px',
-                        borderRadius: 4,
+                        padding: '3px 10px',
+                        borderRadius: 20,
                         fontSize: 10,
                         fontWeight: 600,
                         textTransform: 'uppercase',
@@ -79,11 +80,11 @@ export default function EcosystemSitesWidget() {
                     </span>
                   </Box>
                 </Stack>
-              </Card>
+              </div>
             )
           })}
         </Grid>
       </Stack>
-    </Card>
+    </div>
   )
 }
