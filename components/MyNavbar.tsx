@@ -2,57 +2,27 @@ import type {NavbarProps} from 'sanity'
 
 /**
  * Custom Navbar — Civic Modern branding
- * Simplified: no MutationObserver, no palette switching (single theme)
- * Uses Oswald for brand text, Mulish inherited for everything else
+ * Renders the brand mark + Sanity default controls.
+ * Title comes from the workspace name in sanity.config.ts.
  */
 export default function MyNavbar(props: NavbarProps) {
   return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '0.75rem',
-        padding: '0 1rem',
-        flexWrap: 'wrap',
-        backgroundColor: '#0E0E0E',
-      }}
-    >
+    <div style={{display: 'flex', alignItems: 'center', width: '100%'}}>
       {/* Brand logo */}
-      <img
-        src="/static/android-chrome-512x512.png"
-        alt="BeNeXT Logo"
-        width={28}
-        height={28}
-        style={{objectFit: 'contain', borderRadius: 6}}
-        decoding="async"
-        loading="eager"
-      />
+      <div style={{display: 'flex', alignItems: 'center', padding: '0 0.75rem', flexShrink: 0}}>
+        <img
+          src="/static/android-chrome-512x512.png"
+          alt="BeNeXT"
+          width={24}
+          height={24}
+          style={{objectFit: 'contain', borderRadius: 4}}
+          decoding="async"
+          loading="eager"
+        />
+      </div>
 
-      {/* Oswald brand title */}
-      <span
-        style={{
-          fontFamily: "'Oswald', sans-serif",
-          fontWeight: 700,
-          fontSize: '1.5rem',
-          textTransform: 'uppercase',
-          letterSpacing: '0.5px',
-          color: '#F2E5D5',
-          whiteSpace: 'nowrap',
-        }}
-      >
-        Autori Mandatum
-      </span>
-
-      {/* Sanity default navbar controls */}
-      <div
-        style={{
-          marginLeft: 'auto',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.75rem',
-          flexWrap: 'wrap',
-        }}
-      >
+      {/* Sanity default navbar (workspace name, tools, search, user) */}
+      <div style={{flex: 1, minWidth: 0}}>
         {props.renderDefault(props)}
       </div>
     </div>

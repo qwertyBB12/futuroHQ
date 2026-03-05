@@ -2,235 +2,57 @@
    BENEXT GLOBAL HQ — Civic Modern Studio Theme
    Aligned with @hector-ecosystem/design-system
    Fonts: Oswald (headings) + Mulish (body) + JetBrains Mono (code)
+
+   IMPORTANT: Do NOT use !important on background/color for Sanity [data-ui]
+   components. Let buildLegacyTheme() handle colors via its token system.
+   Only override typography here.
    ============================================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 /* ---------------------------------------------------------------------------
-   Design System Tokens — Civic Modern Palette
+   Typography — Mulish body, Oswald headings
    --------------------------------------------------------------------------- */
 
-:root {
-  /* Dark Anchor */
-  --founders-black: #0E0E0E;
-  --midnight: #162931;
+body {
+  font-family: 'Mulish', sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-  /* Warm Surfaces (no blue tint) */
-  --surface-raised: #1A1714;
-  --surface-overlay: #221F1A;
-  --surface-input: #1A1714;
-  --border-warm: #2A2520;
-  --border-subtle: #201D18;
+/* Oswald for workspace name in navbar */
+[data-ui="Navbar"] button[aria-haspopup="menu"] span {
+  font-family: 'Oswald', sans-serif !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
 
-  /* Copper Family (distinction, credentials) */
-  --copper-light: #C4A497;
-  --copper: #B17E68;
-  --copper-dark: #97644E;
+/* Mulish for buttons and badges */
+[data-ui="Button"],
+[data-ui="Badge"] {
+  font-family: 'Mulish', sans-serif !important;
+}
 
-  /* Vermillion Family (action, interactivity) */
-  --vermillion: #C84841;
-  --vermillion-dark: #A13B36;
-  --vermillion-deep: #813531;
-
-  /* Text */
-  --sandstone: #F2E5D5;
-  --sandstone-light: #FAF6F0;
-  --sandstone-dark: #E8D5C0;
-  --archival-slate: #8B8985;
-  --archival-slate-light: #B8B5B1;
-
-  /* Sanity theme tokens */
-  --main-navigation-color: var(--founders-black);
-  --main-navigation-color--inverted: var(--sandstone);
-  --component-bg: var(--founders-black);
-  --component-text-color: var(--sandstone);
-  --card-bg-color: var(--surface-raised);
-  --card-fg-color: var(--sandstone);
-  --card-muted-fg-color: var(--archival-slate);
-  --card-shadow-outline-color: rgba(14, 14, 14, 0.35);
-  --brand-primary: var(--vermillion);
-  --focus-color: var(--vermillion);
-  --link-color: var(--sandstone);
-  --default-button-color: var(--archival-slate);
-  --default-button-primary-color: var(--vermillion);
-  --default-button-danger-color: var(--vermillion-deep);
-  --default-button-success-color: var(--copper);
-  --input-bg: var(--surface-input);
-  --input-border-color: var(--border-warm);
-  --input-text-color: var(--sandstone);
-  --input-placeholder-color: var(--archival-slate);
-  --input-shadow: none;
-  --state-success-color: var(--copper);
-  --state-info-color: var(--sandstone);
-  --state-warning-color: var(--sandstone-dark);
-  --state-danger-color: var(--vermillion-deep);
-  --badge-default-bg: var(--archival-slate);
-  --badge-default-fg: var(--founders-black);
-  --badge-primary-bg: var(--vermillion);
-  --badge-primary-fg: var(--sandstone);
-  --badge-success-bg: var(--copper);
-  --badge-success-fg: var(--founders-black);
-  --badge-warning-bg: var(--sandstone-dark);
-  --badge-warning-fg: var(--founders-black);
-  --badge-danger-bg: var(--vermillion-deep);
-  --badge-danger-fg: var(--sandstone);
-  --hairline-color: var(--border-warm);
-  --border-color: var(--border-warm);
+[data-ui="Badge"] {
+  font-weight: 600;
+  letter-spacing: 0.025em;
 }
 
 /* ---------------------------------------------------------------------------
-   Base Typography — Mulish body, Oswald headings
+   Brand utility classes (for custom components only)
    --------------------------------------------------------------------------- */
 
-@layer base {
-  body {
-    background-color: var(--component-bg) !important;
-    color: var(--component-text-color) !important;
-    font-family: 'Mulish', sans-serif !important;
-    font-weight: 400;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+.h1-brand {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  text-transform: uppercase;
 }
-
-/* ---------------------------------------------------------------------------
-   Component Overrides — Brand Typography & Warm Dark Theme
-   --------------------------------------------------------------------------- */
-
-@layer components {
-  /* Brand heading class */
-  .h1-brand {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 500;
-    letter-spacing: 0.025em;
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-    text-transform: uppercase;
-  }
-
-  /* Brand button class */
-  .btn-brand {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-    background-color: var(--vermillion);
-    padding: 0.5rem 1rem;
-    font-family: 'Mulish', sans-serif;
-    font-weight: 600;
-    color: var(--sandstone);
-    box-shadow: 0 1px 2px 0 rgba(14, 14, 14, 0.12);
-  }
-
-  /* Navbar background — warm dark */
-  [data-ui="Navbar"],
-  [data-ui="Navbar"] > *,
-  [data-ui="Navbar"] [data-ui="Card"],
-  [data-ui="Navbar"] [data-ui="Box"] {
-    background-color: var(--founders-black) !important;
-    background-image: none !important;
-  }
-
-  [data-ui="Navbar"]::before,
-  [data-ui="Navbar"]::after {
-    background: var(--founders-black) !important;
-  }
-
-  /* Workspace name — Oswald Bold, uppercase */
-  [data-ui="Navbar"] [data-testid="workspace-name"],
-  [data-ui="Navbar"] [data-testid="workspace-name"] *,
-  [data-ui="Navbar"] button[aria-haspopup="menu"] span,
-  [data-ui="Navbar"] button[aria-label*="workspace"] span {
-    font-family: 'Oswald', sans-serif !important;
-    font-weight: 700 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important;
-    color: var(--sandstone) !important;
-  }
-
-  /* Pane backgrounds — warm dark */
-  [data-ui="Pane"],
-  [data-ui="PaneHeader"],
-  [data-ui="PaneFooter"],
-  [data-ui="PaneContent"],
-  [data-ui="PaneLayout"] {
-    background-color: var(--founders-black) !important;
-    color: var(--sandstone) !important;
-  }
-
-  /* Cards — warm raised surface */
-  [data-ui="Card"],
-  [data-ui="ListItem"],
-  [data-ui="TreeItem"] {
-    background-color: var(--surface-raised) !important;
-    color: var(--sandstone) !important;
-  }
-
-  /* PaneItems — warm dark */
-  button[data-ui="PaneItem"] {
-    background-color: var(--surface-raised) !important;
-    color: var(--sandstone) !important;
-    border-color: var(--border-subtle) !important;
-  }
-
-  button[data-ui="PaneItem"]:hover {
-    background-color: var(--surface-overlay) !important;
-  }
-
-  /* ListItem text inheritance */
-  [data-ui="ListItem"] *,
-  [data-ui="TreeItem"] * {
-    color: inherit;
-  }
-
-  /* Inputs — warm dark */
-  [data-ui="TextInput"],
-  [data-ui="TextArea"],
-  [data-ui="Select"] {
-    background-color: var(--surface-input) !important;
-    color: var(--sandstone) !important;
-    border-color: var(--border-warm) !important;
-  }
-
-  /* Buttons */
-  [data-ui="Button"] {
-    font-family: 'Mulish', sans-serif !important;
-  }
-
-  [data-ui="Button"][data-tone="primary"] {
-    background-color: var(--vermillion) !important;
-    color: var(--sandstone) !important;
-  }
-
-  [data-ui="Button"][data-tone="positive"],
-  [data-ui="Button"][data-tone="success"] {
-    background-color: var(--copper) !important;
-    color: var(--founders-black) !important;
-  }
-
-  [data-ui="Button"][data-tone="critical"],
-  [data-ui="Button"][data-tone="danger"] {
-    background-color: var(--vermillion-deep) !important;
-    color: var(--sandstone) !important;
-  }
-
-  /* Badges */
-  [data-ui="Badge"] {
-    font-family: 'Mulish', sans-serif !important;
-    font-weight: 600;
-    letter-spacing: 0.025em;
-  }
-}
-
-/* ---------------------------------------------------------------------------
-   Responsive
-   --------------------------------------------------------------------------- */
 
 @media (min-width: 768px) {
   .h1-brand {
@@ -239,60 +61,14 @@
   }
 }
 
-/* ---------------------------------------------------------------------------
-   Utilities
-   --------------------------------------------------------------------------- */
-
-@layer utilities {
-  .bg-surface {
-    background-color: var(--component-bg) !important;
-  }
-
-  .bg-brand {
-    background-color: var(--founders-black) !important;
-  }
-
-  .text-onBrand {
-    color: var(--sandstone) !important;
-  }
-
-  .font-display {
-    font-family: 'Oswald', sans-serif !important;
-  }
-
-  .font-body {
-    font-family: 'Mulish', sans-serif !important;
-  }
-
-  .font-mono {
-    font-family: 'JetBrains Mono', monospace !important;
-  }
-
-  .text-copper {
-    color: var(--copper) !important;
-  }
-
-  .text-vermillion {
-    color: var(--vermillion) !important;
-  }
+.font-display {
+  font-family: 'Oswald', sans-serif !important;
 }
 
-/* ---------------------------------------------------------------------------
-   Hide workspace switcher badge (SVG initials)
-   --------------------------------------------------------------------------- */
-
-[data-ui="Navbar"] button:has(svg text) {
-  display: none !important;
-  width: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  visibility: hidden !important;
+.font-body {
+  font-family: 'Mulish', sans-serif !important;
 }
 
-/* ---------------------------------------------------------------------------
-   Force color scheme
-   --------------------------------------------------------------------------- */
-
-:root {
-  color-scheme: only light;
+.font-mono {
+  font-family: 'JetBrains Mono', monospace !important;
 }
