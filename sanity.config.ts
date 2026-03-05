@@ -12,7 +12,6 @@ import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {assist} from '@sanity/assist'
-import {scheduledPublishing} from '@sanity/scheduled-publishing'
 import {media} from 'sanity-plugin-media'
 import {schemaTypes} from './schemaTypes'
 import {customTheme} from './theme'
@@ -75,7 +74,6 @@ export default defineConfig({
     structureTool({structure: deskStructure}),
     visionTool(),
     assist(),
-    scheduledPublishing(),
     media(),
   ],
 
