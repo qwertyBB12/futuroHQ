@@ -65,6 +65,7 @@ export default defineConfig({
   projectId: 'fo6n8ceo',
   dataset: 'production',
   theme: customTheme,
+  icon: StudioLogo,
 
   plugins: [
     structureTool({structure: deskStructure}),
