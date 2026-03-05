@@ -13,6 +13,21 @@ const VERMILLION = '#C84841'
 const SANDSTONE = '#F2E5D5'
 const SLATE = '#8B8985'
 
+// ─── Session gate: full boot sequence once per day ───
+const BOOT_KEY = 'am-boot-ts'
+const ONE_DAY = 24 * 60 * 60 * 1000
+
+function shouldRunBoot(): boolean {
+  try {
+    const last = localStorage.getItem(BOOT_KEY)
+    if (last && Date.now() - Number(last) < ONE_DAY) return false
+    localStorage.setItem(BOOT_KEY, String(Date.now()))
+    return true
+  } catch {
+    return true
+  }
+}
+
 // ─── CSS Keyframes (injected once) ───
 const STYLE_ID = 'am-dashboard-anims'
 const KEYFRAMES = `
@@ -54,8 +69,8 @@ const KEYFRAMES = `
 }
 `
 
-function CommandMark() {
-  const [phase, setPhase] = useState<'acquire' | 'locked'>('acquire')
+function CommandMark({boot}: {boot: boolean}) {
+  const [phase, setPhase] = useState<'acquire' | 'locked'>(boot ? 'acquire' : 'locked')
   const imgRef = useRef<HTMLImageElement>(null)
 
   useEffect(() => {
@@ -67,10 +82,11 @@ function CommandMark() {
       document.head.appendChild(style)
     }
 
+    if (!boot) return
     // Phase 1: signal acquisition (2.4s), then lock on
     const timer = setTimeout(() => setPhase('locked'), 2400)
     return () => clearTimeout(timer)
-  }, [])
+  }, [boot])
 
   return (
     <div
@@ -154,12 +170,14 @@ function CommandMark() {
   )
 }
 
-function SecureEyebrow() {
-  const [text, setText] = useState('')
-  const [typing, setTyping] = useState(false)
+function SecureEyebrow({boot}: {boot: boolean}) {
   const full = 'SECURE CHANNEL ESTABLISHED'
+  const [text, setText] = useState(boot ? '' : full)
+  const [typing, setTyping] = useState(false)
+  const [done, setDone] = useState(!boot)
 
   useEffect(() => {
+    if (!boot) return
     // Start typing after signal locks (3s total: 2.4s acquire + 0.6s pause)
     const startTimer = setTimeout(() => {
       setTyping(true)
@@ -167,14 +185,17 @@ function SecureEyebrow() {
       const interval = setInterval(() => {
         i++
         setText(full.slice(0, i))
-        if (i >= full.length) clearInterval(interval)
+        if (i >= full.length) {
+          clearInterval(interval)
+          setDone(true)
+        }
       }, 50)
       return () => clearInterval(interval)
     }, 3000)
     return () => clearTimeout(startTimer)
-  }, [])
+  }, [boot])
 
-  if (!typing && text === '') {
+  if (!typing && !done) {
     return <div style={{height: 14}} />
   }
 
@@ -184,10 +205,10 @@ function SecureEyebrow() {
         fontFamily: "'JetBrains Mono', 'Courier New', monospace",
         fontSize: 10,
         letterSpacing: '0.18em',
-        color: text.length >= full.length ? `${COPPER}88` : `${VERMILLION}88`,
+        color: done ? `${COPPER}88` : `${VERMILLION}88`,
         borderRight:
-          text.length < full.length ? `2px solid ${COPPER}` : '2px solid transparent',
-        animation: text.length < full.length ? 'am-eyebrow-blink 0.6s step-end infinite' : 'none',
+          !done ? `2px solid ${COPPER}` : '2px solid transparent',
+        animation: !done ? 'am-eyebrow-blink 0.6s step-end infinite' : 'none',
         display: 'inline-block',
         paddingRight: 2,
         marginTop: 2,
@@ -199,6 +220,8 @@ function SecureEyebrow() {
 }
 
 export default function DashboardLayout() {
+  const [boot] = useState(() => shouldRunBoot())
+
   return (
     <div
       style={{
@@ -210,7 +233,7 @@ export default function DashboardLayout() {
       <Stack space={5} style={{maxWidth: 1200, margin: '0 auto'}}>
         {/* Header — Command Center */}
         <Flex align="center" gap={4}>
-          <CommandMark />
+          <CommandMark boot={boot} />
           <Stack space={2}>
             <Heading
               size={3}
@@ -234,7 +257,7 @@ export default function DashboardLayout() {
               >
                 Ecosystem Command Center
               </Text>
-              <SecureEyebrow />
+              <SecureEyebrow boot={boot} />
             </Flex>
           </Stack>
         </Flex>
