@@ -14,7 +14,11 @@ export default defineType({
   name: 'impactMetric',
   title: 'Impact Metric',
   type: 'document',
-  description: 'Updatable impact statistics displayed across futuro.ngo (homepage, impact, alumni)',
+  description:
+    'CMS-managed statistics for futuro.ngo — replaces hardcoded numbers. ' +
+    'Not governed (no narrativeOwner) — these are factual metrics, not editorial. ' +
+    'Display on homepage, impact page, or alumni section controlled by showOnHomepage flag. ' +
+    'Keep values current — outdated metrics undermine credibility.',
   fields: [
     defineField({
       name: 'label',

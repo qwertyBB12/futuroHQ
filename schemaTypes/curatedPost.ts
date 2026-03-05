@@ -6,6 +6,12 @@ export default defineType({
   name: 'curatedPost',
   title: 'Curated Post (Third-Party)',
   type: 'document',
+  description:
+    'Third-party content curated with original commentary. ' +
+    'Default narrativeOwner: "hector". Default platformTier: "distribution". Default archivalStatus: "ephemeral". ' +
+    'The title is YOUR headline (not the original). The body is YOUR interpretation or framing. ' +
+    'Always include the original source URL and author attribution. ' +
+    'This is curation as editorial act — why does this matter to the ecosystem?',
   fields: [
     // --- Core ---
     defineField({

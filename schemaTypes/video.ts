@@ -5,6 +5,16 @@ export default defineType({
   name: 'video',
   title: 'Video',
   type: 'document',
+  description:
+    'Video content — reflections, keynotes, interviews, documentaries. ' +
+    'Default narrativeOwner: "hector". Default platformTier: "canonical". Default archivalStatus: "archival". ' +
+    'Supports bilingual (en/es) with conditional Spanish title/description fields. ' +
+    'videoFormat determines longform vs shortform. contentCategory determines site section placement.',
+  initialValue: {
+    narrativeOwner: 'hector',
+    platformTier: 'canonical',
+    archivalStatus: 'archival',
+  },
   fields: [
     defineField({
       name: 'title',

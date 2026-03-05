@@ -5,6 +5,12 @@ export default defineType({
   name: 'keynote',
   title: 'Keynote',
   type: 'document',
+  description:
+    'A keynote speech or major presentation. ' +
+    'Default narrativeOwner: "hector". Default platformTier: "canonical". Default archivalStatus: "archival". ' +
+    'Venue and date are required. Category classifies the type: commencement, conference, institutional, panel, workshop. ' +
+    'Link to related video, essay, or podcast episode when recordings exist. ' +
+    'Featured keynotes surface on hectorhlopez.com/keynotes.',
   fields: [
     defineField({
       name: 'title',

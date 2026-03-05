@@ -14,6 +14,10 @@ import impactMetric from './impactMetric'
 import podcast from './podcast'
 import podcastEpisode from './podcastEpisode'
 import video from './video'
+import socialPost from './socialPost'
+import opEd from './opEd'
+import curatedPost from './curatedPost'
+import keynote from './keynote'
 import tag from './tag'
 
 // --- Shared Objects ---
@@ -40,6 +44,13 @@ import accreditationHourLog from './accreditationHourLog'
 import pricingTier from './pricingTier'
 import usageRecord from './usageRecord'
 
+// --- Institutional Memory ---
+import decision from './decision'
+
+// --- Legacy (registered but hidden from desk) ---
+import vlog from './vlog'
+import alumniContinuum from './alumniContinuum'
+
 // --- Export combined schema array ---
 export const schemaTypes = [
   // Core
@@ -62,6 +73,10 @@ export const schemaTypes = [
   podcast,
   podcastEpisode,
   video,
+  socialPost,
+  opEd,
+  curatedPost,
+  keynote,
   tag,
 
   // Companion Platform
@@ -78,6 +93,13 @@ export const schemaTypes = [
   // Platform Business
   pricingTier,
   usageRecord,
+
+  // Institutional Memory
+  decision,
+
+  // Legacy (hidden from desk)
+  vlog,
+  alumniContinuum,
 
   // Shared Objects
   mediaBlock,

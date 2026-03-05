@@ -6,6 +6,11 @@ export default defineType({
   name: 'alumniContinuum',
   title: 'Alumni Continuum',
   type: 'document',
+  description:
+    'Alumni-only curated content — resources, opportunities, and announcements for the alumni community. ' +
+    'Default narrativeOwner: "benext". Default platformTier: "institutional". Default archivalStatus: "alumni-only". ' +
+    'Audience scoping controls which alumni group sees this content. ' +
+    'Status: pending review. May be kept or removed depending on Companion Platform decisions.',
   fields: [
     // --- Core ---
     defineField({

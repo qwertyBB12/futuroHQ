@@ -5,6 +5,19 @@ export default defineType({
   name: 'essay',
   title: 'Essay',
   type: 'document',
+  description:
+    'Primary content type for long-form writing. ' +
+    'Default narrativeOwner: "hector" (unless explicitly creating for another entity). ' +
+    'Default platformTier: "canonical". Default archivalStatus: "archival". ' +
+    'Always populate seoBlock with title, description, and keywords. ' +
+    'Language is English unless explicitly specified. ' +
+    'The essay body uses Portable Text. Write in cinematic, literary, reflective prose — bold but not bombastic. ' +
+    'Never use sovereignty/lexicon terms in essay content (these are internal-only vocabulary).',
+  initialValue: {
+    narrativeOwner: 'hector',
+    platformTier: 'canonical',
+    archivalStatus: 'archival',
+  },
   fields: [
     defineField({
       name: 'title',

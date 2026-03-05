@@ -1,0 +1,8 @@
+{
+  "path": [
+    "./schemaTypes/**/*.{ts,tsx}",
+    "../hector-ecosystem/packages/sanity-client/src/**/*.ts"
+  ],
+  "schema": "./schema.json",
+  "generates": "../hector-ecosystem/packages/sanity-client/src/sanity.types.ts"
+}

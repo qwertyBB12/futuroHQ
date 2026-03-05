@@ -6,6 +6,13 @@ export default defineType({
   name: 'project',
   title: 'Project',
   type: 'document',
+  description:
+    'A project in the ecosystem — Futuro convenings, BeNeXT initiatives, community ventures. ' +
+    'Default narrativeOwner: depends on context ("futuro" for Futuro projects, "benext" for institutional). ' +
+    'Default platformTier: "institutional". Default archivalStatus: "archival". ' +
+    'Status tracks lifecycle: active → inprogress → archived. ' +
+    'Include participants (alumni references), publicNarrative for the website, and projectMedia for visuals. ' +
+    'Companion Platform fields (enableCompanion, etc.) gate whether this project appears in the alumni dashboard.',
   fieldsets: [
     {
       name: 'companion',

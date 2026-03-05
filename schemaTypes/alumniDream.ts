@@ -15,7 +15,12 @@ export default defineType({
   name: 'alumniDream',
   title: 'Alumni Dream',
   type: 'document',
-  description: 'Tracks dreams from first whisper through realization',
+  description:
+    'Tracks alumni dreams from first whisper through realization. Part of the Companion Platform. ' +
+    'Default narrativeOwner: "benext". Default platformTier: "personal". Default archivalStatus: "alumni-only". ' +
+    'Status lifecycle: seed → articulated → in-motion → realized → evolved (or paused/released). ' +
+    'Always reference the alumni who owns this dream. ' +
+    'Content is authentic and unpolished — this is the participant voice, not institutional voice.',
   fields: [
     // --- Core ---
     defineField({

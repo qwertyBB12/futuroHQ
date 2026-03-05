@@ -6,6 +6,10 @@ export default defineType({
   name: 'vlog',
   title: 'Vlog',
   type: 'document',
+  description:
+    'LEGACY — Hidden from desk. Do not create new vlogs. ' +
+    'Existing vlog data has been migrated to the video type with legacyVlog fields. ' +
+    'Schema is registered for backwards compatibility with existing documents only.',
   fields: [
     // --- Core ---
     defineField({

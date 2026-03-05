@@ -6,6 +6,12 @@ export default defineType({
   name: 'podcast',
   title: 'Podcast Series',
   type: 'document',
+  description:
+    'Container for a podcast series (e.g. a show with multiple episodes). ' +
+    'Default narrativeOwner: "hector". Default platformTier: "canonical". ' +
+    'Status should be "active" for current shows, "archived" for concluded ones. ' +
+    'Include RSS feed URL and YouTube channel URL for cross-platform discovery. ' +
+    'Episodes are separate podcastEpisode documents that reference this series.',
   fields: [
     // --- Status ---
     defineField({

@@ -39,6 +39,15 @@ export default defineType({
     defineField({ name: 'role', title: 'Role', type: 'string' }),
     defineField({ name: 'bio', title: 'Bio', type: 'text' }),
 
+    // --- Identity bridge ---
+    defineField({
+      name: 'supabaseUserId',
+      title: 'Supabase User ID',
+      type: 'string',
+      description: 'Links this person to their Supabase Auth account for gated site access',
+      readOnly: true,
+    }),
+
     // --- Media ---
     defineField({
       name: 'photo',

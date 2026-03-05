@@ -1,16 +1,20 @@
 import { defineType, defineField } from 'sanity'
+import { governanceFields } from './blocks/governanceBlock'
 
-/**
- * News — Futuro.ngo news articles
- *
- * Supports Portable Text body, featured images, author references,
- * and category-based filtering. Used on /news and /news/[slug].
- */
 export default defineType({
   name: 'news',
   title: 'News Article',
   type: 'document',
-  description: 'News articles, updates, and announcements for futuro.ngo',
+  description:
+    'News articles, updates, and announcements for futuro.ngo and ecosystem sites. ' +
+    'Default narrativeOwner: "benext". Default platformTier: "institutional". Default archivalStatus: "archival". ' +
+    'Institutional voice — third person, factual, measured. ' +
+    'Categories: update, alumni, impact, event. Used on /news and /news/[slug].',
+  initialValue: {
+    narrativeOwner: 'benext',
+    platformTier: 'institutional',
+    archivalStatus: 'archival',
+  },
   fields: [
     // --- Publish toggle pinned at top ---
     defineField({
@@ -160,6 +164,9 @@ export default defineType({
       type: 'seoBlock',
       description: 'Override SEO metadata for this article when needed',
     }),
+
+    // --- Governance ---
+    ...governanceFields,
   ],
 
   orderings: [

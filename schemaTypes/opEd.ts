@@ -6,6 +6,12 @@ export default defineType({
   name: 'opEd',
   title: 'Op-Ed',
   type: 'document',
+  description:
+    'Opinion-editorial pieces — shorter, more pointed than essays. ' +
+    'Default narrativeOwner: "hector". Default platformTier: "canonical". Default archivalStatus: "archival". ' +
+    'Supports bilingual (en/es). Body uses Portable Text. ' +
+    'Voice should be direct and argumentative — making a case, not just reflecting. ' +
+    'Include source publication if externally published.',
   fields: [
     // --- Core ---
     defineField({

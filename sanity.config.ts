@@ -50,6 +50,7 @@ const GOVERNED_TYPES = new Set([
   'alumniDream',
   'alumniConversation',
   'projectUpdate',
+  'news',
 ])
 
 // Types with language field
@@ -113,6 +114,11 @@ export default defineConfig({
         badges.push(EntityBadge)
         badges.push(PlatformTierBadge)
         badges.push(ArchivalBadge)
+      }
+
+      // Decision has standalone narrativeOwner (no full governance block)
+      if (context.schemaType === 'decision') {
+        badges.push(EntityBadge)
       }
 
       if (BILINGUAL_TYPES.has(context.schemaType)) {

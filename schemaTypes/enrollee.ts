@@ -4,6 +4,11 @@ export default defineType({
   name: 'enrollee',
   title: 'Enrollee',
   type: 'document',
+  description:
+    'Prospective participant in a Futuro/BeNeXT program. Used by the external enrollment system. ' +
+    'Not governed (no narrativeOwner) — this is operational data, not editorial content. ' +
+    'Status lifecycle: prospect → applicant → admitted → enrolled → withdrawn. ' +
+    'Track preferred language, target program year, and cohort assignment.',
   groups: [
     { name: 'identity', title: 'Identity', default: true },
     { name: 'enrollment', title: 'Enrollment' },
