@@ -1,7 +1,7 @@
 import type {StudioHeadProps} from 'sanity'
 import {Children, isValidElement, cloneElement} from 'react'
 
-const FAVICON_VERSION = process.env.SANITY_STUDIO_FAVICON_VERSION || '2025-10-09'
+const FAVICON_VERSION = process.env.SANITY_STUDIO_FAVICON_VERSION || '2026-03'
 
 const OUR_ICONS = [
   {rel: 'icon', type: 'image/png', sizes: '32x32', href: '/static/favicon-32x32.png'},
@@ -12,18 +12,11 @@ const OUR_ICONS = [
 ]
 
 function pruneNode(node: any): any {
-  if (!isValidElement(node)) {
-    return node
-  }
+  if (!isValidElement(node)) return node
 
   const rel = typeof node.props?.rel === 'string' ? node.props.rel.toLowerCase() : ''
-  if (rel.includes('icon')) {
-    return null
-  }
-
-  if (node.type === 'title') {
-    return null
-  }
+  if (rel.includes('icon')) return null
+  if (node.type === 'title') return null
 
   if (node.type === 'meta' && node.props?.property === 'og:site_name') {
     return cloneElement(node, {...node.props, content: 'BeNeXT Global HQ'})
@@ -33,17 +26,12 @@ function pruneNode(node: any): any {
     return cloneElement(node, {...node.props, content: 'BeNeXT Global HQ'})
   }
 
-  if (
-    node.type === 'meta' &&
-    node.props?.name === 'application-name'
-  ) {
+  if (node.type === 'meta' && node.props?.name === 'application-name') {
     return cloneElement(node, {...node.props, content: 'BeNeXT Global HQ'})
   }
 
   if (node.props?.children) {
-    const prunedChildren = Children.toArray(node.props.children)
-      .map(pruneNode)
-      .filter(Boolean)
+    const prunedChildren = Children.toArray(node.props.children).map(pruneNode).filter(Boolean)
     if (prunedChildren.length !== Children.count(node.props.children)) {
       return cloneElement(node, node.props, prunedChildren)
     }
@@ -64,7 +52,11 @@ export default function StudioHead(props: StudioHeadProps) {
       {OUR_ICONS.map((icon, index) => (
         <link key={index} {...icon} href={`${icon.href}${versionQuery}`} />
       ))}
-      <meta name="theme-color" content="#1B2A41" />
+      {/* Ecosystem-aligned theme color — Founder's Black */}
+      <meta name="theme-color" content="#0E0E0E" />
+      {/* Preconnect fonts */}
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
     </>
   )
 }
