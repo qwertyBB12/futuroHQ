@@ -51,6 +51,7 @@ export const SocialDistributeAction: DocumentActionComponent = (props) => {
             language: doc.language || 'en',
             coverImage: doc.coverImage,
             surfaceOn: doc.surfaceOn,
+            socialTargets: doc.socialTargets,
             ai_derivatives: doc.ai_derivatives,
           }),
         })
