@@ -1,6 +1,6 @@
 /* =============================================================================
    AUTORI MANDATUM — Civic Modern + Liquid Glass
-   Warm dark palette. Glass everywhere — not just the dashboard.
+   Warm dark palette. Glass where it matters. Writer's sanctuary in the editor.
    ============================================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
@@ -35,109 +35,152 @@ body {
 }
 
 /* ---------------------------------------------------------------------------
-   AMBIENT GRADIENT — The texture that makes ALL glass visible
-   Visible through every pane, not just the dashboard
+   AMBIENT GRADIENT — Visible through glass edges, not through pane centers
+   Subtle enough to not distract, warm enough to feel alive
    --------------------------------------------------------------------------- */
 
 body {
   background:
-    radial-gradient(ellipse 90% 70% at 10% 5%, rgba(200, 72, 65, 0.09) 0%, transparent 55%),
-    radial-gradient(ellipse 70% 60% at 90% 90%, rgba(177, 126, 104, 0.07) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 50% at 50% 40%, rgba(200, 72, 65, 0.04) 0%, transparent 50%),
-    radial-gradient(ellipse 80% 40% at 75% 15%, rgba(177, 126, 104, 0.05) 0%, transparent 50%),
-    radial-gradient(ellipse 40% 30% at 30% 70%, rgba(200, 72, 65, 0.03) 0%, transparent 40%),
+    radial-gradient(ellipse 90% 70% at 10% 5%, rgba(200, 72, 65, 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 60% at 90% 90%, rgba(177, 126, 104, 0.10) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 50% at 50% 40%, rgba(200, 72, 65, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 40% at 75% 15%, rgba(177, 126, 104, 0.07) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 30% at 30% 70%, rgba(200, 72, 65, 0.04) 0%, transparent 40%),
     #0E0E0E !important;
   background-attachment: fixed !important;
 }
 
 /* ---------------------------------------------------------------------------
-   UNIFIED GLASS SURFACE — All panes transparent so gradient shows through
-   This is the key: every structural container must be transparent or
-   translucent, otherwise the glass has nothing to refract.
+   STRUCTURAL SURFACES — Readable but with glass character
+   Glass = specular edges + inner light + subtle translucency at borders
+   NOT = making everything see-through until it's illegible
    --------------------------------------------------------------------------- */
 
+/* The tool screen and layout containers — transparent to let panes define surface */
 [data-ui="ToolScreen"],
 [data-testid="tool-panel-canvas"],
-[data-ui="PaneLayout"],
-[data-ui="Pane"],
-[data-ui="PaneContent"],
-[data-ui="PaneFooter"] {
+[data-ui="PaneLayout"] {
   background: transparent !important;
 }
 
-/* Sidebar nav pane — very subtle glass */
+/* ---------------------------------------------------------------------------
+   PANE SURFACES — Opaque enough to read, glass-edged
+   --------------------------------------------------------------------------- */
+
+/* Sidebar nav (left) — solid warm surface with glass top edge */
 [data-ui="Pane"]:first-child {
-  background: rgba(14, 14, 14, 0.2) !important;
-  backdrop-filter: blur(20px) saturate(1.2) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(1.2) !important;
+  background: rgba(18, 16, 14, 0.92) !important;
+  backdrop-filter: blur(20px) saturate(1.3) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(1.3) !important;
+  border-right: 1px solid rgba(242, 229, 213, 0.06) !important;
 }
 
-/* Document list pane (middle column) */
+/* Document list (middle) — slightly lighter to create depth hierarchy */
 [data-ui="Pane"]:nth-child(2) {
-  background: rgba(14, 14, 14, 0.15) !important;
-  backdrop-filter: blur(16px) saturate(1.15) !important;
-  -webkit-backdrop-filter: blur(16px) saturate(1.15) !important;
+  background: rgba(20, 18, 15, 0.90) !important;
+  backdrop-filter: blur(16px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(1.2) !important;
 }
 
-/* Editor pane (right — where you spend 90% of time) */
+/* ---------------------------------------------------------------------------
+   WRITER'S SANCTUARY — The editor pane (right)
+   Neuropsychology-informed design:
+   • Warm color temperature (~2700K feel) lowers cortisol, promotes flow state
+   • Slightly elevated/brighter surface creates "focus island" — peripheral fade
+   • Subtle warm vignette at edges narrows attention naturally
+   • High contrast text on warm dark reduces eye strain for long sessions
+   • The surface should feel like a premium leather desk under lamplight
+   --------------------------------------------------------------------------- */
+
 [data-ui="Pane"]:last-child {
-  background: rgba(14, 14, 14, 0.1) !important;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(177, 126, 104, 0.04) 0%, transparent 70%),
+    rgba(22, 19, 16, 0.95) !important;
   backdrop-filter: blur(12px) saturate(1.1) !important;
   -webkit-backdrop-filter: blur(12px) saturate(1.1) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(242, 229, 213, 0.04),
+    inset 0 0 80px rgba(177, 126, 104, 0.02) !important;
 }
 
-/* Pane dividers — subtle warm line */
+/* Editor pane content area — the actual writing surface */
+[data-ui="Pane"]:last-child [data-ui="PaneContent"] {
+  background: transparent !important;
+}
+
+/* Form inputs inside the editor — warmer, more inviting */
+[data-ui="Pane"]:last-child [data-ui="TextInput"],
+[data-ui="Pane"]:last-child [data-ui="TextArea"] {
+  background: rgba(26, 23, 20, 0.5) !important;
+  border-color: rgba(177, 126, 104, 0.12) !important;
+  border-top-color: rgba(242, 229, 213, 0.08) !important;
+}
+
+[data-ui="Pane"]:last-child [data-ui="TextInput"]:focus-within,
+[data-ui="Pane"]:last-child [data-ui="TextArea"]:focus-within {
+  background: rgba(26, 23, 20, 0.6) !important;
+  border-color: rgba(177, 126, 104, 0.25) !important;
+  box-shadow:
+    0 0 0 1px rgba(177, 126, 104, 0.15),
+    0 0 30px rgba(177, 126, 104, 0.06),
+    0 1px 0 rgba(242, 229, 213, 0.03) inset !important;
+}
+
+/* Pane dividers — warm subtle line */
 [data-ui="PaneLayout"] > div[style*="width"] {
-  opacity: 0.3;
+  opacity: 0.4;
 }
 
 /* ---------------------------------------------------------------------------
    LIQUID GLASS — Navbar
+   The navbar gets the strongest glass — it's the crown of the UI
    --------------------------------------------------------------------------- */
 
 [data-ui="Navbar"] {
   backdrop-filter: blur(40px) saturate(1.8) brightness(1.1) !important;
   -webkit-backdrop-filter: blur(40px) saturate(1.8) brightness(1.1) !important;
-  background: rgba(14, 14, 14, 0.5) !important;
-  border-bottom: 1px solid rgba(242, 229, 213, 0.06) !important;
+  background: rgba(14, 14, 14, 0.55) !important;
+  border-bottom: 1px solid rgba(242, 229, 213, 0.08) !important;
   box-shadow:
-    0 1px 0 rgba(242, 229, 213, 0.03) inset,
-    0 4px 30px rgba(0, 0, 0, 0.3) !important;
+    0 1px 0 rgba(242, 229, 213, 0.04) inset,
+    0 4px 30px rgba(0, 0, 0, 0.35) !important;
 }
 
 /* ---------------------------------------------------------------------------
    LIQUID GLASS — Pane headers
+   Slightly translucent with visible glass edge — the "glass shelf" holding tabs
    --------------------------------------------------------------------------- */
 
 [data-ui="PaneHeader"] {
   backdrop-filter: blur(32px) saturate(1.5) !important;
   -webkit-backdrop-filter: blur(32px) saturate(1.5) !important;
-  background: rgba(14, 14, 14, 0.35) !important;
-  border-bottom: 1px solid rgba(242, 229, 213, 0.04) !important;
-  box-shadow: 0 1px 0 rgba(242, 229, 213, 0.02) inset !important;
+  background: rgba(18, 16, 14, 0.75) !important;
+  border-bottom: 1px solid rgba(242, 229, 213, 0.06) !important;
+  box-shadow:
+    0 1px 0 rgba(242, 229, 213, 0.03) inset,
+    0 4px 16px rgba(0, 0, 0, 0.15) !important;
 }
 
 /* ---------------------------------------------------------------------------
-   SELECTED PANE ITEM — Whisper, not scream
-   Thin accent bar + barely-tinted translucent background
+   SELECTED PANE ITEM — Warm whisper, not a scream
+   Thin accent bar + barely-tinted background
    --------------------------------------------------------------------------- */
 
-/* Override Sanity's default heavy selected state */
 [data-ui="PaneItem"][data-selected],
 [data-ui="PaneItem"][data-selected] > *,
 [data-ui="PaneItem"][aria-selected="true"],
 [data-ui="PaneItem"][aria-selected="true"] > *,
 button[data-ui="PaneItem"][data-selected="true"],
 button[data-ui="PaneItem"][data-selected="true"] > * {
-  background: rgba(200, 72, 65, 0.06) !important;
-  background-color: rgba(200, 72, 65, 0.06) !important;
+  background: rgba(200, 72, 65, 0.08) !important;
+  background-color: rgba(200, 72, 65, 0.08) !important;
 }
 
 [data-ui="PaneItem"][data-selected],
 [data-ui="PaneItem"][aria-selected="true"],
 button[data-ui="PaneItem"][data-selected="true"] {
-  background: rgba(200, 72, 65, 0.06) !important;
-  box-shadow: inset 3px 0 0 rgba(200, 72, 65, 0.6) !important;
+  background: rgba(200, 72, 65, 0.08) !important;
+  box-shadow: inset 3px 0 0 rgba(200, 72, 65, 0.7) !important;
   border-radius: 12px !important;
 }
 
@@ -151,11 +194,11 @@ button[data-ui="PaneItem"] {
 
 [data-ui="PaneItem"]:hover,
 button[data-ui="PaneItem"]:hover {
-  background: rgba(242, 229, 213, 0.04) !important;
+  background: rgba(242, 229, 213, 0.05) !important;
 }
 
 /* ---------------------------------------------------------------------------
-   PUBLISHED / DRAFT STATUS BADGES — Glass pills, not solid blocks
+   STATUS BADGES — Glass pills
    --------------------------------------------------------------------------- */
 
 [data-ui="Badge"] {
@@ -165,48 +208,48 @@ button[data-ui="PaneItem"]:hover {
   transition: all 0.2s ease !important;
 }
 
-/* Make status badges translucent */
 [data-testid="pane-header-document-badge"],
 [data-ui="StatusButton"] [data-ui="Badge"],
 [data-ui="DocumentStatusBarActions"] [data-ui="Badge"] {
-  opacity: 0.85 !important;
+  opacity: 0.9 !important;
 }
 
 /* ---------------------------------------------------------------------------
    INPUT FIELDS — Glass containers with specular edges
+   Warm, inviting — not cold rectangles
    --------------------------------------------------------------------------- */
 
 [data-ui="TextInput"],
 [data-ui="TextArea"],
 [data-ui="Select"] {
-  background: rgba(26, 23, 20, 0.3) !important;
+  background: rgba(26, 23, 20, 0.45) !important;
   backdrop-filter: blur(8px) !important;
   -webkit-backdrop-filter: blur(8px) !important;
-  border: 1px solid rgba(242, 229, 213, 0.06) !important;
-  border-top-color: rgba(242, 229, 213, 0.1) !important;
-  border-left-color: rgba(242, 229, 213, 0.08) !important;
-  border-bottom-color: rgba(0, 0, 0, 0.1) !important;
-  border-right-color: rgba(0, 0, 0, 0.06) !important;
+  border: 1px solid rgba(242, 229, 213, 0.08) !important;
+  border-top-color: rgba(242, 229, 213, 0.12) !important;
+  border-left-color: rgba(242, 229, 213, 0.10) !important;
+  border-bottom-color: rgba(0, 0, 0, 0.12) !important;
+  border-right-color: rgba(0, 0, 0, 0.08) !important;
   border-radius: 14px !important;
-  box-shadow: 0 1px 0 rgba(242, 229, 213, 0.02) inset !important;
+  box-shadow: 0 1px 0 rgba(242, 229, 213, 0.03) inset !important;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 [data-ui="TextInput"]:focus-within,
 [data-ui="TextArea"]:focus-within,
 [data-ui="Select"]:focus-within {
-  background: rgba(26, 23, 20, 0.4) !important;
+  background: rgba(26, 23, 20, 0.55) !important;
   border-color: rgba(200, 72, 65, 0.25) !important;
   border-top-color: rgba(200, 72, 65, 0.3) !important;
   box-shadow:
-    0 1px 0 rgba(242, 229, 213, 0.03) inset,
+    0 1px 0 rgba(242, 229, 213, 0.04) inset,
     0 0 0 1px rgba(200, 72, 65, 0.2),
     0 0 24px rgba(200, 72, 65, 0.08),
     0 0 48px rgba(200, 72, 65, 0.03) !important;
 }
 
 /* ---------------------------------------------------------------------------
-   FORM FIELD CARDS — Glass treatment on field wrappers
+   FORM FIELD CARDS — Subtle transitions
    --------------------------------------------------------------------------- */
 
 [data-testid="field-wrapper"],
@@ -221,13 +264,13 @@ button[data-ui="PaneItem"]:hover {
 [data-ui="Dialog"] [data-ui="Card"] {
   backdrop-filter: blur(48px) saturate(1.8) brightness(1.05) !important;
   -webkit-backdrop-filter: blur(48px) saturate(1.8) brightness(1.05) !important;
-  background: rgba(26, 23, 20, 0.65) !important;
-  border: 1px solid rgba(242, 229, 213, 0.08) !important;
-  border-top-color: rgba(242, 229, 213, 0.14) !important;
-  border-left-color: rgba(242, 229, 213, 0.1) !important;
+  background: rgba(26, 23, 20, 0.75) !important;
+  border: 1px solid rgba(242, 229, 213, 0.10) !important;
+  border-top-color: rgba(242, 229, 213, 0.16) !important;
+  border-left-color: rgba(242, 229, 213, 0.12) !important;
   border-radius: 24px !important;
   box-shadow:
-    0 1px 0 rgba(242, 229, 213, 0.05) inset,
+    0 1px 0 rgba(242, 229, 213, 0.06) inset,
     0 32px 100px rgba(0, 0, 0, 0.6) !important;
 }
 
@@ -240,12 +283,12 @@ button[data-ui="PaneItem"]:hover {
 [data-ui="Menu"] {
   backdrop-filter: blur(40px) saturate(1.7) brightness(1.05) !important;
   -webkit-backdrop-filter: blur(40px) saturate(1.7) brightness(1.05) !important;
-  background: rgba(26, 23, 20, 0.7) !important;
-  border: 1px solid rgba(242, 229, 213, 0.07) !important;
-  border-top-color: rgba(242, 229, 213, 0.12) !important;
+  background: rgba(26, 23, 20, 0.80) !important;
+  border: 1px solid rgba(242, 229, 213, 0.09) !important;
+  border-top-color: rgba(242, 229, 213, 0.14) !important;
   border-radius: 20px !important;
   box-shadow:
-    0 1px 0 rgba(242, 229, 213, 0.04) inset,
+    0 1px 0 rgba(242, 229, 213, 0.05) inset,
     0 20px 60px rgba(0, 0, 0, 0.5) !important;
 }
 
@@ -256,13 +299,13 @@ button[data-ui="PaneItem"]:hover {
 [data-ui="Tooltip"] [data-ui="Card"] {
   backdrop-filter: blur(24px) saturate(1.5) !important;
   -webkit-backdrop-filter: blur(24px) saturate(1.5) !important;
-  background: rgba(26, 23, 20, 0.85) !important;
-  border: 1px solid rgba(242, 229, 213, 0.06) !important;
+  background: rgba(26, 23, 20, 0.90) !important;
+  border: 1px solid rgba(242, 229, 213, 0.08) !important;
   border-radius: 14px !important;
 }
 
 /* ---------------------------------------------------------------------------
-   BUTTONS — Unified glass style + glow
+   BUTTONS — Glass style + glow on hover
    --------------------------------------------------------------------------- */
 
 [data-ui="Button"] {
@@ -298,13 +341,13 @@ button[data-ui="PaneItem"]:hover {
     0 0 48px rgba(129, 53, 49, 0.12);
 }
 
-/* Generate button and other inline buttons — glass style */
+/* Default buttons — glass style */
 [data-ui="Button"][data-tone="default"] {
-  background: rgba(26, 23, 20, 0.4) !important;
+  background: rgba(26, 23, 20, 0.5) !important;
   backdrop-filter: blur(8px) !important;
   -webkit-backdrop-filter: blur(8px) !important;
-  border: 1px solid rgba(242, 229, 213, 0.06) !important;
-  border-top-color: rgba(242, 229, 213, 0.1) !important;
+  border: 1px solid rgba(242, 229, 213, 0.08) !important;
+  border-top-color: rgba(242, 229, 213, 0.12) !important;
 }
 
 /* ---------------------------------------------------------------------------
@@ -324,7 +367,7 @@ button[data-ui="PaneItem"]:hover {
 }
 
 /* ---------------------------------------------------------------------------
-   FOCUS RING — Vermillion glow halo (soft, not harsh)
+   FOCUS RING — Warm glow halo
    --------------------------------------------------------------------------- */
 
 *:focus-visible {
@@ -344,7 +387,7 @@ button[data-ui="PaneItem"]:hover {
 }
 
 [data-ui="MenuItem"]:hover {
-  background: rgba(242, 229, 213, 0.05) !important;
+  background: rgba(242, 229, 213, 0.06) !important;
 }
 
 /* ---------------------------------------------------------------------------
@@ -353,9 +396,9 @@ button[data-ui="PaneItem"]:hover {
 
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(139, 137, 133, 0.2); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: rgba(139, 137, 133, 0.25); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(200, 72, 65, 0.35); }
-* { scrollbar-width: thin; scrollbar-color: rgba(139, 137, 133, 0.2) transparent; }
+* { scrollbar-width: thin; scrollbar-color: rgba(139, 137, 133, 0.25) transparent; }
 
 /* ---------------------------------------------------------------------------
    SELECTION — Copper
