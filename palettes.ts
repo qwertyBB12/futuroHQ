@@ -11,7 +11,7 @@
 export const civicModernThemeProps = {
   /* Base scale */
   '--black': '#0E0E0E',
-  '--white': '#F2E5D5',
+  '--white': '#FFFFFF',
   '--gray': '#8B8985',
   '--gray-base': '#8B8985',
 
