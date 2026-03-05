@@ -1,173 +1,236 @@
-/* styles.css */
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap');
+/* =============================================================================
+   BENEXT GLOBAL HQ — Civic Modern Studio Theme
+   Aligned with @hector-ecosystem/design-system
+   Fonts: Oswald (headings) + Mulish (body) + JetBrains Mono (code)
+   ============================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ---------------------------------------------------------------------------
+   Design System Tokens — Civic Modern Palette
+   --------------------------------------------------------------------------- */
+
 :root {
-  --founders-black:  #0B1220;
-  --archival-slate:  #8A8D91;
-  --sandstone:       #F2E5D5;
-  --scholar-gold:    #D4AF37;
-  --hoyas-midnight:  #1B2A41; /* keep as a fallback token */
-  --global-garnet:   #8C1E4A;
+  /* Dark Anchor */
+  --founders-black: #0E0E0E;
+  --midnight: #162931;
+
+  /* Warm Surfaces (no blue tint) */
+  --surface-raised: #1A1714;
+  --surface-overlay: #221F1A;
+  --surface-input: #1A1714;
+  --border-warm: #2A2520;
+  --border-subtle: #201D18;
+
+  /* Copper Family (distinction, credentials) */
+  --copper-light: #C4A497;
+  --copper: #B17E68;
+  --copper-dark: #97644E;
+
+  /* Vermillion Family (action, interactivity) */
+  --vermillion: #C84841;
+  --vermillion-dark: #A13B36;
+  --vermillion-deep: #813531;
+
+  /* Text */
+  --sandstone: #F2E5D5;
+  --sandstone-light: #FAF6F0;
+  --sandstone-dark: #E8D5C0;
+  --archival-slate: #8B8985;
+  --archival-slate-light: #B8B5B1;
+
+  /* Sanity theme tokens */
   --main-navigation-color: var(--founders-black);
   --main-navigation-color--inverted: var(--sandstone);
   --component-bg: var(--founders-black);
-  --component-text-color: #F2E5D5;
-  --card-bg-color: #111A2C;
+  --component-text-color: var(--sandstone);
+  --card-bg-color: var(--surface-raised);
   --card-fg-color: var(--sandstone);
   --card-muted-fg-color: var(--archival-slate);
-  --card-shadow-outline-color: rgba(0, 0, 0, 0.35);
-  --brand-primary: #FF6F61;
-  --focus-color: #FF6F61;
+  --card-shadow-outline-color: rgba(14, 14, 14, 0.35);
+  --brand-primary: var(--vermillion);
+  --focus-color: var(--vermillion);
   --link-color: var(--sandstone);
   --default-button-color: var(--archival-slate);
-  --default-button-primary-color: #FF6F61;
-  --default-button-danger-color: var(--global-garnet);
-  --default-button-success-color: #FF6F61;
-  --input-bg: #18243A;
-  --input-border-color: #1F2D46;
+  --default-button-primary-color: var(--vermillion);
+  --default-button-danger-color: var(--vermillion-deep);
+  --default-button-success-color: var(--copper);
+  --input-bg: var(--surface-input);
+  --input-border-color: var(--border-warm);
   --input-text-color: var(--sandstone);
   --input-placeholder-color: var(--archival-slate);
   --input-shadow: none;
-  --state-success-color: #FF6F61;
+  --state-success-color: var(--copper);
   --state-info-color: var(--sandstone);
-  --state-warning-color: var(--sandstone);
-  --state-danger-color: var(--global-garnet);
+  --state-warning-color: var(--sandstone-dark);
+  --state-danger-color: var(--vermillion-deep);
   --badge-default-bg: var(--archival-slate);
-  --badge-default-fg: var(--hoyas-midnight);
-  --badge-primary-bg: #FF6F61;
-  --badge-primary-fg: var(--hoyas-midnight);
-  --badge-success-bg: #FF6F61;
-  --badge-success-fg: var(--hoyas-midnight);
-  --badge-warning-bg: var(--sandstone);
-  --badge-warning-fg: var(--hoyas-midnight);
-  --badge-danger-bg: var(--global-garnet);
+  --badge-default-fg: var(--founders-black);
+  --badge-primary-bg: var(--vermillion);
+  --badge-primary-fg: var(--sandstone);
+  --badge-success-bg: var(--copper);
+  --badge-success-fg: var(--founders-black);
+  --badge-warning-bg: var(--sandstone-dark);
+  --badge-warning-fg: var(--founders-black);
+  --badge-danger-bg: var(--vermillion-deep);
   --badge-danger-fg: var(--sandstone);
-  --hairline-color: #1C2A42;
-  --border-color: #1F2D46;
+  --hairline-color: var(--border-warm);
+  --border-color: var(--border-warm);
 }
 
-:root[data-palette='midnightSlate'] {
-  --component-bg: #0B1220;
-  --component-text-color: #F2E5D5;
-  --card-bg-color: #111A2C;
-  --card-fg-color: #F2E5D5;
-  --card-muted-fg-color: #8A8D91;
-  --card-shadow-outline-color: rgba(0, 0, 0, 0.35);
-  --main-navigation-color: #0B1220;
-  --main-navigation-color--inverted: #F2E5D5;
-  --brand-primary: #FF6F61;
-  --focus-color: #FF6F61;
-  --link-color: #F2E5D5;
-  --default-button-color: #8A8D91;
-  --default-button-primary-color: #FF6F61;
-  --default-button-danger-color: #8C1E4A;
-  --default-button-success-color: #FF6F61;
-  --input-bg: #18243A;
-  --input-border-color: #1F2D46;
-  --input-text-color: #F2E5D5;
-  --input-placeholder-color: #8A8D91;
-  --input-shadow: none;
-  --state-success-color: #FF6F61;
-  --state-info-color: #F2E5D5;
-  --state-warning-color: #F2E5D5;
-  --state-danger-color: #8C1E4A;
-  --badge-default-bg: #8A8D91;
-  --badge-default-fg: #1B2A41;
-  --badge-primary-bg: #FF6F61;
-  --badge-primary-fg: #1B2A41;
-  --badge-success-bg: #FF6F61;
-  --badge-success-fg: #1B2A41;
-  --badge-warning-bg: #F2E5D5;
-  --badge-warning-fg: #1B2A41;
-  --badge-danger-bg: #8C1E4A;
-  --badge-danger-fg: #F2E5D5;
-  --hairline-color: #1C2A42;
-  --border-color: #1F2D46;
-}
+/* ---------------------------------------------------------------------------
+   Base Typography — Mulish body, Oswald headings
+   --------------------------------------------------------------------------- */
 
-/* Optional: local brand font setup (drop files under /public/fonts) */
-/*
-@font-face {
-  font-family: "FuturoSans";
-  src: url("/fonts/FuturoSans-Regular.woff2") format("woff2");
-  font-weight: 400; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: "FuturoSans";
-  src: url("/fonts/FuturoSans-Semibold.woff2") format("woff2");
-  font-weight: 600; font-style: normal; font-display: swap;
-}
-*/
-
-/* Collapse any workspace switcher button that contains an SVG initials badge */
-[data-ui="Navbar"] button:has(svg text) {
-  display: none !important;
-  width: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  visibility: hidden !important;
-}
-/* === Futuro / BeNeXT Brand Helpers === */
 @layer base {
   body {
-    background-color: var(--component-bg, var(--founders-black)) !important;
-    color: var(--component-text-color, #F2E5D5) !important;
-    font-family: 'Oswald', sans-serif !important;
+    background-color: var(--component-bg) !important;
+    color: var(--component-text-color) !important;
+    font-family: 'Mulish', sans-serif !important;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
+/* ---------------------------------------------------------------------------
+   Component Overrides — Brand Typography & Warm Dark Theme
+   --------------------------------------------------------------------------- */
+
 @layer components {
+  /* Brand heading class */
   .h1-brand {
     font-family: 'Oswald', sans-serif;
-    font-weight: 700;
+    font-weight: 500;
     letter-spacing: 0.025em;
     font-size: 1.875rem;
     line-height: 2.25rem;
     text-transform: uppercase;
   }
 
+  /* Brand button class */
   .btn-brand {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 1rem;
-    background-color: var(--main-navigation-color, var(--founders-black));
+    border-radius: 4px;
+    background-color: var(--vermillion);
     padding: 0.5rem 1rem;
+    font-family: 'Mulish', sans-serif;
     font-weight: 600;
-    color: var(--main-navigation-color--inverted, var(--sandstone));
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    color: var(--sandstone);
+    box-shadow: 0 1px 2px 0 rgba(14, 14, 14, 0.12);
   }
 
-  /* Unify the navbar background (use the Sanity theme token instead of a separate var) */
+  /* Navbar background — warm dark */
   [data-ui="Navbar"],
   [data-ui="Navbar"] > *,
   [data-ui="Navbar"] [data-ui="Card"],
   [data-ui="Navbar"] [data-ui="Box"] {
-    background-color: var(--main-navigation-color, var(--founders-black)) !important;
+    background-color: var(--founders-black) !important;
     background-image: none !important;
   }
 
-  /* Some builds add before/after layers; force them too */
   [data-ui="Navbar"]::before,
   [data-ui="Navbar"]::after {
-    background: var(--main-navigation-color, var(--founders-black)) !important;
+    background: var(--founders-black) !important;
   }
-  /* Workspace name typography — Oswald Bold, uppercase */
+
+  /* Workspace name — Oswald Bold, uppercase */
   [data-ui="Navbar"] [data-testid="workspace-name"],
   [data-ui="Navbar"] [data-testid="workspace-name"] *,
-  /* fallbacks when testid isn't present */
   [data-ui="Navbar"] button[aria-haspopup="menu"] span,
   [data-ui="Navbar"] button[aria-label*="workspace"] span {
     font-family: 'Oswald', sans-serif !important;
     font-weight: 700 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.5px !important;
-    color: #ffffff !important;
+    color: var(--sandstone) !important;
   }
 
+  /* Pane backgrounds — warm dark */
+  [data-ui="Pane"],
+  [data-ui="PaneHeader"],
+  [data-ui="PaneFooter"],
+  [data-ui="PaneContent"],
+  [data-ui="PaneLayout"] {
+    background-color: var(--founders-black) !important;
+    color: var(--sandstone) !important;
+  }
+
+  /* Cards — warm raised surface */
+  [data-ui="Card"],
+  [data-ui="ListItem"],
+  [data-ui="TreeItem"] {
+    background-color: var(--surface-raised) !important;
+    color: var(--sandstone) !important;
+  }
+
+  /* PaneItems — warm dark */
+  button[data-ui="PaneItem"] {
+    background-color: var(--surface-raised) !important;
+    color: var(--sandstone) !important;
+    border-color: var(--border-subtle) !important;
+  }
+
+  button[data-ui="PaneItem"]:hover {
+    background-color: var(--surface-overlay) !important;
+  }
+
+  /* ListItem text inheritance */
+  [data-ui="ListItem"] *,
+  [data-ui="TreeItem"] * {
+    color: inherit;
+  }
+
+  /* Inputs — warm dark */
+  [data-ui="TextInput"],
+  [data-ui="TextArea"],
+  [data-ui="Select"] {
+    background-color: var(--surface-input) !important;
+    color: var(--sandstone) !important;
+    border-color: var(--border-warm) !important;
+  }
+
+  /* Buttons */
+  [data-ui="Button"] {
+    font-family: 'Mulish', sans-serif !important;
+  }
+
+  [data-ui="Button"][data-tone="primary"] {
+    background-color: var(--vermillion) !important;
+    color: var(--sandstone) !important;
+  }
+
+  [data-ui="Button"][data-tone="positive"],
+  [data-ui="Button"][data-tone="success"] {
+    background-color: var(--copper) !important;
+    color: var(--founders-black) !important;
+  }
+
+  [data-ui="Button"][data-tone="critical"],
+  [data-ui="Button"][data-tone="danger"] {
+    background-color: var(--vermillion-deep) !important;
+    color: var(--sandstone) !important;
+  }
+
+  /* Badges */
+  [data-ui="Badge"] {
+    font-family: 'Mulish', sans-serif !important;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+  }
 }
+
+/* ---------------------------------------------------------------------------
+   Responsive
+   --------------------------------------------------------------------------- */
 
 @media (min-width: 768px) {
   .h1-brand {
@@ -176,88 +239,60 @@
   }
 }
 
+/* ---------------------------------------------------------------------------
+   Utilities
+   --------------------------------------------------------------------------- */
+
 @layer utilities {
   .bg-surface {
-    background-color: var(--component-bg, var(--founders-black)) !important;
+    background-color: var(--component-bg) !important;
   }
 
   .bg-brand {
-    background-color: var(--main-navigation-color, var(--founders-black)) !important;
+    background-color: var(--founders-black) !important;
   }
 
   .text-onBrand {
-    color: var(--main-navigation-color--inverted, var(--sandstone)) !important;
+    color: var(--sandstone) !important;
   }
 
   .font-display {
     font-family: 'Oswald', sans-serif !important;
   }
+
+  .font-body {
+    font-family: 'Mulish', sans-serif !important;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace !important;
+  }
+
+  .text-copper {
+    color: var(--copper) !important;
+  }
+
+  .text-vermillion {
+    color: var(--vermillion) !important;
+  }
 }
 
-:root[data-palette] {
+/* ---------------------------------------------------------------------------
+   Hide workspace switcher badge (SVG initials)
+   --------------------------------------------------------------------------- */
+
+[data-ui="Navbar"] button:has(svg text) {
+  display: none !important;
+  width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  visibility: hidden !important;
+}
+
+/* ---------------------------------------------------------------------------
+   Force color scheme
+   --------------------------------------------------------------------------- */
+
+:root {
   color-scheme: only light;
-}
-
-:root[data-palette] body,
-:root[data-palette] [data-sanity-ui-theme="legacy"] {
-  background-color: var(--component-bg) !important;
-  color: var(--component-text-color) !important;
-}
-
-:root[data-palette] [data-ui="Pane"],
-:root[data-palette] [data-ui="Pane"] [data-ui="Card"],
-:root[data-palette] [data-ui="Pane"] [data-ui="Box"],
-:root[data-palette] [data-ui="Card"] {
-  background-color: var(--card-bg-color) !important;
-  color: var(--card-fg-color) !important;
-}
-
-:root[data-palette] [data-ui="Card"] [data-ui],
-:root[data-palette] [data-ui="Card"] * {
-  color: inherit;
-}
-
-:root[data-palette] [data-ui="Button"],
-:root[data-palette] [data-ui="MenuButton"],
-:root[data-palette] [data-ui="Tab"],
-:root[data-palette] [data-ui="TextInput"],
-:root[data-palette] [data-ui="Select"] {
-  background-color: var(--input-bg) !important;
-  color: var(--input-text-color) !important;
-  border-color: var(--input-border-color) !important;
-}
-
-:root[data-palette] [data-ui="Badge"] {
-  background-color: var(--badge-default-bg) !important;
-  color: var(--badge-default-fg) !important;
-}
-
-:root[data-palette] [data-ui="Badge"][data-status="success"] {
-  background-color: var(--badge-success-bg) !important;
-  color: var(--badge-success-fg) !important;
-}
-
-:root[data-palette] [data-ui="Badge"][data-status="warning"] {
-  background-color: var(--badge-warning-bg) !important;
-  color: var(--badge-warning-fg) !important;
-}
-
-:root[data-palette] [data-ui="Badge"][data-status="danger"] {
-  background-color: var(--badge-danger-bg) !important;
-  color: var(--badge-danger-fg) !important;
-}
-
-:root[data-palette] [data-ui="Pane"] [data-ui="Button"] {
-  background-color: var(--default-button-color) !important;
-  color: var(--component-text-color) !important;
-}
-
-:root[data-palette] [data-ui="Button"][data-tone="primary"] {
-  background-color: var(--default-button-primary-color) !important;
-  color: var(--main-navigation-color--inverted) !important;
-}
-
-:root[data-palette] [data-ui="Button"][data-tone="danger"] {
-  background-color: var(--default-button-danger-color) !important;
-  color: var(--badge-danger-fg) !important;
 }
