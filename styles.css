@@ -373,15 +373,18 @@ button[data-ui="PaneItem"]:hover {
   color: #F2E5D5 !important;
 }
 
-/* Override neon pink presence ring on user avatar with Vermillion */
-[data-ui="Avatar"] [data-as="span"][style*="border-color"],
-[data-ui="Avatar"] > span[style*="border"],
-[data-ui="Navbar"] [data-ui="Avatar"] {
+/* Override Sanity's neon pink/magenta presence color globally.
+   Sanity sets --user-color as an inline style on elements, so we
+   override at :root and force border-color on avatar wrappers. */
+:root,
+* {
   --user-color: #C84841 !important;
-  --user-color-light: #C84841 !important;
+  --user-color-light: rgba(200, 72, 65, 0.4) !important;
 }
 
-[data-ui="Avatar"] span[style] {
+[data-ui="StatusButton"] span,
+[data-ui="Avatar"] span,
+[data-ui="Avatar"] div {
   border-color: #C84841 !important;
 }
 
