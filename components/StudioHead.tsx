@@ -1,4 +1,3 @@
-import type {StudioHeadProps} from 'sanity'
 import {Children, isValidElement, cloneElement} from 'react'
 
 const FAVICON_VERSION = process.env.SANITY_STUDIO_FAVICON_VERSION || '2026-03'
@@ -14,33 +13,34 @@ const OUR_ICONS = [
 function pruneNode(node: any): any {
   if (!isValidElement(node)) return node
 
-  const rel = typeof node.props?.rel === 'string' ? node.props.rel.toLowerCase() : ''
+  const props = node.props as Record<string, any>
+  const rel = typeof props?.rel === 'string' ? props.rel.toLowerCase() : ''
   if (rel.includes('icon')) return null
   if (node.type === 'title') return null
 
-  if (node.type === 'meta' && node.props?.property === 'og:site_name') {
-    return cloneElement(node, {...node.props, content: 'BeNeXT Global HQ'})
+  if (node.type === 'meta' && props?.property === 'og:site_name') {
+    return cloneElement(node as any, {...props, content: 'BeNeXT Global HQ'})
   }
 
-  if (node.type === 'meta' && node.props?.name === 'apple-mobile-web-app-title') {
-    return cloneElement(node, {...node.props, content: 'BeNeXT Global HQ'})
+  if (node.type === 'meta' && props?.name === 'apple-mobile-web-app-title') {
+    return cloneElement(node as any, {...props, content: 'BeNeXT Global HQ'})
   }
 
-  if (node.type === 'meta' && node.props?.name === 'application-name') {
-    return cloneElement(node, {...node.props, content: 'BeNeXT Global HQ'})
+  if (node.type === 'meta' && props?.name === 'application-name') {
+    return cloneElement(node as any, {...props, content: 'BeNeXT Global HQ'})
   }
 
-  if (node.props?.children) {
-    const prunedChildren = Children.toArray(node.props.children).map(pruneNode).filter(Boolean)
-    if (prunedChildren.length !== Children.count(node.props.children)) {
-      return cloneElement(node, node.props, prunedChildren)
+  if (props?.children) {
+    const prunedChildren = Children.toArray(props.children).map(pruneNode).filter(Boolean)
+    if (prunedChildren.length !== Children.count(props.children)) {
+      return cloneElement(node, props, prunedChildren)
     }
   }
 
   return node
 }
 
-export default function StudioHead(props: StudioHeadProps) {
+export default function StudioHead(props: any) {
   const versionQuery = `?v=${FAVICON_VERSION}`
   const defaultNodes = props.renderDefault(props)
   const filteredDefault = Children.toArray(defaultNodes).map(pruneNode).filter(Boolean)
@@ -52,7 +52,7 @@ export default function StudioHead(props: StudioHeadProps) {
       {OUR_ICONS.map((icon, index) => (
         <link key={index} {...icon} href={`${icon.href}${versionQuery}`} />
       ))}
-      {/* Ecosystem-aligned theme color — Founder's Black */}
+      {/* Ecosystem-aligned theme color */}
       <meta name="theme-color" content="#0E0E0E" />
       {/* Preconnect fonts */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />

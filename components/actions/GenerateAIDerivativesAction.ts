@@ -1,14 +1,15 @@
 import {useState} from 'react'
 import type {DocumentActionComponent} from 'sanity'
+import {useDocumentOperation} from 'sanity'
 import {SparklesIcon} from '@sanity/icons'
 
 /**
  * Auto-generate AI derivatives (summary, quotes, captions) for content documents.
- * Uses the AI SEO generator endpoint or can be extended for any AI provider.
+ * Uses the AI endpoint configured via SANITY_STUDIO_AI_ENDPOINT.
  */
 export const GenerateAIDerivativesAction: DocumentActionComponent = (props) => {
   const [generating, setGenerating] = useState(false)
-  const {patch, publish} = props
+  const {patch} = useDocumentOperation(props.id, props.type)
 
   const doc = props.draft || props.published
   if (!doc) return null
@@ -23,7 +24,7 @@ export const GenerateAIDerivativesAction: DocumentActionComponent = (props) => {
       : undefined
 
   return {
-    label: generating ? 'Generating…' : 'Generate AI Derivatives',
+    label: generating ? 'Generating...' : 'Generate AI Derivatives',
     icon: SparklesIcon,
     disabled: generating || !endpoint,
     title: endpoint

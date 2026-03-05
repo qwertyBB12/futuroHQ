@@ -17,6 +17,34 @@ type LivePreviewProps = {
 type PreviewDocument = Record<string, any> | null
 
 const previewProjections: Record<string, string> = {
+  essay: `
+    ...,
+    "surfaceOnList": surfaceOn
+  `,
+  video: `
+    ...,
+    "linkedEssayTitle": linkedEssay->title,
+    "tagsList": tags[]->{_id, label}
+  `,
+  person: `
+    ...
+  `,
+  alumni: `
+    ...,
+    "currentProjectsList": currentProjects[]->{_id, title},
+    "conveningTitle": convening->title
+  `,
+  collaborator: `
+    ...,
+    "relatedProjectsList": relatedProjects[]->{_id, title}
+  `,
+  curatedPost: `
+    ...
+  `,
+  socialPost: `
+    ...,
+    "authorName": author->{_id, "displayName": coalesce(fullName, name, title)}
+  `,
   project: `
     ...,
     "participants": participants[]->{_id, _type, "displayName": coalesce(fullName, name, title)},
@@ -190,9 +218,9 @@ const LivePreview: ComponentType<LivePreviewProps> = ({ document, schemaType }) 
     sync()
 
     const subscription = client
-      .listen(query, params, { perspective: 'previewDrafts', includeResult: true })
-      .subscribe((event: { result?: PreviewDocument }) => {
-        if (!cancelled) {
+      .listen(query, params, { includeResult: true })
+      .subscribe((event: any) => {
+        if (!cancelled && event.result) {
           setData(event.result ?? null)
           setIsLoading(false)
         }
@@ -220,7 +248,172 @@ const LivePreview: ComponentType<LivePreviewProps> = ({ document, schemaType }) 
       </Stack>
     )
 
+    const governanceBadges = (
+      <Inline space={2}>
+        {data.narrativeOwner && <Badge mode="outline" tone="primary">{data.narrativeOwner as string}</Badge>}
+        {data.platformTier && <Badge mode="outline">{data.platformTier as string}</Badge>}
+        {data.language && <Badge mode="outline" tone="caution">{(Array.isArray(data.language) ? data.language.join('/') : data.language) as string}</Badge>}
+      </Inline>
+    )
+
     switch (schemaName) {
+      case 'essay':
+        return (
+          <Stack space={4}>
+            {defaultHeader}
+            {governanceBadges}
+            <Grid columns={[1, 2]} gap={4}>
+              <PreviewField label="Publication Venue">{data.publicationVenue}</PreviewField>
+              <PreviewField label="Publish Date">{formatDate(data.publishDate)}</PreviewField>
+              <PreviewField label="Language">{data.language}</PreviewField>
+              <PreviewField label="Slug">{data.slug?.current || '—'}</PreviewField>
+            </Grid>
+            {data.excerpt && <PreviewField label="Excerpt"><Text size={2}>{data.excerpt as string}</Text></PreviewField>}
+            {data.externalUrl && <PreviewField label="External URL"><Text size={1} muted>{data.externalUrl as string}</Text></PreviewField>}
+            {Array.isArray(data.surfaceOnList) && data.surfaceOnList.length > 0 && (
+              <PreviewField label="Surfaced On">
+                <Inline space={2}>
+                  {(data.surfaceOnList as string[]).map((site) => (
+                    <Badge key={site} mode="outline" tone="primary">{site}</Badge>
+                  ))}
+                </Inline>
+              </PreviewField>
+            )}
+            {typeof data.fiveYearTest === 'boolean' && (
+              <PreviewField label="Five Year Test">
+                <Badge tone={data.fiveYearTest ? 'positive' : 'caution'}>{data.fiveYearTest ? 'Passes' : 'Not yet'}</Badge>
+              </PreviewField>
+            )}
+            <PreviewField label="Body">{renderPortableText(data.body)}</PreviewField>
+          </Stack>
+        )
+
+      case 'video':
+        return (
+          <Stack space={4}>
+            {defaultHeader}
+            {governanceBadges}
+            <Grid columns={[1, 2, 3]} gap={4}>
+              <PreviewField label="Format">
+                <Badge tone={data.videoFormat === 'longform' ? 'primary' : 'caution'}>
+                  {(data.videoFormat as string || '—').toUpperCase()}
+                </Badge>
+              </PreviewField>
+              <PreviewField label="Platform">{data.platform}</PreviewField>
+              <PreviewField label="Category">{data.contentCategory}</PreviewField>
+              <PreviewField label="Publish Date">{formatDate(data.publishDate)}</PreviewField>
+              <PreviewField label="Duration">{data.duration ? `${Math.floor(data.duration as number / 60)}m ${(data.duration as number) % 60}s` : '—'}</PreviewField>
+              <PreviewField label="Slug">{data.slug?.current || '—'}</PreviewField>
+            </Grid>
+            {data.videoUrl && <PreviewField label="Video URL"><Text size={1} muted>{data.videoUrl as string}</Text></PreviewField>}
+            {data.linkedEssayTitle && <PreviewField label="Linked Essay">{data.linkedEssayTitle}</PreviewField>}
+            {data.keynoteVenue && <PreviewField label="Keynote Venue">{data.keynoteVenue}</PreviewField>}
+            <PreviewList label="Tags" items={data.tagsList} getLabel={(item) => item?.label || null} />
+          </Stack>
+        )
+
+      case 'person':
+        return (
+          <Stack space={4}>
+            <Heading size={3}>{data.name || 'Untitled'}</Heading>
+            {data.role && <Text muted size={2}>{data.role as string}</Text>}
+            <Grid columns={[1, 2]} gap={4}>
+              <PreviewField label="Slug">{data.slug?.current || '—'}</PreviewField>
+              <PreviewField label="Published">
+                <Badge tone={data.publish !== false ? 'positive' : 'caution'}>{data.publish !== false ? 'Yes' : 'No'}</Badge>
+              </PreviewField>
+            </Grid>
+            {data.bio && <PreviewField label="Bio"><Text size={2}>{data.bio as string}</Text></PreviewField>}
+          </Stack>
+        )
+
+      case 'alumni':
+        return (
+          <Stack space={4}>
+            <Heading size={3}>{data.name || 'Untitled'}</Heading>
+            {governanceBadges}
+            <Grid columns={[1, 2, 3]} gap={4}>
+              <PreviewField label="Country">{data.country}</PreviewField>
+              <PreviewField label="Generation">{data.generation}</PreviewField>
+              <PreviewField label="Cohort Year">{data.cohortYear}</PreviewField>
+              <PreviewField label="Designation">{data.institutionalDesignation}</PreviewField>
+              <PreviewField label="Engagement">{data.engagementLevel}</PreviewField>
+              <PreviewField label="Convening">{data.conveningTitle}</PreviewField>
+            </Grid>
+            {data.bio && <PreviewField label="Bio"><Text size={2}>{data.bio as string}</Text></PreviewField>}
+            <PreviewList label="Current Projects" items={data.currentProjectsList} getLabel={(item) => item?.title || null} />
+            {data.skills && Array.isArray(data.skills) && (data.skills as string[]).length > 0 && (
+              <PreviewField label="Skills">
+                <Inline space={2}>
+                  {(data.skills as string[]).map((s) => <Badge key={s} mode="outline">{s}</Badge>)}
+                </Inline>
+              </PreviewField>
+            )}
+          </Stack>
+        )
+
+      case 'collaborator':
+        return (
+          <Stack space={4}>
+            <Heading size={3}>{data.name || 'Untitled'}</Heading>
+            {governanceBadges}
+            <Grid columns={[1, 2]} gap={4}>
+              <PreviewField label="Type">
+                <Badge mode="outline">{(data.orgType as string || 'other').toUpperCase()}</Badge>
+              </PreviewField>
+              <PreviewField label="Futuro Host">
+                <Badge tone={data.isFuturoHost ? 'positive' : 'default'}>{data.isFuturoHost ? 'Yes' : 'No'}</Badge>
+              </PreviewField>
+            </Grid>
+            {data.bio && <PreviewField label="Bio"><Text size={2}>{data.bio as string}</Text></PreviewField>}
+            {data.website && <PreviewField label="Website"><Text size={1} muted>{data.website as string}</Text></PreviewField>}
+            <PreviewList label="Related Projects" items={data.relatedProjectsList} getLabel={(item) => item?.title || null} />
+          </Stack>
+        )
+
+      case 'curatedPost':
+        return (
+          <Stack space={4}>
+            {defaultHeader}
+            {governanceBadges}
+            <Grid columns={[1, 2]} gap={4}>
+              <PreviewField label="Source Type">
+                <Badge mode="outline">{(data.sourceType as string || '—').toUpperCase()}</Badge>
+              </PreviewField>
+              <PreviewField label="Published">{formatDate(data.datePublished)}</PreviewField>
+              <PreviewField label="Source Author">{data.sourceAuthor}</PreviewField>
+              <PreviewField label="Slug">{data.slug?.current || '—'}</PreviewField>
+            </Grid>
+            {data.originalSourceUrl && <PreviewField label="Original Source"><Text size={1} muted>{data.originalSourceUrl as string}</Text></PreviewField>}
+            {data.body && <PreviewField label="Commentary"><Text size={2}>{data.body as string}</Text></PreviewField>}
+          </Stack>
+        )
+
+      case 'socialPost':
+        return (
+          <Stack space={4}>
+            <Heading size={3}>{data.title || 'Untitled Post'}</Heading>
+            {governanceBadges}
+            <Grid columns={[1, 2, 3]} gap={4}>
+              <PreviewField label="Platform">
+                <Badge tone="primary">{data.platform || '—'}</Badge>
+              </PreviewField>
+              <PreviewField label="Author">{data.authorName?.displayName}</PreviewField>
+              <PreviewField label="Published">{formatDate(data.datePublished)}</PreviewField>
+              {data.scheduledDate && <PreviewField label="Scheduled">{formatDate(data.scheduledDate)}</PreviewField>}
+            </Grid>
+            {data.body && <PreviewField label="Caption / Body"><Text size={2}>{data.body as string}</Text></PreviewField>}
+            {data.postUrl && <PreviewField label="Post URL"><Text size={1} muted>{data.postUrl as string}</Text></PreviewField>}
+            {Array.isArray(data.tagsOrHandles) && (data.tagsOrHandles as string[]).length > 0 && (
+              <PreviewField label="Tags / Handles">
+                <Inline space={2}>
+                  {(data.tagsOrHandles as string[]).map((t) => <Badge key={t} mode="outline">{t}</Badge>)}
+                </Inline>
+              </PreviewField>
+            )}
+          </Stack>
+        )
+
       case 'project':
         return (
           <Stack space={4}>
@@ -358,11 +551,11 @@ const LivePreview: ComponentType<LivePreviewProps> = ({ document, schemaType }) 
         return (
           <Stack space={4}>
             {defaultHeader}
-            <Box padding={3} radius={2} border>
+            <Card padding={3} border>
               <pre style={{ margin: 0, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
                 {JSON.stringify(data, null, 2)}
               </pre>
-            </Box>
+            </Card>
           </Stack>
         )
     }

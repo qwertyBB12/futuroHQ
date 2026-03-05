@@ -89,7 +89,7 @@ const GovernanceView: ComponentType<GovernanceViewProps> = ({document}) => {
   const tier = data.platformTier as string | undefined
   const archival = data.archivalStatus as string | undefined
   const entity = data.postingEntity as string | undefined
-  const tracking = data.conversionTracking as Record<string, unknown> | undefined
+  const tracking = data.conversionTracking as Record<string, any> | undefined
   const surfaceOn = data.surfaceOn as string[] | undefined
   const publish = data.publish as boolean | undefined
   const fiveYear = data.fiveYearTest as boolean | undefined
