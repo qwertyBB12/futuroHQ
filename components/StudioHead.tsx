@@ -1,6 +1,6 @@
 import {Children, isValidElement, cloneElement} from 'react'
 
-const FAVICON_VERSION = process.env.SANITY_STUDIO_FAVICON_VERSION || '2026-03'
+const FAVICON_VERSION = process.env.SANITY_STUDIO_FAVICON_VERSION || '2026-03b'
 
 const OUR_ICONS = [
   {rel: 'icon', type: 'image/png', sizes: '32x32', href: '/static/favicon-32x32.png'},
@@ -19,15 +19,15 @@ function pruneNode(node: any): any {
   if (node.type === 'title') return null
 
   if (node.type === 'meta' && props?.property === 'og:site_name') {
-    return cloneElement(node as any, {...props, content: 'BeNeXT Global HQ'})
+    return cloneElement(node as any, {...props, content: 'Autori Mandatum'})
   }
 
   if (node.type === 'meta' && props?.name === 'apple-mobile-web-app-title') {
-    return cloneElement(node as any, {...props, content: 'BeNeXT Global HQ'})
+    return cloneElement(node as any, {...props, content: 'Autori Mandatum'})
   }
 
   if (node.type === 'meta' && props?.name === 'application-name') {
-    return cloneElement(node as any, {...props, content: 'BeNeXT Global HQ'})
+    return cloneElement(node as any, {...props, content: 'Autori Mandatum'})
   }
 
   if (props?.children) {
@@ -48,7 +48,7 @@ export default function StudioHead(props: any) {
   return (
     <>
       {filteredDefault}
-      <title>BeNeXT Global HQ</title>
+      <title>Autori Mandatum</title>
       {OUR_ICONS.map((icon, index) => (
         <link key={index} {...icon} href={`${icon.href}${versionQuery}`} />
       ))}

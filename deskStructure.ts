@@ -14,28 +14,17 @@ import SeoAuditView from './components/views/SeoAuditView'
 // Types that get SEO Audit tab
 const SEO_TYPES = new Set([
   'essay', 'video', 'podcastEpisode', 'opEd', 'curatedPost', 'socialPost',
-  'project', 'futuroSummit', 'collaborator', 'news',
+  'project', 'futuroSummit', 'collaborator', 'news', 'keynote',
 ])
 
 // Types that get the full view panes (Content + Preview + Governance + References)
 const GOVERNED_TYPES = new Set([
-  'essay',
-  'video',
-  'podcast',
-  'podcastEpisode',
-  'opEd',
-  'curatedPost',
-  'socialPost',
-  'project',
-  'futuroSummit',
-  'person',
-  'alumni',
-  'collaborator',
-  'alumniDream',
-  'alumniConversation',
-  'projectUpdate',
-  'news',
-  'keynote',
+  'essay', 'video', 'podcast', 'podcastEpisode',
+  'opEd', 'curatedPost', 'socialPost', 'news', 'keynote',
+  'project', 'futuroSummit', 'alumni',
+  'alumniDream', 'alumniConversation', 'projectUpdate', 'participantConnection',
+  'accreditationRecord', 'credential', 'accreditationHourLog',
+  'pricingTier', 'usageRecord',
 ])
 
 // Every type explicitly placed in a tier — used to compute ungrouped fallback
@@ -114,7 +103,7 @@ export const deskStructure = (S: StructureBuilder) => {
   const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()
 
   return S.list()
-    .title('BeNeXT HQ')
+    .title('Autori Mandatum')
     .items([
       // =====================================================================
       // TIER 1 — Writer's Desk
@@ -156,8 +145,6 @@ export const deskStructure = (S: StructureBuilder) => {
               listWithPreview('opEd', 'Op-Eds'),
               listWithPreview('curatedPost', 'Curated Posts'),
               listWithPreview('news', 'News'),
-              S.divider(),
-              listWithPreview('person', 'People'),
             ]),
         ),
 
@@ -181,6 +168,7 @@ export const deskStructure = (S: StructureBuilder) => {
               listWithPreview('keynote', 'Keynotes'),
               S.documentTypeListItem('recruitmentAsset').title('Recruitment Assets'),
               S.divider(),
+              listWithPreview('person', 'People'),
               listWithPreview('collaborator', 'Collaborators & Organizations'),
               S.documentTypeListItem('ledgerPerson').title('Ledger People'),
               S.divider(),

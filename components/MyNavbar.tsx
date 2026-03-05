@@ -12,7 +12,7 @@ export default function MyNavbar(props: NavbarProps) {
       <div style={{display: 'flex', alignItems: 'center', padding: '0 0.75rem', flexShrink: 0}}>
         <img
           src="/static/android-chrome-512x512.png"
-          alt="BeNeXT"
+          alt="Autori Mandatum"
           width={24}
           height={24}
           style={{objectFit: 'contain', borderRadius: 4}}
