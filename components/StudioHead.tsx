@@ -3,11 +3,12 @@ import {Children, isValidElement, cloneElement, useEffect} from 'react'
 const FAVICON_VERSION = process.env.SANITY_STUDIO_FAVICON_VERSION || '2026-03c'
 
 const OUR_ICONS = [
+  {rel: 'icon', type: 'image/svg+xml', href: '/static/favicon.svg'},
   {rel: 'icon', type: 'image/png', sizes: '32x32', href: '/static/favicon-32x32.png'},
   {rel: 'icon', type: 'image/png', sizes: '16x16', href: '/static/favicon-16x16.png'},
   {rel: 'apple-touch-icon', sizes: '180x180', href: '/static/apple-touch-icon.png'},
   {rel: 'shortcut icon', href: '/static/favicon.ico'},
-  {rel: 'icon', href: '/static/favicon.ico'},
+  {rel: 'icon', href: '/static/favicon.ico', sizes: 'any'},
 ]
 
 function pruneNode(node: any): any {
@@ -80,75 +81,6 @@ function useFaviconEnforcer() {
   }, [])
 }
 
-/** Override inline border-color on presence avatar rings */
-function usePresenceColorOverride() {
-  useEffect(() => {
-    const VERMILLION = '#C84841'
-    const VERMILLION_RGB = 'rgb(200, 72, 65)'
-
-    // Known Sanity presence colors (neon pink/magenta/blue/green)
-    const SANITY_COLORS = new Set([
-      '#f03e2f', '#2276fc', '#e9a400', '#43b649', '#7928ca',
-      'rgb(240, 62, 47)', 'rgb(34, 118, 252)', 'rgb(233, 164, 0)',
-      'rgb(67, 182, 73)', 'rgb(121, 40, 202)',
-    ])
-
-    function isSanityPresenceColor(color: string): boolean {
-      if (!color || color === 'transparent' || color === '') return false
-      if (color === VERMILLION || color === VERMILLION_RGB) return false
-      // Match any non-transparent color on avatar-related elements
-      return true
-    }
-
-    function overridePresenceRings() {
-      // Broad selector: Avatar elements, status buttons, and any element
-      // Sanity might use for presence indicators
-      const selectors = [
-        '[data-ui="Avatar"] span',
-        '[data-ui="Avatar"] div',
-        '[data-ui="Avatar"]',
-        '[data-ui="StatusButton"] span',
-        '[data-ui="StatusButton"] div',
-      ]
-      document.querySelectorAll(selectors.join(', ')).forEach((el) => {
-        const htmlEl = el as HTMLElement
-        const bc = htmlEl.style.borderColor
-        if (bc && isSanityPresenceColor(bc)) {
-          htmlEl.style.borderColor = VERMILLION
-        }
-        // Also check outline-color which some Sanity versions use
-        const oc = htmlEl.style.outlineColor
-        if (oc && isSanityPresenceColor(oc)) {
-          htmlEl.style.outlineColor = VERMILLION
-        }
-        // Check CSS custom property --user-color
-        const userColor = htmlEl.style.getPropertyValue('--user-color')
-        if (userColor && userColor !== VERMILLION) {
-          htmlEl.style.setProperty('--user-color', VERMILLION)
-          htmlEl.style.setProperty('--user-color-light', 'rgba(200, 72, 65, 0.4)')
-        }
-      })
-
-      // Nuclear option: find ANY element with inline --user-color
-      document.querySelectorAll('[style*="--user-color"]').forEach((el) => {
-        const htmlEl = el as HTMLElement
-        htmlEl.style.setProperty('--user-color', VERMILLION)
-        htmlEl.style.setProperty('--user-color-light', 'rgba(200, 72, 65, 0.4)')
-      })
-    }
-
-    overridePresenceRings()
-    const observer = new MutationObserver(overridePresenceRings)
-    observer.observe(document.body, {
-      attributes: true,
-      subtree: true,
-      attributeFilter: ['style'],
-      childList: true,
-    })
-
-    return () => observer.disconnect()
-  }, [])
-}
 
 export default function StudioHead(props: any) {
   const versionQuery = `?v=${FAVICON_VERSION}`
@@ -156,7 +88,6 @@ export default function StudioHead(props: any) {
   const filteredDefault = Children.toArray(defaultNodes).map(pruneNode).filter(Boolean)
 
   useFaviconEnforcer()
-  usePresenceColorOverride()
 
   return (
     <>
