@@ -3,6 +3,8 @@ import EcosystemHealthWidget from './EcosystemHealthWidget'
 import RecentActivityWidget from './RecentActivityWidget'
 import QuickActionsWidget from './QuickActionsWidget'
 import EcosystemSitesWidget from './EcosystemSitesWidget'
+import MyDraftsWidget from './MyDraftsWidget'
+import PendingTasksWidget from './PendingTasksWidget'
 
 export default function DashboardLayout() {
   return (
@@ -40,15 +42,21 @@ export default function DashboardLayout() {
           </Stack>
         </Flex>
 
-        {/* Top row */}
+        {/* Top row — Writer's focus */}
         <Grid columns={[1, 1, 2]} gap={4}>
+          <MyDraftsWidget />
           <QuickActionsWidget />
-          <EcosystemHealthWidget />
         </Grid>
 
-        {/* Bottom row */}
+        {/* Middle row — Activity & Tasks */}
         <Grid columns={[1, 1, 2]} gap={4}>
           <RecentActivityWidget />
+          <PendingTasksWidget />
+        </Grid>
+
+        {/* Bottom row — Ecosystem overview */}
+        <Grid columns={[1, 1, 2]} gap={4}>
+          <EcosystemHealthWidget />
           <EcosystemSitesWidget />
         </Grid>
       </Stack>

@@ -1,10 +1,20 @@
 import { defineType, defineField } from 'sanity'
+import { governanceFields } from './blocks/governanceBlock'
 
 export default defineType({
   name: 'futuroSummit',
   title: 'Futuro Summit',
   type: 'document',
-  description: 'Central record for each Futuro Summit experience',
+  description:
+    'Describes a Futuro program convening. ' +
+    'Default narrativeOwner: "futuro". Default platformTier: "institutional". Default archivalStatus: "archival". ' +
+    'Third-person institutional voice, not personal. ' +
+    'Include dates, location, thematic focus, and partner institutions.',
+  initialValue: {
+    narrativeOwner: 'futuro',
+    platformTier: 'institutional',
+    archivalStatus: 'archival',
+  },
   fields: [
     defineField({
       name: 'title',
@@ -110,6 +120,7 @@ export default defineType({
       type: 'seoBlock',
       description: 'Override SEO metadata for the summit page when needed',
     }),
+    ...governanceFields,
   ],
   preview: {
     select: {

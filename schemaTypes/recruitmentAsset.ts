@@ -4,6 +4,11 @@ export default defineType({
   name: 'recruitmentAsset',
   title: 'Recruitment Asset',
   type: 'document',
+  description:
+    'Recruitment messaging organized by a 7-chapter narrative arc. ' +
+    'Not governed (no narrativeOwner) — these serve the enrollment funnel across entities. ' +
+    'Each asset has a chapter (1-7), asset type (video, quote, stat, testimonial), and content. ' +
+    'Include person reference when the asset features a specific alumnus or speaker.',
   fields: [
     defineField({
       name: 'title',

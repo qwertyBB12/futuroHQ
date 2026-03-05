@@ -6,6 +6,12 @@ export default defineType({
   name: 'podcastEpisode',
   title: 'Podcast Episode',
   type: 'document',
+  description:
+    'Individual podcast episode within a series. ' +
+    'Default narrativeOwner: "hector". Default platformTier: "canonical". Default archivalStatus: "archival". ' +
+    'Supports bilingual (en/es). Include episode number, season number, and duration. ' +
+    'audioEmbed is the primary player (Captivate/RSS). videoEmbed is optional (YouTube/Vimeo). ' +
+    'Reference the parent podcast series via the series field.',
   fields: [
     // --- Core ---
     defineField({

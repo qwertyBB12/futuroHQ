@@ -5,6 +5,14 @@ export default defineType({
   name: 'alumni',
   title: 'Alumni',
   type: 'document',
+  description:
+    'A Futuro/BeNeXT program alumnus. Public profiles live on benextglobal.com. ' +
+    'Default narrativeOwner: "benext" or "futuro" depending on cohort. ' +
+    'Default platformTier: "personal". Default archivalStatus: "archival". ' +
+    'Bios should be third person. Include cohortYear, generation, and convening reference. ' +
+    'Media array holds photos and video testimonials (mediaBlock). ' +
+    'Companion Platform fields (supabaseUserId, etc.) link to the gated alumni dashboard. ' +
+    'featuredEssays and featuredVideos surface alumni-authored content on their profile.',
   fieldsets: [
     {
       name: 'companion',
