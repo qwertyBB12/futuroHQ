@@ -12,6 +12,13 @@ import {
 import LivePreview from './components/previews/LivePreview'
 import GovernanceView from './components/views/GovernanceView'
 import ReferencesView from './components/views/ReferencesView'
+import SeoAuditView from './components/views/SeoAuditView'
+
+// Types that get SEO Audit tab
+const SEO_TYPES = new Set([
+  'essay', 'video', 'podcastEpisode', 'opEd', 'curatedPost', 'socialPost',
+  'project', 'futuroSummit', 'collaborator',
+])
 
 // Types that get the full 4-tab view (Content + Preview + Governance + References)
 const GOVERNED_TYPES = new Set([
@@ -70,6 +77,10 @@ export const deskStructure = (S: StructureBuilder) => {
     if (GOVERNED_TYPES.has(schemaType)) {
       views.push(S.view.component(GovernanceView).title('Governance'))
       views.push(S.view.component(ReferencesView).title('References'))
+    }
+
+    if (SEO_TYPES.has(schemaType)) {
+      views.push(S.view.component(SeoAuditView).title('SEO'))
     }
 
     return views
