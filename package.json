@@ -18,7 +18,6 @@
   "dependencies": {
     "@sanity/assist": "^5.0.4",
     "@sanity/client": "^6.29.1",
-    "@sanity/scheduled-publishing": "^1.4.1",
     "@sanity/vision": "^4.10.2",
     "react": "^19.1",
     "react-dom": "^19.1",
