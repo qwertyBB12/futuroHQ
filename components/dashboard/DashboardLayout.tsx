@@ -19,7 +19,7 @@ export default function DashboardLayout() {
         {/* Header */}
         <Flex align="center" gap={4}>
           <img
-            src="/static/android-chrome-512x512.png"
+            src="/static/logo-benext.png"
             alt="Autori Mandatum"
             width={44}
             height={44}
