@@ -373,44 +373,9 @@ button[data-ui="PaneItem"]:hover {
   color: #F2E5D5 !important;
 }
 
-/* Override Sanity's presence / avatar ring color globally.
-   Sanity uses --card-avatar-{hue}-bg-color CSS variables (set via styled-components
-   on Card elements) to color the SVG stroke ring around avatars.
-   Override ALL hues to Vermillion at every level. */
-:root,
-*,
-[data-ui="Card"],
-[data-ui="ThemeProvider"] {
-  --card-avatar-gray-bg-color: #C84841 !important;
-  --card-avatar-blue-bg-color: #C84841 !important;
-  --card-avatar-purple-bg-color: #C84841 !important;
-  --card-avatar-magenta-bg-color: #C84841 !important;
-  --card-avatar-red-bg-color: #C84841 !important;
-  --card-avatar-orange-bg-color: #C84841 !important;
-  --card-avatar-yellow-bg-color: #C84841 !important;
-  --card-avatar-green-bg-color: #C84841 !important;
-  --card-avatar-cyan-bg-color: #C84841 !important;
-  --card-avatar-gray-fg-color: #F2E5D5 !important;
-  --card-avatar-blue-fg-color: #F2E5D5 !important;
-  --card-avatar-purple-fg-color: #F2E5D5 !important;
-  --card-avatar-magenta-fg-color: #F2E5D5 !important;
-  --card-avatar-red-fg-color: #F2E5D5 !important;
-  --card-avatar-orange-fg-color: #F2E5D5 !important;
-  --card-avatar-yellow-fg-color: #F2E5D5 !important;
-  --card-avatar-green-fg-color: #F2E5D5 !important;
-  --card-avatar-cyan-fg-color: #F2E5D5 !important;
-}
-
-/* Force the SVG stroke color on avatar rings directly */
-[data-ui="Avatar"] ellipse {
-  stroke: #C84841 !important;
-}
-
-/* Force avatar background */
-[data-ui="Avatar"] {
-  --avatar-bg-color: #C84841 !important;
-  --avatar-fg-color: #F2E5D5 !important;
-}
+/* NOTE: Sanity presence ring color (pink/neon) cannot be overridden via CSS.
+   The Avatar SVG stroke is controlled by @sanity/ui internals (styled-components).
+   Accepted as platform limitation. */
 
 /* ---------------------------------------------------------------------------
    Brand utilities
