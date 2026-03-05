@@ -74,6 +74,14 @@ body {
 }
 
 /* ---------------------------------------------------------------------------
+   Fix: Sanity UI Text strikethrough caused by theme contrast miscalculation
+   --------------------------------------------------------------------------- */
+
+[data-ui="Text"] {
+  text-decoration: none !important;
+}
+
+/* ---------------------------------------------------------------------------
    Force color scheme — prevents browser dark-mode interference
    --------------------------------------------------------------------------- */
 
