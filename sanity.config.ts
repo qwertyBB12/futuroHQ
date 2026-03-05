@@ -35,22 +35,17 @@ import {SocialDistributeAction} from './components/actions/SocialDistributeActio
 
 // Document types that have governance fields (show entity badges + custom actions)
 const GOVERNED_TYPES = new Set([
-  'essay',
-  'video',
-  'podcast',
-  'podcastEpisode',
-  'opEd',
-  'curatedPost',
-  'socialPost',
-  'project',
-  'futuroSummit',
-  'person',
-  'alumni',
-  'collaborator',
-  'alumniDream',
-  'alumniConversation',
-  'projectUpdate',
-  'news',
+  // Content
+  'essay', 'video', 'podcast', 'podcastEpisode',
+  'opEd', 'curatedPost', 'socialPost', 'news', 'keynote',
+  // Programs
+  'project', 'futuroSummit', 'alumni',
+  // Companion
+  'alumniDream', 'alumniConversation', 'projectUpdate', 'participantConnection',
+  // Accreditation
+  'accreditationRecord', 'credential', 'accreditationHourLog',
+  // Platform Business
+  'pricingTier', 'usageRecord',
 ])
 
 // Types with language field
@@ -66,7 +61,7 @@ const BILINGUAL_TYPES = new Set(['essay', 'video', 'podcastEpisode', 'opEd'])
 
 export default defineConfig({
   name: 'default',
-  title: 'BeNeXT Global HQ',
+  title: 'Autori Mandatum',
   projectId: 'fo6n8ceo',
   dataset: 'production',
   theme: customTheme,
