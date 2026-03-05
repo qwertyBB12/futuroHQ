@@ -125,8 +125,14 @@ export const deskStructure = (S: StructureBuilder) => {
         .child(
           S.documentList()
             .title("Writer's Desk")
-            .filter('_updatedAt > $thirtyDaysAgo')
-            .params({thirtyDaysAgo})
+            .filter('_type in $writerTypes && _updatedAt > $thirtyDaysAgo')
+            .params({
+              writerTypes: [
+                'essay', 'video', 'podcast', 'podcastEpisode',
+                'socialPost', 'opEd', 'curatedPost', 'news', 'keynote',
+              ],
+              thirtyDaysAgo,
+            })
             .defaultOrdering([{field: '_updatedAt', direction: 'desc'}]),
         ),
 
