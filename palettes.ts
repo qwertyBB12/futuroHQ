@@ -1,42 +1,42 @@
 /**
- * BeNeXT Global HQ — Midnight Teal Studio Palette
+ * Autori Mandatum — Midnight Cobalt Studio Palette
  *
- * The Studio is the "submarine" beneath the warm Civic Modern public sites.
- * Cool, deep, operational. Copper stays as the single warm thread.
+ * The Studio is mission control. Deep, authoritative, digital.
+ * Cobalt (Arkah) as primary. Copper as the warm thread.
  *
  * These are the ONLY keys that buildLegacyTheme() reads.
  */
 
 export const civicModernThemeProps = {
   /* Base scale */
-  '--black': '#080F0F',
+  '--black': '#06090F',
   '--white': '#FFFFFF',
-  '--gray': '#7A8F8F',
-  '--gray-base': '#7A8F8F',
+  '--gray': '#7A8494',
+  '--gray-base': '#7A8494',
 
-  /* Component surfaces — deep ocean */
-  '--component-bg': '#0D1F1F',
-  '--component-text-color': '#D4E0E0',
+  /* Component surfaces — deep midnight */
+  '--component-bg': '#0C1220',
+  '--component-text-color': '#D4DCE8',
 
-  /* Brand — Teal (cool action) */
-  '--brand-primary': '#2C7A8C',
+  /* Brand — Cobalt (authoritative action) */
+  '--brand-primary': '#1D3FAF',
 
   /* Focus ring */
-  '--focus-color': '#2C7A8C',
+  '--focus-color': '#1D3FAF',
 
   /* Navigation — abyss */
-  '--main-navigation-color': '#080F0F',
-  '--main-navigation-color--inverted': '#D4E0E0',
+  '--main-navigation-color': '#06090F',
+  '--main-navigation-color--inverted': '#D4DCE8',
 
   /* Buttons */
-  '--default-button-color': '#7A8F8F',
-  '--default-button-primary-color': '#2C7A8C',
+  '--default-button-color': '#7A8494',
+  '--default-button-primary-color': '#1D3FAF',
   '--default-button-success-color': '#B17E68',
   '--default-button-warning-color': '#E8D5C0',
   '--default-button-danger-color': '#C84841',
 
   /* State feedback */
-  '--state-info-color': '#4DA8B8',
+  '--state-info-color': '#4A6FE3',
   '--state-success-color': '#B17E68',
   '--state-warning-color': '#E8D5C0',
   '--state-danger-color': '#C84841',

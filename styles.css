@@ -1,9 +1,9 @@
 /* =============================================================================
-   BENEXT GLOBAL HQ — Midnight Teal Studio Theme
-   The submarine beneath the warm Civic Modern public sites.
+   AUTORI MANDATUM — Midnight Cobalt + Liquid Glass
+   Mission control aesthetic. Cobalt primary, Copper warm thread.
 
-   LAYER 1: buildLegacyTheme() handles base colors (teal, abyss, silver mist).
-   LAYER 2: This CSS adds glassmorphism, glow, transitions, and typography.
+   LAYER 1: buildLegacyTheme() handles base colors.
+   LAYER 2: This CSS creates the liquid glass effect + typography.
    ============================================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
@@ -38,113 +38,187 @@ body {
 }
 
 /* ---------------------------------------------------------------------------
-   GLASSMORPHISM — Frosted glass with teal luminance
+   AMBIENT GRADIENT — The texture behind the glass
+   Without this, backdrop-filter blurs nothing visible.
    --------------------------------------------------------------------------- */
 
-/* Navbar — frosted glass bar */
-[data-ui="Navbar"] {
-  backdrop-filter: blur(24px) saturate(1.4);
-  -webkit-backdrop-filter: blur(24px) saturate(1.4);
-  background: rgba(8, 15, 15, 0.78) !important;
-  border-bottom: 1px solid rgba(44, 122, 140, 0.1);
+body {
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(29, 63, 175, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(177, 126, 104, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 40% at 50% 50%, rgba(29, 63, 175, 0.04) 0%, transparent 50%),
+    #06090F !important;
+  background-attachment: fixed !important;
 }
 
-/* Pane headers — subtle glass */
-[data-ui="PaneHeader"] {
-  backdrop-filter: blur(16px) saturate(1.2);
-  -webkit-backdrop-filter: blur(16px) saturate(1.2);
-  background: rgba(8, 15, 15, 0.6) !important;
-  border-bottom: 1px solid rgba(44, 122, 140, 0.06);
-}
-
-/* Dialog overlays — deep glass */
-[data-ui="Dialog"] > [data-ui="Card"] {
-  backdrop-filter: blur(32px) saturate(1.6);
-  -webkit-backdrop-filter: blur(32px) saturate(1.6);
-  background: rgba(13, 31, 31, 0.88) !important;
-  border: 1px solid rgba(44, 122, 140, 0.12);
-  border-radius: 16px;
-  box-shadow:
-    0 24px 80px rgba(0, 0, 0, 0.6),
-    0 0 1px rgba(44, 122, 140, 0.15);
-}
-
-/* Popover / Menu dropdowns — glass */
-[data-ui="Popover"] > [data-ui="Card"],
-[data-ui="MenuButton"] [data-ui="Card"] {
-  backdrop-filter: blur(24px) saturate(1.5);
-  -webkit-backdrop-filter: blur(24px) saturate(1.5);
-  background: rgba(13, 31, 31, 0.9) !important;
-  border: 1px solid rgba(44, 122, 140, 0.1);
-  border-radius: 12px;
-  box-shadow:
-    0 16px 48px rgba(0, 0, 0, 0.5),
-    0 0 0 0.5px rgba(44, 122, 140, 0.08);
-}
-
-/* Tooltip glass */
-[data-ui="Tooltip"] [data-ui="Card"] {
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  background: rgba(13, 31, 31, 0.94) !important;
-  border: 1px solid rgba(44, 122, 140, 0.08);
-  border-radius: 8px;
+/* Tool content areas — let the gradient show through */
+[data-ui="ToolScreen"],
+[data-testid="tool-panel-canvas"] {
+  background: transparent !important;
 }
 
 /* ---------------------------------------------------------------------------
-   CARDS & SURFACES — Teal edge glow
+   LIQUID GLASS — Navbar
+   Frosted translucent bar with specular edge
    --------------------------------------------------------------------------- */
 
-[data-ui="Card"][data-border="true"],
-[data-ui="Card"][data-shadow] {
-  border-color: rgba(44, 122, 140, 0.08) !important;
-  border-radius: 12px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+[data-ui="Navbar"] {
+  backdrop-filter: blur(40px) saturate(1.8) brightness(1.1);
+  -webkit-backdrop-filter: blur(40px) saturate(1.8) brightness(1.1);
+  background: rgba(6, 9, 15, 0.55) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.03) inset,
+    0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* ---------------------------------------------------------------------------
+   LIQUID GLASS — Pane headers
+   --------------------------------------------------------------------------- */
+
+[data-ui="PaneHeader"] {
+  backdrop-filter: blur(32px) saturate(1.5);
+  -webkit-backdrop-filter: blur(32px) saturate(1.5);
+  background: rgba(6, 9, 15, 0.45) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.02) inset;
+}
+
+/* ---------------------------------------------------------------------------
+   LIQUID GLASS — Dialogs
+   Deep frosted panel with specular edges
+   --------------------------------------------------------------------------- */
+
+[data-ui="Dialog"] > [data-ui="Card"] {
+  backdrop-filter: blur(48px) saturate(1.8) brightness(1.05);
+  -webkit-backdrop-filter: blur(48px) saturate(1.8) brightness(1.05);
+  background: rgba(12, 18, 32, 0.7) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top-color: rgba(255, 255, 255, 0.12);
+  border-left-color: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 32px 100px rgba(0, 0, 0, 0.6),
+    0 0 1px rgba(29, 63, 175, 0.2);
+}
+
+/* ---------------------------------------------------------------------------
+   LIQUID GLASS — Popovers & Menus
+   --------------------------------------------------------------------------- */
+
+[data-ui="Popover"] > [data-ui="Card"],
+[data-ui="MenuButton"] [data-ui="Card"] {
+  backdrop-filter: blur(40px) saturate(1.7) brightness(1.05);
+  -webkit-backdrop-filter: blur(40px) saturate(1.7) brightness(1.05);
+  background: rgba(12, 18, 32, 0.72) !important;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-top-color: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 0 0 0.5px rgba(29, 63, 175, 0.1);
+}
+
+/* ---------------------------------------------------------------------------
+   LIQUID GLASS — Tooltips
+   --------------------------------------------------------------------------- */
+
+[data-ui="Tooltip"] [data-ui="Card"] {
+  backdrop-filter: blur(24px) saturate(1.5);
+  -webkit-backdrop-filter: blur(24px) saturate(1.5);
+  background: rgba(12, 18, 32, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset;
+}
+
+/* ---------------------------------------------------------------------------
+   LIQUID GLASS — Cards with border (dashboard widgets, etc.)
+   Specular highlight: bright top-left, dark bottom-right
+   --------------------------------------------------------------------------- */
+
+[data-ui="Card"][data-border="true"] {
+  background: rgba(12, 18, 32, 0.4) !important;
+  backdrop-filter: blur(20px) saturate(1.3);
+  -webkit-backdrop-filter: blur(20px) saturate(1.3);
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-top-color: rgba(255, 255, 255, 0.1) !important;
+  border-left-color: rgba(255, 255, 255, 0.08) !important;
+  border-bottom-color: rgba(0, 0, 0, 0.15) !important;
+  border-right-color: rgba(0, 0, 0, 0.1) !important;
+  border-radius: 16px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.03) inset,
+    0 8px 32px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 [data-ui="Card"][data-border="true"]:hover {
-  border-color: rgba(44, 122, 140, 0.2) !important;
-  box-shadow: 0 0 20px rgba(44, 122, 140, 0.06);
+  background: rgba(12, 18, 32, 0.5) !important;
+  border-top-color: rgba(255, 255, 255, 0.14) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 12px 40px rgba(0, 0, 0, 0.25),
+    0 0 24px rgba(29, 63, 175, 0.06);
+}
+
+/* Cards with shadow (dashboard widget containers) */
+[data-ui="Card"][data-shadow] {
+  background: rgba(12, 18, 32, 0.35) !important;
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-top-color: rgba(255, 255, 255, 0.09);
+  border-left-color: rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 12px 48px rgba(0, 0, 0, 0.3),
+    0 0 0 0.5px rgba(29, 63, 175, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ---------------------------------------------------------------------------
-   BUTTONS — Teal glow on primary, copper glow on success
+   BUTTONS — Liquid glass with cobalt glow
    --------------------------------------------------------------------------- */
 
 [data-ui="Button"] {
-  border-radius: 8px !important;
-  transition: all 0.2s ease;
+  border-radius: 10px !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 }
 
 [data-ui="Button"]:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 [data-ui="Button"]:active {
   transform: translateY(0);
+  transition-duration: 0.1s;
 }
 
-/* Primary — teal glow */
+/* Primary — cobalt glow */
 [data-ui="Button"][data-tone="primary"]:hover {
   box-shadow:
-    0 4px 16px rgba(44, 122, 140, 0.35),
-    0 0 40px rgba(44, 122, 140, 0.12);
+    0 4px 20px rgba(29, 63, 175, 0.4),
+    0 0 48px rgba(29, 63, 175, 0.15);
 }
 
-/* Success/positive — copper glow (the warm thread) */
+/* Success — copper glow */
 [data-ui="Button"][data-tone="positive"]:hover {
   box-shadow:
-    0 4px 16px rgba(177, 126, 104, 0.35),
-    0 0 40px rgba(177, 126, 104, 0.12);
+    0 4px 20px rgba(177, 126, 104, 0.4),
+    0 0 48px rgba(177, 126, 104, 0.12);
 }
 
 /* Danger — vermillion glow */
 [data-ui="Button"][data-tone="critical"]:hover {
   box-shadow:
-    0 4px 16px rgba(200, 72, 65, 0.35),
-    0 0 40px rgba(200, 72, 65, 0.1);
+    0 4px 20px rgba(200, 72, 65, 0.4),
+    0 0 48px rgba(200, 72, 65, 0.12);
 }
 
 /* ---------------------------------------------------------------------------
@@ -159,72 +233,73 @@ body {
 }
 
 /* ---------------------------------------------------------------------------
-   INPUTS — Teal glow on focus
+   INPUTS — Cobalt glow on focus
    --------------------------------------------------------------------------- */
 
 [data-ui="TextInput"],
 [data-ui="TextArea"],
 [data-ui="Select"] {
-  border-radius: 8px !important;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 10px !important;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 [data-ui="TextInput"]:focus-within,
 [data-ui="TextArea"]:focus-within,
 [data-ui="Select"]:focus-within {
   box-shadow:
-    0 0 0 1px rgba(44, 122, 140, 0.35),
-    0 0 20px rgba(44, 122, 140, 0.1);
+    0 0 0 1px rgba(29, 63, 175, 0.4),
+    0 0 24px rgba(29, 63, 175, 0.12),
+    0 0 48px rgba(29, 63, 175, 0.04);
 }
 
 /* ---------------------------------------------------------------------------
-   PANE ITEMS — Teal highlight on select
+   PANE ITEMS — Cobalt highlight on select
    --------------------------------------------------------------------------- */
 
 [data-ui="PaneItem"],
 button[data-ui="PaneItem"] {
-  border-radius: 8px;
-  transition: all 0.15s ease;
+  border-radius: 10px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   margin: 1px 4px;
 }
 
 [data-ui="PaneItem"]:hover,
 button[data-ui="PaneItem"]:hover {
-  background: rgba(44, 122, 140, 0.05) !important;
-  box-shadow: 0 0 16px rgba(44, 122, 140, 0.04);
+  background: rgba(29, 63, 175, 0.06) !important;
+  box-shadow: 0 0 16px rgba(29, 63, 175, 0.04);
 }
 
 [data-ui="PaneItem"][data-selected="true"],
 button[data-ui="PaneItem"][data-selected="true"] {
-  background: rgba(44, 122, 140, 0.1) !important;
+  background: rgba(29, 63, 175, 0.1) !important;
   box-shadow:
-    inset 3px 0 0 rgba(44, 122, 140, 0.7),
-    0 0 20px rgba(44, 122, 140, 0.05);
+    inset 3px 0 0 rgba(29, 63, 175, 0.8),
+    0 0 24px rgba(29, 63, 175, 0.06);
 }
 
 /* ---------------------------------------------------------------------------
-   TAB PANELS — Teal glow active tab
+   TABS — Cobalt glow active
    --------------------------------------------------------------------------- */
 
 [data-ui="Tab"] {
-  border-radius: 6px !important;
+  border-radius: 8px !important;
   transition: all 0.2s ease;
 }
 
 [data-ui="Tab"][data-selected="true"],
 [data-ui="Tab"][aria-selected="true"] {
-  box-shadow: 0 0 12px rgba(44, 122, 140, 0.2);
+  box-shadow: 0 0 16px rgba(29, 63, 175, 0.2);
 }
 
 /* ---------------------------------------------------------------------------
-   FOCUS RING — Teal glow
+   FOCUS RING — Cobalt glow halo
    --------------------------------------------------------------------------- */
 
 *:focus-visible {
   outline: none !important;
   box-shadow:
-    0 0 0 2px rgba(44, 122, 140, 0.45),
-    0 0 16px rgba(44, 122, 140, 0.12) !important;
+    0 0 0 2px rgba(29, 63, 175, 0.5),
+    0 0 20px rgba(29, 63, 175, 0.15) !important;
 }
 
 /* ---------------------------------------------------------------------------
@@ -241,26 +316,26 @@ button[data-ui="PaneItem"][data-selected="true"] {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(122, 143, 143, 0.3);
+  background: rgba(122, 132, 148, 0.25);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(44, 122, 140, 0.5);
+  background: rgba(29, 63, 175, 0.45);
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(122, 143, 143, 0.3) transparent;
+  scrollbar-color: rgba(122, 132, 148, 0.25) transparent;
 }
 
 /* ---------------------------------------------------------------------------
-   SELECTION — Teal highlight
+   SELECTION — Cobalt highlight
    --------------------------------------------------------------------------- */
 
 ::selection {
-  background: rgba(44, 122, 140, 0.35);
-  color: #D4E0E0;
+  background: rgba(29, 63, 175, 0.35);
+  color: #D4DCE8;
 }
 
 /* ---------------------------------------------------------------------------
@@ -271,20 +346,20 @@ button[data-ui="PaneItem"][data-selected="true"] {
 [data-ui="Badge"],
 [data-ui="Tab"],
 [data-ui="MenuItem"] {
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 [data-ui="MenuItem"]:hover {
-  background: rgba(44, 122, 140, 0.06) !important;
-  border-radius: 6px;
+  background: rgba(29, 63, 175, 0.07) !important;
+  border-radius: 8px;
 }
 
 /* ---------------------------------------------------------------------------
-   SPINNER — Teal glow pulse
+   SPINNER — Cobalt glow pulse
    --------------------------------------------------------------------------- */
 
 [data-ui="Spinner"] {
-  filter: drop-shadow(0 0 8px rgba(44, 122, 140, 0.5));
+  filter: drop-shadow(0 0 10px rgba(29, 63, 175, 0.5));
 }
 
 /* ---------------------------------------------------------------------------
@@ -293,8 +368,8 @@ button[data-ui="PaneItem"][data-selected="true"] {
 
 [data-ui="Avatar"] {
   box-shadow:
-    0 0 0 2px rgba(8, 15, 15, 0.8),
-    0 0 0 3px rgba(44, 122, 140, 0.15);
+    0 0 0 2px rgba(6, 9, 15, 0.8),
+    0 0 0 3px rgba(29, 63, 175, 0.2);
   border-radius: 50%;
 }
 

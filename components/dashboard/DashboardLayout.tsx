@@ -26,9 +26,9 @@ export default function DashboardLayout() {
                 letterSpacing: '0.05em',
               }}
             >
-              BeNeXT Global HQ
+              Autori Mandatum
             </Heading>
-            <Text size={1} muted style={{letterSpacing: '0.08em'}}>
+            <Text size={1} muted style={{letterSpacing: '0.12em'}}>
               Ecosystem Command Center
             </Text>
           </Stack>
