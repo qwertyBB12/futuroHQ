@@ -72,3 +72,11 @@ body {
 .font-mono {
   font-family: 'JetBrains Mono', monospace !important;
 }
+
+/* ---------------------------------------------------------------------------
+   Force color scheme — prevents browser dark-mode interference
+   --------------------------------------------------------------------------- */
+
+:root {
+  color-scheme: only light;
+}

@@ -6,7 +6,7 @@ import EcosystemSitesWidget from './EcosystemSitesWidget'
 
 export default function DashboardLayout() {
   return (
-    <Card padding={5} sizing="border" style={{minHeight: '100vh', backgroundColor: '#0E0E0E'}}>
+    <Card padding={5} sizing="border" style={{minHeight: '100vh'}}>
       <Stack space={5} style={{maxWidth: 1200, margin: '0 auto'}}>
         {/* Header */}
         <Flex align="center" gap={4}>
@@ -24,13 +24,12 @@ export default function DashboardLayout() {
                 fontFamily: "'Oswald', sans-serif",
                 textTransform: 'uppercase',
                 letterSpacing: '0.05em',
-                color: '#F2E5D5',
               }}
             >
-              Autori Mandatum
+              BeNeXT Global HQ
             </Heading>
-            <Text size={1} style={{color: '#8B8985'}}>
-              BeNeXT Global HQ — Ecosystem Command Center
+            <Text size={1} muted>
+              Ecosystem Command Center
             </Text>
           </Stack>
         </Flex>
