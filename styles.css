@@ -62,6 +62,41 @@ body {
   background-color: #2A2624 !important;
 }
 
+/* Sanctuary ambient glow — subtle copper warmth radiating from center */
+[data-ui="Pane"]:last-child [data-ui="PaneContent"] {
+  background:
+    radial-gradient(ellipse 90% 50% at 50% 15%, rgba(177, 126, 104, 0.045) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 40% at 50% 85%, rgba(177, 126, 104, 0.025) 0%, transparent 50%),
+    transparent !important;
+  position: relative;
+}
+
+/* Warm inner edge — like lamplight at the top of the writing surface */
+[data-ui="Pane"]:last-child [data-ui="PaneHeader"] {
+  background: #2D2926 !important;
+  border-bottom: 1px solid rgba(177, 126, 104, 0.10) !important;
+  box-shadow:
+    0 1px 0 rgba(242, 229, 213, 0.04) inset,
+    0 4px 20px rgba(177, 126, 104, 0.03) !important;
+}
+
+/* Editor inputs — warmer borders, copper focus glow */
+[data-ui="Pane"]:last-child [data-ui="TextInput"],
+[data-ui="Pane"]:last-child [data-ui="TextArea"] {
+  border-color: rgba(177, 126, 104, 0.12) !important;
+  border-top-color: rgba(242, 229, 213, 0.10) !important;
+}
+
+[data-ui="Pane"]:last-child [data-ui="TextInput"]:focus-within,
+[data-ui="Pane"]:last-child [data-ui="TextArea"]:focus-within {
+  border-color: rgba(177, 126, 104, 0.30) !important;
+  box-shadow:
+    0 0 0 1px rgba(177, 126, 104, 0.18),
+    0 0 24px rgba(177, 126, 104, 0.08),
+    0 0 60px rgba(177, 126, 104, 0.03),
+    0 1px 0 rgba(242, 229, 213, 0.04) inset !important;
+}
+
 /* ---------------------------------------------------------------------------
    LIQUID GLASS — Navbar
    --------------------------------------------------------------------------- */
