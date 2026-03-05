@@ -1,11 +1,9 @@
 /* =============================================================================
-   BENEXT GLOBAL HQ — Civic Modern Studio Theme
-   Aligned with @hector-ecosystem/design-system
-   Fonts: Oswald (headings) + Mulish (body) + JetBrains Mono (code)
+   BENEXT GLOBAL HQ — Midnight Teal Studio Theme
+   The submarine beneath the warm Civic Modern public sites.
 
-   LAYER 1: buildLegacyTheme() handles all base colors via token system.
+   LAYER 1: buildLegacyTheme() handles base colors (teal, abyss, silver mist).
    LAYER 2: This CSS adds glassmorphism, glow, transitions, and typography.
-            Never override background-color with !important on Sanity components.
    ============================================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
@@ -40,35 +38,35 @@ body {
 }
 
 /* ---------------------------------------------------------------------------
-   GLASSMORPHISM — Frosted glass on structural elements
+   GLASSMORPHISM — Frosted glass with teal luminance
    --------------------------------------------------------------------------- */
 
 /* Navbar — frosted glass bar */
 [data-ui="Navbar"] {
   backdrop-filter: blur(24px) saturate(1.4);
   -webkit-backdrop-filter: blur(24px) saturate(1.4);
-  background: rgba(14, 14, 14, 0.75) !important;
-  border-bottom: 1px solid rgba(242, 229, 213, 0.06);
+  background: rgba(8, 15, 15, 0.78) !important;
+  border-bottom: 1px solid rgba(44, 122, 140, 0.1);
 }
 
 /* Pane headers — subtle glass */
 [data-ui="PaneHeader"] {
   backdrop-filter: blur(16px) saturate(1.2);
   -webkit-backdrop-filter: blur(16px) saturate(1.2);
-  background: rgba(14, 14, 14, 0.6) !important;
-  border-bottom: 1px solid rgba(242, 229, 213, 0.04);
+  background: rgba(8, 15, 15, 0.6) !important;
+  border-bottom: 1px solid rgba(44, 122, 140, 0.06);
 }
 
-/* Dialog overlays — frosted glass */
+/* Dialog overlays — deep glass */
 [data-ui="Dialog"] > [data-ui="Card"] {
   backdrop-filter: blur(32px) saturate(1.6);
   -webkit-backdrop-filter: blur(32px) saturate(1.6);
-  background: rgba(26, 23, 20, 0.85) !important;
-  border: 1px solid rgba(242, 229, 213, 0.08);
+  background: rgba(13, 31, 31, 0.88) !important;
+  border: 1px solid rgba(44, 122, 140, 0.12);
   border-radius: 16px;
   box-shadow:
-    0 24px 80px rgba(0, 0, 0, 0.5),
-    0 0 1px rgba(242, 229, 213, 0.1);
+    0 24px 80px rgba(0, 0, 0, 0.6),
+    0 0 1px rgba(44, 122, 140, 0.15);
 }
 
 /* Popover / Menu dropdowns — glass */
@@ -76,42 +74,41 @@ body {
 [data-ui="MenuButton"] [data-ui="Card"] {
   backdrop-filter: blur(24px) saturate(1.5);
   -webkit-backdrop-filter: blur(24px) saturate(1.5);
-  background: rgba(26, 23, 20, 0.88) !important;
-  border: 1px solid rgba(242, 229, 213, 0.07);
+  background: rgba(13, 31, 31, 0.9) !important;
+  border: 1px solid rgba(44, 122, 140, 0.1);
   border-radius: 12px;
   box-shadow:
-    0 16px 48px rgba(0, 0, 0, 0.4),
-    0 0 0 0.5px rgba(242, 229, 213, 0.06);
+    0 16px 48px rgba(0, 0, 0, 0.5),
+    0 0 0 0.5px rgba(44, 122, 140, 0.08);
 }
 
 /* Tooltip glass */
 [data-ui="Tooltip"] [data-ui="Card"] {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  background: rgba(26, 23, 20, 0.92) !important;
-  border: 1px solid rgba(242, 229, 213, 0.06);
+  background: rgba(13, 31, 31, 0.94) !important;
+  border: 1px solid rgba(44, 122, 140, 0.08);
   border-radius: 8px;
 }
 
 /* ---------------------------------------------------------------------------
-   CARDS & SURFACES — Glass lift with warm glow
+   CARDS & SURFACES — Teal edge glow
    --------------------------------------------------------------------------- */
 
-/* Bordered cards get glass treatment */
 [data-ui="Card"][data-border="true"],
 [data-ui="Card"][data-shadow] {
-  border-color: rgba(242, 229, 213, 0.06) !important;
+  border-color: rgba(44, 122, 140, 0.08) !important;
   border-radius: 12px;
   transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
 }
 
 [data-ui="Card"][data-border="true"]:hover {
-  border-color: rgba(177, 126, 104, 0.2) !important;
-  box-shadow: 0 0 20px rgba(177, 126, 104, 0.06);
+  border-color: rgba(44, 122, 140, 0.2) !important;
+  box-shadow: 0 0 20px rgba(44, 122, 140, 0.06);
 }
 
 /* ---------------------------------------------------------------------------
-   BUTTONS — Glow on hover, glass feel
+   BUTTONS — Teal glow on primary, copper glow on success
    --------------------------------------------------------------------------- */
 
 [data-ui="Button"] {
@@ -122,29 +119,36 @@ body {
 
 [data-ui="Button"]:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 [data-ui="Button"]:active {
   transform: translateY(0);
 }
 
-/* Primary buttons — vermillion glow */
+/* Primary — teal glow */
 [data-ui="Button"][data-tone="primary"]:hover {
   box-shadow:
-    0 4px 16px rgba(200, 72, 65, 0.3),
+    0 4px 16px rgba(44, 122, 140, 0.35),
+    0 0 40px rgba(44, 122, 140, 0.12);
+}
+
+/* Success/positive — copper glow (the warm thread) */
+[data-ui="Button"][data-tone="positive"]:hover {
+  box-shadow:
+    0 4px 16px rgba(177, 126, 104, 0.35),
+    0 0 40px rgba(177, 126, 104, 0.12);
+}
+
+/* Danger — vermillion glow */
+[data-ui="Button"][data-tone="critical"]:hover {
+  box-shadow:
+    0 4px 16px rgba(200, 72, 65, 0.35),
     0 0 40px rgba(200, 72, 65, 0.1);
 }
 
-/* Success/positive buttons — copper glow */
-[data-ui="Button"][data-tone="positive"]:hover {
-  box-shadow:
-    0 4px 16px rgba(177, 126, 104, 0.3),
-    0 0 40px rgba(177, 126, 104, 0.1);
-}
-
 /* ---------------------------------------------------------------------------
-   BADGES — Glass pill style
+   BADGES — Glass pills
    --------------------------------------------------------------------------- */
 
 [data-ui="Badge"] {
@@ -155,7 +159,7 @@ body {
 }
 
 /* ---------------------------------------------------------------------------
-   INPUTS — Soft glow on focus
+   INPUTS — Teal glow on focus
    --------------------------------------------------------------------------- */
 
 [data-ui="TextInput"],
@@ -169,12 +173,12 @@ body {
 [data-ui="TextArea"]:focus-within,
 [data-ui="Select"]:focus-within {
   box-shadow:
-    0 0 0 1px rgba(200, 72, 65, 0.3),
-    0 0 20px rgba(200, 72, 65, 0.08);
+    0 0 0 1px rgba(44, 122, 140, 0.35),
+    0 0 20px rgba(44, 122, 140, 0.1);
 }
 
 /* ---------------------------------------------------------------------------
-   PANE ITEMS — Smooth hover with glass highlight
+   PANE ITEMS — Teal highlight on select
    --------------------------------------------------------------------------- */
 
 [data-ui="PaneItem"],
@@ -186,20 +190,20 @@ button[data-ui="PaneItem"] {
 
 [data-ui="PaneItem"]:hover,
 button[data-ui="PaneItem"]:hover {
-  background: rgba(242, 229, 213, 0.04) !important;
-  box-shadow: 0 0 16px rgba(177, 126, 104, 0.04);
+  background: rgba(44, 122, 140, 0.05) !important;
+  box-shadow: 0 0 16px rgba(44, 122, 140, 0.04);
 }
 
 [data-ui="PaneItem"][data-selected="true"],
 button[data-ui="PaneItem"][data-selected="true"] {
-  background: rgba(200, 72, 65, 0.08) !important;
+  background: rgba(44, 122, 140, 0.1) !important;
   box-shadow:
-    inset 3px 0 0 rgba(200, 72, 65, 0.6),
-    0 0 20px rgba(200, 72, 65, 0.04);
+    inset 3px 0 0 rgba(44, 122, 140, 0.7),
+    0 0 20px rgba(44, 122, 140, 0.05);
 }
 
 /* ---------------------------------------------------------------------------
-   TAB PANELS — Glowing active tab
+   TAB PANELS — Teal glow active tab
    --------------------------------------------------------------------------- */
 
 [data-ui="Tab"] {
@@ -209,22 +213,22 @@ button[data-ui="PaneItem"][data-selected="true"] {
 
 [data-ui="Tab"][data-selected="true"],
 [data-ui="Tab"][aria-selected="true"] {
-  box-shadow: 0 0 12px rgba(200, 72, 65, 0.15);
+  box-shadow: 0 0 12px rgba(44, 122, 140, 0.2);
 }
 
 /* ---------------------------------------------------------------------------
-   FOCUS RING — Glowing vermillion instead of solid outline
+   FOCUS RING — Teal glow
    --------------------------------------------------------------------------- */
 
 *:focus-visible {
   outline: none !important;
   box-shadow:
-    0 0 0 2px rgba(200, 72, 65, 0.4),
-    0 0 16px rgba(200, 72, 65, 0.1) !important;
+    0 0 0 2px rgba(44, 122, 140, 0.45),
+    0 0 16px rgba(44, 122, 140, 0.12) !important;
 }
 
 /* ---------------------------------------------------------------------------
-   CUSTOM SCROLLBAR — Thin, warm, minimal
+   SCROLLBAR — Thin, cool, minimal
    --------------------------------------------------------------------------- */
 
 ::-webkit-scrollbar {
@@ -237,31 +241,30 @@ button[data-ui="PaneItem"][data-selected="true"] {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(139, 137, 133, 0.3);
+  background: rgba(122, 143, 143, 0.3);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(177, 126, 104, 0.5);
+  background: rgba(44, 122, 140, 0.5);
 }
 
-/* Firefox scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(139, 137, 133, 0.3) transparent;
+  scrollbar-color: rgba(122, 143, 143, 0.3) transparent;
 }
 
 /* ---------------------------------------------------------------------------
-   SELECTION — Copper highlight
+   SELECTION — Teal highlight
    --------------------------------------------------------------------------- */
 
 ::selection {
-  background: rgba(177, 126, 104, 0.35);
-  color: #F2E5D5;
+  background: rgba(44, 122, 140, 0.35);
+  color: #D4E0E0;
 }
 
 /* ---------------------------------------------------------------------------
-   MICRO-ANIMATIONS — Smooth transitions globally
+   MICRO-ANIMATIONS
    --------------------------------------------------------------------------- */
 
 [data-ui="Card"],
@@ -272,16 +275,16 @@ button[data-ui="PaneItem"][data-selected="true"] {
 }
 
 [data-ui="MenuItem"]:hover {
-  background: rgba(242, 229, 213, 0.05) !important;
+  background: rgba(44, 122, 140, 0.06) !important;
   border-radius: 6px;
 }
 
 /* ---------------------------------------------------------------------------
-   SPINNER — Vermillion glow pulse
+   SPINNER — Teal glow pulse
    --------------------------------------------------------------------------- */
 
 [data-ui="Spinner"] {
-  filter: drop-shadow(0 0 8px rgba(200, 72, 65, 0.4));
+  filter: drop-shadow(0 0 8px rgba(44, 122, 140, 0.5));
 }
 
 /* ---------------------------------------------------------------------------
@@ -290,13 +293,13 @@ button[data-ui="PaneItem"][data-selected="true"] {
 
 [data-ui="Avatar"] {
   box-shadow:
-    0 0 0 2px rgba(14, 14, 14, 0.8),
-    0 0 0 3px rgba(242, 229, 213, 0.1);
+    0 0 0 2px rgba(8, 15, 15, 0.8),
+    0 0 0 3px rgba(44, 122, 140, 0.15);
   border-radius: 50%;
 }
 
 /* ---------------------------------------------------------------------------
-   Brand utility classes (for custom components)
+   Brand utility classes
    --------------------------------------------------------------------------- */
 
 .h1-brand {

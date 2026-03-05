@@ -28,7 +28,7 @@ export default function DashboardLayout() {
             >
               BeNeXT Global HQ
             </Heading>
-            <Text size={1} muted>
+            <Text size={1} muted style={{letterSpacing: '0.08em'}}>
               Ecosystem Command Center
             </Text>
           </Stack>
