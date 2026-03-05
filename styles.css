@@ -364,6 +364,15 @@ button[data-ui="PaneItem"]:hover {
   border-radius: 50%;
 }
 
+/* Override Sanity's green workspace badge with ecosystem Vermillion Deep */
+[data-ui="Navbar"] [data-ui="Avatar"][data-color="blue"],
+[data-ui="Navbar"] [data-ui="Avatar"][data-color="green"],
+[data-ui="Navbar"] > button:first-child [data-ui="Avatar"] {
+  --card-badge-dot-color: #813531 !important;
+  background-color: #813531 !important;
+  color: #F2E5D5 !important;
+}
+
 /* ---------------------------------------------------------------------------
    Brand utilities
    --------------------------------------------------------------------------- */
