@@ -3,10 +3,13 @@
  *
  * Warm dark. Copper distinction. Vermillion action.
  * These are the ONLY keys that buildLegacyTheme() reads.
+ *
+ * KEY INSIGHT: --black controls ALL card backgrounds in dark mode.
+ * Raising it lifts the entire UI. Body bg stays darker via CSS.
  */
 
 export const civicModernThemeProps = {
-  '--black': '#0E0E0E',
+  '--black': '#201D19',       // Card surfaces — warm dark (body stays #0E0E0E via CSS)
   '--white': '#FFFFFF',
   '--gray': '#B5B1AC',
   '--gray-base': '#B5B1AC',
@@ -17,10 +20,10 @@ export const civicModernThemeProps = {
   '--brand-primary': '#C84841',
   '--focus-color': '#C84841',
 
-  '--main-navigation-color': '#0E0E0E',
-  '--main-navigation-color--inverted': '#F8F2EA',
+  '--main-navigation-color': '#151311',
+  '--main-navigation-color--inverted': '#FBF6F0',
 
-  '--default-button-color': '#8B8985',
+  '--default-button-color': '#9E9A96',
   '--default-button-primary-color': '#C84841',
   '--default-button-success-color': '#B17E68',
   '--default-button-warning-color': '#E8D5C0',
