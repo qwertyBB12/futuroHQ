@@ -3,9 +3,9 @@
    Aligned with @hector-ecosystem/design-system
    Fonts: Oswald (headings) + Mulish (body) + JetBrains Mono (code)
 
-   IMPORTANT: Do NOT use !important on background/color for Sanity [data-ui]
-   components. Let buildLegacyTheme() handle colors via its token system.
-   Only override typography here.
+   LAYER 1: buildLegacyTheme() handles all base colors via token system.
+   LAYER 2: This CSS adds glassmorphism, glow, transitions, and typography.
+            Never override background-color with !important on Sanity components.
    ============================================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
@@ -13,7 +13,7 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 /* ---------------------------------------------------------------------------
-   Typography — Mulish body, Oswald headings
+   Typography
    --------------------------------------------------------------------------- */
 
 body {
@@ -22,7 +22,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Oswald for workspace name in navbar */
 [data-ui="Navbar"] button[aria-haspopup="menu"] span {
   font-family: 'Oswald', sans-serif !important;
   font-weight: 700 !important;
@@ -30,7 +29,6 @@ body {
   letter-spacing: 0.5px !important;
 }
 
-/* Mulish for buttons and badges */
 [data-ui="Button"],
 [data-ui="Badge"] {
   font-family: 'Mulish', sans-serif !important;
@@ -42,7 +40,263 @@ body {
 }
 
 /* ---------------------------------------------------------------------------
-   Brand utility classes (for custom components only)
+   GLASSMORPHISM — Frosted glass on structural elements
+   --------------------------------------------------------------------------- */
+
+/* Navbar — frosted glass bar */
+[data-ui="Navbar"] {
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  background: rgba(14, 14, 14, 0.75) !important;
+  border-bottom: 1px solid rgba(242, 229, 213, 0.06);
+}
+
+/* Pane headers — subtle glass */
+[data-ui="PaneHeader"] {
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  background: rgba(14, 14, 14, 0.6) !important;
+  border-bottom: 1px solid rgba(242, 229, 213, 0.04);
+}
+
+/* Dialog overlays — frosted glass */
+[data-ui="Dialog"] > [data-ui="Card"] {
+  backdrop-filter: blur(32px) saturate(1.6);
+  -webkit-backdrop-filter: blur(32px) saturate(1.6);
+  background: rgba(26, 23, 20, 0.85) !important;
+  border: 1px solid rgba(242, 229, 213, 0.08);
+  border-radius: 16px;
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.5),
+    0 0 1px rgba(242, 229, 213, 0.1);
+}
+
+/* Popover / Menu dropdowns — glass */
+[data-ui="Popover"] > [data-ui="Card"],
+[data-ui="MenuButton"] [data-ui="Card"] {
+  backdrop-filter: blur(24px) saturate(1.5);
+  -webkit-backdrop-filter: blur(24px) saturate(1.5);
+  background: rgba(26, 23, 20, 0.88) !important;
+  border: 1px solid rgba(242, 229, 213, 0.07);
+  border-radius: 12px;
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.4),
+    0 0 0 0.5px rgba(242, 229, 213, 0.06);
+}
+
+/* Tooltip glass */
+[data-ui="Tooltip"] [data-ui="Card"] {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: rgba(26, 23, 20, 0.92) !important;
+  border: 1px solid rgba(242, 229, 213, 0.06);
+  border-radius: 8px;
+}
+
+/* ---------------------------------------------------------------------------
+   CARDS & SURFACES — Glass lift with warm glow
+   --------------------------------------------------------------------------- */
+
+/* Bordered cards get glass treatment */
+[data-ui="Card"][data-border="true"],
+[data-ui="Card"][data-shadow] {
+  border-color: rgba(242, 229, 213, 0.06) !important;
+  border-radius: 12px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+[data-ui="Card"][data-border="true"]:hover {
+  border-color: rgba(177, 126, 104, 0.2) !important;
+  box-shadow: 0 0 20px rgba(177, 126, 104, 0.06);
+}
+
+/* ---------------------------------------------------------------------------
+   BUTTONS — Glow on hover, glass feel
+   --------------------------------------------------------------------------- */
+
+[data-ui="Button"] {
+  border-radius: 8px !important;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+[data-ui="Button"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+[data-ui="Button"]:active {
+  transform: translateY(0);
+}
+
+/* Primary buttons — vermillion glow */
+[data-ui="Button"][data-tone="primary"]:hover {
+  box-shadow:
+    0 4px 16px rgba(200, 72, 65, 0.3),
+    0 0 40px rgba(200, 72, 65, 0.1);
+}
+
+/* Success/positive buttons — copper glow */
+[data-ui="Button"][data-tone="positive"]:hover {
+  box-shadow:
+    0 4px 16px rgba(177, 126, 104, 0.3),
+    0 0 40px rgba(177, 126, 104, 0.1);
+}
+
+/* ---------------------------------------------------------------------------
+   BADGES — Glass pill style
+   --------------------------------------------------------------------------- */
+
+[data-ui="Badge"] {
+  border-radius: 20px !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+/* ---------------------------------------------------------------------------
+   INPUTS — Soft glow on focus
+   --------------------------------------------------------------------------- */
+
+[data-ui="TextInput"],
+[data-ui="TextArea"],
+[data-ui="Select"] {
+  border-radius: 8px !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+[data-ui="TextInput"]:focus-within,
+[data-ui="TextArea"]:focus-within,
+[data-ui="Select"]:focus-within {
+  box-shadow:
+    0 0 0 1px rgba(200, 72, 65, 0.3),
+    0 0 20px rgba(200, 72, 65, 0.08);
+}
+
+/* ---------------------------------------------------------------------------
+   PANE ITEMS — Smooth hover with glass highlight
+   --------------------------------------------------------------------------- */
+
+[data-ui="PaneItem"],
+button[data-ui="PaneItem"] {
+  border-radius: 8px;
+  transition: all 0.15s ease;
+  margin: 1px 4px;
+}
+
+[data-ui="PaneItem"]:hover,
+button[data-ui="PaneItem"]:hover {
+  background: rgba(242, 229, 213, 0.04) !important;
+  box-shadow: 0 0 16px rgba(177, 126, 104, 0.04);
+}
+
+[data-ui="PaneItem"][data-selected="true"],
+button[data-ui="PaneItem"][data-selected="true"] {
+  background: rgba(200, 72, 65, 0.08) !important;
+  box-shadow:
+    inset 3px 0 0 rgba(200, 72, 65, 0.6),
+    0 0 20px rgba(200, 72, 65, 0.04);
+}
+
+/* ---------------------------------------------------------------------------
+   TAB PANELS — Glowing active tab
+   --------------------------------------------------------------------------- */
+
+[data-ui="Tab"] {
+  border-radius: 6px !important;
+  transition: all 0.2s ease;
+}
+
+[data-ui="Tab"][data-selected="true"],
+[data-ui="Tab"][aria-selected="true"] {
+  box-shadow: 0 0 12px rgba(200, 72, 65, 0.15);
+}
+
+/* ---------------------------------------------------------------------------
+   FOCUS RING — Glowing vermillion instead of solid outline
+   --------------------------------------------------------------------------- */
+
+*:focus-visible {
+  outline: none !important;
+  box-shadow:
+    0 0 0 2px rgba(200, 72, 65, 0.4),
+    0 0 16px rgba(200, 72, 65, 0.1) !important;
+}
+
+/* ---------------------------------------------------------------------------
+   CUSTOM SCROLLBAR — Thin, warm, minimal
+   --------------------------------------------------------------------------- */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 137, 133, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(177, 126, 104, 0.5);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(139, 137, 133, 0.3) transparent;
+}
+
+/* ---------------------------------------------------------------------------
+   SELECTION — Copper highlight
+   --------------------------------------------------------------------------- */
+
+::selection {
+  background: rgba(177, 126, 104, 0.35);
+  color: #F2E5D5;
+}
+
+/* ---------------------------------------------------------------------------
+   MICRO-ANIMATIONS — Smooth transitions globally
+   --------------------------------------------------------------------------- */
+
+[data-ui="Card"],
+[data-ui="Badge"],
+[data-ui="Tab"],
+[data-ui="MenuItem"] {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-ui="MenuItem"]:hover {
+  background: rgba(242, 229, 213, 0.05) !important;
+  border-radius: 6px;
+}
+
+/* ---------------------------------------------------------------------------
+   SPINNER — Vermillion glow pulse
+   --------------------------------------------------------------------------- */
+
+[data-ui="Spinner"] {
+  filter: drop-shadow(0 0 8px rgba(200, 72, 65, 0.4));
+}
+
+/* ---------------------------------------------------------------------------
+   AVATAR — Glass ring
+   --------------------------------------------------------------------------- */
+
+[data-ui="Avatar"] {
+  box-shadow:
+    0 0 0 2px rgba(14, 14, 14, 0.8),
+    0 0 0 3px rgba(242, 229, 213, 0.1);
+  border-radius: 50%;
+}
+
+/* ---------------------------------------------------------------------------
+   Brand utility classes (for custom components)
    --------------------------------------------------------------------------- */
 
 .h1-brand {
@@ -61,20 +315,12 @@ body {
   }
 }
 
-.font-display {
-  font-family: 'Oswald', sans-serif !important;
-}
-
-.font-body {
-  font-family: 'Mulish', sans-serif !important;
-}
-
-.font-mono {
-  font-family: 'JetBrains Mono', monospace !important;
-}
+.font-display { font-family: 'Oswald', sans-serif !important; }
+.font-body { font-family: 'Mulish', sans-serif !important; }
+.font-mono { font-family: 'JetBrains Mono', monospace !important; }
 
 /* ---------------------------------------------------------------------------
-   Force color scheme — prevents browser dark-mode interference
+   Force color scheme
    --------------------------------------------------------------------------- */
 
 :root {
