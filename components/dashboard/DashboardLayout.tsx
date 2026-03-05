@@ -1,3 +1,4 @@
+import {useEffect, useRef, useState} from 'react'
 import {Stack, Heading, Grid, Text, Flex} from '@sanity/ui'
 import EcosystemHealthWidget from './EcosystemHealthWidget'
 import RecentActivityWidget from './RecentActivityWidget'
@@ -5,6 +6,197 @@ import QuickActionsWidget from './QuickActionsWidget'
 import EcosystemSitesWidget from './EcosystemSitesWidget'
 import MyDraftsWidget from './MyDraftsWidget'
 import PendingTasksWidget from './PendingTasksWidget'
+
+// ─── Copper / Vermillion palette ───
+const COPPER = '#B17E68'
+const VERMILLION = '#C84841'
+const SANDSTONE = '#F2E5D5'
+const SLATE = '#8B8985'
+
+// ─── CSS Keyframes (injected once) ───
+const STYLE_ID = 'am-dashboard-anims'
+const KEYFRAMES = `
+@keyframes am-radar-sweep {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes am-signal-acquire {
+  0%    { opacity: 0; transform: translate(0,0); }
+  4%    { opacity: 0.8; transform: translate(3px,-2px); }
+  8%    { opacity: 0; transform: translate(-2px,1px); }
+  14%   { opacity: 0.6; transform: translate(1px,2px); }
+  20%   { opacity: 0; }
+  26%   { opacity: 0.9; transform: translate(-3px,-1px); }
+  32%   { opacity: 0.1; transform: translate(2px,0); }
+  38%   { opacity: 0; }
+  44%   { opacity: 1; transform: translate(1px,-1px); }
+  50%   { opacity: 0; }
+  56%   { opacity: 0.85; transform: translate(-1px,0); }
+  62%   { opacity: 0.9; }
+  68%   { opacity: 0.1; transform: translate(1px,0); }
+  74%   { opacity: 1; transform: translate(0,0); }
+  80%   { opacity: 0.05; }
+  86%   { opacity: 0.95; }
+  92%   { opacity: 1; }
+  100%  { opacity: 1; transform: translate(0,0); }
+}
+@keyframes am-phosphor-breathe {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.08; }
+}
+@keyframes am-arrow-breathe {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.15; }
+}
+@keyframes am-eyebrow-blink {
+  0%, 49% { border-right-color: ${COPPER}; }
+  50%, 100% { border-right-color: transparent; }
+}
+`
+
+function CommandMark() {
+  const [phase, setPhase] = useState<'acquire' | 'locked'>('acquire')
+  const imgRef = useRef<HTMLImageElement>(null)
+
+  useEffect(() => {
+    // Inject keyframes once
+    if (!document.getElementById(STYLE_ID)) {
+      const style = document.createElement('style')
+      style.id = STYLE_ID
+      style.textContent = KEYFRAMES
+      document.head.appendChild(style)
+    }
+
+    // Phase 1: signal acquisition (2.4s), then lock on
+    const timer = setTimeout(() => setPhase('locked'), 2400)
+    return () => clearTimeout(timer)
+  }, [])
+
+  return (
+    <div
+      style={{
+        position: 'relative',
+        width: 64,
+        height: 64,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexShrink: 0,
+      }}
+    >
+      {/* Radar sweep ring */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          borderRadius: '50%',
+          border: `1px solid ${phase === 'acquire' ? `${VERMILLION}33` : `${COPPER}22`}`,
+          overflow: 'hidden',
+          transition: 'border-color 0.6s ease',
+        }}
+      >
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            borderRadius: '50%',
+            background: `conic-gradient(from 0deg, transparent 0deg, transparent 330deg, ${COPPER}40 345deg, ${COPPER}66 355deg, ${COPPER}80 360deg)`,
+            animation: phase === 'acquire' ? 'am-radar-sweep 2s linear infinite' : 'am-radar-sweep 8s linear infinite',
+            transition: 'animation-duration 1s',
+          }}
+        />
+      </div>
+
+      {/* Inner ring */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 8,
+          borderRadius: '50%',
+          border: `1px solid ${COPPER}18`,
+        }}
+      />
+
+      {/* Phosphor glow */}
+      <div
+        style={{
+          position: 'absolute',
+          width: 80,
+          height: 80,
+          borderRadius: '50%',
+          background: `radial-gradient(circle, ${COPPER}33 0%, transparent 70%)`,
+          filter: 'blur(16px)',
+          pointerEvents: 'none',
+          animation: phase === 'locked' ? 'am-phosphor-breathe 4s ease-in-out infinite' : 'none',
+          opacity: phase === 'acquire' ? 0.3 : undefined,
+        }}
+      />
+
+      {/* Arrow mark */}
+      <img
+        ref={imgRef}
+        src="/static/logo-benext.png"
+        alt=""
+        width={36}
+        height={36}
+        style={{
+          position: 'relative',
+          zIndex: 1,
+          objectFit: 'contain',
+          filter: `drop-shadow(0 0 12px ${COPPER}40)`,
+          animation:
+            phase === 'acquire'
+              ? 'am-signal-acquire 2.4s step-end forwards'
+              : 'am-arrow-breathe 5s ease-in-out infinite',
+        }}
+      />
+    </div>
+  )
+}
+
+function SecureEyebrow() {
+  const [text, setText] = useState('')
+  const [typing, setTyping] = useState(false)
+  const full = 'SECURE CHANNEL ESTABLISHED'
+
+  useEffect(() => {
+    // Start typing after signal locks (3s total: 2.4s acquire + 0.6s pause)
+    const startTimer = setTimeout(() => {
+      setTyping(true)
+      let i = 0
+      const interval = setInterval(() => {
+        i++
+        setText(full.slice(0, i))
+        if (i >= full.length) clearInterval(interval)
+      }, 50)
+      return () => clearInterval(interval)
+    }, 3000)
+    return () => clearTimeout(startTimer)
+  }, [])
+
+  if (!typing && text === '') {
+    return <div style={{height: 14}} />
+  }
+
+  return (
+    <div
+      style={{
+        fontFamily: "'JetBrains Mono', 'Courier New', monospace",
+        fontSize: 10,
+        letterSpacing: '0.18em',
+        color: text.length >= full.length ? `${COPPER}88` : `${VERMILLION}88`,
+        borderRight:
+          text.length < full.length ? `2px solid ${COPPER}` : '2px solid transparent',
+        animation: text.length < full.length ? 'am-eyebrow-blink 0.6s step-end infinite' : 'none',
+        display: 'inline-block',
+        paddingRight: 2,
+        marginTop: 2,
+      }}
+    >
+      {text}
+    </div>
+  )
+}
 
 export default function DashboardLayout() {
   return (
@@ -16,15 +208,9 @@ export default function DashboardLayout() {
       }}
     >
       <Stack space={5} style={{maxWidth: 1200, margin: '0 auto'}}>
-        {/* Header */}
+        {/* Header — Command Center */}
         <Flex align="center" gap={4}>
-          <img
-            src="/static/logo-benext.png"
-            alt="Autori Mandatum"
-            width={44}
-            height={44}
-            style={{objectFit: 'contain', borderRadius: 12}}
-          />
+          <CommandMark />
           <Stack space={2}>
             <Heading
               size={3}
@@ -36,9 +222,20 @@ export default function DashboardLayout() {
             >
               Autori Mandatum
             </Heading>
-            <Text size={1} muted style={{letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: 11}}>
-              Ecosystem Command Center
-            </Text>
+            <Flex align="center" gap={3}>
+              <Text
+                size={1}
+                muted
+                style={{
+                  letterSpacing: '0.14em',
+                  textTransform: 'uppercase',
+                  fontSize: 11,
+                }}
+              >
+                Ecosystem Command Center
+              </Text>
+              <SecureEyebrow />
+            </Flex>
           </Stack>
         </Flex>
 
