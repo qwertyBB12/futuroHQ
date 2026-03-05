@@ -82,17 +82,20 @@ export default function RecentActivityWidget() {
                   }}
                 />
                 <Stack space={1} style={{flex: 1, minWidth: 0}}>
-                  <Text
-                    size={1}
-                    weight="semibold"
+                  <span
                     style={{
                       overflow: 'hidden',
                       textOverflow: 'ellipsis',
                       whiteSpace: 'nowrap',
+                      display: 'block',
+                      fontFamily: "'Mulish', sans-serif",
+                      fontWeight: 600,
+                      fontSize: 13,
+                      textDecoration: 'none',
                     }}
                   >
                     {doc.title || 'Untitled'}
-                  </Text>
+                  </span>
                   <Text size={0} muted>
                     {TYPE_LABELS[doc._type] || doc._type}
                   </Text>
