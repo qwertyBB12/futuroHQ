@@ -11,7 +11,7 @@ export default function MyNavbar(props: NavbarProps) {
       {/* Brand logo */}
       <div style={{display: 'flex', alignItems: 'center', padding: '0 0.75rem', flexShrink: 0}}>
         <img
-          src="/static/android-chrome-512x512.png"
+          src="/static/logo-benext.png"
           alt="Autori Mandatum"
           width={24}
           height={24}
