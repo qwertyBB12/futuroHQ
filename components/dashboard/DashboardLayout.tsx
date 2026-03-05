@@ -1,4 +1,4 @@
-import {Card, Stack, Heading, Grid, Text, Flex, Box} from '@sanity/ui'
+import {Stack, Heading, Grid, Text, Flex} from '@sanity/ui'
 import EcosystemHealthWidget from './EcosystemHealthWidget'
 import RecentActivityWidget from './RecentActivityWidget'
 import QuickActionsWidget from './QuickActionsWidget'
@@ -6,16 +6,22 @@ import EcosystemSitesWidget from './EcosystemSitesWidget'
 
 export default function DashboardLayout() {
   return (
-    <Card padding={5} sizing="border" style={{minHeight: '100vh'}}>
+    <div
+      style={{
+        minHeight: '100vh',
+        padding: '2.5rem',
+        background: 'transparent',
+      }}
+    >
       <Stack space={5} style={{maxWidth: 1200, margin: '0 auto'}}>
         {/* Header */}
         <Flex align="center" gap={4}>
           <img
             src="/static/android-chrome-512x512.png"
-            alt="BeNeXT"
-            width={40}
-            height={40}
-            style={{objectFit: 'contain', borderRadius: 8}}
+            alt="Autori Mandatum"
+            width={44}
+            height={44}
+            style={{objectFit: 'contain', borderRadius: 12}}
           />
           <Stack space={2}>
             <Heading
@@ -23,29 +29,29 @@ export default function DashboardLayout() {
               style={{
                 fontFamily: "'Oswald', sans-serif",
                 textTransform: 'uppercase',
-                letterSpacing: '0.05em',
+                letterSpacing: '0.06em',
               }}
             >
               Autori Mandatum
             </Heading>
-            <Text size={1} muted style={{letterSpacing: '0.12em'}}>
+            <Text size={1} muted style={{letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: 11}}>
               Ecosystem Command Center
             </Text>
           </Stack>
         </Flex>
 
-        {/* Top row: Quick Actions + Ecosystem Health */}
+        {/* Top row */}
         <Grid columns={[1, 1, 2]} gap={4}>
           <QuickActionsWidget />
           <EcosystemHealthWidget />
         </Grid>
 
-        {/* Bottom row: Recent Activity + Sites */}
+        {/* Bottom row */}
         <Grid columns={[1, 1, 2]} gap={4}>
           <RecentActivityWidget />
           <EcosystemSitesWidget />
         </Grid>
       </Stack>
-    </Card>
+    </div>
   )
 }
