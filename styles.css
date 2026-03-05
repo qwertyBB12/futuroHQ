@@ -74,15 +74,6 @@ body {
 }
 
 /* ---------------------------------------------------------------------------
-   Fix: Sanity UI strikethrough caused by theme contrast miscalculation.
-   The theme engine applies line-through on text in certain color contexts.
-   --------------------------------------------------------------------------- */
-
-*:not(a) {
-  text-decoration-line: none !important;
-}
-
-/* ---------------------------------------------------------------------------
    Force color scheme — prevents browser dark-mode interference
    --------------------------------------------------------------------------- */
 
