@@ -14,7 +14,7 @@ import SeoAuditView from './components/views/SeoAuditView'
 // Types that get SEO Audit tab
 const SEO_TYPES = new Set([
   'essay', 'video', 'podcastEpisode', 'opEd', 'curatedPost', 'socialPost',
-  'project', 'futuroSummit', 'collaborator', 'news', 'keynote',
+  'project', 'futuroSummit', 'collaborator', 'news', 'keynote', 'ledgerPerson',
 ])
 
 // Types that get the full view panes (Content + Preview + Governance + References)

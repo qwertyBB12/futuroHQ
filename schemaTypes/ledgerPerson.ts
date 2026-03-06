@@ -102,13 +102,7 @@ export default defineType({
     defineField({
       name: 'seo',
       title: 'SEO',
-      type: 'object',
-      fields: [
-        { name: 'slug', title: 'Slug', type: 'slug', options: { source: 'fullName' } },
-        { name: 'titleTag', title: 'Title Tag', type: 'string' },
-        { name: 'metaDescription', title: 'Meta Description', type: 'text' },
-        { name: 'socialImage', title: 'Social Image', type: 'image' },
-      ],
+      type: 'seoBlock',
     }),
 
     // --- Meta ---

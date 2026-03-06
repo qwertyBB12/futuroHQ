@@ -180,6 +180,11 @@ export default defineType({
       of: [{ type: 'reference', to: [{ type: 'tag' }] }],
     }),
     defineField({
+      name: 'seo',
+      title: 'SEO',
+      type: 'seoBlock',
+    }),
+    defineField({
       name: 'legacyVlog',
       title: 'Legacy Vlog Data',
       type: 'object',
@@ -311,4 +316,22 @@ export default defineType({
     }),
     ...governanceFields,
   ],
+  preview: {
+    select: {
+      title: 'title',
+      date: 'publishDate',
+      format: 'videoFormat',
+      category: 'contentCategory',
+      media: 'thumbnailImage',
+    },
+    prepare({ title, date, format, category, media }) {
+      const dateStr = date ? new Date(date).toLocaleDateString() : ''
+      const labels = [format, category].filter(Boolean).join(' · ')
+      return {
+        title: title || 'Untitled Video',
+        subtitle: [labels, dateStr].filter(Boolean).join(' — '),
+        media,
+      }
+    },
+  },
 })
