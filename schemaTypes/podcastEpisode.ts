@@ -86,6 +86,9 @@ export default defineType({
       type: 'reference',
       to: [{ type: 'podcast' }],
     }),
+    // --- SEO ---
+    defineField({ name: 'seo', title: 'SEO', type: 'seoBlock' }),
+
     ...commonMeta,
 
     // --- Governance ---
