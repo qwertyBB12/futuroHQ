@@ -80,6 +80,44 @@ const previewProjections: Record<string, string> = {
     "host": hostInstitution->{_id, name},
     "featuredProjects": featuredProjects[]->{_id, title, "slug": slug.current}
   `,
+  keynote: `
+    ...
+  `,
+  news: `
+    ...
+  `,
+  alumniDream: `
+    ...,
+    "alumniName": alumni->name
+  `,
+  alumniConversation: `
+    ...,
+    "alumniName": alumni->name
+  `,
+  credential: `
+    ...,
+    "alumniName": alumni->name
+  `,
+  accreditationRecord: `
+    ...,
+    "alumniName": alumni->name
+  `,
+  accreditationHourLog: `
+    ...,
+    "alumniName": alumni->name
+  `,
+  projectUpdate: `
+    ...
+  `,
+  participantConnection: `
+    ...
+  `,
+  pricingTier: `
+    ...
+  `,
+  usageRecord: `
+    ...
+  `,
 }
 
 const buildQuery = (schemaName?: string) => {
@@ -547,10 +585,206 @@ const LivePreview: ComponentType<LivePreviewProps> = ({ document, schemaType }) 
           </Stack>
         )
 
+      case 'keynote':
+        return (
+          <Stack space={4}>
+            {defaultHeader}
+            {governanceBadges}
+            <Grid columns={[1, 2]} gap={4}>
+              <PreviewField label="Venue">{data.venue}</PreviewField>
+              <PreviewField label="Location">{data.location}</PreviewField>
+              <PreviewField label="Date">{formatDate(data.date)}</PreviewField>
+              <PreviewField label="Category">
+                {data.category && <Badge mode="outline">{(data.category as string).toUpperCase()}</Badge>}
+              </PreviewField>
+            </Grid>
+            {data.videoUrl && <PreviewField label="Video"><Text size={1} muted>{data.videoUrl as string}</Text></PreviewField>}
+            {data.presentationUrl && <PreviewField label="Slides"><Text size={1} muted>{data.presentationUrl as string}</Text></PreviewField>}
+            {typeof data.featured === 'boolean' && (
+              <PreviewField label="Featured">
+                <Badge tone={data.featured ? 'positive' : 'default'}>{data.featured ? 'Yes' : 'No'}</Badge>
+              </PreviewField>
+            )}
+          </Stack>
+        )
+
+      case 'news':
+        return (
+          <Stack space={4}>
+            {defaultHeader}
+            {governanceBadges}
+            <Grid columns={[1, 2]} gap={4}>
+              <PreviewField label="Category">
+                {data.category && <Badge mode="outline">{(data.category as string).toUpperCase()}</Badge>}
+              </PreviewField>
+              <PreviewField label="Publish Date">{formatDate(data.publishDate)}</PreviewField>
+              <PreviewField label="Slug">{data.slug?.current || '—'}</PreviewField>
+              <PreviewField label="Featured">
+                <Badge tone={data.featured ? 'positive' : 'default'}>{data.featured ? 'Yes' : 'No'}</Badge>
+              </PreviewField>
+            </Grid>
+            {data.excerpt && <PreviewField label="Excerpt"><Text size={2}>{data.excerpt as string}</Text></PreviewField>}
+            <PreviewField label="Body">{renderPortableText(data.body)}</PreviewField>
+          </Stack>
+        )
+
+      case 'alumniDream':
+        return (
+          <Stack space={4}>
+            {defaultHeader}
+            {governanceBadges}
+            <Grid columns={[1, 2, 3]} gap={4}>
+              <PreviewField label="Category">
+                {data.category && <Badge mode="outline">{(data.category as string).toUpperCase()}</Badge>}
+              </PreviewField>
+              <PreviewField label="Status">
+                <Badge tone={data.status === 'seed' ? 'caution' : data.status === 'active' ? 'positive' : 'default'}>
+                  {(data.status as string || '—').toUpperCase()}
+                </Badge>
+              </PreviewField>
+              <PreviewField label="Surfaced">{formatDate(data.surfacedDate)}</PreviewField>
+            </Grid>
+          </Stack>
+        )
+
+      case 'alumniConversation':
+        return (
+          <Stack space={4}>
+            <Heading size={3}>{data.summary || data.title || 'Untitled Conversation'}</Heading>
+            {governanceBadges}
+            <Grid columns={[1, 2]} gap={4}>
+              <PreviewField label="Date">{formatDate(data.date)}</PreviewField>
+              <PreviewField label="Language">{data.language}</PreviewField>
+              <PreviewField label="Format">{data.format}</PreviewField>
+              <PreviewField label="Context">{data.context}</PreviewField>
+            </Grid>
+            {data.sentiment && <PreviewField label="Sentiment">{data.sentiment}</PreviewField>}
+            {data.energyLevel && <PreviewField label="Energy">{data.energyLevel}</PreviewField>}
+            {Array.isArray(data.keyInsights) && (data.keyInsights as string[]).length > 0 && (
+              <PreviewField label="Key Insights">
+                <Stack space={1}>
+                  {(data.keyInsights as string[]).map((insight, i) => (
+                    <Text key={i} size={2}>• {insight}</Text>
+                  ))}
+                </Stack>
+              </PreviewField>
+            )}
+          </Stack>
+        )
+
+      case 'credential':
+        return (
+          <Stack space={4}>
+            {defaultHeader}
+            {governanceBadges}
+            <Grid columns={[1, 2]} gap={4}>
+              <PreviewField label="Level">
+                <Badge mode="outline" tone="positive">{(data.level as string || '—').toUpperCase()}</Badge>
+              </PreviewField>
+              <PreviewField label="Issued">{formatDate(data.issuedDate)}</PreviewField>
+              <PreviewField label="Verified">
+                <Badge tone={data.verified ? 'positive' : 'caution'}>{data.verified ? 'Yes' : 'No'}</Badge>
+              </PreviewField>
+              <PreviewField label="Public Display">
+                <Badge tone={data.publicDisplay ? 'positive' : 'default'}>{data.publicDisplay ? 'Yes' : 'No'}</Badge>
+              </PreviewField>
+            </Grid>
+          </Stack>
+        )
+
+      case 'accreditationRecord':
+        return (
+          <Stack space={4}>
+            {defaultHeader}
+            {governanceBadges}
+            <Grid columns={[1, 2, 3]} gap={4}>
+              <PreviewField label="Dimension">{data.dimension}</PreviewField>
+              <PreviewField label="Evidence Type">{data.evidenceType}</PreviewField>
+              <PreviewField label="Hours">{data.hoursLogged}</PreviewField>
+              <PreviewField label="Date">{formatDate(data.date)}</PreviewField>
+              <PreviewField label="Verified">
+                <Badge tone={data.verified ? 'positive' : 'caution'}>{data.verified ? 'Yes' : 'No'}</Badge>
+              </PreviewField>
+            </Grid>
+          </Stack>
+        )
+
+      case 'accreditationHourLog':
+        return (
+          <Stack space={4}>
+            <Heading size={3}>{data.description || 'Hour Log'}</Heading>
+            {governanceBadges}
+            <Grid columns={[1, 2, 3]} gap={4}>
+              <PreviewField label="Source">{data.source}</PreviewField>
+              <PreviewField label="Raw Hours">{data.rawHours}</PreviewField>
+              <PreviewField label="Credit Hours">{data.creditHours}</PreviewField>
+              <PreviewField label="Date">{formatDate(data.date)}</PreviewField>
+              <PreviewField label="Verified">
+                <Badge tone={data.verified ? 'positive' : 'caution'}>{data.verified ? 'Yes' : 'No'}</Badge>
+              </PreviewField>
+            </Grid>
+          </Stack>
+        )
+
+      case 'projectUpdate':
+        return (
+          <Stack space={4}>
+            {defaultHeader}
+            {governanceBadges}
+            <Grid columns={[1, 2]} gap={4}>
+              <PreviewField label="Update Type">{data.updateType}</PreviewField>
+              <PreviewField label="Date">{formatDate(data.date)}</PreviewField>
+            </Grid>
+            {data.body && <PreviewField label="Content"><Text size={2}>{typeof data.body === 'string' ? data.body : ''}</Text></PreviewField>}
+          </Stack>
+        )
+
+      case 'participantConnection':
+        return (
+          <Stack space={4}>
+            {defaultHeader}
+            {governanceBadges}
+            <Grid columns={[1, 2]} gap={4}>
+              <PreviewField label="Connection Type">{data.connectionType}</PreviewField>
+              <PreviewField label="Strength">{data.strength}</PreviewField>
+              <PreviewField label="Date">{formatDate(data.date)}</PreviewField>
+            </Grid>
+          </Stack>
+        )
+
+      case 'pricingTier':
+        return (
+          <Stack space={4}>
+            <Heading size={3}>{data.name || 'Untitled Tier'}</Heading>
+            {governanceBadges}
+            <Grid columns={[1, 2]} gap={4}>
+              <PreviewField label="Price">{data.price}</PreviewField>
+              <PreviewField label="Billing">{data.billingPeriod}</PreviewField>
+              <PreviewField label="Active">
+                <Badge tone={data.active ? 'positive' : 'caution'}>{data.active ? 'Yes' : 'No'}</Badge>
+              </PreviewField>
+            </Grid>
+          </Stack>
+        )
+
+      case 'usageRecord':
+        return (
+          <Stack space={4}>
+            {defaultHeader}
+            {governanceBadges}
+            <Grid columns={[1, 2]} gap={4}>
+              <PreviewField label="Period">{data.period}</PreviewField>
+              <PreviewField label="Metric">{data.metric}</PreviewField>
+              <PreviewField label="Value">{data.value}</PreviewField>
+            </Grid>
+          </Stack>
+        )
+
       default:
         return (
           <Stack space={4}>
             {defaultHeader}
+            {governanceBadges}
             <Card padding={3} border>
               <pre style={{ margin: 0, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
                 {JSON.stringify(data, null, 2)}
