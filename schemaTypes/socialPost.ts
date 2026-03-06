@@ -38,7 +38,12 @@ export default defineType({
       type: 'reference',
       to: [{ type: 'person' }, { type: 'alumni' }, { type: 'ledgerPerson' }, { type: 'collaborator' }],
     }),
-    defineField({ name: 'title', title: 'Title / Hook', type: 'string' }),
+    defineField({
+      name: 'title',
+      title: 'Title / Hook',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
     defineField({ name: 'body', title: 'Caption / Body', type: 'text' }),
 
     // --- Source & Distribution Pipeline ---

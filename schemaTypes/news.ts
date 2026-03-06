@@ -157,6 +157,14 @@ export default defineType({
       description: 'Select the author of this article',
     }),
 
+    // --- Tags ---
+    defineField({
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'tag' }] }],
+    }),
+
     // --- SEO (shared block) ---
     defineField({
       name: 'seo',

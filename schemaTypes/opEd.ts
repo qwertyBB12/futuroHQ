@@ -73,6 +73,14 @@ export default defineType({
       type: 'narrativeBlock',
     }),
 
+    // --- Tags ---
+    defineField({
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'tag' }] }],
+    }),
+
     // --- SEO ---
     defineField({
       name: 'seo',

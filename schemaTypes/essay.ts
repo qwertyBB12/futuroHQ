@@ -9,7 +9,7 @@ export default defineType({
     'Primary content type for long-form writing. ' +
     'Default narrativeOwner: "hector" (unless explicitly creating for another entity). ' +
     'Default platformTier: "canonical". Default archivalStatus: "archival". ' +
-    'Always populate seoBlock with title, description, and keywords. ' +
+    'Always populate seo with title, description, and keywords. ' +
     'Language is English unless explicitly specified. ' +
     'The essay body uses Portable Text. Write in cinematic, literary, reflective prose — bold but not bombastic. ' +
     'Never use sovereignty/lexicon terms in essay content (these are internal-only vocabulary).',
@@ -114,10 +114,33 @@ export default defineType({
       description: 'Will I be proud of this in 2030?',
     }),
     defineField({
-      name: 'seoBlock',
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'tag' }] }],
+    }),
+    defineField({
+      name: 'seo',
       title: 'SEO',
       type: 'seoBlock',
     }),
     ...governanceFields,
   ],
+  preview: {
+    select: {
+      title: 'title',
+      date: 'publishDate',
+      language: 'language',
+      media: 'coverImage',
+    },
+    prepare({ title, date, language, media }) {
+      const dateStr = date ? new Date(date).toLocaleDateString() : ''
+      const lang = language === 'es' ? '[ES]' : ''
+      return {
+        title: title || 'Untitled Essay',
+        subtitle: [lang, dateStr].filter(Boolean).join(' · '),
+        media,
+      }
+    },
+  },
 })

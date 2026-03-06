@@ -118,6 +118,14 @@ export default defineType({
         ],
       },
     }),
+    // --- Tags ---
+    defineField({
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'tag' }] }],
+    }),
+
     // --- SEO ---
     defineField({ name: 'seo', title: 'SEO', type: 'seoBlock' }),
 
