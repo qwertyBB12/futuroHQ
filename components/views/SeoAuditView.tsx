@@ -15,7 +15,7 @@ type Check = {
 
 function runChecks(data: Record<string, any>): Check[] {
   const checks: Check[] = []
-  const seo = data.seo as Record<string, any> | undefined
+  const seo = (data.seo || data.seoBlock) as Record<string, any> | undefined
   const title = (data.title as string) || ''
   const slug = data.slug?.current || seo?.slug?.current || ''
   const titleTag = (seo?.titleTag as string) || ''
