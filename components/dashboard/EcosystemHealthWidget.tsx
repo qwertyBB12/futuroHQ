@@ -18,6 +18,7 @@ const ENTITIES = [
   {entity: 'next', label: 'NeXT', accent: '#B17E68'},
   {entity: 'mitikah', label: 'Mitikah', accent: '#8B8985'},
   {entity: 'medikah', label: 'Medikah', accent: '#2C7A8C'},
+  {entity: 'arkah', label: 'Arkah', accent: '#1D3FAF'},
 ]
 
 export default function EcosystemHealthWidget() {

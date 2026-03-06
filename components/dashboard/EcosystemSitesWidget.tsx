@@ -13,10 +13,10 @@ type Site = {
 const SITES: Site[] = [
   {name: 'hectorhlopez.com', url: 'https://hectorhlopez.com', entity: 'Hector', accent: '#B17E68', status: 'live'},
   {name: 'benextglobal.com', url: 'https://benextglobal.com', entity: 'BeNeXT', accent: '#C84841', status: 'live'},
-  {name: 'futuro.ngo', url: 'https://futuro.ngo', entity: 'Futuro', accent: '#C84841', status: 'development'},
-  {name: 'next.ngo', url: 'https://next.ngo', entity: 'NeXT', accent: '#B17E68', status: 'planned'},
+  {name: 'futuro.ngo', url: 'https://futuro.ngo', entity: 'Futuro', accent: '#C84841', status: 'live'},
+  {name: 'next.ngo', url: 'https://next.ngo', entity: 'NeXT', accent: '#B17E68', status: 'live'},
   {name: 'mitikah.com', url: 'https://mitikah.com', entity: 'Mitikah', accent: '#8B8985', status: 'planned'},
-  {name: 'medikah.com', url: 'https://medikah.com', entity: 'Medikah', accent: '#2C7A8C', status: 'planned'},
+  {name: 'medikah.com', url: 'https://medikah.com', entity: 'Medikah', accent: '#2C7A8C', status: 'live'},
   {name: 'arkah.co', url: 'https://arkah.co', entity: 'Arkah', accent: '#1D3FAF', status: 'development'},
 ]
 
