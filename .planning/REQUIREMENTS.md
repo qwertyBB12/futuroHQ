@@ -48,23 +48,23 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SAFE-01 | — | Pending |
-| SAFE-02 | — | Pending |
-| INFR-01 | — | Pending |
-| INFR-02 | — | Pending |
-| INFR-03 | — | Pending |
-| INFR-04 | — | Pending |
-| SCHM-01 | — | Pending |
-| SCHM-02 | — | Pending |
-| SCHM-03 | — | Pending |
-| SCHM-04 | — | Pending |
-| SCHM-05 | — | Pending |
+| SAFE-01 | Phase 1: Safety Guards | Pending |
+| SAFE-02 | Phase 1: Safety Guards | Pending |
+| INFR-01 | Phase 2: Infrastructure | Pending |
+| INFR-02 | Phase 2: Infrastructure | Pending |
+| INFR-03 | Phase 2: Infrastructure | Pending |
+| INFR-04 | Phase 2: Infrastructure | Pending |
+| SCHM-01 | Phase 3: Schema Consolidation | Pending |
+| SCHM-02 | Phase 3: Schema Consolidation | Pending |
+| SCHM-03 | Phase 3: Schema Consolidation | Pending |
+| SCHM-04 | Phase 3: Schema Consolidation | Pending |
+| SCHM-05 | Phase 3: Schema Consolidation | Pending |
 
 **Coverage:**
 - v1 requirements: 11 total
-- Mapped to phases: 0
-- Unmapped: 11
+- Mapped to phases: 11
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-07*
-*Last updated: 2026-03-07 after initial definition*
+*Last updated: 2026-03-07 after roadmap creation*
