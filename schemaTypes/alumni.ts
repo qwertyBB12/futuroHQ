@@ -45,6 +45,12 @@ export default defineType({
       description: 'URL-friendly identifier',
     }),
     defineField({ name: 'country', title: 'Country', type: 'string' }),
+    defineField({
+      name: 'projectTitle',
+      title: 'Project Title',
+      type: 'string',
+      description: 'Short project title shown on alumni cards (e.g. "Renewable Energy in the Caribbean")',
+    }),
     defineField({ name: 'bio', title: 'Biography', type: 'text' }),
 
     // --- Media ---
