@@ -23,13 +23,13 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Depends on**: Nothing (first phase)
 **Requirements**: SAFE-01, SAFE-02
 **Success Criteria** (what must be TRUE):
-  1. Opening a document with SeoGeneratorInput when `AI_SEO_GENERATOR_ENDPOINT` is unset shows a disabled/unavailable state instead of failing silently or throwing errors
+  1. Opening a document with SeoGeneratorInput when `SANITY_STUDIO_SEO_ENDPOINT` is unset shows a disabled/unavailable state instead of failing silently or throwing errors
   2. The GenerateAIDerivativesAction is hidden or visibly disabled in the document actions menu when `SANITY_STUDIO_AI_ENDPOINT` is unset
   3. Both components function normally when their respective env vars are configured
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 01-01: AI endpoint guard implementation
+- [ ] 01-01-PLAN.md — Fix env var prefix bug in SeoGeneratorInput, add error feedback to GenerateAIDerivativesAction
 
 ### Phase 2: Infrastructure
 **Goal**: Developers can safely experiment with schema changes on a staging dataset, and content publishes automatically trigger site deploys
