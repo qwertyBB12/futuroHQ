@@ -4,6 +4,10 @@ export default defineType({
   name: 'ledgerPerson',
   title: 'Vanguard Ledger Person',
   type: 'document',
+  description:
+    'Vanguard Ledger narrative intelligence dossiers — soulmarks, doctrine alignment, strategic grids. ' +
+    'Distinct from person (simple identity) and alumni (program graduate profiles). ' +
+    'Intentionally ungoverned: ledgerPerson is a cross-cutting identity type used for narrative intelligence, not multi-entity content.',
   fields: [
     // --- Publish toggle pinned at top ---
     defineField({

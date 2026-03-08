@@ -4,6 +4,9 @@ export default defineType({
   name: 'person',
   title: 'Person',
   type: 'document',
+  description:
+    'Simple public profiles (name, role, bio, photo) — cross-entity identity records shared across the ecosystem. ' +
+    'Intentionally ungoverned: person is a cross-cutting identity type, not multi-entity content, so governanceFields are not applied.',
   fields: [
     // --- Publish toggle pinned at top ---
     defineField({
