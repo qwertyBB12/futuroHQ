@@ -22,7 +22,7 @@ const GOVERNED_TYPES = new Set([
   'essay', 'video', 'podcast', 'podcastEpisode',
   'opEd', 'curatedPost', 'socialPost', 'news', 'keynote',
   'project', 'futuroSummit', 'alumni',
-  'alumniDream', 'alumniConversation', 'projectUpdate', 'participantConnection',
+  'alumniDream', 'alumniConversation', 'projectUpdate', 'participantConnection', 'alumniContinuum',
   'accreditationRecord', 'credential', 'accreditationHourLog',
   'pricingTier', 'usageRecord',
 ])
@@ -34,16 +34,16 @@ const groupedDocTypes = new Set([
   'person',
   // Tier 3 — Programs & Projects
   'futuroSummit', 'project', 'alumni', 'enrollee',
-  'alumniDream', 'alumniConversation', 'projectUpdate', 'participantConnection',
+  'alumniDream', 'alumniConversation', 'projectUpdate', 'participantConnection', 'alumniContinuum',
   'accreditationRecord', 'credential', 'accreditationHourLog',
   'keynote', 'recruitmentAsset',
   'ledgerPerson', 'collaborator',
   // Tier 4 — System
-  'tag', 'siteSettings_futuro', 'impactMetric',
+  'tag', 'siteSettings_futuro', 'siteSettings_hector', 'siteSettings_benext', 'siteSettings_next', 'siteSettings_mitikah', 'siteSettings_medikah', 'siteSettings_arkah', 'impactMetric',
   'pricingTier', 'usageRecord',
   'decision',
   // Legacy (hidden)
-  'vlog', 'alumniContinuum',
+  'vlog',
 ])
 
 export const deskStructure = (S: StructureBuilder) => {
@@ -176,6 +176,7 @@ export const deskStructure = (S: StructureBuilder) => {
               listWithPreview('alumniConversation', 'Conversations'),
               listWithPreview('projectUpdate', 'Project Updates'),
               S.documentTypeListItem('participantConnection').title('Participant Connections'),
+              listWithPreview('alumniContinuum', 'Alumni Continuum'),
               S.divider(),
               S.documentTypeListItem('accreditationRecord').title('Accreditation Records'),
               S.documentTypeListItem('credential').title('Credentials'),
@@ -197,11 +198,61 @@ export const deskStructure = (S: StructureBuilder) => {
             .items([
               S.documentTypeListItem('tag').title('Tags'),
               S.listItem()
-                .title('Futuro Site Settings')
+                .title('Site Settings')
                 .child(
-                  S.document()
-                    .schemaType('siteSettings_futuro')
-                    .documentId('siteSettings_futuro'),
+                  S.list()
+                    .title('Site Settings')
+                    .items([
+                      S.listItem()
+                        .title('Hector Site Settings')
+                        .child(
+                          S.document()
+                            .schemaType('siteSettings_hector')
+                            .documentId('siteSettings_hector'),
+                        ),
+                      S.listItem()
+                        .title('BeNeXT Site Settings')
+                        .child(
+                          S.document()
+                            .schemaType('siteSettings_benext')
+                            .documentId('siteSettings_benext'),
+                        ),
+                      S.listItem()
+                        .title('Futuro Site Settings')
+                        .child(
+                          S.document()
+                            .schemaType('siteSettings_futuro')
+                            .documentId('siteSettings_futuro'),
+                        ),
+                      S.listItem()
+                        .title('NeXT Site Settings')
+                        .child(
+                          S.document()
+                            .schemaType('siteSettings_next')
+                            .documentId('siteSettings_next'),
+                        ),
+                      S.listItem()
+                        .title('Mitikah Site Settings')
+                        .child(
+                          S.document()
+                            .schemaType('siteSettings_mitikah')
+                            .documentId('siteSettings_mitikah'),
+                        ),
+                      S.listItem()
+                        .title('Medikah Site Settings')
+                        .child(
+                          S.document()
+                            .schemaType('siteSettings_medikah')
+                            .documentId('siteSettings_medikah'),
+                        ),
+                      S.listItem()
+                        .title('Arkah Site Settings')
+                        .child(
+                          S.document()
+                            .schemaType('siteSettings_arkah')
+                            .documentId('siteSettings_arkah'),
+                        ),
+                    ]),
                 ),
               S.documentTypeListItem('impactMetric').title('Impact Metrics'),
               S.divider(),
