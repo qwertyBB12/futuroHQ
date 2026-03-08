@@ -6,6 +6,12 @@ import essay from './essay'
 import person from './person'
 import project from './project'
 import siteSettings_futuro from './siteSettings_futuro'
+import siteSettings_hector from './siteSettings_hector'
+import siteSettings_benext from './siteSettings_benext'
+import siteSettings_next from './siteSettings_next'
+import siteSettings_mitikah from './siteSettings_mitikah'
+import siteSettings_medikah from './siteSettings_medikah'
+import siteSettings_arkah from './siteSettings_arkah'
 import futuroSummit from './futuroSummit'
 import news from './news'
 import impactMetric from './impactMetric'
@@ -30,6 +36,7 @@ import enrollee from './enrollee'
 import recruitmentAsset from './recruitmentAsset'
 
 // --- Companion Platform ---
+import alumniContinuum from './alumniContinuum'
 import alumniDream from './alumniDream'
 import alumniConversation from './alumniConversation'
 import projectUpdate from './projectUpdate'
@@ -49,7 +56,6 @@ import decision from './decision'
 
 // --- Legacy (registered but hidden from desk) ---
 import vlog from './vlog'
-import alumniContinuum from './alumniContinuum'
 
 // --- Export combined schema array ---
 export const schemaTypes = [
@@ -61,6 +67,12 @@ export const schemaTypes = [
   person,
   project,
   siteSettings_futuro,
+  siteSettings_hector,
+  siteSettings_benext,
+  siteSettings_next,
+  siteSettings_mitikah,
+  siteSettings_medikah,
+  siteSettings_arkah,
   futuroSummit,
   news,
   impactMetric,
@@ -80,6 +92,7 @@ export const schemaTypes = [
   tag,
 
   // Companion Platform
+  alumniContinuum,
   alumniDream,
   alumniConversation,
   projectUpdate,
@@ -99,7 +112,6 @@ export const schemaTypes = [
 
   // Legacy (hidden from desk)
   vlog,
-  alumniContinuum,
 
   // Shared Objects
   mediaBlock,
