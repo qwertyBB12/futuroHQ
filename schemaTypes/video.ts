@@ -6,10 +6,11 @@ export default defineType({
   title: 'Video',
   type: 'document',
   description:
-    'Video content — reflections, keynotes, interviews, documentaries. ' +
+    'Video content — reflections, interviews, documentaries. ' +
     'Default narrativeOwner: "hector". Default platformTier: "canonical". Default archivalStatus: "archival". ' +
     'Supports bilingual (en/es) with conditional Spanish title/description fields. ' +
-    'videoFormat determines longform vs shortform. contentCategory determines site section placement.',
+    'videoFormat determines longform vs shortform. contentCategory determines site section placement. ' +
+    'Keynote speeches use the dedicated keynote type, not video.',
   initialValue: {
     narrativeOwner: 'hector',
     platformTier: 'canonical',
@@ -88,13 +89,7 @@ export default defineType({
       name: 'videoUrl',
       title: 'Video URL',
       type: 'url',
-      description: 'Optional for keynotes without video recordings.',
-      validation: (Rule) =>
-        Rule.custom((value, context) => {
-          const doc = context?.document
-          if (doc?.contentCategory === 'keynote') return true
-          return value ? true : 'Video URL is required for non-keynote entries'
-        }),
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'thumbnailImage',
@@ -115,52 +110,12 @@ export default defineType({
       options: {
         list: [
           { title: 'Reflection', value: 'reflection' },
-          { title: 'Keynote', value: 'keynote' },
           { title: 'Interview', value: 'interview' },
           { title: 'Documentary', value: 'documentary' },
         ],
         layout: 'radio',
       },
       initialValue: 'reflection',
-    }),
-    defineField({
-      name: 'speechText',
-      title: 'Speech Text',
-      type: 'array',
-      of: [{ type: 'block' }],
-      description: 'Full written text of the keynote speech',
-      hidden: ({ document }) => document?.contentCategory !== 'keynote',
-    }),
-    defineField({
-      name: 'linkedEssay',
-      title: 'Linked Essay',
-      type: 'reference',
-      to: [{ type: 'essay' }],
-      description: 'Link to a published essay version of this keynote, if one exists. Takes priority over Speech Text.',
-      hidden: ({ document }) => document?.contentCategory !== 'keynote',
-    }),
-    defineField({
-      name: 'linkedReflection',
-      title: 'Linked Reflection',
-      type: 'reference',
-      to: [{ type: 'video' }],
-      description: 'Link to a video reflection related to this keynote, if one exists.',
-      hidden: ({ document }) => document?.contentCategory !== 'keynote',
-    }),
-    defineField({
-      name: 'linkedPodcastEpisode',
-      title: 'Linked Podcast Episode',
-      type: 'reference',
-      to: [{ type: 'podcastEpisode' }],
-      description: 'Link to a podcast episode of this keynote speech, if one exists.',
-      hidden: ({ document }) => document?.contentCategory !== 'keynote',
-    }),
-    defineField({
-      name: 'keynoteVenue',
-      title: 'Venue',
-      type: 'string',
-      description: 'Where the keynote was delivered (e.g., Georgetown University, OAS Headquarters)',
-      hidden: ({ document }) => document?.contentCategory !== 'keynote',
     }),
     defineField({
       name: 'publishDate',
