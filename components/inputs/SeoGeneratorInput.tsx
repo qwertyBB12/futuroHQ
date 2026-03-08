@@ -13,7 +13,7 @@ export function SeoGeneratorInput(props: ObjectInputProps) {
   const [error, setError] = useState<string | null>(null)
   const doc = useFormValue([]) as SanityDocument | null
 
-  const hasEndpoint = Boolean(process.env.AI_SEO_GENERATOR_ENDPOINT)
+  const hasEndpoint = Boolean(process.env.SANITY_STUDIO_SEO_ENDPOINT)
 
   const handleApply = (suggestion: SeoSuggestion) => {
     const nextValue: Record<string, unknown> = {
@@ -62,7 +62,7 @@ export function SeoGeneratorInput(props: ObjectInputProps) {
           <Text size={1}>
             {hasEndpoint
               ? 'Generate SEO metadata with your automation endpoint.'
-              : 'Set AI_SEO_GENERATOR_ENDPOINT in .env.local to enable one-click SEO.'}
+              : 'Set SANITY_STUDIO_SEO_ENDPOINT in .env.local to enable one-click SEO.'}
           </Text>
           <Flex align="center" gap={3}>
             {isLoading ? <Spinner /> : null}

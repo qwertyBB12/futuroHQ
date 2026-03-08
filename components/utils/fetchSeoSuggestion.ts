@@ -11,11 +11,11 @@ export type SeoRequestPayload = {
   fieldPath: string
 }
 
-const endpoint = process.env.AI_SEO_GENERATOR_ENDPOINT
+const endpoint = process.env.SANITY_STUDIO_SEO_ENDPOINT
 
 export async function fetchSeoSuggestion(payload: SeoRequestPayload): Promise<SeoSuggestion> {
   if (!endpoint) {
-    console.warn('[seo-generator] Missing AI_SEO_GENERATOR_ENDPOINT env variable.')
+    console.warn('[seo-generator] Missing SANITY_STUDIO_SEO_ENDPOINT env variable.')
     return {}
   }
 
