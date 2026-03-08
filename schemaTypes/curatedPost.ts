@@ -71,19 +71,12 @@ export default defineType({
       type: 'datetime',
       initialValue: () => new Date().toISOString()
     }),
-    defineField({ 
-      name: 'tags', 
-      title: 'Tags', 
-      type: 'array', 
-      of: [{ type: 'string' }],
-      description: 'Keywords or themes for filtering'
-    }),
     defineField({
-      name: 'tags_ref',
-      title: 'Tags (ref)',
+      name: 'tags',
+      title: 'Tags',
       type: 'array',
       of: [{ type: 'reference', to: [{ type: 'tag' }] }],
-      description: 'Link to reusable tag documents while keeping legacy tags',
+      description: 'Reusable tag references for categorization and filtering',
     }),
 
     // --- Narrative & SEO ---
