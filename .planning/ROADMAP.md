@@ -56,12 +56,12 @@ Plans:
   3. Keynote content has a single canonical representation — either the `keynote` type or `video` with `contentCategory: 'keynote'`, not both
   4. Every entity (hector, benext, futuro, next, mitikah, medikah, arkah) has a site settings document type registered in the schema
   5. `alumniContinuum` is either committed with documented purpose and proper desk structure placement, or removed from the schema registry
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 03-01: Tag system consolidation
-- [ ] 03-02: Person types and keynote resolution
-- [ ] 03-03: Site settings and experimental type cleanup
+- [ ] 03-01-PLAN.md — Tag consolidation (string to reference) and person type documentation
+- [ ] 03-02-PLAN.md — Keynote canonical resolution (remove from video, enrich keynote type)
+- [ ] 03-03-PLAN.md — Site settings for all entities and alumniContinuum commitment
 
 ## Progress
 
