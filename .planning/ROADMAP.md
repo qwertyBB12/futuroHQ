@@ -12,8 +12,8 @@ A three-phase hardening pass that moves from immediate safety fixes (AI endpoint
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Safety Guards** - AI endpoint components fail gracefully when env vars are missing
-- [ ] **Phase 2: Infrastructure** - Staging dataset, dataset switching, and automated deploy pipeline
+- [x] **Phase 1: Safety Guards** - AI endpoint components fail gracefully when env vars are missing
+- [x] **Phase 2: Infrastructure** - Staging dataset, dataset switching, and automated deploy pipeline
 - [ ] **Phase 3: Schema Consolidation** - Resolve dual tags, person type overlap, keynote duplication, missing site settings, and experimental types
 
 ## Phase Details
@@ -29,7 +29,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 1 plan
 
 Plans:
-- [ ] 01-01-PLAN.md — Fix env var prefix bug in SeoGeneratorInput, add error feedback to GenerateAIDerivativesAction
+- [x] 01-01-PLAN.md — Fix env var prefix bug in SeoGeneratorInput, add error feedback to GenerateAIDerivativesAction
 
 ### Phase 2: Infrastructure
 **Goal**: Developers can safely experiment with schema changes on a staging dataset, and content publishes automatically trigger site deploys
@@ -43,8 +43,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Dual-workspace config (production + staging) with dataset switcher
-- [ ] 02-02-PLAN.md — Automated Netlify deploy webhook via Sanity Manage
+- [x] 02-01-PLAN.md — Dual-workspace config (production + staging) with dataset switcher
+- [x] 02-02-PLAN.md — Automated Netlify deploy webhook via Sanity Manage
 
 ### Phase 3: Schema Consolidation
 **Goal**: Schema debt resolved — every document type has a clear, non-overlapping purpose and all entities have proper configuration
@@ -70,6 +70,6 @@ Phases execute in numeric order: 1 -> 2 -> 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Safety Guards | 0/1 | Not started | - |
-| 2. Infrastructure | 0/2 | Not started | - |
+| 1. Safety Guards | 1/1 | Complete | 2026-03-08 |
+| 2. Infrastructure | 2/2 | Complete | 2026-03-08 |
 | 3. Schema Consolidation | 0/3 | Not started | - |
