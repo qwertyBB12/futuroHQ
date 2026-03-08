@@ -3,8 +3,9 @@
  *
  * Ecosystem-aligned Civic Modern theme
  * AI Assist, Dashboard, Custom Actions & Badges
+ * Dual-workspace: production + staging
  *
- * Project: fo6n8ceo | Dataset: production
+ * Project: fo6n8ceo | Datasets: production, staging
  */
 
 import './styles.css'
@@ -59,11 +60,10 @@ const BILINGUAL_TYPES = new Set(['essay', 'video', 'podcastEpisode', 'opEd'])
  * - Add these to .env.local (never commit)
  */
 
-export default defineConfig({
-  name: 'default',
-  title: 'Autori Mandatum',
-  projectId: 'fo6n8ceo',
-  dataset: 'production',
+// ---------------------------------------------------------------------------
+// Shared configuration — common to all workspaces
+// ---------------------------------------------------------------------------
+const sharedConfig = {
   theme: customTheme,
   icon: StudioLogo,
 
@@ -76,9 +76,7 @@ export default defineConfig({
 
   schema: {types: schemaTypes},
 
-  // ---------------------------------------------------------------------------
   // Custom Studio Components
-  // ---------------------------------------------------------------------------
   studio: {
     components: {
       logo: StudioLogo,
@@ -87,10 +85,8 @@ export default defineConfig({
     },
   },
 
-  // ---------------------------------------------------------------------------
   // Custom Tools — Dashboard
-  // ---------------------------------------------------------------------------
-  tools: (prev) => [
+  tools: (prev: any) => [
     {
       name: 'dashboard',
       title: 'Dashboard',
@@ -99,11 +95,9 @@ export default defineConfig({
     ...prev,
   ],
 
-  // ---------------------------------------------------------------------------
-  // Document Badges — Entity awareness at a glance
-  // ---------------------------------------------------------------------------
+  // Document Badges & Actions
   document: {
-    badges: (prev, context) => {
+    badges: (prev: any, context: any) => {
       const badges = [...prev]
 
       if (GOVERNED_TYPES.has(context.schemaType)) {
@@ -124,10 +118,7 @@ export default defineConfig({
       return badges
     },
 
-    // -------------------------------------------------------------------------
-    // Document Actions — Ecosystem-aware workflows
-    // -------------------------------------------------------------------------
-    actions: (prev, context) => {
+    actions: (prev: any, context: any) => {
       const actions = [...prev]
 
       // Deploy action — available on all content types
@@ -145,4 +136,26 @@ export default defineConfig({
       return actions
     },
   },
-})
+}
+
+// ---------------------------------------------------------------------------
+// Dual-workspace config: production + staging
+// ---------------------------------------------------------------------------
+export default defineConfig([
+  {
+    ...sharedConfig,
+    name: 'production',
+    title: 'Autori Mandatum',
+    projectId: 'fo6n8ceo',
+    dataset: 'production',
+    basePath: '/production',
+  },
+  {
+    ...sharedConfig,
+    name: 'staging',
+    title: 'Autori Mandatum (Staging)',
+    projectId: 'fo6n8ceo',
+    dataset: 'staging',
+    basePath: '/staging',
+  },
+])
