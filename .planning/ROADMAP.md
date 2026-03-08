@@ -40,11 +40,11 @@ Plans:
   2. Switching datasets in the Studio does not require code changes or redeployment
   3. Publishing a document in the production dataset automatically triggers a Netlify build via webhook
   4. The manual TriggerDeployAction still works as a fallback alongside the automated webhook
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 02-01: Staging dataset and dataset switcher
-- [ ] 02-02: Automated deploy webhook
+- [ ] 02-01-PLAN.md — Dual-workspace config (production + staging) with dataset switcher
+- [ ] 02-02-PLAN.md — Automated Netlify deploy webhook via Sanity Manage
 
 ### Phase 3: Schema Consolidation
 **Goal**: Schema debt resolved — every document type has a clear, non-overlapping purpose and all entities have proper configuration
