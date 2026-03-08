@@ -2,6 +2,7 @@ import {useState} from 'react'
 import type {DocumentActionComponent} from 'sanity'
 import {useDocumentOperation} from 'sanity'
 import {SparklesIcon} from '@sanity/icons'
+import {useToast} from '@sanity/ui'
 
 /**
  * Auto-generate AI derivatives (summary, quotes, captions) for content documents.
@@ -10,6 +11,7 @@ import {SparklesIcon} from '@sanity/icons'
 export const GenerateAIDerivativesAction: DocumentActionComponent = (props) => {
   const [generating, setGenerating] = useState(false)
   const {patch} = useDocumentOperation(props.id, props.type)
+  const toast = useToast()
 
   const doc = props.draft || props.published
   if (!doc) return null
@@ -48,22 +50,37 @@ export const GenerateAIDerivativesAction: DocumentActionComponent = (props) => {
           }),
         })
 
-        if (res.ok) {
-          const data = await res.json()
-          patch.execute([
-            {
-              set: {
-                ai_derivatives: {
-                  summary: data.summary || '',
-                  quotes: data.quotes || [],
-                  captions: data.captions || [],
-                },
+        if (!res.ok) {
+          toast.push({
+            status: 'error',
+            title: 'AI generation failed',
+            description: `Endpoint returned ${res.status}: ${res.statusText}`,
+          })
+          return
+        }
+
+        const data = await res.json()
+        patch.execute([
+          {
+            set: {
+              ai_derivatives: {
+                summary: data.summary || '',
+                quotes: data.quotes || [],
+                captions: data.captions || [],
               },
             },
-          ])
-        }
-      } catch {
-        // Fail silently — user can retry
+          },
+        ])
+        toast.push({
+          status: 'success',
+          title: 'AI derivatives generated',
+        })
+      } catch (err) {
+        toast.push({
+          status: 'error',
+          title: 'AI generation failed',
+          description: err instanceof Error ? err.message : 'Check your AI endpoint configuration',
+        })
       } finally {
         setGenerating(false)
       }
