@@ -6,10 +6,10 @@ export default defineType({
   title: 'Keynote',
   type: 'document',
   description:
-    'A keynote speech or major presentation. ' +
+    'The canonical representation of a keynote speech or major presentation — the hub connecting all formats (video, essay, podcast). ' +
     'Default narrativeOwner: "hector". Default platformTier: "canonical". Default archivalStatus: "archival". ' +
     'Venue and date are required. Category classifies the type: commencement, conference, institutional, panel, workshop. ' +
-    'Link to related video, essay, or podcast episode when recordings exist. ' +
+    'Use linkedVideo, linkedEssay, and linkedPodcastEpisode to connect related content. ' +
     'Featured keynotes surface on hectorhlopez.com/keynotes.',
   fields: [
     defineField({
@@ -52,10 +52,38 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'speechText',
+      title: 'Speech Text',
+      type: 'array',
+      of: [{type: 'block'}],
+      description: 'Full written text of the keynote speech, if available',
+    }),
+    defineField({
+      name: 'linkedVideo',
+      title: 'Linked Video',
+      type: 'reference',
+      to: [{type: 'video'}],
+      description: 'Video recording of this keynote speech',
+    }),
+    defineField({
+      name: 'linkedEssay',
+      title: 'Linked Essay',
+      type: 'reference',
+      to: [{type: 'essay'}],
+      description: 'Published essay version of this keynote, if one exists',
+    }),
+    defineField({
+      name: 'linkedPodcastEpisode',
+      title: 'Linked Podcast Episode',
+      type: 'reference',
+      to: [{type: 'podcastEpisode'}],
+      description: 'Podcast episode of this keynote speech, if one exists',
+    }),
+    defineField({
       name: 'videoUrl',
       title: 'Video URL',
       type: 'url',
-      description: 'YouTube or other video embed URL',
+      description: 'YouTube or other video embed URL (legacy — prefer linkedVideo reference)',
     }),
     defineField({
       name: 'presentationUrl',
