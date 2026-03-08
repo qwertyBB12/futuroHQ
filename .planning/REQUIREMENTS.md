@@ -9,8 +9,8 @@ Requirements for this hardening pass. Each maps to roadmap phases.
 
 ### Safety
 
-- [ ] **SAFE-01**: SeoGeneratorInput gracefully disables when `AI_SEO_GENERATOR_ENDPOINT` env var is not set — no silent failures, clear UI indication
-- [ ] **SAFE-02**: GenerateAIDerivativesAction gracefully disables when `SANITY_STUDIO_AI_ENDPOINT` env var is not set — action hidden or shows disabled state
+- [x] **SAFE-01**: SeoGeneratorInput gracefully disables when `AI_SEO_GENERATOR_ENDPOINT` env var is not set — no silent failures, clear UI indication
+- [x] **SAFE-02**: GenerateAIDerivativesAction gracefully disables when `SANITY_STUDIO_AI_ENDPOINT` env var is not set — action hidden or shows disabled state
 
 ### Infrastructure
 
@@ -48,8 +48,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SAFE-01 | Phase 1: Safety Guards | Pending |
-| SAFE-02 | Phase 1: Safety Guards | Pending |
+| SAFE-01 | Phase 1: Safety Guards | Complete |
+| SAFE-02 | Phase 1: Safety Guards | Complete |
 | INFR-01 | Phase 2: Infrastructure | Pending |
 | INFR-02 | Phase 2: Infrastructure | Pending |
 | INFR-03 | Phase 2: Infrastructure | Pending |
