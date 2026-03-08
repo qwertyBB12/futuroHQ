@@ -143,13 +143,12 @@ export default defineType({
       type: 'array',
       of: [{ type: 'string' }],
     }),
-    defineField({ name: 'tags', title: 'Tags', type: 'array', of: [{ type: 'string' }] }),
     defineField({
-      name: 'tags_ref',
-      title: 'Tags (ref)',
+      name: 'tags',
+      title: 'Tags',
       type: 'array',
       of: [{ type: 'reference', to: [{ type: 'tag' }] }],
-      description: 'Reusable tag references (keep legacy string tags during migration)',
+      description: 'Reusable tag references for categorization and filtering',
     }),
 
     // --- Narrative & SEO ---

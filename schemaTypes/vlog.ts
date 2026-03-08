@@ -82,14 +82,8 @@ export default defineType({
       name: 'tags',
       title: 'Tags',
       type: 'array',
-      of: [{ type: 'string' }],
-    }),
-    defineField({
-      name: 'tags_ref',
-      title: 'Tags (ref)',
-      type: 'array',
       of: [{ type: 'reference', to: [{ type: 'tag' }] }],
-      description: 'Link to tag documents while existing string tags migrate in parallel',
+      description: 'Reusable tag references for categorization and filtering',
     }),
 
     // --- Media ---
