@@ -6,6 +6,8 @@ export default defineType({
   title: 'Alumni',
   type: 'document',
   description:
+    'Futuro/BeNeXT program graduates with Companion Platform integration (30+ fields including dreams, conversations, accreditation). ' +
+    'Distinct from person (simple identity) and ledgerPerson (narrative intelligence). ' +
     'A Futuro/BeNeXT program alumnus. Public profiles live on benextglobal.com. ' +
     'Default narrativeOwner: "benext" or "futuro" depending on cohort. ' +
     'Default platformTier: "personal". Default archivalStatus: "archival". ' +
