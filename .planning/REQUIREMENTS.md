@@ -14,10 +14,10 @@ Requirements for this hardening pass. Each maps to roadmap phases.
 
 ### Infrastructure
 
-- [ ] **INFR-01**: Staging dataset (`staging`) created via Sanity CLI with documented workflow
-- [ ] **INFR-02**: Studio config supports dataset switching between production and staging for development
-- [ ] **INFR-03**: Sanity webhook configured to trigger Netlify build automatically on document publish
-- [ ] **INFR-04**: TriggerDeployAction retained as manual fallback alongside automated webhook
+- [x] **INFR-01**: Staging dataset (`staging`) created via Sanity CLI with documented workflow
+- [x] **INFR-02**: Studio config supports dataset switching between production and staging for development
+- [x] **INFR-03**: Sanity webhook configured to trigger Netlify build automatically on document publish
+- [x] **INFR-04**: TriggerDeployAction retained as manual fallback alongside automated webhook
 
 ### Schema Cleanup
 
@@ -50,10 +50,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 |-------------|-------|--------|
 | SAFE-01 | Phase 1: Safety Guards | Complete |
 | SAFE-02 | Phase 1: Safety Guards | Complete |
-| INFR-01 | Phase 2: Infrastructure | Pending |
-| INFR-02 | Phase 2: Infrastructure | Pending |
-| INFR-03 | Phase 2: Infrastructure | Pending |
-| INFR-04 | Phase 2: Infrastructure | Pending |
+| INFR-01 | Phase 2: Infrastructure | Complete |
+| INFR-02 | Phase 2: Infrastructure | Complete |
+| INFR-03 | Phase 2: Infrastructure | Complete |
+| INFR-04 | Phase 2: Infrastructure | Complete |
 | SCHM-01 | Phase 3: Schema Consolidation | Pending |
 | SCHM-02 | Phase 3: Schema Consolidation | Pending |
 | SCHM-03 | Phase 3: Schema Consolidation | Pending |
