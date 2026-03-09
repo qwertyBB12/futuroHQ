@@ -5,7 +5,7 @@ milestone_name: Security & Content Architecture Pass
 status: milestone_complete
 stopped_at: v1.0 milestone shipped
 last_updated: "2026-03-09T01:09:17.000Z"
-last_activity: 2026-03-09 — Quick task 1 completed (bilingual Es fields on siteSettings)
+last_activity: 2026-03-09 — Completed quick task 1: Add Es-suffixed bilingual fields to all siteSettings schemas
 progress:
   total_phases: 3
   completed_phases: 3
@@ -67,6 +67,12 @@ All decisions logged in PROJECT.md Key Decisions table. Key patterns:
 ### Blockers/Concerns
 
 None.
+
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 1 | Add Es-suffixed bilingual fields to all siteSettings schemas | 2026-03-09 | c98a065 | [1-add-es-suffixed-bilingual-fields-to-all-](./quick/1-add-es-suffixed-bilingual-fields-to-all-/) |
 
 ## Session Continuity
 
