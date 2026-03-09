@@ -5,7 +5,7 @@ milestone_name: Security & Content Architecture Pass
 status: milestone_complete
 stopped_at: v1.0 milestone shipped
 last_updated: "2026-03-09T01:09:17.000Z"
-last_activity: 2026-03-09 — Completed quick task 1: Add Es-suffixed bilingual fields to all siteSettings schemas
+last_activity: 2026-03-09 — Completed quick task 2: Add navLinks array field to all siteSettings schemas
 progress:
   total_phases: 3
   completed_phases: 3
@@ -73,9 +73,10 @@ None.
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
 | 1 | Add Es-suffixed bilingual fields to all siteSettings schemas | 2026-03-09 | c98a065 | [1-add-es-suffixed-bilingual-fields-to-all-](./quick/1-add-es-suffixed-bilingual-fields-to-all-/) |
+| 2 | Add navLinks array field to all siteSettings schemas | 2026-03-09 | 3286d85 | [2-add-navlinks-array-field-to-all-sitesett](./quick/2-add-navlinks-array-field-to-all-sitesett/) |
 
 ## Session Continuity
 
 Last session: 2026-03-09
-Stopped at: Quick task 1 completed (bilingual Es fields)
+Stopped at: Quick task 2 completed (navLinks array field + data population)
 Resume file: None
