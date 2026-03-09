@@ -21,6 +21,13 @@ export default defineType({
       description: 'Default SEO description applied when pages do not provide their own',
     }),
     defineField({
+      name: 'metaDescriptionEs',
+      title: 'Meta Description (ES)',
+      type: 'text',
+      rows: 3,
+      description: 'Spanish variant — default SEO description applied when pages do not provide their own',
+    }),
+    defineField({
       name: 'defaultSocialImage',
       title: 'Default Social Image',
       type: 'image',
@@ -38,6 +45,12 @@ export default defineType({
           title: 'CTA Copy',
           type: 'string',
           description: 'Button or link copy for the CTA',
+        }),
+        defineField({
+          name: 'copyEs',
+          title: 'CTA Copy (ES)',
+          type: 'string',
+          description: 'Spanish variant — button or link copy for the CTA',
         }),
         defineField({
           name: 'url',
@@ -86,6 +99,13 @@ export default defineType({
       type: 'text',
       rows: 3,
       description: 'Reusable footer text such as mission statements or legal language',
+    }),
+    defineField({
+      name: 'footerCopyEs',
+      title: 'Footer Copy (ES)',
+      type: 'text',
+      rows: 3,
+      description: 'Spanish variant — reusable footer text such as mission statements or legal language',
     }),
   ],
   preview: {
