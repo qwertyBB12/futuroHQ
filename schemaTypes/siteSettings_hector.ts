@@ -14,6 +14,41 @@ export default defineType({
       validation: Rule => Rule.required(),
     }),
     defineField({
+      name: 'navLinks',
+      title: 'Navigation Links',
+      type: 'array',
+      description: 'Ordered list of navigation links rendered in the site header',
+      of: [
+        {
+          name: 'navLinkItem',
+          title: 'Nav Link',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'label',
+              title: 'Label',
+              type: 'string',
+              description: 'English navigation label',
+              validation: Rule => Rule.required(),
+            }),
+            defineField({
+              name: 'labelEs',
+              title: 'Label (ES)',
+              type: 'string',
+              description: 'Spanish variant — navigation label',
+            }),
+            defineField({
+              name: 'href',
+              title: 'Link Path',
+              type: 'string',
+              description: 'URL path or full URL for the navigation link',
+              validation: Rule => Rule.required(),
+            }),
+          ],
+        },
+      ],
+    }),
+    defineField({
       name: 'metaDescription',
       title: 'Meta Description',
       type: 'text',
