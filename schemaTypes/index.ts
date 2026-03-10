@@ -15,6 +15,7 @@ import siteSettings_arkah from './siteSettings_arkah'
 import futuroSummit from './futuroSummit'
 import news from './news'
 import impactMetric from './impactMetric'
+import pageContent_hhl_about from './pageContent_hhl_about'
 
 // --- Media / Publishing ---
 import podcast from './podcast'
@@ -76,6 +77,7 @@ export const schemaTypes = [
   futuroSummit,
   news,
   impactMetric,
+  pageContent_hhl_about,
 
   // Enrollment (archive candidates — used by external enrollment system)
   enrollee,
