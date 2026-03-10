@@ -128,6 +128,47 @@ export default defineType({
         }),
       ],
     }),
+    // --- About Page ---
+    defineField({
+      name: 'aboutHeroHeading',
+      title: 'About Hero Heading',
+      type: 'string',
+      description: 'Main heading on the About page',
+    }),
+    defineField({
+      name: 'aboutHeroHeadingEs',
+      title: 'About Hero Heading (ES)',
+      type: 'string',
+      description: 'Spanish variant — main heading on the About page',
+    }),
+    defineField({
+      name: 'aboutHeroLead',
+      title: 'About Hero Lead',
+      type: 'text',
+      rows: 3,
+      description: 'Introductory paragraph beneath the About hero heading',
+    }),
+    defineField({
+      name: 'aboutHeroLeadEs',
+      title: 'About Hero Lead (ES)',
+      type: 'text',
+      rows: 3,
+      description: 'Spanish variant — introductory paragraph beneath the About hero heading',
+    }),
+    defineField({
+      name: 'aboutBody',
+      title: 'About Body',
+      type: 'text',
+      rows: 12,
+      description: 'Extended About page body copy (plain text)',
+    }),
+    defineField({
+      name: 'aboutBodyEs',
+      title: 'About Body (ES)',
+      type: 'text',
+      rows: 12,
+      description: 'Spanish variant — extended About page body copy (plain text)',
+    }),
     defineField({
       name: 'footerCopy',
       title: 'Footer Copy',
