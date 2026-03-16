@@ -1,6 +1,7 @@
 import { defineType, defineField } from 'sanity'
 import { commonMeta } from './blocks/commonMeta'
 import { governanceFields } from './blocks/governanceBlock'
+import {featuredInField} from './blocks/featuredInField'
 
 export default defineType({
   name: 'opEd',
@@ -80,6 +81,7 @@ export default defineType({
       type: 'array',
       of: [{ type: 'reference', to: [{ type: 'tag' }] }],
     }),
+    featuredInField,
 
     // --- SEO ---
     defineField({

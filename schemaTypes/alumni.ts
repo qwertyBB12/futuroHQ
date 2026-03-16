@@ -1,5 +1,6 @@
 import { defineType, defineField } from 'sanity'
 import { governanceFields } from './blocks/governanceBlock'
+import {featuredContentField} from './blocks/featuredContentField'
 
 export default defineType({
   name: 'alumni',
@@ -14,7 +15,7 @@ export default defineType({
     'Bios should be third person. Include cohortYear, generation, and convening reference. ' +
     'Media array holds photos and video testimonials (mediaBlock). ' +
     'Companion Platform fields (supabaseUserId, etc.) link to the gated alumni dashboard. ' +
-    'featuredEssays and featuredVideos surface alumni-authored content on their profile.',
+    'featuredContent surfaces content where this alumni appears on their profile.',
   fieldsets: [
     {
       name: 'companion',
@@ -109,20 +110,7 @@ export default defineType({
     }),
 
     // --- Featured Content (curated for public profile) ---
-    defineField({
-      name: 'featuredEssays',
-      title: 'Featured Essays',
-      type: 'array',
-      of: [{ type: 'reference', to: [{ type: 'essay' }] }],
-      description: 'Curated essays shown on the public alumni profile',
-    }),
-    defineField({
-      name: 'featuredVideos',
-      title: 'Featured Videos',
-      type: 'array',
-      of: [{ type: 'reference', to: [{ type: 'video' }] }],
-      description: 'Curated videos shown on the public alumni profile',
-    }),
+    featuredContentField,
 
     // --- Order ---
     defineField({

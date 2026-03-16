@@ -1,6 +1,7 @@
 import {defineType, defineField} from 'sanity'
 import {governanceFields} from './blocks/governanceBlock'
 import {surfaceOnField} from './blocks/surfaceOnField'
+import {featuredInField} from './blocks/featuredInField'
 
 export default defineType({
   name: 'keynote',
@@ -157,6 +158,7 @@ export default defineType({
       type: 'array',
       of: [{ type: 'reference', to: [{ type: 'tag' }] }],
     }),
+    featuredInField,
 
     // --- SEO ---
     defineField({ name: 'seo', title: 'SEO', type: 'seoBlock' }),
