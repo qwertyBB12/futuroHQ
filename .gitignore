@@ -36,3 +36,6 @@ dist
 backups/
 .claude/
 .mcp.json
+
+# Personal data files for batch population scripts (runtime copies, not templates)
+scripts/data/

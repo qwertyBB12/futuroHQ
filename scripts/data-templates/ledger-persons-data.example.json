@@ -1,0 +1,8 @@
+[
+  {
+    "_id": "REPLACE_WITH_SANITY_ID",
+    "openingPortrait": "Opening portrait text (must be longer than 50 characters for completeness check)",
+    "currentTitle": "Current Title",
+    "organization": "Organization Name"
+  }
+]
