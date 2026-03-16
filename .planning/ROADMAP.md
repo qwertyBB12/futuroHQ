@@ -107,7 +107,7 @@ Plans:
 | 1. Safety Guards | v1.0 | 1/1 | Complete | 2026-03-08 |
 | 2. Infrastructure | v1.0 | 2/2 | Complete | 2026-03-08 |
 | 3. Schema Consolidation | v1.0 | 3/3 | Complete | 2026-03-08 |
-| 4. Tech Debt + Shared Infrastructure | v1.1 | 0/2 | Not started | - |
+| 4. Tech Debt + Shared Infrastructure | 1/2 | In Progress|  | - |
 | 5. Enrichment Tooling | v1.1 | 0/TBD | Not started | - |
 | 6. Person Tagging + Data Entry | v1.1 | 0/TBD | Not started | - |
 | 7. Video Schema B2/Bunny Fields | v1.1 | 0/TBD | Not started | - |

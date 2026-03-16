@@ -10,13 +10,13 @@ Requirements for Content Production & Media Pipeline milestone. Each maps to roa
 ### Schema & Infrastructure
 
 - [ ] **SCHM-01**: alumniContinuum added to GOVERNED_TYPES in sanity.config.ts so badges and document actions render correctly
-- [ ] **SCHM-02**: surfaceOn field extracted from essay.ts into shared reusable definition (like governanceFields pattern)
+- [x] **SCHM-02**: surfaceOn field extracted from essay.ts into shared reusable definition (like governanceFields pattern)
 - [ ] **SCHM-03**: surfaceOn field added to video, podcast, podcastEpisode, keynote, news schemas
-- [ ] **SCHM-04**: Arkah added to surfaceOn site options list as 7th site value
+- [x] **SCHM-04**: Arkah added to surfaceOn site options list as 7th site value
 - [ ] **SCHM-05**: Video schema has B2/Bunny fields: b2Key, cdnUrl, duration, resolution, thumbnailUrl in a collapsible field group
 - [ ] **SCHM-06**: Video schema has videoSource enum field (wistia | b2) for migration tracking
 - [ ] **SCHM-07**: Video documents have person/alumni reference array field for cross-site profile surfacing
-- [ ] **SCHM-08**: GOVERNED_TYPES extracted to shared lib/constants.ts used by both sanity.config.ts and deskStructure.ts
+- [x] **SCHM-08**: GOVERNED_TYPES extracted to shared lib/constants.ts used by both sanity.config.ts and deskStructure.ts
 
 ### Enrichment Tooling
 
@@ -72,10 +72,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | SCHM-01 | Phase 4 | Pending |
-| SCHM-02 | Phase 4 | Pending |
+| SCHM-02 | Phase 4 | Complete |
 | SCHM-03 | Phase 4 | Pending |
-| SCHM-04 | Phase 4 | Pending |
-| SCHM-08 | Phase 4 | Pending |
+| SCHM-04 | Phase 4 | Complete |
+| SCHM-08 | Phase 4 | Complete |
 | ENRH-01 | Phase 5 | Pending |
 | ENRH-02 | Phase 5 | Pending |
 | ENRH-03 | Phase 5 | Pending |
