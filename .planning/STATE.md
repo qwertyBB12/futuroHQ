@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Content Production & Media Pipeline
 status: planning
-stopped_at: Phase 6 UI-SPEC approved
-last_updated: "2026-03-16T22:14:01.713Z"
+stopped_at: Completed 06-01-PLAN.md
+last_updated: "2026-03-16T22:37:46.558Z"
 last_activity: 2026-03-16 — Roadmap created for v1.1 (5 phases, 19 requirements mapped)
 progress:
   total_phases: 5
   completed_phases: 2
-  total_plans: 4
-  completed_plans: 4
+  total_plans: 6
+  completed_plans: 5
   percent: 0
 ---
 
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-03-16)
 
 ## Current Position
 
-Phase: 4 of 8 (Tech Debt + Shared Infrastructure)
-Plan: Not started
-Status: Ready to plan
-Last activity: 2026-03-16 — Roadmap created for v1.1 (5 phases, 19 requirements mapped)
+Phase: 6 of 8 (Person Tagging + Data Entry)
+Plan: 01 complete — ready for Plan 02
+Status: In progress
+Last activity: 2026-03-16 — Phase 6 Plan 01 complete — person tagging schema foundation
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [████████░░] 83%
 
 ## Performance Metrics
 
@@ -50,6 +50,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 04 P02 | 3min | 2 tasks | 7 files |
 | Phase 05-enrichment-tooling P01 | 1 | 2 tasks | 2 files |
 | Phase 05-enrichment-tooling P02 | 2 | 3 tasks | 5 files |
+| Phase 06-person-tagging-data-entry P01 | ~15min | 2 tasks | 15 files |
 
 ## Accumulated Context
 
@@ -70,6 +71,8 @@ All decisions logged in PROJECT.md Key Decisions table. Key patterns for v1.1:
 - [Phase 05-01]: ENRICHMENT_TYPES defined separately from GOVERNED_TYPES — collaborator and ledgerPerson are enrichment-tracked but not governance-governed
 - [Phase 05-02]: document.components.unstable_layout used for banner registration — @sanity/assist already uses it and Sanity 5 chains multiple registrations via renderDefault
 - [Phase 05-02]: CompletenessInput guards internally via COMPLETENESS_CONFIG so global registration is safe — returns renderDefault for non-tracked types
+- [Phase 06-01]: featuredIn targets 4 people types (alumni, person, ledgerPerson, collaborator); featuredContent targets 7 content types
+- [Phase 06-01]: alumni featuredEssays + featuredVideos removed and replaced by unified featuredContent field
 
 ### Pending Todos
 
@@ -89,6 +92,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-16T22:14:01.711Z
-Stopped at: Phase 6 UI-SPEC approved
-Resume file: .planning/phases/06-person-tagging-data-entry/06-UI-SPEC.md
+Last session: 2026-03-16T22:37:46.556Z
+Stopped at: Completed 06-01-PLAN.md
+Resume file: None
