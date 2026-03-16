@@ -33,24 +33,7 @@ import {TriggerDeployAction} from './components/actions/TriggerDeployAction'
 import {GenerateAIDerivativesAction} from './components/actions/GenerateAIDerivativesAction'
 import {ArchiveAction} from './components/actions/ArchiveAction'
 import {SocialDistributeAction} from './components/actions/SocialDistributeAction'
-
-// Document types that have governance fields (show entity badges + custom actions)
-const GOVERNED_TYPES = new Set([
-  // Content
-  'essay', 'video', 'podcast', 'podcastEpisode',
-  'opEd', 'curatedPost', 'socialPost', 'news', 'keynote',
-  // Programs
-  'project', 'futuroSummit', 'alumni',
-  // Companion
-  'alumniDream', 'alumniConversation', 'projectUpdate', 'participantConnection',
-  // Accreditation
-  'accreditationRecord', 'credential', 'accreditationHourLog',
-  // Platform Business
-  'pricingTier', 'usageRecord',
-])
-
-// Types with language field
-const BILINGUAL_TYPES = new Set(['essay', 'video', 'podcastEpisode', 'opEd'])
+import {GOVERNED_TYPES, BILINGUAL_TYPES} from './lib/constants'
 
 /**
  * Webhook reminders:
