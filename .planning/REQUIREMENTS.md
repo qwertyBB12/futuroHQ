@@ -71,31 +71,31 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SCHM-01 | — | Pending |
-| SCHM-02 | — | Pending |
-| SCHM-03 | — | Pending |
-| SCHM-04 | — | Pending |
-| SCHM-05 | — | Pending |
-| SCHM-06 | — | Pending |
-| SCHM-07 | — | Pending |
-| SCHM-08 | — | Pending |
-| ENRH-01 | — | Pending |
-| ENRH-02 | — | Pending |
-| ENRH-03 | — | Pending |
-| ENRH-04 | — | Pending |
-| DATA-01 | — | Pending |
-| DATA-02 | — | Pending |
-| DATA-03 | — | Pending |
-| MDIA-01 | — | Pending |
-| MDIA-02 | — | Pending |
-| MDIA-03 | — | Pending |
-| MDIA-04 | — | Pending |
+| SCHM-01 | Phase 4 | Pending |
+| SCHM-02 | Phase 4 | Pending |
+| SCHM-03 | Phase 4 | Pending |
+| SCHM-04 | Phase 4 | Pending |
+| SCHM-08 | Phase 4 | Pending |
+| ENRH-01 | Phase 5 | Pending |
+| ENRH-02 | Phase 5 | Pending |
+| ENRH-03 | Phase 5 | Pending |
+| ENRH-04 | Phase 5 | Pending |
+| SCHM-07 | Phase 6 | Pending |
+| DATA-01 | Phase 6 | Pending |
+| DATA-02 | Phase 6 | Pending |
+| DATA-03 | Phase 6 | Pending |
+| SCHM-05 | Phase 7 | Pending |
+| SCHM-06 | Phase 7 | Pending |
+| MDIA-01 | Phase 8 | Pending |
+| MDIA-02 | Phase 8 | Pending |
+| MDIA-03 | Phase 8 | Pending |
+| MDIA-04 | Phase 8 | Pending |
 
 **Coverage:**
 - v1.1 requirements: 19 total
-- Mapped to phases: 0
-- Unmapped: 19
+- Mapped to phases: 19
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-16*
-*Last updated: 2026-03-16 after initial definition*
+*Last updated: 2026-03-16 — traceability populated after roadmap creation*
