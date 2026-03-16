@@ -1,4 +1,5 @@
 import { defineType, defineField } from 'sanity'
+import {featuredContentField} from './blocks/featuredContentField'
 
 export default defineType({
   name: 'ledgerPerson',
@@ -46,6 +47,7 @@ export default defineType({
       of: [{ type: 'reference', to: [{ type: 'collaborator' }] }],
       description: 'Links to collaborator entities (NGOs, corporations, universities, etc.)',
     }),
+    featuredContentField,
 
     // --- Narrative Development ---
     defineField({ name: 'openingPortrait', title: 'Opening Portrait', type: 'text' }),

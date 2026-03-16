@@ -2,6 +2,7 @@ import { defineType, defineField } from 'sanity'
 import { commonMeta } from './blocks/commonMeta'
 import { governanceFields } from './blocks/governanceBlock'
 import {surfaceOnField} from './blocks/surfaceOnField'
+import {featuredInField} from './blocks/featuredInField'
 
 export default defineType({
   name: 'podcast',
@@ -81,6 +82,7 @@ export default defineType({
       title: 'Cover Media',
       type: 'mediaBlock', // ✅ unified
     }),
+    featuredInField,
     ...commonMeta,
     surfaceOnField,
 

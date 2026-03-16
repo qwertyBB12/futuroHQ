@@ -2,6 +2,7 @@ import { defineType, defineField } from 'sanity'
 import { commonMeta } from './blocks/commonMeta'
 import { governanceFields } from './blocks/governanceBlock'
 import {surfaceOnField} from './blocks/surfaceOnField'
+import {featuredInField} from './blocks/featuredInField'
 
 export default defineType({
   name: 'podcastEpisode',
@@ -68,6 +69,7 @@ export default defineType({
       type: 'array',
       of: [{ type: 'reference', to: [{ type: 'tag' }] }],
     }),
+    featuredInField,
 
     // --- Audio + Video ---
     defineField({
