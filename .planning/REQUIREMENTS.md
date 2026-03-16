@@ -21,9 +21,9 @@ Requirements for Content Production & Media Pipeline milestone. Each maps to roa
 ### Enrichment Tooling
 
 - [x] **ENRH-01**: Filtered desk lists showing incomplete records per content type using GROQ null/empty filters
-- [ ] **ENRH-02**: Completeness dashboard widget showing field completion gaps across all content types via GROQ count() aggregation
-- [ ] **ENRH-03**: Per-document completeness progress bar rendered above form fields via components.input API
-- [ ] **ENRH-04**: Batch update scripts via Sanity client for bulk field population with rate-limit-safe chunking (25 req/s, ~100 mutations/transaction)
+- [x] **ENRH-02**: Completeness dashboard widget showing field completion gaps across all content types via GROQ count() aggregation
+- [x] **ENRH-03**: Per-document completeness progress bar rendered above form fields via components.input API
+- [x] **ENRH-04**: Batch update scripts via Sanity client for bulk field population with rate-limit-safe chunking (25 req/s, ~100 mutations/transaction)
 
 ### Data Entry
 
@@ -77,9 +77,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SCHM-04 | Phase 4 | Complete |
 | SCHM-08 | Phase 4 | Complete |
 | ENRH-01 | Phase 5 | Complete |
-| ENRH-02 | Phase 5 | Pending |
-| ENRH-03 | Phase 5 | Pending |
-| ENRH-04 | Phase 5 | Pending |
+| ENRH-02 | Phase 5 | Complete |
+| ENRH-03 | Phase 5 | Complete |
+| ENRH-04 | Phase 5 | Complete |
 | SCHM-07 | Phase 6 | Pending |
 | DATA-01 | Phase 6 | Pending |
 | DATA-02 | Phase 6 | Pending |
