@@ -1,5 +1,6 @@
 import {defineType, defineField} from 'sanity'
 import {governanceFields} from './blocks/governanceBlock'
+import {surfaceOnField} from './blocks/surfaceOnField'
 
 export default defineType({
   name: 'keynote',
@@ -11,6 +12,9 @@ export default defineType({
     'Venue and date are required. Category classifies the type: commencement, conference, institutional, panel, workshop. ' +
     'Use linkedVideo, linkedEssay, and linkedPodcastEpisode to connect related content. ' +
     'Featured keynotes surface on hectorhlopez.com/keynotes.',
+  groups: [
+    {name: 'distribution', title: 'Distribution'},
+  ],
   fields: [
     defineField({
       name: 'title',
@@ -157,6 +161,7 @@ export default defineType({
     // --- SEO ---
     defineField({ name: 'seo', title: 'SEO', type: 'seoBlock' }),
 
+    surfaceOnField,
     ...governanceFields,
   ],
   orderings: [

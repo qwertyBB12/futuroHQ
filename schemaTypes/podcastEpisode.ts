@@ -1,6 +1,7 @@
 import { defineType, defineField } from 'sanity'
 import { commonMeta } from './blocks/commonMeta'
 import { governanceFields } from './blocks/governanceBlock'
+import {surfaceOnField} from './blocks/surfaceOnField'
 
 export default defineType({
   name: 'podcastEpisode',
@@ -12,6 +13,9 @@ export default defineType({
     'Supports bilingual (en/es). Include episode number, season number, and duration. ' +
     'audioEmbed is the primary player (Captivate/RSS). videoEmbed is optional (YouTube/Vimeo). ' +
     'Reference the parent podcast series via the series field.',
+  groups: [
+    {name: 'distribution', title: 'Distribution'},
+  ],
   fields: [
     // --- Core ---
     defineField({
@@ -90,6 +94,7 @@ export default defineType({
     defineField({ name: 'seo', title: 'SEO', type: 'seoBlock' }),
 
     ...commonMeta,
+    surfaceOnField,
 
     // --- Governance ---
     ...governanceFields,

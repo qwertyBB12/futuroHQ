@@ -1,5 +1,6 @@
 import { defineType, defineField } from 'sanity'
 import { governanceFields } from './blocks/governanceBlock'
+import {surfaceOnField} from './blocks/surfaceOnField'
 
 export default defineType({
   name: 'video',
@@ -16,6 +17,9 @@ export default defineType({
     platformTier: 'canonical',
     archivalStatus: 'archival',
   },
+  groups: [
+    {name: 'distribution', title: 'Distribution'},
+  ],
   fields: [
     defineField({
       name: 'title',
@@ -269,6 +273,7 @@ export default defineType({
         }),
       ],
     }),
+    surfaceOnField,
     ...governanceFields,
   ],
   preview: {
