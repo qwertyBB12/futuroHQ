@@ -1,5 +1,6 @@
 import { defineType, defineField } from 'sanity'
 import { governanceFields } from './blocks/governanceBlock'
+import {surfaceOnField} from './blocks/surfaceOnField'
 
 export default defineType({
   name: 'news',
@@ -15,6 +16,9 @@ export default defineType({
     platformTier: 'institutional',
     archivalStatus: 'archival',
   },
+  groups: [
+    {name: 'distribution', title: 'Distribution'},
+  ],
   fields: [
     // --- Publish toggle pinned at top ---
     defineField({
@@ -172,6 +176,8 @@ export default defineType({
       type: 'seoBlock',
       description: 'Override SEO metadata for this article when needed',
     }),
+
+    surfaceOnField,
 
     // --- Governance ---
     ...governanceFields,

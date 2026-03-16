@@ -1,5 +1,6 @@
 import { defineType, defineField } from 'sanity'
 import { governanceFields } from './blocks/governanceBlock'
+import {surfaceOnField} from './blocks/surfaceOnField'
 
 export default defineType({
   name: 'essay',
@@ -18,6 +19,9 @@ export default defineType({
     platformTier: 'canonical',
     archivalStatus: 'archival',
   },
+  groups: [
+    {name: 'distribution', title: 'Distribution'},
+  ],
   fields: [
     defineField({
       name: 'title',
@@ -89,24 +93,6 @@ export default defineType({
       options: { hotspot: true },
     }),
     defineField({
-      name: 'surfaceOn',
-      title: 'Surface On',
-      type: 'array',
-      of: [{ type: 'string' }],
-      options: {
-        list: [
-          { title: 'hectorhlopez.com', value: 'hectorhlopez' },
-          { title: 'Futuro.ngo', value: 'futuro' },
-          { title: 'BeNeXT Global', value: 'benext' },
-          { title: 'Mítikah', value: 'mitikah' },
-          { title: 'Medikah', value: 'medikah' },
-          { title: 'NeXT', value: 'next' },
-        ],
-        layout: 'grid',
-      },
-      description: 'Which ecosystem sites should display this essay',
-    }),
-    defineField({
       name: 'fiveYearTest',
       title: 'Five Year Test',
       type: 'boolean',
@@ -124,6 +110,7 @@ export default defineType({
       title: 'SEO',
       type: 'seoBlock',
     }),
+    surfaceOnField,
     ...governanceFields,
   ],
   preview: {

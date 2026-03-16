@@ -1,6 +1,7 @@
 import { defineType, defineField } from 'sanity'
 import { commonMeta } from './blocks/commonMeta'
 import { governanceFields } from './blocks/governanceBlock'
+import {surfaceOnField} from './blocks/surfaceOnField'
 
 export default defineType({
   name: 'podcast',
@@ -12,6 +13,9 @@ export default defineType({
     'Status should be "active" for current shows, "archived" for concluded ones. ' +
     'Include RSS feed URL and YouTube channel URL for cross-platform discovery. ' +
     'Episodes are separate podcastEpisode documents that reference this series.',
+  groups: [
+    {name: 'distribution', title: 'Distribution'},
+  ],
   fields: [
     // --- Status ---
     defineField({
@@ -78,6 +82,7 @@ export default defineType({
       type: 'mediaBlock', // ✅ unified
     }),
     ...commonMeta,
+    surfaceOnField,
 
     // --- Governance ---
     ...governanceFields,
