@@ -172,14 +172,14 @@ export const deskStructure = (S: StructureBuilder) => {
           S.list()
             .title('Daily')
             .items([
-              listWithPreview('essay', 'Essays'),
+              listWithEnrichment('essay', 'Essays'),
               listWithEnrichment('video', 'Videos'),
-              listWithPreview('podcast', 'Podcasts'),
+              listWithEnrichment('podcast', 'Podcasts'),
               listWithEnrichment('podcastEpisode', 'Podcast Episodes'),
               listWithPreview('socialPost', 'Social Posts'),
-              listWithPreview('opEd', 'Op-Eds'),
+              listWithEnrichment('opEd', 'Op-Eds'),
               listWithPreview('curatedPost', 'Curated Posts'),
-              listWithPreview('news', 'News'),
+              listWithEnrichment('news', 'News'),
             ]),
         ),
 
@@ -200,7 +200,7 @@ export const deskStructure = (S: StructureBuilder) => {
               listWithEnrichment('alumni', 'Alumni'),
               S.documentTypeListItem('enrollee').title('Enrollees'),
               S.divider(),
-              listWithPreview('keynote', 'Keynotes'),
+              listWithEnrichment('keynote', 'Keynotes'),
               S.documentTypeListItem('recruitmentAsset').title('Recruitment Assets'),
               S.divider(),
               listWithPreview('person', 'People'),

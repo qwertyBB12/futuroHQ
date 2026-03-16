@@ -20,6 +20,11 @@ const TRACKED_TYPES = [
   {type: 'ledgerPerson', label: 'Ledger People'},
   {type: 'video', label: 'Videos'},
   {type: 'podcastEpisode', label: 'Podcast Episodes'},
+  {type: 'essay', label: 'Essays'},
+  {type: 'podcast', label: 'Podcasts'},
+  {type: 'keynote', label: 'Keynotes'},
+  {type: 'opEd', label: 'Op-Eds'},
+  {type: 'news', label: 'News'},
 ]
 
 export default function EnrichmentProgressWidget() {
