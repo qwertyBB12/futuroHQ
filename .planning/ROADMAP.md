@@ -39,10 +39,11 @@ See: `.planning/milestones/v1.0-ROADMAP.md` for full details.
   2. video, podcast, podcastEpisode, keynote, and news documents each have a surfaceOn field with working multi-select grid UI
   3. Arkah appears as a selectable option in the surfaceOn grid on all content types including essay
   4. GOVERNED_TYPES is defined once in lib/constants.ts and imported by both sanity.config.ts and deskStructure.ts — no divergence possible
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 04-01: TBD
+- [ ] 04-01-PLAN.md — Extract constants to lib/constants.ts, create shared surfaceOnField, update imports
+- [ ] 04-02-PLAN.md — Propagate surfaceOnField to 6 schemas, patch alumniContinuum governance data
 
 ### Phase 5: Enrichment Tooling
 **Goal**: Editors can see exactly which records are incomplete and navigate directly to them — no hunting, no Vision queries required
@@ -106,7 +107,7 @@ Plans:
 | 1. Safety Guards | v1.0 | 1/1 | Complete | 2026-03-08 |
 | 2. Infrastructure | v1.0 | 2/2 | Complete | 2026-03-08 |
 | 3. Schema Consolidation | v1.0 | 3/3 | Complete | 2026-03-08 |
-| 4. Tech Debt + Shared Infrastructure | v1.1 | 0/TBD | Not started | - |
+| 4. Tech Debt + Shared Infrastructure | v1.1 | 0/2 | Not started | - |
 | 5. Enrichment Tooling | v1.1 | 0/TBD | Not started | - |
 | 6. Person Tagging + Data Entry | v1.1 | 0/TBD | Not started | - |
 | 7. Video Schema B2/Bunny Fields | v1.1 | 0/TBD | Not started | - |
