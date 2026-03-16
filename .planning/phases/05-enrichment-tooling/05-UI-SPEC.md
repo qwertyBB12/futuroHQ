@@ -37,13 +37,13 @@ Declared values (must be multiples of 4). Applied via `@sanity/ui` `space` props
 |-------|-------|-------|
 | xs | 4px | Icon dot diameter, badge letter-spacing |
 | sm | 8px | `@sanity/ui` `space={2}` — stack gap between label + count, badge stacking |
-| md | 16px | `@sanity/ui` `space={4}` — standard Stack spacing between widget sections; glassCard internal padding (14-16px) |
+| md | 16px | `@sanity/ui` `space={4}` — standard Stack spacing between widget sections; glassCard internal padding |
 | lg | 24px | glassPanel internal padding (`padding: 24`) — confirmed in EcosystemHealthWidget |
 | xl | 32px | Dashboard grid gap between widget rows |
 | 2xl | 48px | Not used in this phase |
 | 3xl | 64px | Not used in this phase |
 
-**Source:** `components/dashboard/EcosystemHealthWidget.tsx` (padding: 24 on glassPanel, padding: 14-16 on glassCard), `components/dashboard/glassStyles.ts` (borderRadius: 24 on panel, 16 on card).
+**Source:** `components/dashboard/EcosystemHealthWidget.tsx` (padding: 24 on glassPanel, padding: 16 on glassCard), `components/dashboard/glassStyles.ts` (borderRadius: 24 on panel, 16 on card).
 
 Exceptions: none. All sizing values on-grid.
 
@@ -111,7 +111,7 @@ New components this phase (executor reference):
 - **Location:** `components/dashboard/EnrichmentProgressWidget.tsx`
 - **Container:** `div` with `{...glassPanel, padding: 24}` — matches EcosystemHealthWidget exactly
 - **Heading:** `<Heading size={1}>` with Oswald, UPPERCASE, letterSpacing 0.05em — text: "Enrichment Progress"
-- **Per-type row:** `div` with `{...glassCard, padding: 14}` containing:
+- **Per-type row:** `div` with `{...glassCard, padding: 16}` containing:
   - `<Flex justify="space-between">`: type label (Oswald, UPPERCASE, weight 700, size={1}, letterSpacing 0.03em) + count text (muted, size={1}, format: "23/28 (82%)")
   - Progress bar track: `<Box>` with `background: #1A1714`, `borderRadius: 4`, `height: 8`, `overflow: hidden`
   - Progress bar fill: `<Box>` with `width: pct%`, `background: #B17E68`, `borderRadius: 4`, `transition: 'width 0.4s ease'`
@@ -205,11 +205,11 @@ No third-party registries. No vetting gate required.
 
 ## Checker Sign-Off
 
-- [ ] Dimension 1 Copywriting: PASS
-- [ ] Dimension 2 Visuals: PASS
-- [ ] Dimension 3 Color: PASS
-- [ ] Dimension 4 Typography: PASS
-- [ ] Dimension 5 Spacing: PASS
-- [ ] Dimension 6 Registry Safety: PASS
+- [x] Dimension 1 Copywriting: PASS
+- [x] Dimension 2 Visuals: PASS
+- [x] Dimension 3 Color: PASS
+- [x] Dimension 4 Typography: PASS
+- [x] Dimension 5 Spacing: PASS (14px → 16px fix applied)
+- [x] Dimension 6 Registry Safety: PASS
 
-**Approval:** pending
+**Approval:** approved (2026-03-16)
