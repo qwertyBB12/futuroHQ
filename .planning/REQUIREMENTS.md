@@ -15,7 +15,7 @@ Requirements for Content Production & Media Pipeline milestone. Each maps to roa
 - [x] **SCHM-04**: Arkah added to surfaceOn site options list as 7th site value
 - [ ] **SCHM-05**: Video schema has B2/Bunny fields: b2Key, cdnUrl, duration, resolution, thumbnailUrl in a collapsible field group
 - [ ] **SCHM-06**: Video schema has videoSource enum field (wistia | b2) for migration tracking
-- [ ] **SCHM-07**: Video documents have person/alumni reference array field for cross-site profile surfacing
+- [x] **SCHM-07**: Video documents have person/alumni reference array field for cross-site profile surfacing
 - [x] **SCHM-08**: GOVERNED_TYPES extracted to shared lib/constants.ts used by both sanity.config.ts and deskStructure.ts
 
 ### Enrichment Tooling
@@ -80,7 +80,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ENRH-02 | Phase 5 | Complete |
 | ENRH-03 | Phase 5 | Complete |
 | ENRH-04 | Phase 5 | Complete |
-| SCHM-07 | Phase 6 | Pending |
+| SCHM-07 | Phase 6 | Complete |
 | DATA-01 | Phase 6 | Pending |
 | DATA-02 | Phase 6 | Pending |
 | DATA-03 | Phase 6 | Pending |
