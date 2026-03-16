@@ -34,6 +34,8 @@ import {GenerateAIDerivativesAction} from './components/actions/GenerateAIDeriva
 import {ArchiveAction} from './components/actions/ArchiveAction'
 import {SocialDistributeAction} from './components/actions/SocialDistributeAction'
 import {GOVERNED_TYPES, BILINGUAL_TYPES} from './lib/constants'
+import {CompletenessInput} from './components/inputs/CompletenessInput'
+import {ENRICHMENT_TYPES} from './lib/completeness'
 
 /**
  * Webhook reminders:
@@ -78,8 +80,14 @@ const sharedConfig = {
     ...prev,
   ],
 
-  // Document Badges & Actions
+  // Document Badges, Actions & Components
   document: {
+    // Completeness banner — appears above form for all 5 enrichment-tracked types
+    // Guards internally via COMPLETENESS_CONFIG so safe to register globally
+    components: {
+      unstable_layout: CompletenessInput,
+    },
+
     badges: (prev: any, context: any) => {
       const badges = [...prev]
 
