@@ -7,6 +7,7 @@ import EcosystemSitesWidget from './EcosystemSitesWidget'
 import MyDraftsWidget from './MyDraftsWidget'
 import PendingTasksWidget from './PendingTasksWidget'
 import SeoHealthWidget from './SeoHealthWidget'
+import EnrichmentProgressWidget from './EnrichmentProgressWidget'
 
 // ─── Copper / Vermillion palette ───
 const COPPER = '#B17E68'
@@ -279,6 +280,11 @@ export default function DashboardLayout() {
         <Grid columns={[1, 1, 2]} gap={4}>
           <EcosystemHealthWidget />
           <SeoHealthWidget />
+        </Grid>
+
+        {/* Enrichment row — content production tracking */}
+        <Grid columns={[1, 1, 2]} gap={4}>
+          <EnrichmentProgressWidget />
         </Grid>
 
         {/* Sites row */}
