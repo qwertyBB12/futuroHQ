@@ -8,7 +8,7 @@ export default defineType({
   type: 'document',
   description:
     'Alumni-only curated content — resources, opportunities, and announcements for the alumni community. ' +
-    'Default narrativeOwner: "benext". Default platformTier: "institutional". Default archivalStatus: "alumni-only". ' +
+    'Default narrativeOwner: "benext". Default platformTier: "canonical". Default archivalStatus: "archival". ' +
     'Audience scoping controls which alumni group sees this content.',
   fields: [
     // --- Core ---
@@ -118,8 +118,9 @@ export default defineType({
   ],
 
   initialValue: {
-    archivalStatus: 'alumni-only',
-    narrativeOwner: 'futuro',
+    narrativeOwner: 'benext',
+    platformTier: 'canonical',
+    archivalStatus: 'archival',
     accessLevel: 'all-alumni',
   },
 
