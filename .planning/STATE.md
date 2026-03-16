@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Content Production & Media Pipeline
 status: planning
-stopped_at: Completed 05-01-PLAN.md
-last_updated: "2026-03-16T21:34:23.917Z"
+stopped_at: Completed 05-02-PLAN.md
+last_updated: "2026-03-16T21:39:05.676Z"
 last_activity: 2026-03-16 — Roadmap created for v1.1 (5 phases, 19 requirements mapped)
 progress:
   total_phases: 5
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 4
-  completed_plans: 3
+  completed_plans: 4
   percent: 0
 ---
 
@@ -49,6 +49,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 04 P01 | 2 | 2 tasks | 4 files |
 | Phase 04 P02 | 3min | 2 tasks | 7 files |
 | Phase 05-enrichment-tooling P01 | 1 | 2 tasks | 2 files |
+| Phase 05-enrichment-tooling P02 | 2 | 3 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -67,6 +68,8 @@ All decisions logged in PROJECT.md Key Decisions table. Key patterns for v1.1:
 - [Phase 05-01]: S.documentList().filter() used for Needs Enrichment desk lists — NOT S.documentTypeList().filter() which silently ignores the filter
 - [Phase 05-01]: lib/completeness.ts kept pure TypeScript with no Studio imports for Node.js batch script compatibility
 - [Phase 05-01]: ENRICHMENT_TYPES defined separately from GOVERNED_TYPES — collaborator and ledgerPerson are enrichment-tracked but not governance-governed
+- [Phase 05-02]: document.components.unstable_layout used for banner registration — @sanity/assist already uses it and Sanity 5 chains multiple registrations via renderDefault
+- [Phase 05-02]: CompletenessInput guards internally via COMPLETENESS_CONFIG so global registration is safe — returns renderDefault for non-tracked types
 
 ### Pending Todos
 
@@ -86,6 +89,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-16T21:34:23.915Z
-Stopped at: Completed 05-01-PLAN.md
+Last session: 2026-03-16T21:39:05.674Z
+Stopped at: Completed 05-02-PLAN.md
 Resume file: None
