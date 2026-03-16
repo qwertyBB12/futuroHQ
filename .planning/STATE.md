@@ -1,34 +1,36 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.0
-milestone_name: Security & Content Architecture Pass
-status: milestone_complete
-stopped_at: v1.0 milestone shipped
-last_updated: "2026-03-09T01:09:17.000Z"
-last_activity: 2026-03-09 — Completed quick task 2: Add navLinks array field to all siteSettings schemas
+milestone: v1.1
+milestone_name: Content Production & Media Pipeline
+status: defining_requirements
+stopped_at: null
+last_updated: "2026-03-16T00:00:00.000Z"
+last_activity: 2026-03-16 — Milestone v1.1 started
 progress:
-  total_phases: 3
-  completed_phases: 3
-  total_plans: 6
-  completed_plans: 6
-  percent: 100
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-03-08)
+See: .planning/PROJECT.md (updated 2026-03-16)
 
 **Core value:** Every component must either work correctly or be gracefully disabled — no silent failures, no orphaned experiments, no schema ambiguity.
-**Current focus:** Planning next milestone
+**Current focus:** Defining requirements for v1.1
 
 ## Current Position
 
-Milestone v1.0 shipped. All 3 phases complete (6 plans, 9 tasks).
-Next: `/gsd:new-milestone` to define next milestone.
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-03-16 — Milestone v1.1 started
 
-Progress: [██████████] 100%
+Progress: [░░░░░░░░░░] 0%
 
 ## Performance Metrics
 
