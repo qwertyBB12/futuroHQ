@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Content Production & Media Pipeline
 status: planning
-stopped_at: Phase 5 context gathered
-last_updated: "2026-03-16T20:55:35.804Z"
+stopped_at: Completed 05-01-PLAN.md
+last_updated: "2026-03-16T21:34:23.917Z"
 last_activity: 2026-03-16 — Roadmap created for v1.1 (5 phases, 19 requirements mapped)
 progress:
   total_phases: 5
   completed_phases: 1
-  total_plans: 2
-  completed_plans: 2
+  total_plans: 4
+  completed_plans: 3
   percent: 0
 ---
 
@@ -48,6 +48,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 03 P01-03 | 3 | 9min | 3min |
 | Phase 04 P01 | 2 | 2 tasks | 4 files |
 | Phase 04 P02 | 3min | 2 tasks | 7 files |
+| Phase 05-enrichment-tooling P01 | 1 | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -63,6 +64,9 @@ All decisions logged in PROJECT.md Key Decisions table. Key patterns for v1.1:
 - [Phase 04-02]: surfaceOnField placed before governanceFields in all 6 schemas — distribution fields appear above governance in form
 - [Phase 04-02]: alumniContinuum GROQ audit: 0 docs in production — no patch script needed, initialValue update sufficient
 - [Phase 04-02]: alumniContinuum defaults corrected: narrativeOwner benext, platformTier canonical, archivalStatus archival per CONTEXT.md
+- [Phase 05-01]: S.documentList().filter() used for Needs Enrichment desk lists — NOT S.documentTypeList().filter() which silently ignores the filter
+- [Phase 05-01]: lib/completeness.ts kept pure TypeScript with no Studio imports for Node.js batch script compatibility
+- [Phase 05-01]: ENRICHMENT_TYPES defined separately from GOVERNED_TYPES — collaborator and ledgerPerson are enrichment-tracked but not governance-governed
 
 ### Pending Todos
 
@@ -82,6 +86,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-16T20:55:35.802Z
-Stopped at: Phase 5 context gathered
-Resume file: .planning/phases/05-enrichment-tooling/05-CONTEXT.md
+Last session: 2026-03-16T21:34:23.915Z
+Stopped at: Completed 05-01-PLAN.md
+Resume file: None
