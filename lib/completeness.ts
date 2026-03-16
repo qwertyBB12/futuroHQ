@@ -115,6 +115,11 @@ export const COMPLETENESS_CONFIG: CompletenessConfig = {
       validate: (v) =>
         Boolean((v as Record<string, unknown>)?.metaDescription),
     },
+    {
+      field: 'featuredIn',
+      label: 'Featured In',
+      validate: (v) => Array.isArray(v) && v.length > 0,
+    },
   ],
 
   podcastEpisode: [
@@ -137,6 +142,51 @@ export const COMPLETENESS_CONFIG: CompletenessConfig = {
       field: 'episodeNumber',
       label: 'Episode Number',
       validate: (v) => typeof v === 'number' && v > 0,
+    },
+    {
+      field: 'featuredIn',
+      label: 'Featured In',
+      validate: (v) => Array.isArray(v) && v.length > 0,
+    },
+  ],
+
+  essay: [
+    {
+      field: 'featuredIn',
+      label: 'Featured In',
+      validate: (v) => Array.isArray(v) && v.length > 0,
+    },
+  ],
+
+  podcast: [
+    {
+      field: 'featuredIn',
+      label: 'Featured In',
+      validate: (v) => Array.isArray(v) && v.length > 0,
+    },
+  ],
+
+  keynote: [
+    {
+      field: 'featuredIn',
+      label: 'Featured In',
+      validate: (v) => Array.isArray(v) && v.length > 0,
+    },
+  ],
+
+  opEd: [
+    {
+      field: 'featuredIn',
+      label: 'Featured In',
+      validate: (v) => Array.isArray(v) && v.length > 0,
+    },
+  ],
+
+  news: [
+    {
+      field: 'featuredIn',
+      label: 'Featured In',
+      validate: (v) => Array.isArray(v) && v.length > 0,
     },
   ],
 }
@@ -201,7 +251,17 @@ export const GROQ_FILTERS: Record<string, string> = {
 
   ledgerPerson: `_type == "ledgerPerson" && !(_id in path("drafts.**")) && (!defined(openingPortrait) || length(openingPortrait) <= 50 || !defined(currentTitle) || !defined(organization))`,
 
-  video: `_type == "video" && !(_id in path("drafts.**")) && (!defined(thumbnailImage) || !defined(thumbnailImage.asset) || !defined(description) || description == "" || !defined(tags) || length(tags) == 0 || !defined(seo) || !defined(seo.metaDescription))`,
+  video: `_type == "video" && !(_id in path("drafts.**")) && (!defined(thumbnailImage) || !defined(thumbnailImage.asset) || !defined(description) || description == "" || !defined(tags) || length(tags) == 0 || !defined(seo) || !defined(seo.metaDescription) || !defined(featuredIn) || length(featuredIn) == 0)`,
 
-  podcastEpisode: `_type == "podcastEpisode" && !(_id in path("drafts.**")) && (!defined(description) || description == "" || !defined(audioEmbed) || !defined(tags) || length(tags) == 0 || !defined(episodeNumber))`,
+  podcastEpisode: `_type == "podcastEpisode" && !(_id in path("drafts.**")) && (!defined(description) || description == "" || !defined(audioEmbed) || !defined(tags) || length(tags) == 0 || !defined(episodeNumber) || !defined(featuredIn) || length(featuredIn) == 0)`,
+
+  essay: `_type == "essay" && !(_id in path("drafts.**")) && (!defined(featuredIn) || length(featuredIn) == 0)`,
+
+  podcast: `_type == "podcast" && !(_id in path("drafts.**")) && (!defined(featuredIn) || length(featuredIn) == 0)`,
+
+  keynote: `_type == "keynote" && !(_id in path("drafts.**")) && (!defined(featuredIn) || length(featuredIn) == 0)`,
+
+  opEd: `_type == "opEd" && !(_id in path("drafts.**")) && (!defined(featuredIn) || length(featuredIn) == 0)`,
+
+  news: `_type == "news" && !(_id in path("drafts.**")) && (!defined(featuredIn) || length(featuredIn) == 0)`,
 }
