@@ -11,6 +11,7 @@ import GovernanceView from './components/views/GovernanceView'
 import ReferencesView from './components/views/ReferencesView'
 import SeoAuditView from './components/views/SeoAuditView'
 import {GOVERNED_TYPES} from './lib/constants'
+import {GROQ_FILTERS} from './lib/completeness'
 
 // Types that get SEO Audit tab
 const SEO_TYPES = new Set([
@@ -72,6 +73,49 @@ export const deskStructure = (S: StructureBuilder) => {
           ),
       )
 
+  // Nested list with "All [Type]" and "Needs Enrichment" children.
+  // Used for the 5 tracked enrichment types. The "Needs Enrichment" child uses
+  // S.documentList().filter() — NOT S.documentTypeList().filter() — because
+  // only S.documentList() accepts a custom GROQ filter string.
+  const listWithEnrichment = (schemaType: string, title: string) =>
+    S.listItem()
+      .title(title)
+      .schemaType(schemaType)
+      .child(
+        S.list()
+          .title(title)
+          .items([
+            S.listItem()
+              .title(`All ${title}`)
+              .schemaType(schemaType)
+              .child(
+                S.documentTypeList(schemaType)
+                  .title(`All ${title}`)
+                  .child((documentId) =>
+                    S.document()
+                      .schemaType(schemaType)
+                      .documentId(documentId)
+                      .views(documentViews(schemaType)),
+                  ),
+              ),
+            S.listItem()
+              .title('Needs Enrichment')
+              .schemaType(schemaType)
+              .child(
+                S.documentList()
+                  .title('Needs Enrichment')
+                  .schemaType(schemaType)
+                  .filter(GROQ_FILTERS[schemaType])
+                  .child((documentId) =>
+                    S.document()
+                      .schemaType(schemaType)
+                      .documentId(documentId)
+                      .views(documentViews(schemaType)),
+                  ),
+              ),
+          ]),
+      )
+
   // Ungrouped fallback
   const allDocumentTypeListItems = S.documentTypeListItems()
   const ungroupedDocItems = allDocumentTypeListItems.filter((listItem) => {
@@ -129,9 +173,9 @@ export const deskStructure = (S: StructureBuilder) => {
             .title('Daily')
             .items([
               listWithPreview('essay', 'Essays'),
-              listWithPreview('video', 'Videos'),
+              listWithEnrichment('video', 'Videos'),
               listWithPreview('podcast', 'Podcasts'),
-              listWithPreview('podcastEpisode', 'Podcast Episodes'),
+              listWithEnrichment('podcastEpisode', 'Podcast Episodes'),
               listWithPreview('socialPost', 'Social Posts'),
               listWithPreview('opEd', 'Op-Eds'),
               listWithPreview('curatedPost', 'Curated Posts'),
@@ -153,15 +197,15 @@ export const deskStructure = (S: StructureBuilder) => {
             .items([
               listWithPreview('futuroSummit', 'Futuro Summits'),
               listWithPreview('project', 'Projects'),
-              listWithPreview('alumni', 'Alumni'),
+              listWithEnrichment('alumni', 'Alumni'),
               S.documentTypeListItem('enrollee').title('Enrollees'),
               S.divider(),
               listWithPreview('keynote', 'Keynotes'),
               S.documentTypeListItem('recruitmentAsset').title('Recruitment Assets'),
               S.divider(),
               listWithPreview('person', 'People'),
-              listWithPreview('collaborator', 'Collaborators & Organizations'),
-              S.documentTypeListItem('ledgerPerson').title('Ledger People'),
+              listWithEnrichment('collaborator', 'Collaborators & Organizations'),
+              listWithEnrichment('ledgerPerson', 'Ledger People'),
               S.divider(),
               listWithPreview('alumniDream', 'Alumni Dreams'),
               listWithPreview('alumniConversation', 'Conversations'),
