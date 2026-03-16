@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Content Production & Media Pipeline
 status: planning
-stopped_at: Completed 04-01-PLAN.md
-last_updated: "2026-03-16T20:21:59.902Z"
+stopped_at: Completed 04-02-PLAN.md
+last_updated: "2026-03-16T20:26:33.427Z"
 last_activity: 2026-03-16 — Roadmap created for v1.1 (5 phases, 19 requirements mapped)
 progress:
   total_phases: 5
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 2
-  completed_plans: 1
+  completed_plans: 2
   percent: 0
 ---
 
@@ -47,6 +47,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 02 P01-02 | 2 | 15min | 7.5min |
 | Phase 03 P01-03 | 3 | 9min | 3min |
 | Phase 04 P01 | 2 | 2 tasks | 4 files |
+| Phase 04 P02 | 3min | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -59,6 +60,9 @@ All decisions logged in PROJECT.md Key Decisions table. Key patterns for v1.1:
 - aws4fetch (not @aws-sdk) in Cloudflare Worker — AWS SDK broken in Workers since Jan 2025
 - [Phase 04-01]: GOVERNED_TYPES merged superset: deskStructure.ts had alumniContinuum, sanity.config.ts did not — canonical set includes it
 - [Phase 04-01]: lib/constants.ts single source of truth for GOVERNED_TYPES, BILINGUAL_TYPES, SURFACE_SITES — SEO_TYPES and groupedDocTypes remain local to deskStructure.ts
+- [Phase 04-02]: surfaceOnField placed before governanceFields in all 6 schemas — distribution fields appear above governance in form
+- [Phase 04-02]: alumniContinuum GROQ audit: 0 docs in production — no patch script needed, initialValue update sufficient
+- [Phase 04-02]: alumniContinuum defaults corrected: narrativeOwner benext, platformTier canonical, archivalStatus archival per CONTEXT.md
 
 ### Pending Todos
 
@@ -78,6 +82,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-16T20:21:59.900Z
-Stopped at: Completed 04-01-PLAN.md
+Last session: 2026-03-16T20:26:33.425Z
+Stopped at: Completed 04-02-PLAN.md
 Resume file: None
