@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Content Production & Media Pipeline
 status: planning
-stopped_at: Phase 4 UI-SPEC approved
-last_updated: "2026-03-16T20:04:09.370Z"
+stopped_at: Completed 04-01-PLAN.md
+last_updated: "2026-03-16T20:21:59.902Z"
 last_activity: 2026-03-16 — Roadmap created for v1.1 (5 phases, 19 requirements mapped)
 progress:
   total_phases: 5
   completed_phases: 0
-  total_plans: 0
-  completed_plans: 0
+  total_plans: 2
+  completed_plans: 1
   percent: 0
 ---
 
@@ -46,6 +46,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 01 P01 | 1 | 2min | 2min |
 | Phase 02 P01-02 | 2 | 15min | 7.5min |
 | Phase 03 P01-03 | 3 | 9min | 3min |
+| Phase 04 P01 | 2 | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -56,6 +57,8 @@ All decisions logged in PROJECT.md Key Decisions table. Key patterns for v1.1:
 - surfaceOn as string array (not references) — matches existing essay pattern, no join needed
 - Enrichment tooling before data entry — build tools first so data entry is trackable
 - aws4fetch (not @aws-sdk) in Cloudflare Worker — AWS SDK broken in Workers since Jan 2025
+- [Phase 04-01]: GOVERNED_TYPES merged superset: deskStructure.ts had alumniContinuum, sanity.config.ts did not — canonical set includes it
+- [Phase 04-01]: lib/constants.ts single source of truth for GOVERNED_TYPES, BILINGUAL_TYPES, SURFACE_SITES — SEO_TYPES and groupedDocTypes remain local to deskStructure.ts
 
 ### Pending Todos
 
@@ -75,6 +78,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-16T20:04:09.368Z
-Stopped at: Phase 4 UI-SPEC approved
-Resume file: .planning/phases/04-tech-debt-shared-infrastructure/04-UI-SPEC.md
+Last session: 2026-03-16T20:21:59.900Z
+Stopped at: Completed 04-01-PLAN.md
+Resume file: None
