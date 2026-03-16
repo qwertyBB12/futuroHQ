@@ -35,7 +35,7 @@ Declared values (must be multiples of 4). Applied via `@sanity/ui` `space` props
 
 | Token | Value | Usage |
 |-------|-------|-------|
-| xs | 4px | Icon dot diameter (10px dot uses 4px internal), badge letter-spacing |
+| xs | 4px | Icon dot diameter, badge letter-spacing |
 | sm | 8px | `@sanity/ui` `space={2}` — stack gap between label + count, badge stacking |
 | md | 16px | `@sanity/ui` `space={4}` — standard Stack spacing between widget sections; glassCard internal padding (14-16px) |
 | lg | 24px | glassPanel internal padding (`padding: 24`) — confirmed in EcosystemHealthWidget |
@@ -45,11 +45,11 @@ Declared values (must be multiples of 4). Applied via `@sanity/ui` `space` props
 
 **Source:** `components/dashboard/EcosystemHealthWidget.tsx` (padding: 24 on glassPanel, padding: 14-16 on glassCard), `components/dashboard/glassStyles.ts` (borderRadius: 24 on panel, 16 on card).
 
-Exceptions:
-- Progress bar track height: 6px (widget) / 4px (document banner) — sub-grid intentional for thin indicator aesthetic
-- Entity color dot in widget: 10px diameter — consistent with EcosystemHealthWidget dot pattern
-- Banner progress bar track: 4px height (tighter, inline with form)
-- Widget progress bar track: 6px height (more prominent, dashboard context)
+Exceptions: none. All sizing values on-grid.
+
+Notes:
+- Progress bar track height: 8px (widget) / 4px (document banner) — both on-grid. Widget bar is taller for dashboard prominence; banner bar is thinner for inline-form context.
+- Entity color dot in widget: 8px diameter — on-grid, consistent with the dot pattern used in EcosystemHealthWidget.
 
 ---
 
@@ -62,10 +62,12 @@ All type uses `@sanity/ui` `<Text>` and `<Heading>` components or inline `style`
 | Widget heading | 14px (Heading size={1}) | 700 (Oswald) | 1.2 | Oswald | UPPERCASE + letter-spacing: 0.05em — matches EcosystemHealthWidget |
 | Widget stat / count | 28px (inline span) | 700 (Oswald) | 1.1 | Oswald | All counts — total and per-type — rendered at 28px |
 | Row label | 12px (Text size={1}) | 700 (Oswald) | 1.3 | Oswald | UPPERCASE + letter-spacing: 0.03em — uppercase treatment provides visual distinction from 28px counts |
-| Body / muted | 12px (Text size={1}) | 400 (Mulish) | 1.5 | Mulish | Muted counts (e.g. "23/28"), missing field list in banner |
+| Body / muted | 12px (Text size={1}) | 400 (Mulish) | 1.5 | Mulish | Muted counts (e.g. "23/28"), missing field list in banner, "Complete" banner text |
 
 Declared sizes: 12px, 14px, 28px (3 sizes — within maximum of 4).
-Declared weights: 400 (Mulish body), 700 (Oswald headings, counts, and row labels — 2 weights maximum).
+Declared weights: 400 (Mulish body) and 700 (Oswald headings, counts, and row labels — 2 weights maximum).
+
+**Weight enforcement note:** The banner "Complete" state text and all banner copy must use weight 400 (Mulish body). The RESEARCH.md implementation example uses `weight="semibold"` (600) in a banner component reference — this is NOT within the two-weight contract. Use `weight="regular"` (400) for all banner text elements. The 700 weight is reserved for Oswald headings, widget counts, and row labels only.
 
 **Source:** `components/dashboard/EcosystemHealthWidget.tsx` (font sizes, weight patterns confirmed in JSX), `styles.css` (font-family assignments), `tailwind.config.js` (fontFamily tokens).
 
@@ -111,7 +113,7 @@ New components this phase (executor reference):
 - **Heading:** `<Heading size={1}>` with Oswald, UPPERCASE, letterSpacing 0.05em — text: "Enrichment Progress"
 - **Per-type row:** `div` with `{...glassCard, padding: 14}` containing:
   - `<Flex justify="space-between">`: type label (Oswald, UPPERCASE, weight 700, size={1}, letterSpacing 0.03em) + count text (muted, size={1}, format: "23/28 (82%)")
-  - Progress bar track: `<Box>` with `background: #1A1714`, `borderRadius: 4`, `height: 6`, `overflow: hidden`
+  - Progress bar track: `<Box>` with `background: #1A1714`, `borderRadius: 4`, `height: 8`, `overflow: hidden`
   - Progress bar fill: `<Box>` with `width: pct%`, `background: #B17E68`, `borderRadius: 4`, `transition: 'width 0.4s ease'`
 - **Spacing:** `<Stack space={4}>` for heading + rows section; `<Stack space={3}>` between type rows; `<Stack space={2}>` inside each row
 - **Data fetch:** `useClient({apiVersion: '2024-10-23'})` + `useEffect` once on mount — no listener
@@ -179,7 +181,7 @@ New components this phase (executor reference):
 | Banner incomplete heading | "[N]/[total] fields complete ([pct]%)" |
 | Banner missing fields | "Missing: [Field Label], [Field Label]" (comma-separated, uses human-readable labels from COMPLETENESS_CONFIG) |
 | Banner complete heading | "Complete" |
-| Empty "Needs Enrichment" list | Sanity default empty state — "No documents" (no custom copy — the list simply has no items when all records are complete) |
+| Empty "Needs Enrichment" list | "All [Type] records are complete." (e.g. "All Alumni records are complete.") — replaces Sanity platform default "No documents" with a positive confirmation |
 | Batch script console — start | "Found [N] [type] needing enrichment" |
 | Batch script console — chunk | "Patched [N] documents" |
 | Batch script console — done | "Done." |
