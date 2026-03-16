@@ -10,21 +10,12 @@ import LivePreview from './components/previews/LivePreview'
 import GovernanceView from './components/views/GovernanceView'
 import ReferencesView from './components/views/ReferencesView'
 import SeoAuditView from './components/views/SeoAuditView'
+import {GOVERNED_TYPES} from './lib/constants'
 
 // Types that get SEO Audit tab
 const SEO_TYPES = new Set([
   'essay', 'video', 'podcastEpisode', 'opEd', 'curatedPost', 'socialPost',
   'project', 'futuroSummit', 'collaborator', 'news', 'keynote', 'ledgerPerson',
-])
-
-// Types that get the full view panes (Content + Preview + Governance + References)
-const GOVERNED_TYPES = new Set([
-  'essay', 'video', 'podcast', 'podcastEpisode',
-  'opEd', 'curatedPost', 'socialPost', 'news', 'keynote',
-  'project', 'futuroSummit', 'alumni',
-  'alumniDream', 'alumniConversation', 'projectUpdate', 'participantConnection', 'alumniContinuum',
-  'accreditationRecord', 'credential', 'accreditationHourLog',
-  'pricingTier', 'usageRecord',
 ])
 
 // Every type explicitly placed in a tier — used to compute ungrouped fallback
