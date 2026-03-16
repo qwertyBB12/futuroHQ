@@ -69,10 +69,11 @@ Plans:
   2. All alumni records display photos, bios, and cohort details — the enrichment dashboard shows 100% completion for alumni
   3. All collaborator records have photos, bios, and organization details populated
   4. All 27 previously-empty ledgerPerson documents have data — the "Needs Enrichment" filtered list for ledgerPerson is empty
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 06-01: TBD
+- [ ] 06-01-PLAN.md — Create shared featuredIn/featuredContent fields, update 12 schemas, expand completeness system and desk structure
+- [ ] 06-02-PLAN.md — Alumni migration script, data population scripts with JSON templates, Studio verification
 
 ### Phase 7: Video Schema B2/Bunny Fields
 **Goal**: The video schema has a stable landing zone for pipeline metadata — editors can manually enter Bunny video IDs while the automated pipeline is being built
@@ -110,6 +111,6 @@ Plans:
 | 3. Schema Consolidation | v1.0 | 3/3 | Complete | 2026-03-08 |
 | 4. Tech Debt + Shared Infrastructure | 2/2 | Complete   | 2026-03-16 | - |
 | 5. Enrichment Tooling | 1/2 | In Progress|  | - |
-| 6. Person Tagging + Data Entry | v1.1 | 0/TBD | Not started | - |
+| 6. Person Tagging + Data Entry | v1.1 | 0/2 | Planned | - |
 | 7. Video Schema B2/Bunny Fields | v1.1 | 0/TBD | Not started | - |
 | 8. Media Pipeline Infrastructure | v1.1 | 0/TBD | Not started | - |
