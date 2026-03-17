@@ -83,10 +83,10 @@ Plans:
   1. Video documents have a collapsible "B2/Bunny Storage" field group containing b2Key, cdnUrl, duration, resolution, and thumbnailUrl fields
   2. Video documents have a videoSource field (wistia | b2) that defaults to wistia — existing videos are not broken
   3. Completeness checks updated so videos with populated bunnyVideoId register as storage-complete in the enrichment dashboard
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 07-01: TBD
+- [ ] 07-01-PLAN.md — Add videoSource enum, B2/Bunny storage fields with conditional visibility, source-aware completeness checks
 
 ### Phase 8: Media Pipeline Infrastructure
 **Goal**: Uploading a video to B2 automatically creates a draft Sanity document with CDN URL and metadata populated — the pipeline is end-to-end tested
@@ -112,5 +112,5 @@ Plans:
 | 4. Tech Debt + Shared Infrastructure | 2/2 | Complete   | 2026-03-16 | - |
 | 5. Enrichment Tooling | 1/2 | In Progress|  | - |
 | 6. Person Tagging + Data Entry | 2/2 | Complete   | 2026-03-17 | - |
-| 7. Video Schema B2/Bunny Fields | v1.1 | 0/TBD | Not started | - |
+| 7. Video Schema B2/Bunny Fields | v1.1 | 0/1 | Planned | - |
 | 8. Media Pipeline Infrastructure | v1.1 | 0/TBD | Not started | - |
