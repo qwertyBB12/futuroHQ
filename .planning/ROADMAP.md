@@ -97,10 +97,12 @@ Plans:
   2. Uploading a file to B2 triggers a Cloudflare Worker that creates or patches a draft video document in Sanity with b2Key, cdnUrl, and bunnyStatus populated
   3. Studio editors can browse and select assets from the Bunny Storage Zone via a custom asset source panel
   4. At least one real video upload completes the full pipeline: B2 upload → Worker fires → Sanity draft created → CDN URL plays back
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 08-01: TBD
+- [ ] 08-01-PLAN.md — Add bunnyStatus pipeline-tracking field to video schema and update completeness system
+- [ ] 08-02-PLAN.md — Create Cloudflare Worker repo with B2 webhook handler, Sanity draft creation, infrastructure docs and validation scripts
+- [ ] 08-03-PLAN.md — Build Bunny CDN custom asset source plugin for Studio editors to browse and select CDN-hosted videos
 
 ## Progress
 
@@ -113,4 +115,4 @@ Plans:
 | 5. Enrichment Tooling | 1/2 | In Progress|  | - |
 | 6. Person Tagging + Data Entry | 2/2 | Complete   | 2026-03-17 | - |
 | 7. Video Schema B2/Bunny Fields | 1/1 | Complete   | 2026-03-17 | - |
-| 8. Media Pipeline Infrastructure | v1.1 | 0/TBD | Not started | - |
+| 8. Media Pipeline Infrastructure | v1.1 | 0/3 | Not started | - |
