@@ -115,4 +115,4 @@ Plans:
 | 5. Enrichment Tooling | 1/2 | In Progress|  | - |
 | 6. Person Tagging + Data Entry | 2/2 | Complete   | 2026-03-17 | - |
 | 7. Video Schema B2/Bunny Fields | 1/1 | Complete   | 2026-03-17 | - |
-| 8. Media Pipeline Infrastructure | 1/3 | In Progress|  | - |
+| 8. Media Pipeline Infrastructure | 2/3 | In Progress|  | - |
