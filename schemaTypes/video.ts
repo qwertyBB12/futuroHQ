@@ -164,6 +164,23 @@ export default defineType({
       hidden: ({document}) => document?.videoSource !== 'b2',
     }),
     defineField({
+      name: 'bunnyStatus',
+      title: 'Pipeline Status',
+      type: 'string',
+      description: 'Set by the media pipeline Worker. processing = upload received, ready = CDN validated, error = pipeline failure.',
+      options: {
+        list: [
+          {title: 'Processing', value: 'processing'},
+          {title: 'Ready', value: 'ready'},
+          {title: 'Error', value: 'error'},
+        ],
+        layout: 'radio',
+      },
+      group: 'storage',
+      readOnly: true,
+      hidden: ({document}) => document?.videoSource !== 'b2',
+    }),
+    defineField({
       name: 'thumbnailImage',
       title: 'Thumbnail Image',
       type: 'image',
