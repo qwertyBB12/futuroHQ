@@ -13,8 +13,8 @@ Requirements for Content Production & Media Pipeline milestone. Each maps to roa
 - [x] **SCHM-02**: surfaceOn field extracted from essay.ts into shared reusable definition (like governanceFields pattern)
 - [x] **SCHM-03**: surfaceOn field added to video, podcast, podcastEpisode, keynote, news schemas
 - [x] **SCHM-04**: Arkah added to surfaceOn site options list as 7th site value
-- [ ] **SCHM-05**: Video schema has B2/Bunny fields: b2Key, cdnUrl, duration, resolution, thumbnailUrl in a collapsible field group
-- [ ] **SCHM-06**: Video schema has videoSource enum field (wistia | b2) for migration tracking
+- [x] **SCHM-05**: Video schema has B2/Bunny fields: b2Key, cdnUrl, duration, resolution, thumbnailUrl in a collapsible field group
+- [x] **SCHM-06**: Video schema has videoSource enum field (wistia | b2) for migration tracking
 - [x] **SCHM-07**: Video documents have person/alumni reference array field for cross-site profile surfacing
 - [x] **SCHM-08**: GOVERNED_TYPES extracted to shared lib/constants.ts used by both sanity.config.ts and deskStructure.ts
 
@@ -84,8 +84,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DATA-01 | Phase 6 | Complete |
 | DATA-02 | Phase 6 | Complete |
 | DATA-03 | Phase 6 | Complete |
-| SCHM-05 | Phase 7 | Pending |
-| SCHM-06 | Phase 7 | Pending |
+| SCHM-05 | Phase 7 | Complete |
+| SCHM-06 | Phase 7 | Complete |
 | MDIA-01 | Phase 8 | Pending |
 | MDIA-02 | Phase 8 | Pending |
 | MDIA-03 | Phase 8 | Pending |

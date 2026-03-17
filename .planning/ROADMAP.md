@@ -25,7 +25,7 @@ See: `.planning/milestones/v1.0-ROADMAP.md` for full details.
 - [x] **Phase 4: Tech Debt + Shared Infrastructure** - Resolve v1.0 governance debt and extract surfaceOn + GOVERNED_TYPES as shared constants before all subsequent schema work (completed 2026-03-16)
 - [ ] **Phase 5: Enrichment Tooling** - Build completeness indicators, filtered desk lists, and enrichment dashboard widget so data entry is trackable and efficient
 - [x] **Phase 6: Person Tagging + Data Entry** - Add alumni reference field to video and populate all incomplete alumni, collaborator, and ledgerPerson records (completed 2026-03-16)
-- [ ] **Phase 7: Video Schema B2/Bunny Fields** - Extend video schema with B2/Bunny storage fields and migration-tracking enum before pipeline infrastructure is built
+- [x] **Phase 7: Video Schema B2/Bunny Fields** - Extend video schema with B2/Bunny storage fields and migration-tracking enum before pipeline infrastructure is built (completed 2026-03-17)
 - [ ] **Phase 8: Media Pipeline Infrastructure** - Configure B2 + Bunny CDN and deploy Cloudflare Worker that auto-creates Sanity draft documents on video upload
 
 ## Phase Details
@@ -112,5 +112,5 @@ Plans:
 | 4. Tech Debt + Shared Infrastructure | 2/2 | Complete   | 2026-03-16 | - |
 | 5. Enrichment Tooling | 1/2 | In Progress|  | - |
 | 6. Person Tagging + Data Entry | 2/2 | Complete   | 2026-03-17 | - |
-| 7. Video Schema B2/Bunny Fields | v1.1 | 0/1 | Planned | - |
+| 7. Video Schema B2/Bunny Fields | 1/1 | Complete   | 2026-03-17 | - |
 | 8. Media Pipeline Infrastructure | v1.1 | 0/TBD | Not started | - |

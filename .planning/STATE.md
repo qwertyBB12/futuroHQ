@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Content Production & Media Pipeline
 status: executing
-stopped_at: Phase 7 context gathered
+stopped_at: Phase 7 Plan 01 complete — video schema B2/Bunny fields
 last_updated: "2026-03-17T00:30:56.338Z"
-last_activity: 2026-03-16 — Phase 6 Plan 01 complete — person tagging schema foundation
+last_activity: 2026-03-17 — Phase 7 Plan 01 complete — video schema B2/Bunny fields and source-aware completeness
 progress:
   total_phases: 5
   completed_phases: 3
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-03-16)
 
 ## Current Position
 
-Phase: 6 of 8 (Person Tagging + Data Entry)
-Plan: 01 complete — ready for Plan 02
+Phase: 7 of 8 (Video Schema B2/Bunny Fields)
+Plan: 01 complete — ready for Plan 02 (or next phase)
 Status: In progress
-Last activity: 2026-03-16 — Phase 6 Plan 01 complete — person tagging schema foundation
+Last activity: 2026-03-17 — Phase 7 Plan 01 complete — video schema B2/Bunny fields and source-aware completeness
 
-Progress: [████████░░] 83%
+Progress: [█████████░] 90%
 
 ## Performance Metrics
 
@@ -53,6 +53,7 @@ Progress: [████████░░] 83%
 | Phase 06-person-tagging-data-entry P01 | ~15min | 2 tasks | 15 files |
 | Phase 06 P02 | 2min | 1 tasks | 9 files |
 | Phase 06-person-tagging-data-entry P02 | 5min | 2 tasks | 9 files |
+| Phase 07-video-schema-b2-bunny-fields P01 | ~2min | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -78,6 +79,10 @@ All decisions logged in PROJECT.md Key Decisions table. Key patterns for v1.1:
 - [Phase 06-02]: Migration uses --live opt-in flag (not --dry-run opt-out) for safety on destructive unset operations
 - [Phase 06-02]: populate-* scripts use set() to overwrite vs batch-enrich.ts setIfMissing — intentional for real vs placeholder data
 - [Phase 06-person-tagging-data-entry]: Data population execution deferred to post-B2/Bunny CDN milestone — user approved closing phase with tooling complete
+- [Phase 07-01]: videoSource defaults to b2 for new documents (overrides SCHM-06 "defaults to wistia") — ecosystem is transitioning off Wistia
+- [Phase 07-01]: B2 storage fields hidden via `videoSource !== 'b2'` with no undefined guard — null/undefined treated as wistia (existing 84 videos safe)
+- [Phase 07-01]: 6th completeness check added outside COMPLETENESS_CONFIG via schemaType === 'video' branch — preserves pure FieldCheck interface for Node.js compatibility
+- [Phase 07-01]: duration field assigned to B2/Bunny Storage group per SCHM-05 (5 fields: b2Key, cdnUrl, duration, resolution, thumbnailUrl)
 
 ### Pending Todos
 
