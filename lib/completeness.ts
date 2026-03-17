@@ -245,14 +245,21 @@ export function checkCompleteness(
       } else {
         missingFields.push('CDN URL')
       }
+      // bunnyStatus check — B2 videos should have pipeline confirmation
+      if (doc.bunnyStatus === 'ready') {
+        completed++
+      } else {
+        missingFields.push('Pipeline Status')
+      }
+      return {completed, total: checks.length + 2, missingFields}
     } else {
       if (typeof doc.videoUrl === 'string' && doc.videoUrl.length > 0) {
         completed++
       } else {
         missingFields.push('Video URL')
       }
+      return {completed, total: checks.length + 1, missingFields}
     }
-    return {completed, total: checks.length + 1, missingFields}
   }
 
   return {completed, total: checks.length, missingFields}
@@ -278,7 +285,7 @@ export const GROQ_FILTERS: Record<string, string> = {
   !defined(tags) || length(tags) == 0 ||
   !defined(seo) || !defined(seo.metaDescription) ||
   !defined(featuredIn) || length(featuredIn) == 0 ||
-  (videoSource == "b2" && (!defined(cdnUrl) || cdnUrl == "")) ||
+  (videoSource == "b2" && (!defined(cdnUrl) || cdnUrl == "" || !defined(bunnyStatus) || bunnyStatus != "ready")) ||
   ((videoSource == "wistia" || !defined(videoSource)) && (!defined(videoUrl) || videoUrl == ""))
 )`,
 
