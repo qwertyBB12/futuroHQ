@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Content Production & Media Pipeline
 status: executing
-stopped_at: Phase 8 context gathered
-last_updated: "2026-03-17T03:17:54.368Z"
+stopped_at: Completed 08-01-PLAN.md — bunnyStatus schema field and completeness awareness
+last_updated: "2026-03-17T03:39:43.589Z"
 last_activity: 2026-03-17 — Phase 7 Plan 01 complete — video schema B2/Bunny fields and source-aware completeness
 progress:
   total_phases: 5
   completed_phases: 4
-  total_plans: 7
-  completed_plans: 7
+  total_plans: 10
+  completed_plans: 8
   percent: 90
 ---
 
@@ -54,6 +54,7 @@ Progress: [█████████░] 90%
 | Phase 06 P02 | 2min | 1 tasks | 9 files |
 | Phase 06-person-tagging-data-entry P02 | 5min | 2 tasks | 9 files |
 | Phase 07-video-schema-b2-bunny-fields P01 | ~2min | 2 tasks | 2 files |
+| Phase 08-media-pipeline-infrastructure P01 | 2min | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -83,6 +84,9 @@ All decisions logged in PROJECT.md Key Decisions table. Key patterns for v1.1:
 - [Phase 07-01]: B2 storage fields hidden via `videoSource !== 'b2'` with no undefined guard — null/undefined treated as wistia (existing 84 videos safe)
 - [Phase 07-01]: 6th completeness check added outside COMPLETENESS_CONFIG via schemaType === 'video' branch — preserves pure FieldCheck interface for Node.js compatibility
 - [Phase 07-01]: duration field assigned to B2/Bunny Storage group per SCHM-05 (5 fields: b2Key, cdnUrl, duration, resolution, thumbnailUrl)
+- [Phase 08-01]: bunnyStatus is readOnly — Worker populates it, editors never edit it directly
+- [Phase 08-01]: B2 video completeness total increases to checks.length+2 (cdnUrl + bunnyStatus); Wistia videos remain at checks.length+1
+- [Phase 08-01]: GROQ_FILTERS.video B2 branch extended with bunnyStatus != 'ready' — Needs Enrichment list surfaces B2 videos awaiting pipeline confirmation
 
 ### Pending Todos
 
@@ -102,6 +106,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-17T03:17:54.365Z
-Stopped at: Phase 8 context gathered
-Resume file: .planning/phases/08-media-pipeline-infrastructure/08-CONTEXT.md
+Last session: 2026-03-17T03:39:43.586Z
+Stopped at: Completed 08-01-PLAN.md — bunnyStatus schema field and completeness awareness
+Resume file: None
