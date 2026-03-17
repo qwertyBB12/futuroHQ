@@ -27,9 +27,9 @@ Requirements for Content Production & Media Pipeline milestone. Each maps to roa
 
 ### Data Entry
 
-- [ ] **DATA-01**: All alumni records have photos, bios, and cohort details populated
-- [ ] **DATA-02**: All collaborator records have photos, bios, and organization details populated
-- [ ] **DATA-03**: All 27 empty ledgerPerson documents populated with available data
+- [x] **DATA-01**: All alumni records have photos, bios, and cohort details populated
+- [x] **DATA-02**: All collaborator records have photos, bios, and organization details populated
+- [x] **DATA-03**: All 27 empty ledgerPerson documents populated with available data
 
 ### Media Pipeline
 
@@ -81,9 +81,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ENRH-03 | Phase 5 | Complete |
 | ENRH-04 | Phase 5 | Complete |
 | SCHM-07 | Phase 6 | Complete |
-| DATA-01 | Phase 6 | Pending |
-| DATA-02 | Phase 6 | Pending |
-| DATA-03 | Phase 6 | Pending |
+| DATA-01 | Phase 6 | Complete |
+| DATA-02 | Phase 6 | Complete |
+| DATA-03 | Phase 6 | Complete |
 | SCHM-05 | Phase 7 | Pending |
 | SCHM-06 | Phase 7 | Pending |
 | MDIA-01 | Phase 8 | Pending |
