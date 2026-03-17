@@ -111,6 +111,6 @@ Plans:
 | 3. Schema Consolidation | v1.0 | 3/3 | Complete | 2026-03-08 |
 | 4. Tech Debt + Shared Infrastructure | 2/2 | Complete   | 2026-03-16 | - |
 | 5. Enrichment Tooling | 1/2 | In Progress|  | - |
-| 6. Person Tagging + Data Entry | 2/2 | Complete   | 2026-03-16 | - |
+| 6. Person Tagging + Data Entry | 2/2 | Complete   | 2026-03-17 | - |
 | 7. Video Schema B2/Bunny Fields | v1.1 | 0/TBD | Not started | - |
 | 8. Media Pipeline Infrastructure | v1.1 | 0/TBD | Not started | - |

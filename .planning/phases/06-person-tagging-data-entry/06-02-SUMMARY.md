@@ -39,6 +39,7 @@ key-decisions:
   - "Migration uses --live flag (opt-in) not --dry-run (opt-out) — safer default for destructive field removal"
   - "Runtime data files live in scripts/data/ (gitignored); templates in scripts/data-templates/ (committed)"
   - "Populate scripts use client.patch().set() to overwrite — distinct from batch-enrich.ts which uses setIfMissing"
+  - "Data population execution deferred to post-B2/Bunny CDN milestone — user approved closing phase with tooling complete"
 
 patterns-established:
   - "Migration scripts: opt-in live flag, explicit WARNING in dry-run output, [DRY RUN] / [PATCHING] markers"
@@ -59,7 +60,7 @@ completed: 2026-03-16
 - **Duration:** 2 min
 - **Started:** 2026-03-16T22:39:19Z
 - **Completed:** 2026-03-16T22:41:49Z
-- **Tasks:** 1 complete (Task 2: awaiting human verification)
+- **Tasks:** 2 complete (Task 2: data population deferred by user decision)
 - **Files modified:** 9
 
 ## Accomplishments
@@ -73,7 +74,7 @@ Each task was committed atomically:
 
 1. **Task 1: Create alumni migration script and all data population scripts with templates** - `025e8f6` (feat)
 
-**Plan metadata:** pending (checkpoint not yet cleared)
+**Plan metadata:** (to be committed after STATE.md update)
 
 ## Files Created/Modified
 - `scripts/migrate-alumni-featured.ts` - Migrates featuredEssays + featuredVideos into featuredContent, then unsets old fields; dry-run default, --live to apply
@@ -93,7 +94,9 @@ Each task was committed atomically:
 
 ## Deviations from Plan
 
-None - plan executed exactly as written.
+Task 2 was a `checkpoint:human-verify` gate requiring live data population. The user approved closing the phase without running the scripts — actual data entry is deferred to a future milestone that will first establish B2 Backblaze + Bunny CDN video infrastructure. The tooling (scripts and templates) is fully implemented.
+
+No auto-fixes were applied to Task 1.
 
 ## Issues Encountered
 - `npx tsc --noEmit scripts/*.ts` (inline file mode) shows pre-existing @sanity/client type errors unrelated to new scripts — confirmed against existing `batch-enrich.ts` which shows identical errors. Project's full `npx tsc --noEmit` passes clean.
@@ -108,9 +111,9 @@ None - plan executed exactly as written.
 5. Run population scripts: `npx tsx scripts/populate-alumni.ts --dry-run` then `npx tsx scripts/populate-alumni.ts` (repeat for collaborators, ledger-persons)
 
 ## Next Phase Readiness
-- Scripts are ready; user must provide data files to complete population
-- Task 2 checkpoint: user must verify Studio UI, run migration/population with real data, and confirm completeness targets
-- After Task 2 approved: DATA-01, DATA-02, DATA-03 requirements fully satisfied
+- Phase 6 complete — schema (Plan 01) and migration/population tooling (Plan 02) fully implemented
+- Data population execution is a future task, gated on B2 + Bunny CDN media infrastructure from Phase 7/8
+- Scripts are ready to run once the user prepares data files in scripts/data/
 
 ---
 *Phase: 06-person-tagging-data-entry*
