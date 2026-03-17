@@ -234,6 +234,27 @@ export function checkCompleteness(
     }
   }
 
+  // Source-aware storage check for video documents
+  if (schemaType === 'video') {
+    const videoSource = doc.videoSource as string | undefined
+    const isB2 = videoSource === 'b2'
+    // null/undefined videoSource = legacy wistia video
+    if (isB2) {
+      if (typeof doc.cdnUrl === 'string' && doc.cdnUrl.length > 0) {
+        completed++
+      } else {
+        missingFields.push('CDN URL')
+      }
+    } else {
+      if (typeof doc.videoUrl === 'string' && doc.videoUrl.length > 0) {
+        completed++
+      } else {
+        missingFields.push('Video URL')
+      }
+    }
+    return {completed, total: checks.length + 1, missingFields}
+  }
+
   return {completed, total: checks.length, missingFields}
 }
 
@@ -251,7 +272,15 @@ export const GROQ_FILTERS: Record<string, string> = {
 
   ledgerPerson: `_type == "ledgerPerson" && !(_id in path("drafts.**")) && (!defined(openingPortrait) || length(openingPortrait) <= 50 || !defined(currentTitle) || !defined(organization))`,
 
-  video: `_type == "video" && !(_id in path("drafts.**")) && (!defined(thumbnailImage) || !defined(thumbnailImage.asset) || !defined(description) || description == "" || !defined(tags) || length(tags) == 0 || !defined(seo) || !defined(seo.metaDescription) || !defined(featuredIn) || length(featuredIn) == 0)`,
+  video: `_type == "video" && !(_id in path("drafts.**")) && (
+  !defined(thumbnailImage) || !defined(thumbnailImage.asset) ||
+  !defined(description) || description == "" ||
+  !defined(tags) || length(tags) == 0 ||
+  !defined(seo) || !defined(seo.metaDescription) ||
+  !defined(featuredIn) || length(featuredIn) == 0 ||
+  (videoSource == "b2" && (!defined(cdnUrl) || cdnUrl == "")) ||
+  ((videoSource == "wistia" || !defined(videoSource)) && (!defined(videoUrl) || videoUrl == ""))
+)`,
 
   podcastEpisode: `_type == "podcastEpisode" && !(_id in path("drafts.**")) && (!defined(description) || description == "" || !defined(audioEmbed) || !defined(tags) || length(tags) == 0 || !defined(episodeNumber) || !defined(featuredIn) || length(featuredIn) == 0)`,
 
