@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Content Production & Media Pipeline
 status: executing
-stopped_at: "Completed 08-02 tasks 1-2, checkpoint at task 3 (human-verify: infrastructure setup)"
-last_updated: "2026-03-17T03:42:14.958Z"
-last_activity: 2026-03-17 — Phase 7 Plan 01 complete — video schema B2/Bunny fields and source-aware completeness
+stopped_at: "Phase 8 Wave 1 partial: 08-01 complete, 08-02 checkpoint at task 3 (human-action: infra config + E2E test), 08-03 pending (Wave 2)"
+last_updated: "2026-03-19"
+last_activity: 2026-03-19 — Phase 8 Wave 1 executed; 08-01 shipped bunnyStatus field, 08-02 Worker repo built (2/3 tasks), checkpoint for infra setup
 progress:
   total_phases: 5
   completed_phases: 4
-  total_plans: 10
-  completed_plans: 9
-  percent: 90
+  total_plans: 12
+  completed_plans: 10
+  percent: 93
 ---
 
 # Project State
@@ -21,16 +21,30 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-16)
 
 **Core value:** Every component must either work correctly or be gracefully disabled — no silent failures, no orphaned experiments, no schema ambiguity.
-**Current focus:** Phase 4 — Tech Debt + Shared Infrastructure
+**Current focus:** Phase 8 — Media Pipeline Infrastructure
 
 ## Current Position
 
-Phase: 7 of 8 (Video Schema B2/Bunny Fields)
-Plan: 01 complete — ready for Plan 02 (or next phase)
-Status: In progress
-Last activity: 2026-03-17 — Phase 7 Plan 01 complete — video schema B2/Bunny fields and source-aware completeness
+Phase: 8 of 8 (Media Pipeline Infrastructure)
+Plan: 08-01 ✓, 08-02 checkpoint (task 3: human-action), 08-03 pending (Wave 2)
+Status: Executing — paused at checkpoint
+Last activity: 2026-03-19 — Phase 8 Wave 1: 08-01 complete, 08-02 paused at human-action checkpoint
 
-Progress: [█████████░] 90%
+Progress: [█████████░] 93%
+
+## Resume Instructions
+
+**To resume Phase 8 execution after infra config:**
+1. Complete the infrastructure steps in `/Users/hectorhlopez/projects/benext-media-worker/docs/infrastructure-setup.md`
+2. Run `/gsd:execute-phase 8` — it will detect 08-01 SUMMARY exists, pick up 08-02 continuation + 08-03
+3. When prompted at the 08-02 checkpoint, type "done" if E2E pipeline test passed
+
+**08-02 Checkpoint State:**
+- Tasks 1-2 complete (Worker code + infra docs committed in benext-media-worker repo)
+- Task 3 awaits: B2 bucket creation, Bunny CDN pull zone, Worker deploy, secrets, E2E upload test
+- Agent ID for 08-02 continuation: `afe74f081644f5985`
+
+**08-03 (Wave 2) depends on 08-01 ✓ — ready to execute after 08-02 completes**
 
 ## Performance Metrics
 
@@ -98,8 +112,7 @@ None.
 
 ### Blockers/Concerns
 
-- Phase 8 (Worker): Audit existing Wistia field names in video schema before finalizing Phase 7 schema plan (gap from research)
-- Phase 8 (Worker): May need /gsd:research-phase before planning — HMAC validation specifics and B2 bucket notification rule config are uncharted
+- Phase 8 (Worker): Infra checkpoint — B2 bucket, Bunny CDN pull zone, Worker deploy, and E2E test must be completed manually before 08-02 task 3 can close
 
 ### Quick Tasks Completed
 
@@ -110,6 +123,7 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-17T03:42:14.956Z
-Stopped at: Completed 08-02 tasks 1-2, checkpoint at task 3 (human-verify: infrastructure setup)
+Last session: 2026-03-19
+Stopped at: Phase 8 Wave 1 partial — 08-02 checkpoint at task 3 (human-action: infra config + E2E test)
+Resume with: /gsd:execute-phase 8 (after completing infra steps)
 Resume file: None
