@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Content Production & Media Pipeline
 status: executing
-stopped_at: "Phase 8 Wave 1 partial: 08-01 complete, 08-02 checkpoint at task 3 (human-action: infra config + E2E test), 08-03 pending (Wave 2)"
-last_updated: "2026-03-19"
-last_activity: 2026-03-19 — Phase 8 Wave 1 executed; 08-01 shipped bunnyStatus field, 08-02 Worker repo built (2/3 tasks), checkpoint for infra setup
+stopped_at: "Phase 8: 08-01 complete, 08-02 checkpoint (infra pending), 08-03 complete"
+last_updated: "2026-03-21"
+last_activity: 2026-03-21 — Phase 8 Wave 2 executed; 08-03 Bunny CDN asset source plugin shipped and verified
 progress:
   total_phases: 5
   completed_phases: 4
   total_plans: 12
-  completed_plans: 10
-  percent: 93
+  completed_plans: 11
+  percent: 96
 ---
 
 # Project State
@@ -26,25 +26,21 @@ See: .planning/PROJECT.md (updated 2026-03-16)
 ## Current Position
 
 Phase: 8 of 8 (Media Pipeline Infrastructure)
-Plan: 08-01 ✓, 08-02 checkpoint (task 3: human-action), 08-03 pending (Wave 2)
-Status: Executing — paused at checkpoint
-Last activity: 2026-03-19 — Phase 8 Wave 1: 08-01 complete, 08-02 paused at human-action checkpoint
+Plan: 08-01 ✓, 08-02 checkpoint (task 3: human-action — infra pending), 08-03 ✓
+Status: Executing — 08-02 infra checkpoint remaining
+Last activity: 2026-03-21 — 08-03 Bunny CDN asset source plugin shipped and human-verified
 
-Progress: [█████████░] 93%
+Progress: [█████████░] 96%
 
 ## Resume Instructions
 
-**To resume Phase 8 execution after infra config:**
+**To complete Phase 8:**
 1. Complete the infrastructure steps in `/Users/hectorhlopez/projects/benext-media-worker/docs/infrastructure-setup.md`
-2. Run `/gsd:execute-phase 8` — it will detect 08-01 SUMMARY exists, pick up 08-02 continuation + 08-03
-3. When prompted at the 08-02 checkpoint, type "done" if E2E pipeline test passed
+2. Run `/gsd:execute-phase 8` to close out 08-02 task 3 (E2E pipeline test)
 
 **08-02 Checkpoint State:**
 - Tasks 1-2 complete (Worker code + infra docs committed in benext-media-worker repo)
 - Task 3 awaits: B2 bucket creation, Bunny CDN pull zone, Worker deploy, secrets, E2E upload test
-- Agent ID for 08-02 continuation: `afe74f081644f5985`
-
-**08-03 (Wave 2) depends on 08-01 ✓ — ready to execute after 08-02 completes**
 
 ## Performance Metrics
 
@@ -70,6 +66,7 @@ Progress: [█████████░] 93%
 | Phase 07-video-schema-b2-bunny-fields P01 | ~2min | 2 tasks | 2 files |
 | Phase 08-media-pipeline-infrastructure P01 | 2min | 2 tasks | 2 files |
 | Phase 08-media-pipeline-infrastructure P02 | 3min | 2 tasks | 10 files |
+| Phase 08-media-pipeline-infrastructure P03 | 3min | 3 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -105,6 +102,8 @@ All decisions logged in PROJECT.md Key Decisions table. Key patterns for v1.1:
 - [Phase 08-02]: No @sanity/client in Worker — raw fetch to Sanity Mutations API minimizes bundle size
 - [Phase 08-02]: Constant-time HMAC comparison in Worker via charCodeAt XOR loop prevents timing attacks
 - [Phase 08-02]: Worker sets governance defaults on video drafts (hector/canonical/archival) so editors only fill editorial fields
+- [Phase 08-03]: GROQ-backed asset source listing instead of raw CDN browse — Bunny pull zones have no directory listing API
+- [Phase 08-03]: form.file.assetSources with prev spread — preserves default upload alongside Bunny CDN browser
 
 ### Pending Todos
 
@@ -123,7 +122,7 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-19
-Stopped at: Phase 8 Wave 1 partial — 08-02 checkpoint at task 3 (human-action: infra config + E2E test)
-Resume with: /gsd:execute-phase 8 (after completing infra steps)
+Last session: 2026-03-21
+Stopped at: Phase 8 — 08-03 complete, 08-02 infra checkpoint remaining
+Resume with: /gsd:execute-phase 8 (to close 08-02 after infra steps)
 Resume file: None
