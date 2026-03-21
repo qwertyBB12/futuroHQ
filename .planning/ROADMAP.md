@@ -37,7 +37,7 @@ See: `.planning/milestones/v1.1-ROADMAP.md` for full details.
 **Milestone Goal:** Complete the media pipeline by integrating transcripts and B2/Bunny URLs into Sanity, fill remaining video/podcast metadata gaps, and finish content tagging across all types.
 
 - [x] **Phase 9: Transcript & Podcast Schema** (2 plans) - Add transcript fields to video/podcast, podcast completeness tracking, externalLinks (completed 2026-03-21)
-- [ ] **Phase 10: Video Pipeline Execution** - Run B2/Bunny URL population + transcript ingestion batch scripts, update completeness config
+- [ ] **Phase 10: Video Pipeline Execution** (2 plans) - Run B2/Bunny URL population + transcript ingestion batch scripts, update completeness config
 - [ ] **Phase 11: Video Metadata Completion** - Populate missing descriptions, thumbnails, and tags on all video documents
 - [ ] **Phase 12: Podcast Data + Content Tagging** - Populate podcast episode metadata, close opEd tag gaps, audit tag taxonomy
 
@@ -61,12 +61,15 @@ Plans:
 **Goal**: All existing video documents have B2/Bunny URLs and transcript data populated, and completeness config reflects the new required fields
 **Depends on**: Phase 9
 **Requirements**: VPIPE-01, VPIPE-02, TRANS-02, VPIPE-03
+**Plans**: 2 plans
+Plans:
+- [ ] 10-01-PLAN.md — Create transcript ingestion + B2 match scripts, update completeness config for b2Key
+- [ ] 10-02-PLAN.md — Run scripts in live mode, verify all 26 B2 videos have B2 fields + transcripts populated
 **Success Criteria** (what must be TRUE):
   1. Running the B2 match script patches all video documents with b2Key, cdnUrl, thumbnailUrl, and resolution — no manual edits required
   2. Every video document in Studio shows a populated cdnUrl field (none empty)
   3. Running the transcript ingestion script patches video documents with fullText and speakerSegments from .enriched.json files
   4. Video completeness config requires transcript + B2 fields, so videos missing transcript or b2Key appear in the Needs Enrichment desk list
-**Plans**: TBD
 
 ### Phase 11: Video Metadata Completion
 **Goal**: Every video document has a description, at least one tag, and a thumbnail — no content gaps remain in video metadata
@@ -103,6 +106,6 @@ Plans:
 | 7. Video Schema B2/Bunny Fields | v1.1 | 1/1 | Complete | 2026-03-17 |
 | 8. Media Pipeline Infrastructure | v1.1 | 3/3 | Complete | 2026-03-21 |
 | 9. Transcript & Podcast Schema | v1.2 | 2/2 | Complete   | 2026-03-21 |
-| 10. Video Pipeline Execution | v1.2 | 0/? | Not started | - |
+| 10. Video Pipeline Execution | v1.2 | 0/2 | Not started | - |
 | 11. Video Metadata Completion | v1.2 | 0/? | Not started | - |
 | 12. Podcast Data + Content Tagging | v1.2 | 0/? | Not started | - |
