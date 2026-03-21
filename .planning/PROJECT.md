@@ -72,14 +72,14 @@ Every component in the studio must either work correctly or be gracefully disabl
 - 90 files changed across v1.1, +18,063 / -2,523 lines
 - Enrichment system: 5 tracked types with completeness indicators and filtered desk lists (transcript + externalLinks tracked since Phase 09)
 - Media pipeline: B2 → Bunny CDN → Cloudflare Worker → Sanity draft documents
-- Batch tooling: populate-alumni.ts, populate-collaborators.ts, populate-ledger.ts, batch-enrich.ts
+- Batch tooling: populate-alumni.ts, populate-collaborators.ts, populate-ledger.ts, batch-enrich.ts, ingest-transcripts.ts
 - Cross-site surfacing: surfaceOn on all content types, bidirectional person tagging
 
 **Content gaps (remaining):**
 - Video content metadata: descriptions, thumbnails, tags incomplete
 - Podcast/podcastEpisode metadata incomplete
 - Actual video migration from Wistia to B2/Bunny not yet executed
-- Transcription pipeline output: schema ready (Phase 09), ingestion pending (Phase 10)
+- Transcription pipeline: 26/26 B2 videos have fullText + speakerSegments (Phase 09 schema + Phase 10 ingestion complete)
 
 **Known tech debt:**
 - Pre-existing TypeScript errors in `migrations/` and `scripts/` directories
