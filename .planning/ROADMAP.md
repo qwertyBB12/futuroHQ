@@ -50,7 +50,7 @@ See: `.planning/milestones/v1.1-ROADMAP.md` for full details.
 **Plans**: 2 plans
 Plans:
 - [ ] 09-01-PLAN.md — Transcript block, custom component, video + podcastEpisode schema updates, externalLinks
-- [ ] 09-02-PLAN.md — Podcast + video completeness tracking for transcript and externalLinks fields
+- [x] 09-02-PLAN.md — Podcast + video completeness tracking for transcript and externalLinks fields
 **Success Criteria** (what must be TRUE):
   1. A video document in Studio shows fullText and speakerSegments fields — speakerSegments renders as a collapsible, read-only list of speaker/time/text rows
   2. A podcastEpisode document shows the same transcript field structure as video
@@ -102,7 +102,7 @@ Plans:
 | 6. Person Tagging + Data Entry | v1.1 | 2/2 | Complete | 2026-03-16 |
 | 7. Video Schema B2/Bunny Fields | v1.1 | 1/1 | Complete | 2026-03-17 |
 | 8. Media Pipeline Infrastructure | v1.1 | 3/3 | Complete | 2026-03-21 |
-| 9. Transcript & Podcast Schema | v1.2 | 0/2 | In Progress | - |
+| 9. Transcript & Podcast Schema | v1.2 | 1/2 | In Progress|  |
 | 10. Video Pipeline Execution | v1.2 | 0/? | Not started | - |
 | 11. Video Metadata Completion | v1.2 | 0/? | Not started | - |
 | 12. Podcast Data + Content Tagging | v1.2 | 0/? | Not started | - |

@@ -29,7 +29,7 @@ Requirements for Pipeline Completion & Content Metadata milestone. Each maps to 
 
 - [ ] **POD-01**: PodcastEpisode schema has transcript field (fullText + speakerSegments, same as video)
 - [ ] **POD-02**: PodcastEpisode schema has externalLinks array (platform + url pairs)
-- [ ] **POD-03**: Podcast completeness added to enrichment system
+- [x] **POD-03**: Podcast completeness added to enrichment system
 - [ ] **POD-04**: Batch script populates missing podcast episode metadata
 
 ### Content Tagging
@@ -77,7 +77,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | VMETA-03 | Phase 11 | Pending |
 | POD-01 | Phase 9 | Pending |
 | POD-02 | Phase 9 | Pending |
-| POD-03 | Phase 9 | Pending |
+| POD-03 | Phase 9 | Complete |
 | POD-04 | Phase 12 | Pending |
 | TAG-01 | Phase 12 | Pending |
 | TAG-02 | Phase 12 | Pending |
