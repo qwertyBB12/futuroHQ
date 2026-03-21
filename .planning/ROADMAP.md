@@ -63,7 +63,7 @@ Plans:
 **Requirements**: VPIPE-01, VPIPE-02, TRANS-02, VPIPE-03
 **Plans**: 2 plans
 Plans:
-- [ ] 10-01-PLAN.md — Create transcript ingestion script (matches enriched JSON to video docs by b2Key stem), add b2Key to completeness config
+- [x] 10-01-PLAN.md — Create transcript ingestion script (matches enriched JSON to video docs by b2Key stem), add b2Key to completeness config
 - [ ] 10-02-PLAN.md — Run ingestion script live, verify all 26 B2 videos have b2Key + cdnUrl + fullText + speakerSegments, user confirms in Studio
 **Success Criteria** (what must be TRUE):
   1. Running the B2 match script patches all video documents with b2Key, cdnUrl, thumbnailUrl, and resolution — no manual edits required
@@ -106,6 +106,6 @@ Plans:
 | 7. Video Schema B2/Bunny Fields | v1.1 | 1/1 | Complete | 2026-03-17 |
 | 8. Media Pipeline Infrastructure | v1.1 | 3/3 | Complete | 2026-03-21 |
 | 9. Transcript & Podcast Schema | v1.2 | 2/2 | Complete   | 2026-03-21 |
-| 10. Video Pipeline Execution | v1.2 | 0/2 | Not started | - |
+| 10. Video Pipeline Execution | v1.2 | 1/2 | In Progress|  |
 | 11. Video Metadata Completion | v1.2 | 0/? | Not started | - |
 | 12. Podcast Data + Content Tagging | v1.2 | 0/? | Not started | - |

@@ -10,14 +10,14 @@ Requirements for Pipeline Completion & Content Metadata milestone. Each maps to 
 ### Transcript Integration
 
 - [x] **TRANS-01**: Video schema has fullText (text) and speakerSegments (array of {speaker, start, end, text}) fields
-- [ ] **TRANS-02**: Batch script ingests .enriched.json files and patches video documents with transcript data
+- [x] **TRANS-02**: Batch script ingests .enriched.json files and patches video documents with transcript data
 - [x] **TRANS-03**: Transcript fields display readably in Studio (collapsible, read-only speaker segments)
 
 ### Video Pipeline
 
-- [ ] **VPIPE-01**: Batch script matches B2 files to Sanity video documents and patches b2Key, cdnUrl, bunnyStatus (thumbnailUrl covered by VMETA-03; resolution deferred)
+- [x] **VPIPE-01**: Batch script matches B2 files to Sanity video documents and patches b2Key, cdnUrl, bunnyStatus (thumbnailUrl covered by VMETA-03; resolution deferred)
 - [ ] **VPIPE-02**: All existing video documents have b2Key and cdnUrl populated
-- [ ] **VPIPE-03**: Video completeness config updated to require transcript + B2 fields
+- [x] **VPIPE-03**: Video completeness config updated to require transcript + B2 fields
 
 ### Video Metadata
 
@@ -67,11 +67,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | TRANS-01 | Phase 9 | Complete |
-| TRANS-02 | Phase 10 | Pending |
+| TRANS-02 | Phase 10 | Complete |
 | TRANS-03 | Phase 9 | Complete |
-| VPIPE-01 | Phase 10 | Pending |
+| VPIPE-01 | Phase 10 | Complete |
 | VPIPE-02 | Phase 10 | Pending |
-| VPIPE-03 | Phase 10 | Pending |
+| VPIPE-03 | Phase 10 | Complete |
 | VMETA-01 | Phase 11 | Pending |
 | VMETA-02 | Phase 11 | Pending |
 | VMETA-03 | Phase 11 | Pending |

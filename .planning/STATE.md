@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Pipeline Completion & Content Metadata
 status: unknown
-stopped_at: Completed 09-01-PLAN.md — transcript schema + TranscriptSegmentsInput + externalLinks
-last_updated: "2026-03-21T12:41:07.611Z"
+stopped_at: Completed 10-01-PLAN.md — transcript ingestion script + b2Key completeness
+last_updated: "2026-03-21T13:25:31.682Z"
 progress:
   total_phases: 4
   completed_phases: 1
-  total_plans: 2
-  completed_plans: 2
+  total_plans: 4
+  completed_plans: 3
 ---
 
 # Project State
@@ -19,12 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-21)
 
 **Core value:** Every component must either work correctly or be gracefully disabled — no silent failures, no orphaned experiments, no schema ambiguity.
-**Current focus:** Phase 09 — transcript-podcast-schema
+**Current focus:** Phase 10 — video-pipeline-execution
 
 ## Current Position
 
-Phase: 10
-Plan: Not started
+Phase: 10 (video-pipeline-execution) — EXECUTING
+Plan: 2 of 2
 
 ## Performance Metrics
 
@@ -49,6 +49,8 @@ v1.2 starting context:
 - [Phase 09-transcript-podcast-schema]: fullText uses rows:10 only — text type does not accept collapsible/collapsed options (object type only)
 - [Phase 09-transcript-podcast-schema]: TranscriptSegmentsInput is a full custom renderer — no renderDefault call for read-only display
 - [Phase 09-transcript-podcast-schema]: externalLinks placed in distribution group, after audioEmbed, before videoEmbed in podcastEpisode
+- [Phase 10]: Use client.patch().set() (not setIfMissing) for transcript ingestion to always reflect latest pipeline output
+- [Phase 10]: b2Key added to video completeness checks — B2 videos missing b2Key now surface in Needs Enrichment desk list
 
 ### Pending Todos
 
@@ -66,10 +68,11 @@ None.
 | 2 | Add navLinks array field to all siteSettings schemas | 2026-03-09 | 3286d85 | [2-add-navlinks-array-field-to-all-sitesett](./quick/2-add-navlinks-array-field-to-all-sitesett/) |
 | Phase 09 P02 | 1 | 1 tasks | 1 files |
 | Phase 09-transcript-podcast-schema P01 | 8 | 3 tasks | 6 files |
+| Phase 10 P01 | 2 | 2 tasks | 2 files |
 
 ## Session Continuity
 
-Last session: 2026-03-21T12:37:58.195Z
-Stopped at: Completed 09-01-PLAN.md — transcript schema + TranscriptSegmentsInput + externalLinks
+Last session: 2026-03-21T13:25:31.680Z
+Stopped at: Completed 10-01-PLAN.md — transcript ingestion script + b2Key completeness
 Resume with: /gsd:plan-phase 9
 Resume file: None
