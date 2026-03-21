@@ -17,12 +17,13 @@ key_files:
 decisions:
   - "All 26 B2 video documents are draft-only (no published versions) — this is expected as they were created by populate-sanity-videos.py which creates drafts"
   - "GROQ count() of 18 vs 26 is a CDN caching artifact on draft documents — direct document fetch confirms all 26 populated"
+  - "HB_Male.mp4 was mislabeled as Mark Franklin — patched directly via Sanity API to correct title and featuredIn reference to Maria Alexandra Sheppard"
 metrics:
-  duration: "~5 minutes"
+  duration: "~45 minutes (including checkpoint wait)"
   completed: "2026-03-21"
-  tasks_completed: 2
+  tasks_completed: 3
   files_changed: 1
-  status: "checkpoint-pending"
+  status: "complete"
 ---
 
 # Phase 10 Plan 02: Live Transcript Ingestion & Verification Summary
@@ -40,11 +41,11 @@ Run the transcript ingestion script in live mode and verify all 26 video documen
 | 1 | Run transcript ingestion in live mode | 15494b7 | 26/26 docs patched, 0 errors, 0 unmatched |
 | 2 | GROQ verification of B2 + transcript fields | f1b8446 | All fields confirmed present on all 26 docs |
 
-## Task 3: CHECKPOINT (pending)
+## Task 3: CHECKPOINT (approved)
 
-| Task | Name | Status |
-|------|------|--------|
-| 3 | User verifies transcript data in Studio UI | Awaiting user verification |
+| Task | Name | Status | Outcome |
+|------|------|--------|---------|
+| 3 | User verifies transcript data in Studio UI | APPROVED | "Everything's working properly" — user confirmed transcript data visible in Studio UI |
 
 ## What Was Done
 
@@ -102,10 +103,15 @@ Ran 4 verification queries via `scripts/_verify-transcripts.ts`:
 
 None — all 26 video documents have fullText and speakerSegments from real transcript pipeline output.
 
+## Data Correction: HB_Male.mp4 Speaker Label
+
+During Studio verification (Task 3), user identified that the video associated with `HB_Male.mp4` was mislabeled. The title and `featuredIn` reference were incorrectly set to "Mark Franklin" when the actual speaker is "Maria Alexandra Sheppard". This was patched directly via the Sanity API outside the automated pipeline — not a script or schema issue.
+
 ## Self-Check: PASSED
 
 - [x] `scripts/_verify-transcripts.ts` exists (75 lines)
 - [x] Commit 15494b7 exists (live ingestion run)
 - [x] Commit f1b8446 exists (GROQ verification script)
 - [x] Direct fetch confirms 26/26 documents have b2Key, cdnUrl, fullText, speakerSegments
-- [x] Task 3 checkpoint correctly blocked — awaiting user Studio verification
+- [x] Task 3 checkpoint approved — user confirmed transcript data visible in Studio UI
+- [x] HB_Male.mp4 speaker label corrected (Maria Alexandra Sheppard, not Mark Franklin)
