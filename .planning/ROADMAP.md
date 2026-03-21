@@ -37,7 +37,7 @@ See: `.planning/milestones/v1.1-ROADMAP.md` for full details.
 **Milestone Goal:** Complete the media pipeline by integrating transcripts and B2/Bunny URLs into Sanity, fill remaining video/podcast metadata gaps, and finish content tagging across all types.
 
 - [x] **Phase 9: Transcript & Podcast Schema** (2 plans) - Add transcript fields to video/podcast, podcast completeness tracking, externalLinks (completed 2026-03-21)
-- [ ] **Phase 10: Video Pipeline Execution** (2 plans) - Run B2/Bunny URL population + transcript ingestion batch scripts, update completeness config
+- [ ] **Phase 10: Video Pipeline Execution** (2 plans) - Transcript ingestion script + completeness b2Key update, then run live + verify all 26 videos
 - [ ] **Phase 11: Video Metadata Completion** - Populate missing descriptions, thumbnails, and tags on all video documents
 - [ ] **Phase 12: Podcast Data + Content Tagging** - Populate podcast episode metadata, close opEd tag gaps, audit tag taxonomy
 
@@ -63,8 +63,8 @@ Plans:
 **Requirements**: VPIPE-01, VPIPE-02, TRANS-02, VPIPE-03
 **Plans**: 2 plans
 Plans:
-- [ ] 10-01-PLAN.md — Create transcript ingestion + B2 match scripts, update completeness config for b2Key
-- [ ] 10-02-PLAN.md — Run scripts in live mode, verify all 26 B2 videos have B2 fields + transcripts populated
+- [ ] 10-01-PLAN.md — Create transcript ingestion script (matches enriched JSON to video docs by b2Key stem), add b2Key to completeness config
+- [ ] 10-02-PLAN.md — Run ingestion script live, verify all 26 B2 videos have b2Key + cdnUrl + fullText + speakerSegments, user confirms in Studio
 **Success Criteria** (what must be TRUE):
   1. Running the B2 match script patches all video documents with b2Key, cdnUrl, thumbnailUrl, and resolution — no manual edits required
   2. Every video document in Studio shows a populated cdnUrl field (none empty)
