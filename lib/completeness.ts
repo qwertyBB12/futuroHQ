@@ -255,6 +255,11 @@ export function checkCompleteness(
     const isB2 = videoSource === 'b2'
     // null/undefined videoSource = legacy wistia video
     if (isB2) {
+      if (typeof doc.b2Key === 'string' && doc.b2Key.length > 0) {
+        completed++
+      } else {
+        missingFields.push('B2 Key')
+      }
       if (typeof doc.cdnUrl === 'string' && doc.cdnUrl.length > 0) {
         completed++
       } else {
@@ -266,7 +271,7 @@ export function checkCompleteness(
       } else {
         missingFields.push('Pipeline Status')
       }
-      return {completed, total: checks.length + 2, missingFields}
+      return {completed, total: checks.length + 3, missingFields}
     } else {
       if (typeof doc.videoUrl === 'string' && doc.videoUrl.length > 0) {
         completed++
@@ -300,7 +305,7 @@ export const GROQ_FILTERS: Record<string, string> = {
   !defined(tags) || length(tags) == 0 ||
   !defined(seo) || !defined(seo.metaDescription) ||
   !defined(featuredIn) || length(featuredIn) == 0 ||
-  (videoSource == "b2" && (!defined(cdnUrl) || cdnUrl == "" || !defined(bunnyStatus) || bunnyStatus != "ready")) ||
+  (videoSource == "b2" && (!defined(b2Key) || b2Key == "" || !defined(cdnUrl) || cdnUrl == "" || !defined(bunnyStatus) || bunnyStatus != "ready")) ||
   ((videoSource == "wistia" || !defined(videoSource)) && (!defined(videoUrl) || videoUrl == "")) ||
   !defined(fullText) || fullText == ""
 )`,
