@@ -1,17 +1,17 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.1
-milestone_name: Content Production & Media Pipeline
-status: complete
-stopped_at: "Milestone v1.1 shipped and archived"
+milestone: v1.2
+milestone_name: Pipeline Completion & Content Metadata
+status: defining_requirements
+stopped_at: null
 last_updated: "2026-03-21"
-last_activity: 2026-03-21 — Milestone v1.1 completed, archived, and tagged
+last_activity: 2026-03-21 — Milestone v1.2 started
 progress:
-  total_phases: 5
-  completed_phases: 5
-  total_plans: 10
-  completed_plans: 10
-  percent: 100
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # Project State
@@ -21,13 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-21)
 
 **Core value:** Every component must either work correctly or be gracefully disabled — no silent failures, no orphaned experiments, no schema ambiguity.
-**Current focus:** Planning next milestone (v1.2)
+**Current focus:** Defining requirements for v1.2
 
 ## Current Position
 
-Milestone v1.1 shipped. Awaiting v1.2 definition.
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-03-21 — Milestone v1.2 started
 
-Progress: [██████████] 100%
+Progress: [░░░░░░░░░░] 0%
 
 ## Performance Metrics
 
@@ -59,6 +62,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-03-21
-Stopped at: Milestone v1.1 archived and tagged
-Resume with: /gsd:new-milestone
+Stopped at: Milestone v1.2 started — defining requirements
+Resume with: /gsd:new-milestone (in progress)
 Resume file: None

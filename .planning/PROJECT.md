@@ -40,7 +40,18 @@ Every component in the studio must either work correctly or be gracefully disabl
 
 ### Active
 
-(None — awaiting v1.2 milestone definition)
+(Defined in REQUIREMENTS.md — v1.2 Pipeline Completion & Content Metadata)
+
+## Current Milestone: v1.2 Pipeline Completion & Content Metadata
+
+**Goal:** Complete the media pipeline by integrating transcripts and B2/Bunny URLs into Sanity, fill remaining video/podcast metadata gaps, and finish content tagging across all types.
+
+**Target features:**
+- Transcript field on video documents with transcription pipeline integration
+- Sanity video documents updated with B2/Bunny CDN URLs
+- Video metadata completion (descriptions, thumbnails, tags)
+- Podcast schema enhancements (transcript, duration, external links) + data population
+- Remaining content tagging cleanup
 
 ### Out of Scope
 
@@ -104,4 +115,4 @@ Every component in the studio must either work correctly or be gracefully disabl
 | lib/completeness.ts kept pure TypeScript | No Studio imports for Node.js batch script compatibility | ✓ Good — shared between Studio and CLI |
 
 ---
-*Last updated: 2026-03-21 after v1.1 milestone completion*
+*Last updated: 2026-03-21 after v1.2 milestone start*
