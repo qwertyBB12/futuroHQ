@@ -36,6 +36,7 @@ import {SocialDistributeAction} from './components/actions/SocialDistributeActio
 import {GOVERNED_TYPES, BILINGUAL_TYPES} from './lib/constants'
 import {CompletenessInput} from './components/inputs/CompletenessInput'
 import {ENRICHMENT_TYPES} from './lib/completeness'
+import {bunnyAssetSource} from './components/inputs/BunnyAssetSource'
 
 /**
  * Webhook reminders:
@@ -60,6 +61,13 @@ const sharedConfig = {
   ],
 
   schema: {types: schemaTypes},
+
+  // Custom Asset Sources — Bunny CDN browser for B2-hosted videos
+  form: {
+    file: {
+      assetSources: (prev: any) => [...prev, bunnyAssetSource],
+    },
+  },
 
   // Custom Studio Components
   studio: {
