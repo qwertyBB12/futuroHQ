@@ -70,7 +70,7 @@ Every component in the studio must either work correctly or be gracefully disabl
 - Content lake: project `fo6n8ceo`, datasets `production` + `staging`
 - 6 active sites: hectorhlopez.com, benextglobal.com, futuro.ngo, next.ngo, arkah.co, mitikah
 - 90 files changed across v1.1, +18,063 / -2,523 lines
-- Enrichment system: 5 tracked types with completeness indicators and filtered desk lists
+- Enrichment system: 5 tracked types with completeness indicators and filtered desk lists (transcript + externalLinks tracked since Phase 09)
 - Media pipeline: B2 → Bunny CDN → Cloudflare Worker → Sanity draft documents
 - Batch tooling: populate-alumni.ts, populate-collaborators.ts, populate-ledger.ts, batch-enrich.ts
 - Cross-site surfacing: surfaceOn on all content types, bidirectional person tagging
@@ -79,7 +79,7 @@ Every component in the studio must either work correctly or be gracefully disabl
 - Video content metadata: descriptions, thumbnails, tags incomplete
 - Podcast/podcastEpisode metadata incomplete
 - Actual video migration from Wistia to B2/Bunny not yet executed
-- Transcription pipeline output not yet integrated into Sanity
+- Transcription pipeline output: schema ready (Phase 09), ingestion pending (Phase 10)
 
 **Known tech debt:**
 - Pre-existing TypeScript errors in `migrations/` and `scripts/` directories
