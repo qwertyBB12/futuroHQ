@@ -20,10 +20,6 @@ export const transcriptFields = [
     readOnly: true,
     rows: 10,
     group: 'transcript',
-    options: {
-      collapsible: true,
-      collapsed: true,
-    } as { collapsible: boolean; collapsed: boolean },
   }),
 
   defineField({
