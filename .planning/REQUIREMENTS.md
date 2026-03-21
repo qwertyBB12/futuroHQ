@@ -15,7 +15,7 @@ Requirements for Pipeline Completion & Content Metadata milestone. Each maps to 
 
 ### Video Pipeline
 
-- [ ] **VPIPE-01**: Batch script matches B2 files to Sanity video documents and patches b2Key, cdnUrl, thumbnailUrl, resolution
+- [ ] **VPIPE-01**: Batch script matches B2 files to Sanity video documents and patches b2Key, cdnUrl, bunnyStatus (thumbnailUrl covered by VMETA-03; resolution deferred)
 - [ ] **VPIPE-02**: All existing video documents have b2Key and cdnUrl populated
 - [ ] **VPIPE-03**: Video completeness config updated to require transcript + B2 fields
 
@@ -89,4 +89,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-03-21*
-*Last updated: 2026-03-21 — traceability complete after roadmap creation*
+*Last updated: 2026-03-21 — VPIPE-01 narrowed (removed thumbnailUrl, resolution; covered by VMETA-03)*
