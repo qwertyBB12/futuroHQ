@@ -36,7 +36,7 @@ See: `.planning/milestones/v1.1-ROADMAP.md` for full details.
 
 **Milestone Goal:** Complete the media pipeline by integrating transcripts and B2/Bunny URLs into Sanity, fill remaining video/podcast metadata gaps, and finish content tagging across all types.
 
-- [ ] **Phase 9: Transcript & Podcast Schema** (2 plans) - Add transcript fields to video/podcast, podcast completeness tracking, externalLinks
+- [x] **Phase 9: Transcript & Podcast Schema** (2 plans) - Add transcript fields to video/podcast, podcast completeness tracking, externalLinks (completed 2026-03-21)
 - [ ] **Phase 10: Video Pipeline Execution** - Run B2/Bunny URL population + transcript ingestion batch scripts, update completeness config
 - [ ] **Phase 11: Video Metadata Completion** - Populate missing descriptions, thumbnails, and tags on all video documents
 - [ ] **Phase 12: Podcast Data + Content Tagging** - Populate podcast episode metadata, close opEd tag gaps, audit tag taxonomy
@@ -49,7 +49,7 @@ See: `.planning/milestones/v1.1-ROADMAP.md` for full details.
 **Requirements**: TRANS-01, TRANS-03, POD-01, POD-02, POD-03
 **Plans**: 2 plans
 Plans:
-- [ ] 09-01-PLAN.md — Transcript block, custom component, video + podcastEpisode schema updates, externalLinks
+- [x] 09-01-PLAN.md — Transcript block, custom component, video + podcastEpisode schema updates, externalLinks
 - [x] 09-02-PLAN.md — Podcast + video completeness tracking for transcript and externalLinks fields
 **Success Criteria** (what must be TRUE):
   1. A video document in Studio shows fullText and speakerSegments fields — speakerSegments renders as a collapsible, read-only list of speaker/time/text rows
@@ -102,7 +102,7 @@ Plans:
 | 6. Person Tagging + Data Entry | v1.1 | 2/2 | Complete | 2026-03-16 |
 | 7. Video Schema B2/Bunny Fields | v1.1 | 1/1 | Complete | 2026-03-17 |
 | 8. Media Pipeline Infrastructure | v1.1 | 3/3 | Complete | 2026-03-21 |
-| 9. Transcript & Podcast Schema | v1.2 | 1/2 | In Progress|  |
+| 9. Transcript & Podcast Schema | v1.2 | 2/2 | Complete   | 2026-03-21 |
 | 10. Video Pipeline Execution | v1.2 | 0/? | Not started | - |
 | 11. Video Metadata Completion | v1.2 | 0/? | Not started | - |
 | 12. Podcast Data + Content Tagging | v1.2 | 0/? | Not started | - |

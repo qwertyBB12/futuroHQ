@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Pipeline Completion & Content Metadata
 status: unknown
-stopped_at: Completed 09-02-PLAN.md
-last_updated: "2026-03-21T12:35:29.086Z"
+stopped_at: Completed 09-01-PLAN.md — transcript schema + TranscriptSegmentsInput + externalLinks
+last_updated: "2026-03-21T12:37:58.197Z"
 progress:
   total_phases: 4
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 2
-  completed_plans: 1
+  completed_plans: 2
 ---
 
 # Project State
@@ -46,6 +46,9 @@ v1.2 starting context:
 - Podcast completeness not yet tracked — POD-03 adds it in Phase 9
 - opEd tag gap: 15/17 tagged (2 missing) — TAG-01 closes this in Phase 12
 - [Phase 09]: Track transcript (fullText) as required field on both podcastEpisode and video; track externalLinks on podcastEpisode only
+- [Phase 09-transcript-podcast-schema]: fullText uses rows:10 only — text type does not accept collapsible/collapsed options (object type only)
+- [Phase 09-transcript-podcast-schema]: TranscriptSegmentsInput is a full custom renderer — no renderDefault call for read-only display
+- [Phase 09-transcript-podcast-schema]: externalLinks placed in distribution group, after audioEmbed, before videoEmbed in podcastEpisode
 
 ### Pending Todos
 
@@ -62,10 +65,11 @@ None.
 | 1 | Add Es-suffixed bilingual fields to all siteSettings schemas | 2026-03-09 | c98a065 | [1-add-es-suffixed-bilingual-fields-to-all-](./quick/1-add-es-suffixed-bilingual-fields-to-all-/) |
 | 2 | Add navLinks array field to all siteSettings schemas | 2026-03-09 | 3286d85 | [2-add-navlinks-array-field-to-all-sitesett](./quick/2-add-navlinks-array-field-to-all-sitesett/) |
 | Phase 09 P02 | 1 | 1 tasks | 1 files |
+| Phase 09-transcript-podcast-schema P01 | 8 | 3 tasks | 6 files |
 
 ## Session Continuity
 
-Last session: 2026-03-21T12:35:29.084Z
-Stopped at: Completed 09-02-PLAN.md
+Last session: 2026-03-21T12:37:58.195Z
+Stopped at: Completed 09-01-PLAN.md — transcript schema + TranscriptSegmentsInput + externalLinks
 Resume with: /gsd:plan-phase 9
 Resume file: None

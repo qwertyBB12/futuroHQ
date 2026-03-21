@@ -9,9 +9,9 @@ Requirements for Pipeline Completion & Content Metadata milestone. Each maps to 
 
 ### Transcript Integration
 
-- [ ] **TRANS-01**: Video schema has fullText (text) and speakerSegments (array of {speaker, start, end, text}) fields
+- [x] **TRANS-01**: Video schema has fullText (text) and speakerSegments (array of {speaker, start, end, text}) fields
 - [ ] **TRANS-02**: Batch script ingests .enriched.json files and patches video documents with transcript data
-- [ ] **TRANS-03**: Transcript fields display readably in Studio (collapsible, read-only speaker segments)
+- [x] **TRANS-03**: Transcript fields display readably in Studio (collapsible, read-only speaker segments)
 
 ### Video Pipeline
 
@@ -27,8 +27,8 @@ Requirements for Pipeline Completion & Content Metadata milestone. Each maps to 
 
 ### Podcast
 
-- [ ] **POD-01**: PodcastEpisode schema has transcript field (fullText + speakerSegments, same as video)
-- [ ] **POD-02**: PodcastEpisode schema has externalLinks array (platform + url pairs)
+- [x] **POD-01**: PodcastEpisode schema has transcript field (fullText + speakerSegments, same as video)
+- [x] **POD-02**: PodcastEpisode schema has externalLinks array (platform + url pairs)
 - [x] **POD-03**: Podcast completeness added to enrichment system
 - [ ] **POD-04**: Batch script populates missing podcast episode metadata
 
@@ -66,17 +66,17 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| TRANS-01 | Phase 9 | Pending |
+| TRANS-01 | Phase 9 | Complete |
 | TRANS-02 | Phase 10 | Pending |
-| TRANS-03 | Phase 9 | Pending |
+| TRANS-03 | Phase 9 | Complete |
 | VPIPE-01 | Phase 10 | Pending |
 | VPIPE-02 | Phase 10 | Pending |
 | VPIPE-03 | Phase 10 | Pending |
 | VMETA-01 | Phase 11 | Pending |
 | VMETA-02 | Phase 11 | Pending |
 | VMETA-03 | Phase 11 | Pending |
-| POD-01 | Phase 9 | Pending |
-| POD-02 | Phase 9 | Pending |
+| POD-01 | Phase 9 | Complete |
+| POD-02 | Phase 9 | Complete |
 | POD-03 | Phase 9 | Complete |
 | POD-04 | Phase 12 | Pending |
 | TAG-01 | Phase 12 | Pending |
