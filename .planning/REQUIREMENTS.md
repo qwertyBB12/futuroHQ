@@ -36,7 +36,7 @@ Requirements for Content Production & Media Pipeline milestone. Each maps to roa
 - [x] **MDIA-01**: Backblaze B2 bucket configured with CORS rules validated against Bunny CDN pull zone
 - [x] **MDIA-02**: Bunny CDN pull zone configured and validated with B2 origin (Block Root Path Access enabled)
 - [x] **MDIA-03**: Cloudflare Worker receives B2 upload event notifications and writes metadata to Sanity video draft documents
-- [ ] **MDIA-04**: Bunny CDN custom asset source plugin in Studio for browsing and selecting from Bunny Storage Zone
+- [x] **MDIA-04**: Bunny CDN custom asset source plugin in Studio for browsing and selecting from Bunny Storage Zone
 
 ## Future Requirements
 
@@ -89,7 +89,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | MDIA-01 | Phase 8 | Complete |
 | MDIA-02 | Phase 8 | Complete |
 | MDIA-03 | Phase 8 | Complete |
-| MDIA-04 | Phase 8 | Pending |
+| MDIA-04 | Phase 8 | Complete |
 
 **Coverage:**
 - v1.1 requirements: 19 total

@@ -100,9 +100,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 08-01-PLAN.md — Add bunnyStatus pipeline-tracking field to video schema and update completeness system
-- [ ] 08-02-PLAN.md — Create Cloudflare Worker repo with B2 webhook handler, Sanity draft creation, infrastructure docs and validation scripts
-- [ ] 08-03-PLAN.md — Build Bunny CDN custom asset source plugin for Studio editors to browse and select CDN-hosted videos
+- [x] 08-01-PLAN.md — Add bunnyStatus pipeline-tracking field to video schema and update completeness system
+- [x] 08-02-PLAN.md — Create Cloudflare Worker repo with B2 webhook handler, Sanity draft creation, infrastructure docs and validation scripts
+- [x] 08-03-PLAN.md — Build Bunny CDN custom asset source plugin for Studio editors to browse and select CDN-hosted videos
 
 ## Progress
 
