@@ -120,6 +120,11 @@ export const COMPLETENESS_CONFIG: CompletenessConfig = {
       label: 'Featured In',
       validate: (v) => Array.isArray(v) && v.length > 0,
     },
+    {
+      field: 'fullText',
+      label: 'Transcript',
+      validate: (v) => typeof v === 'string' && v.trim().length > 0,
+    },
   ],
 
   podcastEpisode: [
@@ -146,6 +151,16 @@ export const COMPLETENESS_CONFIG: CompletenessConfig = {
     {
       field: 'featuredIn',
       label: 'Featured In',
+      validate: (v) => Array.isArray(v) && v.length > 0,
+    },
+    {
+      field: 'fullText',
+      label: 'Transcript',
+      validate: (v) => typeof v === 'string' && v.trim().length > 0,
+    },
+    {
+      field: 'externalLinks',
+      label: 'External Links',
       validate: (v) => Array.isArray(v) && v.length > 0,
     },
   ],
@@ -286,10 +301,11 @@ export const GROQ_FILTERS: Record<string, string> = {
   !defined(seo) || !defined(seo.metaDescription) ||
   !defined(featuredIn) || length(featuredIn) == 0 ||
   (videoSource == "b2" && (!defined(cdnUrl) || cdnUrl == "" || !defined(bunnyStatus) || bunnyStatus != "ready")) ||
-  ((videoSource == "wistia" || !defined(videoSource)) && (!defined(videoUrl) || videoUrl == ""))
+  ((videoSource == "wistia" || !defined(videoSource)) && (!defined(videoUrl) || videoUrl == "")) ||
+  !defined(fullText) || fullText == ""
 )`,
 
-  podcastEpisode: `_type == "podcastEpisode" && !(_id in path("drafts.**")) && (!defined(description) || description == "" || !defined(audioEmbed) || !defined(tags) || length(tags) == 0 || !defined(episodeNumber) || !defined(featuredIn) || length(featuredIn) == 0)`,
+  podcastEpisode: `_type == "podcastEpisode" && !(_id in path("drafts.**")) && (!defined(description) || description == "" || !defined(audioEmbed) || !defined(tags) || length(tags) == 0 || !defined(episodeNumber) || !defined(featuredIn) || length(featuredIn) == 0 || !defined(fullText) || fullText == "" || !defined(externalLinks) || length(externalLinks) == 0)`,
 
   essay: `_type == "essay" && !(_id in path("drafts.**")) && (!defined(featuredIn) || length(featuredIn) == 0)`,
 
