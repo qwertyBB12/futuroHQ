@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Pipeline Completion & Content Metadata
 status: unknown
-stopped_at: Completed 10-01-PLAN.md — transcript ingestion script + b2Key completeness
-last_updated: "2026-03-21T13:25:31.682Z"
+stopped_at: Checkpoint 10-02 Task 3 — awaiting user Studio verification of transcript data
+last_updated: "2026-03-21T13:31:01.263Z"
 progress:
   total_phases: 4
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 4
-  completed_plans: 3
+  completed_plans: 4
 ---
 
 # Project State
@@ -51,6 +51,7 @@ v1.2 starting context:
 - [Phase 09-transcript-podcast-schema]: externalLinks placed in distribution group, after audioEmbed, before videoEmbed in podcastEpisode
 - [Phase 10]: Use client.patch().set() (not setIfMissing) for transcript ingestion to always reflect latest pipeline output
 - [Phase 10]: b2Key added to video completeness checks — B2 videos missing b2Key now surface in Needs Enrichment desk list
+- [Phase 10]: All 26 B2 video documents are draft-only (no published versions) — created by populate-sanity-videos.py as drafts pending review; GROQ count() CDN cache artifact returns 18 but direct fetch confirms all 26 have required fields
 
 ### Pending Todos
 
@@ -72,7 +73,7 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-21T13:25:31.680Z
-Stopped at: Completed 10-01-PLAN.md — transcript ingestion script + b2Key completeness
+Last session: 2026-03-21T13:30:49.008Z
+Stopped at: Checkpoint 10-02 Task 3 — awaiting user Studio verification of transcript data
 Resume with: /gsd:plan-phase 9
 Resume file: None
