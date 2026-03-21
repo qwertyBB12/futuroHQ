@@ -66,27 +66,27 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| TRANS-01 | — | Pending |
-| TRANS-02 | — | Pending |
-| TRANS-03 | — | Pending |
-| VPIPE-01 | — | Pending |
-| VPIPE-02 | — | Pending |
-| VPIPE-03 | — | Pending |
-| VMETA-01 | — | Pending |
-| VMETA-02 | — | Pending |
-| VMETA-03 | — | Pending |
-| POD-01 | — | Pending |
-| POD-02 | — | Pending |
-| POD-03 | — | Pending |
-| POD-04 | — | Pending |
-| TAG-01 | — | Pending |
-| TAG-02 | — | Pending |
+| TRANS-01 | Phase 9 | Pending |
+| TRANS-02 | Phase 10 | Pending |
+| TRANS-03 | Phase 9 | Pending |
+| VPIPE-01 | Phase 10 | Pending |
+| VPIPE-02 | Phase 10 | Pending |
+| VPIPE-03 | Phase 10 | Pending |
+| VMETA-01 | Phase 11 | Pending |
+| VMETA-02 | Phase 11 | Pending |
+| VMETA-03 | Phase 11 | Pending |
+| POD-01 | Phase 9 | Pending |
+| POD-02 | Phase 9 | Pending |
+| POD-03 | Phase 9 | Pending |
+| POD-04 | Phase 12 | Pending |
+| TAG-01 | Phase 12 | Pending |
+| TAG-02 | Phase 12 | Pending |
 
 **Coverage:**
 - v1.2 requirements: 15 total
-- Mapped to phases: 0
-- Unmapped: 15 (awaiting roadmap)
+- Mapped to phases: 15
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-21*
-*Last updated: 2026-03-21 after initial definition*
+*Last updated: 2026-03-21 — traceability complete after roadmap creation*
