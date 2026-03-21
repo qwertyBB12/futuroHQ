@@ -29,15 +29,16 @@ Every component in the studio must either work correctly or be gracefully disabl
 - Keynote duplication resolved: keynote is canonical speech hub — v1.0
 - Site settings documents exist for all 7 entities — v1.0
 - alumniContinuum committed as governed type with clear purpose — v1.0
+- Media pipeline — B2 + Bunny CDN + Cloudflare Worker sync into Sanity — Validated in Phase 8
+- Video schema enhanced with B2/Bunny fields (videoSource, b2Key, cdnUrl, bunnyStatus, resolution, thumbnailUrl, duration) — Validated in Phase 7-8
+- Person/alumni tagging on video content for cross-site profile surfacing — Validated in Phase 6
+- surfaceOn field extended to all content types with Arkah added — Validated in Phase 4
 
 ### Active
 
 - [ ] Enrichment tooling — completeness indicators, filtered desk lists, batch operations, enrichment dashboard
 - [ ] Data entry — populate all alumni photos/bios, collaborator details, content metadata (descriptions, thumbnails, tags)
 - [ ] surfaceOn field extended from essays to all content types (video, podcast, podcastEpisode, keynote, news) with Arkah added
-- [ ] Media pipeline — Backblaze B2 + Bunny CDN integration with Cloudflare Worker sync into Sanity
-- [ ] Video schema enhanced with B2/Bunny fields (replacing Wistia for existing, adding new videos)
-- [ ] Person/alumni tagging on video content for cross-site alumni profile surfacing
 - [ ] Fix alumniContinuum missing from GOVERNED_TYPES (v1.0 carried debt)
 
 ### Out of Scope
@@ -114,4 +115,4 @@ Every component in the studio must either work correctly or be gracefully disabl
 | Enrichment tooling before data entry | Build tools first so data entry is efficient and trackable | — Pending |
 
 ---
-*Last updated: 2026-03-16 after v1.1 milestone start*
+*Last updated: 2026-03-21 after Phase 8 completion — all v1.1 phases complete*
