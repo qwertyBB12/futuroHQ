@@ -3,6 +3,7 @@ import { commonMeta } from './blocks/commonMeta'
 import { governanceFields } from './blocks/governanceBlock'
 import {surfaceOnField} from './blocks/surfaceOnField'
 import {featuredInField} from './blocks/featuredInField'
+import { transcriptFields, transcriptGroup } from './blocks/transcriptBlock'
 
 export default defineType({
   name: 'podcastEpisode',
@@ -16,6 +17,7 @@ export default defineType({
     'Reference the parent podcast series via the series field.',
   groups: [
     {name: 'distribution', title: 'Distribution'},
+    transcriptGroup,
   ],
   fields: [
     // --- Core ---
@@ -79,11 +81,52 @@ export default defineType({
       description: 'Usually Captivate.fm / RSS',
     }),
     defineField({
+      name: 'externalLinks',
+      title: 'External Platform Links',
+      type: 'array',
+      description: 'Links to this episode on external platforms (Spotify, Apple Podcasts, etc.)',
+      group: 'distribution',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'platform',
+              title: 'Platform',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'Spotify', value: 'spotify' },
+                  { title: 'Apple Podcasts', value: 'apple' },
+                  { title: 'Google Podcasts', value: 'google' },
+                  { title: 'YouTube', value: 'youtube' },
+                  { title: 'Amazon Music', value: 'amazon' },
+                  { title: 'Captivate', value: 'captivate' },
+                  { title: 'Other', value: 'other' },
+                ],
+              },
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'url',
+              title: 'URL',
+              type: 'url',
+              validation: (Rule) => Rule.required(),
+            }),
+          ],
+          preview: {
+            select: { title: 'platform', subtitle: 'url' },
+          },
+        },
+      ],
+    }),
+    defineField({
       name: 'videoEmbed',
       title: 'Video Embed',
       type: 'mediaBlock',
       description: 'YouTube / Vimeo / Wistia',
     }),
+    ...transcriptFields,
 
     // --- Relations ---
     defineField({

@@ -2,6 +2,7 @@ import { defineType, defineField } from 'sanity'
 import { governanceFields } from './blocks/governanceBlock'
 import {surfaceOnField} from './blocks/surfaceOnField'
 import {featuredInField} from './blocks/featuredInField'
+import { transcriptFields, transcriptGroup } from './blocks/transcriptBlock'
 
 export default defineType({
   name: 'video',
@@ -22,6 +23,7 @@ export default defineType({
   groups: [
     {name: 'distribution', title: 'Distribution'},
     {name: 'storage', title: 'B2/Bunny Storage'},
+    transcriptGroup,
   ],
   fields: [
     defineField({
@@ -218,6 +220,7 @@ export default defineType({
       type: 'number',
       group: 'storage',
     }),
+    ...transcriptFields,
     defineField({
       name: 'tags',
       title: 'Tags',
