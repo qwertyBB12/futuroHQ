@@ -113,7 +113,10 @@ Plans:
   2. Every full-length video document's cdnUrl returns the correct video (URL matches the b2Key filename pattern in B2)
   3. Speaker clip documents have featuredIn person references that match the actual speakers identified in the transcript diarization output
   4. A re-run of the URL audit script returns zero failures after patches are applied
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 13-01-PLAN.md — Audit script + test suite (B2 cross-reference, cdnUrl formula, person tag detection)
+- [ ] 13-02-PLAN.md — Fix script + live audit-fix-reaudit cycle (clear wrong MMXXV tags, verify zero failures)
 
 ### Phase 14: Script Correctness
 **Goal**: The pipeline scripts (process-raw-video.py, extract-speaker-clips.py, extract-dialogue-clips.py) produce correctly encoded, web-optimized output for all supported camera profiles
@@ -166,7 +169,7 @@ Plans:
 | 10. Video Pipeline Execution | v1.2 | 2/2 | Complete | 2026-03-21 |
 | 11. Video Metadata Completion | v1.2 | 0/? | Blocked (v1.3) | - |
 | 12. Podcast Data + Content Tagging | v1.2 | 0/? | Blocked (v1.3) | - |
-| 13. Sanity Data Integrity | v1.3 | 0/? | Not started | - |
+| 13. Sanity Data Integrity | v1.3 | 0/2 | Not started | - |
 | 14. Script Correctness | v1.3 | 0/? | Not started | - |
 | 15. Pipeline Automation | v1.3 | 0/? | Not started | - |
 | 16. Pipeline Documentation | v1.3 | 0/? | Not started | - |
