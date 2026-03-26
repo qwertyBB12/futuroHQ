@@ -1,64 +1,77 @@
 # Requirements: Autori Mandatum
 
-**Defined:** 2026-03-21
+**Defined:** 2026-03-26
 **Core Value:** Every component must either work correctly or be gracefully disabled — no silent failures, no orphaned experiments, no schema ambiguity.
 
-## v1.2 Requirements
+## v1.3 Requirements
 
-Requirements for Pipeline Completion & Content Metadata milestone. Each maps to roadmap phases.
+Requirements for Media Pipeline Integrity milestone. Each maps to roadmap phases.
 
-### Transcript Integration
+### Data Integrity
 
-- [x] **TRANS-01**: Video schema has fullText (text) and speakerSegments (array of {speaker, start, end, text}) fields
-- [x] **TRANS-02**: Batch script ingests .enriched.json files and patches video documents with transcript data
-- [x] **TRANS-03**: Transcript fields display readably in Studio (collapsible, read-only speaker segments)
+- [ ] **DINT-01**: All clip Sanity documents have correct CDN URLs matching actual B2 filenames (verified by loading each URL)
+- [ ] **DINT-02**: All full-length video Sanity documents have correct and working cdnUrl values
+- [ ] **DINT-03**: Speaker clip documents have correct featuredIn references (person tags matching actual speakers)
 
-### Video Pipeline
+### Video Encoding
 
-- [x] **VPIPE-01**: Batch script matches B2 files to Sanity video documents and patches b2Key, cdnUrl, bunnyStatus (thumbnailUrl covered by VMETA-03; resolution deferred)
-- [x] **VPIPE-02**: All existing video documents have b2Key and cdnUrl populated
-- [x] **VPIPE-03**: Video completeness config updated to require transcript + B2 fields
+- [ ] **VENC-01**: process-raw-video.py outputs files with faststart encoding (MOOV atom at file start for progressive streaming)
+- [ ] **VENC-02**: Existing processed files that lack faststart are re-encoded or flagged for re-processing
+- [ ] **VENC-03**: All pipeline output files use consistent, correct FFmpeg settings (CRF 18, H.264, slow preset, web-optimized)
+
+### Pipeline Processing
+
+- [ ] **PIPE-01**: process-raw-video.py correctly applies LUT, vignette, brightness adjustment, and audio passthrough for each camera profile
+- [ ] **PIPE-02**: Pipeline handles multiple camera profiles (Sony A6700 S-Log 3, Canon R5 Canon Log 3, GoPro ProTune Flat) with correct LUT selection
+- [ ] **PIPE-03**: Pipeline detects and applies anamorphic desqueeze (1.33x) when needed
+- [ ] **PIPE-04**: Processed video is automatically transcribed (Whisper) and diarized (pyannote) with enriched JSON output
+
+### Pipeline Automation
+
+- [ ] **AUTO-01**: Single command processes raw video through the full chain: compress → LUT/filter → transcode → transcribe → diarize → clip extract
+- [ ] **AUTO-02**: Clip extraction uses per-manifest filenames (no assumptions about speaker numbering)
+- [ ] **AUTO-03**: Processed files and clips are uploaded to B2 in correct folder structure
+- [ ] **AUTO-04**: Sanity documents are created/updated from pipeline output with correct CDN URLs and person tags
+
+### Documentation
+
+- [ ] **DOCS-01**: Full pipeline architecture documented: which script does what, data flow, where each component runs
+- [ ] **DOCS-02**: Pipeline includes clear instructions for processing new raw video (step-by-step or single-command)
+
+## v1.2 Carried Requirements (blocked until v1.3 completes)
 
 ### Video Metadata
 
-- [ ] **VMETA-01**: Batch script populates missing video descriptions from transcript summaries
-- [ ] **VMETA-02**: All videos have tags assigned
-- [ ] **VMETA-03**: All videos have thumbnailUrl or thumbnailImage populated
+- **VMETA-01**: Batch script populates missing video descriptions from transcript summaries
+- **VMETA-02**: All videos have tags assigned
+- **VMETA-03**: All videos have thumbnailUrl or thumbnailImage populated
 
-### Podcast
+### Podcast & Tagging
 
-- [x] **POD-01**: PodcastEpisode schema has transcript field (fullText + speakerSegments, same as video)
-- [x] **POD-02**: PodcastEpisode schema has externalLinks array (platform + url pairs)
-- [x] **POD-03**: Podcast completeness added to enrichment system
-- [ ] **POD-04**: Batch script populates missing podcast episode metadata
-
-### Content Tagging
-
-- [ ] **TAG-01**: All content types with tags field have tags assigned (opEds gap: 15/17)
-- [ ] **TAG-02**: Tag taxonomy reviewed — no orphan or duplicate tags
+- **POD-04**: Batch script populates missing podcast episode metadata
+- **TAG-01**: All content types with tags field have tags assigned
+- **TAG-02**: Tag taxonomy reviewed — no orphan or duplicate tags
 
 ## Future Requirements
 
-### Transcript Enhancements
+### Pipeline Enhancements
 
-- **TRANS-F01**: Speaker name mapping (SPEAKER_00 → actual person names via voice embeddings)
-- **TRANS-F02**: Searchable transcript index across all videos
-- **TRANS-F03**: Timestamp-linked video playback from transcript segments
-
-### Media Pipeline
-
-- **VPIPE-F01**: Automated clip extraction pipeline (speaker clips, dialogue clips) integrated into Sanity
-- **VPIPE-F02**: Video transcoding via Bunny Stream for adaptive bitrate
+- **PIPE-F01**: Voice profile database — match speakers across videos automatically
+- **PIPE-F02**: EDL/XML timeline generation for DaVinci import
+- **PIPE-F03**: Alumni editing portals — raw footage browsable, clip flagging
+- **PIPE-F04**: Face recognition from extracted frames + alumni photos
+- **PIPE-F05**: AI story arc generation from transcripts
 
 ## Out of Scope
 
 | Feature | Reason |
 |---------|--------|
-| Wistia file download/transfer | Videos already migrated to B2 |
-| Video transcoding in CF Worker | 128MB memory limit; use Bunny Stream if needed |
-| Frontend video player changes | Studio-side only this milestone |
-| Medikah content | Excluded until separate milestone |
-| Speaker voice matching across videos | Complex ML task, future milestone |
+| Wistia migration | Videos already on B2 — Wistia is legacy |
+| Video transcoding in CF Worker | 128MB memory limit; process locally or use Bunny Stream |
+| Frontend video player changes | Studio-side and scripts only this milestone |
+| DaVinci Resolve automation | Future milestone — scripting API exists but is a separate effort |
+| Bunny Stream adaptive bitrate | Cost optimization decision; current CDN delivery is sufficient |
+| Processing remaining 370 raw files | Processing capacity is a runtime task, not a code/pipeline fix — use the corrected pipeline to process manually |
 
 ## Traceability
 
@@ -66,27 +79,28 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| TRANS-01 | Phase 9 | Complete |
-| TRANS-02 | Phase 10 | Complete |
-| TRANS-03 | Phase 9 | Complete |
-| VPIPE-01 | Phase 10 | Complete |
-| VPIPE-02 | Phase 10 | Complete |
-| VPIPE-03 | Phase 10 | Complete |
-| VMETA-01 | Phase 11 | Pending |
-| VMETA-02 | Phase 11 | Pending |
-| VMETA-03 | Phase 11 | Pending |
-| POD-01 | Phase 9 | Complete |
-| POD-02 | Phase 9 | Complete |
-| POD-03 | Phase 9 | Complete |
-| POD-04 | Phase 12 | Pending |
-| TAG-01 | Phase 12 | Pending |
-| TAG-02 | Phase 12 | Pending |
+| DINT-01 | TBD | Pending |
+| DINT-02 | TBD | Pending |
+| DINT-03 | TBD | Pending |
+| VENC-01 | TBD | Pending |
+| VENC-02 | TBD | Pending |
+| VENC-03 | TBD | Pending |
+| PIPE-01 | TBD | Pending |
+| PIPE-02 | TBD | Pending |
+| PIPE-03 | TBD | Pending |
+| PIPE-04 | TBD | Pending |
+| AUTO-01 | TBD | Pending |
+| AUTO-02 | TBD | Pending |
+| AUTO-03 | TBD | Pending |
+| AUTO-04 | TBD | Pending |
+| DOCS-01 | TBD | Pending |
+| DOCS-02 | TBD | Pending |
 
 **Coverage:**
-- v1.2 requirements: 15 total
-- Mapped to phases: 15
-- Unmapped: 0
+- v1.3 requirements: 16 total
+- Mapped to phases: 0
+- Unmapped: 16
 
 ---
-*Requirements defined: 2026-03-21*
-*Last updated: 2026-03-21 — VPIPE-01 narrowed (removed thumbnailUrl, resolution; covered by VMETA-03)*
+*Requirements defined: 2026-03-26*
+*Last updated: 2026-03-26 after initial definition*
