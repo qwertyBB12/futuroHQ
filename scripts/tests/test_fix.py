@@ -204,3 +204,63 @@ def test_apply_fixes_live_calls_patch():
 
     assert result["applied"] == 1
     assert result["failed"] == 0
+
+
+# ============================================================
+# Gap Closure Tests (Plan 13-03)
+# ============================================================
+
+def test_build_fix_plan_person_tag_mismatch_flags_for_review():
+    """
+    Given audit data with a failure containing 'person_tag_mismatch',
+    build_fix_plan() returns action='flag_person_mismatch' with patches=None.
+    Per D-08: MMXIX person tag mismatches are flagged for review, no auto-patch.
+    """
+    audit_data = {
+        "failures": [
+            {
+                "doc_id": "drafts.mmxix-clip-mismatch",
+                "title": "Laura Miller — MMXIX Clip (mismatch)",
+                "b2Key": "Futuro MMXIX/clips/HB2_Laura/SPEAKER_00_01m00s-02m00s.mp4",
+                "issues": ["person_tag_mismatch"],
+                "details": {"action": "review"},
+            }
+        ],
+        "manual_review": [],
+    }
+
+    fix_plan = fix.build_fix_plan(audit_data)
+    assert len(fix_plan) == 1, f"Expected 1 fix action for person_tag_mismatch, got {len(fix_plan)}"
+    action = fix_plan[0]
+    assert action["doc_id"] == "drafts.mmxix-clip-mismatch"
+    assert action["patches"] is None, (
+        f"person_tag_mismatch must have patches=None (no auto-patch), got: {action['patches']}"
+    )
+    assert action["action"] == "flag_person_mismatch", (
+        f"Expected action='flag_person_mismatch', got: {action['action']}"
+    )
+
+
+def test_build_fix_plan_pending_identification_skipped():
+    """
+    Given audit data with a failure containing 'pending_identification',
+    build_fix_plan() returns NO action (informational items should not appear in failures,
+    but if they somehow do, they must be skipped gracefully).
+    """
+    audit_data = {
+        "failures": [
+            {
+                "doc_id": "drafts.mmxxv-clip-cleared",
+                "title": "MMXXV Clip C3460 — Cleared",
+                "b2Key": "Futuro MMXXV/clips/C3460/SPEAKER_01_00m30s-01m00s.mp4",
+                "issues": ["pending_identification"],
+                "details": {"action": "informational"},
+            }
+        ],
+        "manual_review": [],
+    }
+
+    fix_plan = fix.build_fix_plan(audit_data)
+    assert len(fix_plan) == 0, (
+        f"pending_identification items must be skipped by fix script, got: {fix_plan}"
+    )
