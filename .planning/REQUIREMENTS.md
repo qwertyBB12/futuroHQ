@@ -9,9 +9,9 @@ Requirements for Media Pipeline Integrity milestone. Each maps to roadmap phases
 
 ### Data Integrity
 
-- [ ] **DINT-01**: All clip Sanity documents have correct CDN URLs matching actual B2 filenames (verified by loading each URL)
-- [ ] **DINT-02**: All full-length video Sanity documents have correct and working cdnUrl values
-- [ ] **DINT-03**: Speaker clip documents have correct featuredIn references (person tags matching actual speakers)
+- [x] **DINT-01**: All clip Sanity documents have correct CDN URLs matching actual B2 filenames (verified by loading each URL)
+- [x] **DINT-02**: All full-length video Sanity documents have correct and working cdnUrl values
+- [x] **DINT-03**: Speaker clip documents have correct featuredIn references (person tags matching actual speakers)
 
 ### Video Encoding
 
@@ -79,9 +79,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DINT-01 | Phase 13 | Pending |
-| DINT-02 | Phase 13 | Pending |
-| DINT-03 | Phase 13 | Pending |
+| DINT-01 | Phase 13 | Complete |
+| DINT-02 | Phase 13 | Complete |
+| DINT-03 | Phase 13 | Complete |
 | VENC-01 | Phase 14 | Pending |
 | VENC-02 | Phase 14 | Pending |
 | VENC-03 | Phase 14 | Pending |

@@ -49,7 +49,7 @@ See: `.planning/milestones/v1.1-ROADMAP.md` for full details.
 
 **Milestone Goal:** Fix all data integrity issues in the B2-to-Sanity video pipeline and automate the end-to-end flow from raw video to tagged, streamable Sanity documents.
 
-- [ ] **Phase 13: Sanity Data Integrity** - Fix clip CDN URL mismatches and person tag references in existing Sanity documents
+- [x] **Phase 13: Sanity Data Integrity** - Fix clip CDN URL mismatches and person tag references in existing Sanity documents (completed 2026-03-26)
 - [ ] **Phase 14: Script Correctness** - Fix encoding, camera profiles, anamorphic desqueeze, and transcription chain in pipeline scripts
 - [ ] **Phase 15: Pipeline Automation** - Wire all scripts into a single end-to-end command with correct B2 upload structure and Sanity sync
 - [ ] **Phase 16: Pipeline Documentation** - Document full architecture and step-by-step usage guide
@@ -115,8 +115,8 @@ Plans:
   4. A re-run of the URL audit script returns zero failures after patches are applied
 **Plans**: 2 plans
 Plans:
-- [ ] 13-01-PLAN.md — Audit script + test suite (B2 cross-reference, cdnUrl formula, person tag detection)
-- [ ] 13-02-PLAN.md — Fix script + live audit-fix-reaudit cycle (clear wrong MMXXV tags, verify zero failures)
+- [x] 13-01-PLAN.md — Audit script + test suite (B2 cross-reference, cdnUrl formula, person tag detection)
+- [x] 13-02-PLAN.md — Fix script + live audit-fix-reaudit cycle (clear wrong MMXXV tags, verify zero failures)
 
 ### Phase 14: Script Correctness
 **Goal**: The pipeline scripts (process-raw-video.py, extract-speaker-clips.py, extract-dialogue-clips.py) produce correctly encoded, web-optimized output for all supported camera profiles
@@ -169,7 +169,7 @@ Plans:
 | 10. Video Pipeline Execution | v1.2 | 2/2 | Complete | 2026-03-21 |
 | 11. Video Metadata Completion | v1.2 | 0/? | Blocked (v1.3) | - |
 | 12. Podcast Data + Content Tagging | v1.2 | 0/? | Blocked (v1.3) | - |
-| 13. Sanity Data Integrity | v1.3 | 0/2 | Not started | - |
+| 13. Sanity Data Integrity | v1.3 | 2/2 | Complete   | 2026-03-26 |
 | 14. Script Correctness | v1.3 | 0/? | Not started | - |
 | 15. Pipeline Automation | v1.3 | 0/? | Not started | - |
 | 16. Pipeline Documentation | v1.3 | 0/? | Not started | - |
