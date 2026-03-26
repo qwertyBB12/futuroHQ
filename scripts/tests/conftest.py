@@ -14,7 +14,9 @@ def mock_b2_inventory():
     return {
         "Futuro MMXIX/edited/HB_ALISTAIR_ahq12.mp4",
         "Futuro MMXIX/clips/HB2_Laura/SPEAKER_00_00m00s-01m00s.mp4",
+        "Futuro MMXIX/clips/HB2_Laura/SPEAKER_01_01m00s-02m00s.mp4",
         "Futuro MMXXV/clips/C3460/SPEAKER_00_00m00s-00m30s.mp4",
+        "Futuro MMXXV/clips/C3460/SPEAKER_01_00m30s-01m00s.mp4",
         "Futuro MMXXV/edited/card-1/Day 1/C3460_processed.mp4",
         # Deliberately NOT including this path to simulate a missing file:
         # "Futuro MMXIX/edited/MISSING_FILE.mp4"
@@ -104,6 +106,31 @@ def mock_sanity_docs():
             "featuredIn": [
                 # MMXIX-era alumna in an MMXXV longform — should be flagged for review
                 {"_id": "alumni-alistair-coll", "_type": "alumni", "slug": {"current": "alistair-coll"}, "name": "Alistair Coll"}
+            ],
+        },
+        # 7. MMXXV clip — cleared featuredIn (no refs, no named_speakers) — pending_identification
+        {
+            "_id": "drafts.mmxxv-clip-cleared",
+            "_type": "video",
+            "title": "MMXXV Clip C3460 — Cleared",
+            "videoFormat": "clip",
+            "b2Key": "Futuro MMXXV/clips/C3460/SPEAKER_01_00m30s-01m00s.mp4",
+            "cdnUrl": "https://benext.b-cdn.net/Futuro%20MMXXV/clips/C3460/SPEAKER_01_00m30s-01m00s.mp4",
+            "videoSource": "b2",
+            "featuredIn": [],
+        },
+        # 8. MMXIX clip — correct VIDEO_MAP tags PLUS extra host ref (subset match should pass)
+        {
+            "_id": "drafts.mmxix-clip-with-host",
+            "_type": "video",
+            "title": "Laura Miller — MMXIX Clip (with host)",
+            "videoFormat": "clip",
+            "b2Key": "Futuro MMXIX/clips/HB2_Laura/SPEAKER_01_01m00s-02m00s.mp4",
+            "cdnUrl": "https://benext.b-cdn.net/Futuro%20MMXIX/clips/HB2_Laura/SPEAKER_01_01m00s-02m00s.mp4",
+            "videoSource": "b2",
+            "featuredIn": [
+                {"_id": "alumni-laura-miller", "_type": "alumni", "slug": {"current": "laura-miller"}, "name": "Laura Miller"},
+                {"_id": "person-hector", "_type": "person", "slug": {"current": "hector-h-lopez"}, "name": "Hector H. Lopez"},
             ],
         },
     ]

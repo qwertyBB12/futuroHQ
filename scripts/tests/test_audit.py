@@ -250,3 +250,159 @@ def test_person_tag_mmxxv_clip_with_named_speakers(mock_video_map, mmxix_alumni_
     assert "wrong_person_tags" not in result["issues"], (
         f"MMXXV clip with matching named_speakers should not be flagged, got: {result['issues']}"
     )
+
+
+# ============================================================
+# Gap Closure Tests (Plan 13-03)
+# ============================================================
+
+def test_mmxxv_clip_cleared_featuredin_is_pending_identification(mock_sanity_docs, mock_video_map, mmxix_alumni_slugs, mock_enriched_json_dir):
+    """
+    MMXXV clip with featuredIn=[] and no named_speakers ->
+    check_person_tags returns 'pending_identification' (not 'wrong_person_tags'),
+    with action='informational'.
+
+    This is the gap fix: cleared clips that have no refs AND no enriched speakers
+    are not failures — they are awaiting speaker identification.
+    """
+    cleared_doc = next(
+        d for d in mock_sanity_docs if d["_id"] == "drafts.mmxxv-clip-cleared"
+    )
+    person_slug_map = audit.build_person_slug_map(mock_sanity_docs)
+
+    result = audit.check_person_tags(
+        cleared_doc,
+        mock_video_map,
+        mmxix_alumni_slugs,
+        person_slug_map,
+        enriched_dir=mock_enriched_json_dir,
+    )
+    assert "pending_identification" in result["issues"], (
+        f"Expected 'pending_identification' for cleared MMXXV clip, got: {result['issues']}"
+    )
+    assert "wrong_person_tags" not in result["issues"], (
+        f"Cleared MMXXV clip must NOT be flagged as wrong_person_tags, got: {result['issues']}"
+    )
+    assert result.get("action") == "informational", (
+        f"Expected action='informational', got: {result.get('action')}"
+    )
+
+
+def test_mmxxv_clip_featuredin_present_no_named_speakers_still_wrong(mock_sanity_docs, mock_video_map, mmxix_alumni_slugs, mock_enriched_json_dir):
+    """
+    MMXXV clip with featuredIn=[some refs] and no named_speakers ->
+    check_person_tags still returns 'wrong_person_tags' (unverifiable refs are present).
+
+    The cleared-clip path only applies when featuredIn is also empty.
+    """
+    wrong_tag_doc = next(
+        d for d in mock_sanity_docs if d["_id"] == "drafts.mmxxv-clip-wrong-tags"
+    )
+    person_slug_map = audit.build_person_slug_map(mock_sanity_docs)
+
+    result = audit.check_person_tags(
+        wrong_tag_doc,
+        mock_video_map,
+        mmxix_alumni_slugs,
+        person_slug_map,
+        enriched_dir=mock_enriched_json_dir,
+    )
+    assert "wrong_person_tags" in result["issues"], (
+        f"MMXXV clip with unverifiable refs still present should be 'wrong_person_tags', got: {result['issues']}"
+    )
+    assert "pending_identification" not in result["issues"], (
+        f"wrong_person_tags doc must NOT also be pending_identification, got: {result['issues']}"
+    )
+
+
+def test_mmxix_clip_subset_match_no_issues(mock_sanity_docs, mock_video_map, mmxix_alumni_slugs, mock_enriched_json_dir):
+    """
+    MMXIX clip where VIDEO_MAP expected_slugs is a SUBSET of actual_slugs ->
+    check_person_tags returns NO issues.
+
+    The extra hector-h-lopez host ref is acceptable — only absence of expected
+    people triggers person_tag_mismatch.
+    """
+    clip_with_host = next(
+        d for d in mock_sanity_docs if d["_id"] == "drafts.mmxix-clip-with-host"
+    )
+    person_slug_map = audit.build_person_slug_map(mock_sanity_docs)
+
+    result = audit.check_person_tags(
+        clip_with_host,
+        mock_video_map,
+        mmxix_alumni_slugs,
+        person_slug_map,
+        enriched_dir=mock_enriched_json_dir,
+    )
+    assert result["issues"] == [], (
+        f"MMXIX clip with extra host ref should have no issues (subset match), got: {result['issues']}"
+    )
+
+
+def test_mmxix_clip_missing_expected_person_flagged(mock_video_map, mmxix_alumni_slugs, mock_enriched_json_dir):
+    """
+    MMXIX clip where VIDEO_MAP expected_slugs is NOT a subset of actual_slugs ->
+    check_person_tags returns 'person_tag_mismatch'.
+
+    e.g., VIDEO_MAP says ['laura-miller'] but featuredIn has ['hector-h-lopez'] only.
+    """
+    doc_missing_person = {
+        "_id": "drafts.mmxix-clip-missing-person",
+        "_type": "video",
+        "title": "Laura Miller — MMXIX Clip (wrong tags)",
+        "videoFormat": "clip",
+        "b2Key": "Futuro MMXIX/clips/HB2_Laura/SPEAKER_00_01m00s-02m00s.mp4",
+        "cdnUrl": "https://benext.b-cdn.net/Futuro%20MMXIX/clips/HB2_Laura/SPEAKER_00_01m00s-02m00s.mp4",
+        "videoSource": "b2",
+        "featuredIn": [
+            # Only host — expected laura-miller is missing
+            {"_id": "person-hector", "_type": "person", "slug": {"current": "hector-h-lopez"}, "name": "Hector H. Lopez"},
+        ],
+    }
+    person_slug_map = audit.build_person_slug_map([doc_missing_person])
+
+    result = audit.check_person_tags(
+        doc_missing_person,
+        mock_video_map,
+        mmxix_alumni_slugs,
+        person_slug_map,
+        enriched_dir=mock_enriched_json_dir,
+    )
+    assert "person_tag_mismatch" in result["issues"], (
+        f"MMXIX clip missing expected VIDEO_MAP person must be 'person_tag_mismatch', got: {result['issues']}"
+    )
+
+
+def test_mmxix_longform_subset_match_no_issues(mock_video_map, mmxix_alumni_slugs, mock_enriched_json_dir, mock_b2_inventory):
+    """
+    MMXIX longform where VIDEO_MAP expected_slugs is a SUBSET of actual_slugs ->
+    check_person_tags returns NO issues.
+
+    e.g., VIDEO_MAP says ['alistair-coll'] and Sanity has ['alistair-coll', 'hector-h-lopez'].
+    """
+    doc_longform_with_host = {
+        "_id": "drafts.mmxix-longform-with-host",
+        "_type": "video",
+        "title": "Alistair Coll — MMXIX Longform (with host)",
+        "videoFormat": "longform",
+        "b2Key": "Futuro MMXIX/edited/HB_ALISTAIR_ahq12.mp4",
+        "cdnUrl": "https://benext.b-cdn.net/Futuro%20MMXIX/edited/HB_ALISTAIR_ahq12.mp4",
+        "videoSource": "b2",
+        "featuredIn": [
+            {"_id": "alumni-alistair-coll", "_type": "alumni", "slug": {"current": "alistair-coll"}, "name": "Alistair Coll"},
+            {"_id": "person-hector", "_type": "person", "slug": {"current": "hector-h-lopez"}, "name": "Hector H. Lopez"},
+        ],
+    }
+    person_slug_map = audit.build_person_slug_map([doc_longform_with_host])
+
+    result = audit.check_person_tags(
+        doc_longform_with_host,
+        mock_video_map,
+        mmxix_alumni_slugs,
+        person_slug_map,
+        enriched_dir=mock_enriched_json_dir,
+    )
+    assert result["issues"] == [], (
+        f"MMXIX longform with extra host ref should have no issues (subset match), got: {result['issues']}"
+    )
