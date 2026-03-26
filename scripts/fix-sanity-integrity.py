@@ -138,6 +138,20 @@ def build_fix_plan(audit_data: dict) -> list[dict]:
                 "note": "File not in B2 — manual investigation required",
             })
 
+        elif "person_tag_mismatch" in issues:
+            # MMXIX docs where VIDEO_MAP expected people are not all present in featuredIn
+            # Per D-08: flag for review, no auto-patch
+            fix_plan.append({
+                "doc_id": doc_id,
+                "patches": None,
+                "action": "flag_person_mismatch",
+                "note": f"person_tag_mismatch — VIDEO_MAP expected slugs not all present in featuredIn for {doc_id}. Manual review required.",
+            })
+
+        elif "pending_identification" in issues:
+            # Informational — MMXXV clip with cleared featuredIn, no action needed
+            pass  # These should not appear in failures, but skip gracefully if they do
+
     # Per D-08: manual_review items are skipped entirely (no auto-patching)
     # They are reported by the audit but not acted upon here.
 
