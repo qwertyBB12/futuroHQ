@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.3
 milestone_name: Media Pipeline Integrity
 status: executing
-stopped_at: Completed 13-02-PLAN.md — audit-fix-reaudit cycle approved, Phase 13 complete
-last_updated: "2026-03-26T22:51:24.168Z"
+stopped_at: Completed 13-03-PLAN.md — audit gap closure complete
+last_updated: "2026-03-26T23:38:22.665Z"
 last_activity: 2026-03-26
 progress:
   total_phases: 8
-  completed_phases: 3
-  total_plans: 6
-  completed_plans: 6
+  completed_phases: 2
+  total_plans: 8
+  completed_plans: 7
 ---
 
 # Project State
@@ -25,7 +25,7 @@ See: .planning/PROJECT.md (updated 2026-03-26)
 ## Current Position
 
 Phase: 13 (sanity-data-integrity) — EXECUTING
-Plan: 2 of 2
+Plan: 2 of 4
 Status: Ready to execute
 Last activity: 2026-03-26
 
@@ -58,6 +58,8 @@ v1.3 starting context:
 - [Phase 10]: GROQ count() CDN cache artifact can return stale numbers — use direct fetch to confirm state
 - [Phase 13-sanity-data-integrity]: apply_fixes dry_run mode does not call patch_sanity_document — prints [DRY RUN] inline; keeps guard testable
 - [Phase 13-sanity-data-integrity]: build_fix_plan skips manual_review entirely per D-08 — MMXXV longform with MMXIX alumni not auto-patched
+- [Phase 13-sanity-data-integrity]: pending_identification fires only when featuredIn AND named_speakers are both empty — unverifiable refs (non-empty featuredIn, no speakers) remain wrong_person_tags
+- [Phase 13-sanity-data-integrity]: MMXIX issubset comparison: extra refs like hector-as-host are acceptable; only flag when VIDEO_MAP expected people are absent from featuredIn
 
 ### Pending Todos
 
@@ -78,10 +80,11 @@ None.
 | Phase 10 P01 | 2 | 2 tasks | 2 files |
 | Phase 10 P02 | 45 | 3 tasks | 1 files |
 | Phase 13-sanity-data-integrity P02 | 6 | 1 tasks | 2 files |
+| Phase 13-sanity-data-integrity P03 | 14 | 2 tasks | 5 files |
 
 ## Session Continuity
 
-Last session: 2026-03-26T22:51:24.165Z
-Stopped at: Completed 13-02-PLAN.md — audit-fix-reaudit cycle approved, Phase 13 complete
+Last session: 2026-03-26T23:38:22.662Z
+Stopped at: Completed 13-03-PLAN.md — audit gap closure complete
 Resume with: /gsd:plan-phase 13
 Resume file: None
