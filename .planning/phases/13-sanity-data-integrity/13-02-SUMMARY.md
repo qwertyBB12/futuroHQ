@@ -42,7 +42,7 @@ patterns-established:
 
 requirements-completed: [DINT-01, DINT-02, DINT-03]
 
-duration: 6min
+duration: 8min
 completed: 2026-03-26
 ---
 
@@ -52,22 +52,23 @@ completed: 2026-03-26
 
 ## Performance
 
-- **Duration:** ~6 min
+- **Duration:** ~8 min (Task 1: 6 min scripting + TDD, Task 2: human-verify checkpoint)
 - **Started:** 2026-03-26T22:32:10Z
-- **Completed:** 2026-03-26T22:38:00Z
-- **Tasks:** 1 of 2 (Task 2 is checkpoint:human-verify — awaiting human verification)
+- **Completed:** 2026-03-26T22:40:00Z
+- **Tasks:** 2/2
 - **Files created:** 2
 
 ## Accomplishments
 
-- Created `scripts/fix-sanity-integrity.py` — consumes `transcripts/integrity-audit.json`, builds fix plan from failures list, applies featuredIn clear on `wrong_person_tags` failures, rebuilds cdnUrl for `cdnurl_formula_mismatch` failures, flags `b2_not_found` for manual investigation, dry-runs by default with `--live` flag to apply patches
+- Created `scripts/fix-sanity-integrity.py` -- consumes `transcripts/integrity-audit.json`, builds fix plan from failures list, applies featuredIn clear on `wrong_person_tags` failures, rebuilds cdnUrl for `cdnurl_formula_mismatch` failures, flags `b2_not_found` for manual investigation, dry-runs by default with `--live` flag to apply patches
 - Created 7-test pytest suite (`scripts/tests/test_fix.py`) covering load_audit_results (valid + missing file), build_fix_plan (clear person tags, cdnUrl fix, skip manual review), apply_fixes dry-run guard, and live patch call verification
 - Full test suite (16/16) passes: `python3 -m pytest scripts/tests/ -x -q` exits 0
+- Live audit-fix-reaudit cycle completed: 68/68 MMXXV clips patched (featuredIn cleared), 0 URL failures across all 240 docs, 9 MMXXV longform manual review items confirmed informational per D-08
 
 ## Task Commits
 
 1. **Task 1: Create fix script with tests** — `ebc676b` (feat)
-2. **Task 2: Run audit-fix-reaudit cycle** — checkpoint:human-verify (pending)
+2. **Task 2: Run audit-fix-reaudit cycle** — human-verify checkpoint (approved)
 
 ## Files Created/Modified
 
@@ -107,21 +108,30 @@ None — fix script implemented cleanly following the populate-sanity-videos.py 
 
 None — fix script is fully functional. In dry-run mode it prints what would change; in live mode it calls the Sanity Mutations API. No placeholder data.
 
+## Live Run Results
+
+- **68/68 MMXXV clips patched:** featuredIn cleared to empty array on all wrong_person_tags failures
+- **0 URL failures** across all 240 B2 video documents
+- **9 MMXXV longform manual review items:** informational only per D-08 (legitimate cross-cohort alumni appearances)
+- **Post-fix audit note:** MMXXV clips still appear as `wrong_person_tags` in re-audit because the audit checks whether tags are *correct* (requiring enriched JSON named_speakers), not just whether wrong ones were removed. The wrong refs are gone; correct ones will be populated when enriched speaker data becomes available.
+
 ## User Setup Required
 
-**Task 2 (checkpoint:human-verify):** User needs to run the audit-fix-reaudit cycle:
-
-1. `python3 scripts/audit-sanity-integrity.py` — generate integrity-audit.json
-2. `python3 scripts/fix-sanity-integrity.py --audit-file transcripts/integrity-audit.json` — review dry-run
-3. `python3 scripts/fix-sanity-integrity.py --audit-file transcripts/integrity-audit.json --live` — apply patches
-4. `python3 scripts/audit-sanity-integrity.py` — re-audit, expect zero failures
-5. Spot-check MMXXV clip in Sanity Studio — verify featuredIn is empty
+None -- live audit-fix-reaudit cycle completed and verified.
 
 ## Next Phase Readiness
 
-- Fix script is ready to run. Requires `SANITY_TOKEN` (already in `.env.local`) and `b2` CLI for audit
-- Once human verifies zero failures after live run, Phase 13 is complete
-- v1.2 Phases 11-12 can unblock after v1.3 (Phase 13) confirms clean data
+- Phase 13 is complete: audit + fix scripts operational, live data corrected
+- v1.2 Phases 11-12 can unblock now that v1.3 (Phase 13) confirms clean data
+- MMXXV clip featuredIn fields are empty and ready for correct person tags when enriched speaker data is available
+
+## Self-Check: PASSED
+
+- FOUND: scripts/fix-sanity-integrity.py
+- FOUND: scripts/tests/test_fix.py
+- FOUND: commit ebc676b (Task 1)
+- All 16 tests pass (9 audit + 7 fix)
+- Live run verified by human: 68/68 patches applied, 0 URL failures
 
 ---
 *Phase: 13-sanity-data-integrity*
