@@ -3,10 +3,10 @@ gsd_state_version: 1.0
 milestone: v1.3
 milestone_name: Media Pipeline Integrity
 status: active
-stopped_at: Milestone v1.3 started — defining requirements
-last_updated: "2026-03-26T20:00:00.000Z"
+stopped_at: Roadmap created — Phase 13 ready to plan
+last_updated: "2026-03-26T00:00:00.000Z"
 progress:
-  total_phases: 0
+  total_phases: 4
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -23,16 +23,20 @@ See: .planning/PROJECT.md (updated 2026-03-26)
 
 ## Current Position
 
-Phase: Not started (defining requirements)
+Phase: 13 (Sanity Data Integrity) — not started
 Plan: —
-Status: Defining requirements
-Last activity: 2026-03-26 — Milestone v1.3 started
+Status: Roadmap created, ready to plan Phase 13
+Last activity: 2026-03-26 — v1.3 roadmap defined (Phases 13-16)
+
+```
+Progress: [░░░░] 0/4 phases complete
+```
 
 ## Performance Metrics
 
-**Velocity (v1.0 + v1.1):**
+**Velocity (v1.0 + v1.1 + v1.2):**
 
-- Total plans completed: 16 (6 in v1.0, 10 in v1.1)
+- Total plans completed: 16 (6 in v1.0, 10 in v1.1) + 4 in v1.2 = 20 total
 - Average duration: ~4 min/plan
 
 ## Accumulated Context
@@ -41,20 +45,16 @@ Last activity: 2026-03-26 — Milestone v1.3 started
 
 All prior decisions archived in PROJECT.md Key Decisions table and milestones/v1.1-ROADMAP.md.
 
-v1.2 starting context:
+v1.3 starting context:
 
-- Transcript .enriched.json files exist on disk (scripts/transcribe-with-speakers.py output)
-- Video documents already have B2/Bunny fields from Phase 7 schema work
-- Podcast completeness not yet tracked — POD-03 adds it in Phase 9
-- opEd tag gap: 15/17 tagged (2 missing) — TAG-01 closes this in Phase 12
-- [Phase 09]: Track transcript (fullText) as required field on both podcastEpisode and video; track externalLinks on podcastEpisode only
-- [Phase 09-transcript-podcast-schema]: fullText uses rows:10 only — text type does not accept collapsible/collapsed options (object type only)
-- [Phase 09-transcript-podcast-schema]: TranscriptSegmentsInput is a full custom renderer — no renderDefault call for read-only display
-- [Phase 09-transcript-podcast-schema]: externalLinks placed in distribution group, after audioEmbed, before videoEmbed in podcastEpisode
-- [Phase 10]: Use client.patch().set() (not setIfMissing) for transcript ingestion to always reflect latest pipeline output
-- [Phase 10]: b2Key added to video completeness checks — B2 videos missing b2Key now surface in Needs Enrichment desk list
-- [Phase 10]: All 26 B2 video documents are draft-only (no published versions) — created by populate-sanity-videos.py as drafts pending review; GROQ count() CDN cache artifact returns 18 but direct fetch confirms all 26 have required fields
-- [Phase 10]: HB_Male.mp4 was mislabeled as Mark Franklin — patched directly via Sanity API to correct title and featuredIn reference to Maria Alexandra Sheppard
+- Pipeline scripts exist in scripts/: process-raw-video.py, extract-speaker-clips.py, extract-dialogue-clips.py, populate-sanity-videos.py, ingest-transcripts.ts
+- 26 MMXIX HB videos + 53 MMXXV videos already in Sanity (all as drafts)
+- Clip documents exist in Sanity but have wrong CDN URLs (mismatch with actual B2 filenames)
+- Existing processed files may lack faststart encoding (MOOV atom not at file start)
+- v1.2 Phases 11-12 are blocked until v1.3 completes and pipeline produces reliable output
+- Phase 13 is the highest-priority fix: bad URLs in Sanity must be corrected before any further content work
+- [Phase 10]: All 26 B2 video documents are draft-only — created by populate-sanity-videos.py as drafts pending review
+- [Phase 10]: GROQ count() CDN cache artifact can return stale numbers — use direct fetch to confirm state
 
 ### Pending Todos
 
@@ -77,7 +77,7 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-21T18:41:31.494Z
-Stopped at: Completed 10-02-PLAN.md — Phase 10 complete
-Resume with: /gsd:plan-phase 9
+Last session: 2026-03-26
+Stopped at: v1.3 roadmap created — Phases 13-16 defined
+Resume with: /gsd:plan-phase 13
 Resume file: None

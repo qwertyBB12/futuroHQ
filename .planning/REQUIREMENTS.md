@@ -79,28 +79,28 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DINT-01 | TBD | Pending |
-| DINT-02 | TBD | Pending |
-| DINT-03 | TBD | Pending |
-| VENC-01 | TBD | Pending |
-| VENC-02 | TBD | Pending |
-| VENC-03 | TBD | Pending |
-| PIPE-01 | TBD | Pending |
-| PIPE-02 | TBD | Pending |
-| PIPE-03 | TBD | Pending |
-| PIPE-04 | TBD | Pending |
-| AUTO-01 | TBD | Pending |
-| AUTO-02 | TBD | Pending |
-| AUTO-03 | TBD | Pending |
-| AUTO-04 | TBD | Pending |
-| DOCS-01 | TBD | Pending |
-| DOCS-02 | TBD | Pending |
+| DINT-01 | Phase 13 | Pending |
+| DINT-02 | Phase 13 | Pending |
+| DINT-03 | Phase 13 | Pending |
+| VENC-01 | Phase 14 | Pending |
+| VENC-02 | Phase 14 | Pending |
+| VENC-03 | Phase 14 | Pending |
+| PIPE-01 | Phase 14 | Pending |
+| PIPE-02 | Phase 14 | Pending |
+| PIPE-03 | Phase 14 | Pending |
+| PIPE-04 | Phase 14 | Pending |
+| AUTO-01 | Phase 15 | Pending |
+| AUTO-02 | Phase 15 | Pending |
+| AUTO-03 | Phase 15 | Pending |
+| AUTO-04 | Phase 15 | Pending |
+| DOCS-01 | Phase 16 | Pending |
+| DOCS-02 | Phase 16 | Pending |
 
 **Coverage:**
 - v1.3 requirements: 16 total
-- Mapped to phases: 0
-- Unmapped: 16
+- Mapped to phases: 16
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-26*
-*Last updated: 2026-03-26 after initial definition*
+*Last updated: 2026-03-26 — traceability mapped after roadmap creation*
