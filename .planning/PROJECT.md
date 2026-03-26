@@ -40,18 +40,24 @@ Every component in the studio must either work correctly or be gracefully disabl
 
 ### Active
 
-(Defined in REQUIREMENTS.md — v1.2 Pipeline Completion & Content Metadata)
+(Defined in REQUIREMENTS.md — v1.3 Media Pipeline Integrity)
 
-## Current Milestone: v1.2 Pipeline Completion & Content Metadata
+## Current Milestone: v1.3 Media Pipeline Integrity
 
-**Goal:** Complete the media pipeline by integrating transcripts and B2/Bunny URLs into Sanity, fill remaining video/podcast metadata gaps, and finish content tagging across all types.
+**Goal:** Fix all data integrity issues in the B2-to-Sanity video pipeline and automate the end-to-end flow from raw video to tagged, streamable Sanity documents.
 
 **Target features:**
-- Transcript field on video documents with transcription pipeline integration
-- Sanity video documents updated with B2/Bunny CDN URLs
-- Video metadata completion (descriptions, thumbnails, tags)
-- Podcast schema enhancements (transcript, duration, external links) + data population
-- Remaining content tagging cleanup
+- Fix clip CDN URL mismatches in Sanity (re-read manifests, match actual B2 filenames)
+- Add faststart encoding to processed videos (MOOV atom at front for streaming)
+- Audit and optimize the full processing chain (raw → compress/filter/LUT/vignette/audio → diarize → clip extract)
+- Complete remaining ~370 MMXXV raw files across cards 2-3
+- Wire pipeline scripts into one automated end-to-end flow
+- Validate all existing Sanity video documents have correct and working CDN URLs
+- Document the full pipeline architecture (processing scripts vs. CF Worker vs. B2 storage)
+
+**Blocked work (resumes after v1.3):**
+- v1.2 Phase 11: Video Metadata Completion (descriptions, thumbnails, tags)
+- v1.2 Phase 12: Podcast Data + Content Tagging
 
 ### Out of Scope
 
@@ -114,5 +120,22 @@ Every component in the studio must either work correctly or be gracefully disabl
 | S.documentList().filter() for desk lists | S.documentTypeList().filter() silently ignores the filter | ✓ Good — critical Sanity API distinction |
 | lib/completeness.ts kept pure TypeScript | No Studio imports for Node.js batch script compatibility | ✓ Good — shared between Studio and CLI |
 
+## Evolution
+
+This document evolves at phase transitions and milestone boundaries.
+
+**After each phase transition** (via `/gsd:transition`):
+1. Requirements invalidated? → Move to Out of Scope with reason
+2. Requirements validated? → Move to Validated with phase reference
+3. New requirements emerged? → Add to Active
+4. Decisions to log? → Add to Key Decisions
+5. "What This Is" still accurate? → Update if drifted
+
+**After each milestone** (via `/gsd:complete-milestone`):
+1. Full review of all sections
+2. Core Value check — still the right priority?
+3. Audit Out of Scope — reasons still valid?
+4. Update Context with current state
+
 ---
-*Last updated: 2026-03-21 after v1.2 milestone start*
+*Last updated: 2026-03-26 after v1.3 milestone start*
