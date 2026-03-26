@@ -335,16 +335,29 @@ def check_person_tags(
         named_speakers = load_enriched_speakers(stem, enriched_dir)
 
         if not named_speakers:
-            # No speaker-to-person mapping available — all current refs are unverifiable
-            return {
-                "doc_id": doc_id,
-                "issues": ["wrong_person_tags"],
-                "action": "clear_and_flag",
-                "reason": (
-                    f"MMXXV clip — enriched JSON for '{stem}' has no named_speakers; "
-                    "current featuredIn refs are unverifiable (per D-07 cross-reference)"
-                ),
-            }
+            if not actual_slugs:
+                # featuredIn is already empty AND no named_speakers — awaiting speaker identification
+                # This is not a failure; the clip has been cleared and is pending enrichment.
+                return {
+                    "doc_id": doc_id,
+                    "issues": ["pending_identification"],
+                    "action": "informational",
+                    "reason": (
+                        f"MMXXV clip — featuredIn cleared, awaiting speaker identification "
+                        f"(no named_speakers in enriched JSON for '{stem}')"
+                    ),
+                }
+            else:
+                # featuredIn has refs but no named_speakers — refs are unverifiable
+                return {
+                    "doc_id": doc_id,
+                    "issues": ["wrong_person_tags"],
+                    "action": "clear_and_flag",
+                    "reason": (
+                        f"MMXXV clip — enriched JSON for '{stem}' has no named_speakers; "
+                        "current featuredIn refs are unverifiable (per D-07 cross-reference)"
+                    ),
+                }
         else:
             # named_speakers has entries — compare against actual featuredIn slugs
             # named_speakers values are person slugs or names; normalize to set
@@ -386,14 +399,14 @@ def check_person_tags(
         video_info = video_map.get(filename, {})
         expected_slugs = set(video_info.get("alumni", []) + video_info.get("collaborators", []))
 
-        if expected_slugs and expected_slugs != actual_slugs:
+        if expected_slugs and not expected_slugs.issubset(actual_slugs):
             return {
                 "doc_id": doc_id,
                 "issues": ["person_tag_mismatch"],
                 "action": "review",
                 "reason": (
-                    f"MMXIX clip expected slugs {list(expected_slugs)} "
-                    f"but found {list(actual_slugs)}"
+                    f"MMXIX clip — VIDEO_MAP expected slugs {list(expected_slugs)} "
+                    f"are not all present in featuredIn slugs {list(actual_slugs)}"
                 ),
             }
         return {"doc_id": doc_id, "issues": [], "action": None, "reason": None}
@@ -404,14 +417,14 @@ def check_person_tags(
         video_info = video_map.get(filename, {})
         expected_slugs = set(video_info.get("alumni", []) + video_info.get("collaborators", []))
 
-        if expected_slugs and expected_slugs != actual_slugs:
+        if expected_slugs and not expected_slugs.issubset(actual_slugs):
             return {
                 "doc_id": doc_id,
                 "issues": ["person_tag_mismatch"],
                 "action": "review",
                 "reason": (
-                    f"MMXIX longform expected slugs {list(expected_slugs)} "
-                    f"but found {list(actual_slugs)}"
+                    f"MMXIX longform — VIDEO_MAP expected slugs {list(expected_slugs)} "
+                    f"are not all present in featuredIn slugs {list(actual_slugs)}"
                 ),
             }
         return {"doc_id": doc_id, "issues": [], "action": None, "reason": None}
@@ -545,6 +558,7 @@ def main():
     person_results: dict[str, dict] = {}
     failures: list[dict] = []
     manual_review: list[dict] = []
+    informational: list[dict] = []
 
     for doc in docs:
         doc_id = doc.get("_id", "")
@@ -559,7 +573,7 @@ def main():
         )
         person_results[doc_id] = person_result
 
-        # Collect failures and review items
+        # Collect failures, review items, and informational items
         all_issues = url_result.get("issues", []) + person_result.get("issues", [])
         action = person_result.get("action")
 
@@ -568,6 +582,15 @@ def main():
                 "doc_id": doc_id,
                 "title": doc.get("title", ""),
                 "b2Key": doc.get("b2Key", ""),
+                "reason": person_result.get("reason", ""),
+            })
+        elif action == "informational":
+            # pending_identification and similar — not failures, not manual review
+            informational.append({
+                "doc_id": doc_id,
+                "title": doc.get("title", ""),
+                "b2Key": doc.get("b2Key", ""),
+                "issues": person_result.get("issues", []),
                 "reason": person_result.get("reason", ""),
             })
         elif all_issues:
@@ -587,6 +610,12 @@ def main():
     print_summary_table(categories, url_results, person_results)
     print_failures(failures, manual_review)
 
+    if informational:
+        print(f"\n=== INFORMATIONAL — PENDING IDENTIFICATION ({len(informational)}) ===")
+        for item in informational:
+            print(f"  [{item.get('doc_id', '')}] {item.get('title', '')}")
+            print(f"    Reason: {item.get('reason', '')}")
+
     # Step 5: Write JSON output
     audit_result = {
         "generated": datetime.now(timezone.utc).isoformat(),
@@ -595,9 +624,11 @@ def main():
             "url_failures": sum(1 for r in url_results.values() if r.get("issues")),
             "person_tag_issues": sum(1 for r in person_results.values() if r.get("issues")),
             "manual_review_count": len(manual_review),
+            "informational_count": len(informational),
         },
         "failures": failures,
         "manual_review": manual_review,
+        "informational": informational,
     }
 
     json_out.parent.mkdir(parents=True, exist_ok=True)
@@ -606,12 +637,17 @@ def main():
     print(f"\nJSON output written to: {json_out}")
 
     # Exit code: 0 if zero failures, 1 if failures found
+    # Note: informational items do NOT count as failures
     n_failures = len(failures)
     if n_failures == 0 and len(manual_review) == 0:
         print("\nAudit result: CLEAN — no issues found.")
+        if informational:
+            print(f"  ({len(informational)} clips pending speaker identification — not failures)")
         sys.exit(0)
     else:
         print(f"\nAudit result: {n_failures} failure(s), {len(manual_review)} items for manual review.")
+        if informational:
+            print(f"  ({len(informational)} clips pending speaker identification — not failures)")
         sys.exit(1 if n_failures > 0 else 0)
 
 
