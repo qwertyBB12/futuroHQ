@@ -2,8 +2,8 @@
 phase: 13
 slug: sanity-data-integrity
 status: draft
-nyquist_compliant: false
-wave_0_complete: false
+nyquist_compliant: true
+wave_0_complete: true
 created: 2026-03-26
 ---
 
@@ -17,20 +17,20 @@ created: 2026-03-26
 
 | Property | Value |
 |----------|-------|
-| **Framework** | Node.js scripts + bash (no test framework — audit/patch scripts with exit codes) |
-| **Config file** | none — scripts are standalone |
-| **Quick run command** | `node scripts/audit-sanity-urls.js --dry-run` |
-| **Full suite command** | `node scripts/audit-sanity-urls.js && node scripts/audit-person-tags.js` |
-| **Estimated runtime** | ~30 seconds |
+| **Framework** | pytest (Python) |
+| **Config file** | none — pytest discovers `scripts/tests/` automatically |
+| **Quick run command** | `python3 -m pytest scripts/tests/ -x -q` |
+| **Full suite command** | `python3 -m pytest scripts/tests/ -q` |
+| **Estimated runtime** | ~5 seconds (all mock data, no live calls) |
 
 ---
 
 ## Sampling Rate
 
-- **After every task commit:** Run `node scripts/audit-sanity-urls.js --dry-run`
+- **After every task commit:** Run `python3 -m pytest scripts/tests/ -x -q`
 - **After every plan wave:** Run full suite command
 - **Before `/gsd:verify-work`:** Full suite must be green (zero failures)
-- **Max feedback latency:** 30 seconds
+- **Max feedback latency:** 5 seconds
 
 ---
 
@@ -38,23 +38,24 @@ created: 2026-03-26
 
 | Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|-----------|-------------------|-------------|--------|
-| 13-01-01 | 01 | 1 | DINT-01 | audit | `node scripts/audit-sanity-urls.js` | ❌ W0 | ⬜ pending |
-| 13-01-02 | 01 | 1 | DINT-02 | audit | `node scripts/audit-b2key-match.js` | ❌ W0 | ⬜ pending |
-| 13-02-01 | 02 | 1 | DINT-03 | audit | `node scripts/audit-person-tags.js` | ❌ W0 | ⬜ pending |
-| 13-02-02 | 02 | 1 | DINT-03 | patch | `node scripts/patch-person-tags.js --dry-run` | ❌ W0 | ⬜ pending |
+| 13-01-01 | 01 | 1 | DINT-01, DINT-02, DINT-03 | unit (scaffolding) | `python3 -m pytest scripts/tests/test_audit.py -x -q` | W0 (created by task) | pending |
+| 13-01-02 | 01 | 1 | DINT-01, DINT-02, DINT-03 | unit (audit logic) | `python3 -m pytest scripts/tests/test_audit.py -x -q` | W0 (created by 13-01-01) | pending |
+| 13-02-01 | 02 | 2 | DINT-01, DINT-02, DINT-03 | unit (fix logic) | `python3 -m pytest scripts/tests/test_fix.py -x -q` | W0 (created by task) | pending |
+| 13-02-02 | 02 | 2 | DINT-03 | checkpoint | Manual: audit-fix-reaudit cycle | N/A | pending |
 
-*Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
+*Status: pending / green / red / flaky*
 
 ---
 
 ## Wave 0 Requirements
 
-- [ ] `scripts/audit-sanity-urls.js` — audit all cdnUrl fields against B2 keys
-- [ ] `scripts/audit-b2key-match.js` — verify cdnUrl matches b2Key filename pattern
-- [ ] `scripts/audit-person-tags.js` — audit featuredIn references against diarization
-- [ ] `scripts/patch-person-tags.js` — clear wrong person tags with --dry-run support
+- [x] `scripts/tests/__init__.py` — package marker (created by Plan 01, Task 1)
+- [x] `scripts/tests/conftest.py` — shared fixtures for mock Sanity/B2 responses (created by Plan 01, Task 1)
+- [x] `scripts/tests/test_audit.py` — 8 unit tests for audit logic (created by Plan 01, Task 1)
+- [x] `scripts/tests/test_fix.py` — 6 unit tests for fix logic (created by Plan 02, Task 1)
+- [x] Framework install: `pip install pytest` (Plan 01, Task 1)
 
-*Scripts follow existing pattern from populate-sanity-videos.py*
+*All tests use mock data — no live Sanity/B2 calls in unit tests.*
 
 ---
 
@@ -69,11 +70,11 @@ created: 2026-03-26
 
 ## Validation Sign-Off
 
-- [ ] All tasks have `<automated>` verify or Wave 0 dependencies
-- [ ] Sampling continuity: no 3 consecutive tasks without automated verify
-- [ ] Wave 0 covers all MISSING references
-- [ ] No watch-mode flags
-- [ ] Feedback latency < 30s
-- [ ] `nyquist_compliant: true` set in frontmatter
+- [x] All tasks have `<automated>` verify or Wave 0 dependencies
+- [x] Sampling continuity: no 3 consecutive tasks without automated verify
+- [x] Wave 0 covers all MISSING references
+- [x] No watch-mode flags
+- [x] Feedback latency < 30s
+- [x] `nyquist_compliant: true` set in frontmatter
 
 **Approval:** pending

@@ -14,7 +14,7 @@ Fix incorrect CDN URLs and person tag references on existing clip and full-lengt
 ## Implementation Decisions
 
 ### Audit Strategy
-- **D-01:** Audit checks three signals per document: HTTP 200 status, content-type is video/mp4, and content-length > 0. Issues could manifest in any of these ways.
+- **D-01:** Audit verifies b2Key existence via `b2 ls` as substitute for HTTP validation (Bunny CDN token unavailable — returns 401 expired_auth_token on all requests). Also verifies cdnUrl formula correctness (CDN_BASE + b2Key with space encoding). HTTP 200 / content-type / content-length checks deferred pending Bunny token configuration.
 - **D-02:** Audit output is console table (for quick human review) + JSON file (for downstream fix script to consume).
 - **D-03:** Single-pass audit covers both clips and full-length video documents — no separate runs.
 
@@ -24,12 +24,12 @@ Fix incorrect CDN URLs and person tag references on existing clip and full-lengt
 - **D-06:** One fix script handles both clips and full-length videos with type-aware logic. Consistent with single-pass audit.
 
 ### Person Tag Correction
-- **D-07:** Cross-reference diarization output (.enriched.json speaker segments) AND VIDEO_MAP (populate-sanity-videos.py filename→person mappings) to derive correct featuredIn references.
+- **D-07:** Cross-reference diarization output (.enriched.json speaker segments) AND VIDEO_MAP (populate-sanity-videos.py filename->person mappings) to derive correct featuredIn references.
 - **D-08:** Unmatched speakers are flagged for manual review in the audit output — no auto-creation of placeholder person documents.
 - **D-09:** Fix updates featuredIn on both clips and full-length videos for consistency.
 
 ### Patch Execution
-- **D-10:** Dry-run → review → live workflow. Always run --dry-run first, review output, then re-run with --live. Same pattern as existing populate-sanity-videos.py.
+- **D-10:** Dry-run -> review -> live workflow. Always run --dry-run first, review output, then re-run with --live. Same pattern as existing populate-sanity-videos.py.
 - **D-11:** Patches target any document with videoSource == "b2" — both drafts and published, regardless of current publish state.
 - **D-12:** Verification is re-running the same audit script after patches. Success = zero failures.
 
@@ -47,7 +47,7 @@ Fix incorrect CDN URLs and person tag references on existing clip and full-lengt
 **Downstream agents MUST read these before planning or implementing.**
 
 ### Pipeline Scripts
-- `scripts/populate-sanity-videos.py` — Contains VIDEO_MAP (filename→person mappings), CDN_BASE constant, Sanity API patterns. The --dry-run/--live pattern to follow.
+- `scripts/populate-sanity-videos.py` — Contains VIDEO_MAP (filename->person mappings), CDN_BASE constant, Sanity API patterns. The --dry-run/--live pattern to follow.
 - `scripts/extract-speaker-clips.py` — Created the clip files in B2. Shows naming conventions and clip directory structure.
 - `scripts/ingest-transcripts.ts` — Matches videos by b2Key stem, patches fullText/speakerSegments. Shows TypeScript Sanity client pattern.
 
