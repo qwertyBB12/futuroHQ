@@ -1,0 +1,850 @@
+{
+  "generated": "2026-03-26T23:41:25.512554+00:00",
+  "summary": {
+    "total_docs": 240,
+    "url_failures": 0,
+    "person_tag_issues": 84,
+    "manual_review_count": 9,
+    "informational_count": 68
+  },
+  "failures": [
+    {
+      "doc_id": "002f5d2c-55b3-492c-b12a-0ec8f7b43160",
+      "title": "Diego Gracia \u2014 Futuro MMXIX Testimonial",
+      "b2Key": "Futuro MMXIX/edited/HB_DIEGOMTY_ahq12.mp4",
+      "issues": [
+        "person_tag_mismatch"
+      ],
+      "details": {
+        "url": {
+          "doc_id": "002f5d2c-55b3-492c-b12a-0ec8f7b43160",
+          "b2_exists": true,
+          "cdn_formula_ok": true,
+          "issues": []
+        },
+        "person": {
+          "doc_id": "002f5d2c-55b3-492c-b12a-0ec8f7b43160",
+          "issues": [
+            "person_tag_mismatch"
+          ],
+          "action": "review",
+          "reason": "MMXIX longform \u2014 VIDEO_MAP expected slugs ['diego-hernandez'] are not all present in featuredIn slugs ['diego-gracia']"
+        }
+      }
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWlXYzF",
+      "title": "Futuro MMXIX \u2014 HB2_paisa \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXIX/clips/HB2_paisa/SPEAKER_00_00m00s-00m34s.mp4",
+      "issues": [
+        "person_tag_mismatch"
+      ],
+      "details": {
+        "url": {
+          "doc_id": "CgadNFQCI8okHl5PWlXYzF",
+          "b2_exists": true,
+          "cdn_formula_ok": true,
+          "issues": []
+        },
+        "person": {
+          "doc_id": "CgadNFQCI8okHl5PWlXYzF",
+          "issues": [
+            "person_tag_mismatch"
+          ],
+          "action": "review",
+          "reason": "MMXIX clip \u2014 VIDEO_MAP expected slugs ['mateo-porras-bermudez'] are not all present in featuredIn slugs ['Hector H. Lopez', 'santiago-ramirez-anguiano']"
+        }
+      }
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWlXZgd",
+      "title": "Futuro MMXIX \u2014 HB_DIEGOMTY_ahq12 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXIX/clips/HB_DIEGOMTY_ahq12/SPEAKER_00_00m00s-00m11s.mp4",
+      "issues": [
+        "person_tag_mismatch"
+      ],
+      "details": {
+        "url": {
+          "doc_id": "CgadNFQCI8okHl5PWlXZgd",
+          "b2_exists": true,
+          "cdn_formula_ok": true,
+          "issues": []
+        },
+        "person": {
+          "doc_id": "CgadNFQCI8okHl5PWlXZgd",
+          "issues": [
+            "person_tag_mismatch"
+          ],
+          "action": "review",
+          "reason": "MMXIX clip \u2014 VIDEO_MAP expected slugs ['diego-hernandez'] are not all present in featuredIn slugs ['diego-gracia', 'Hector H. Lopez']"
+        }
+      }
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWlXbe7",
+      "title": "Futuro MMXIX \u2014 HB_MASO_ahq12 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXIX/clips/HB_MASO_ahq12/SPEAKER_00_00m00s-00m18s.mp4",
+      "issues": [
+        "person_tag_mismatch"
+      ],
+      "details": {
+        "url": {
+          "doc_id": "CgadNFQCI8okHl5PWlXbe7",
+          "b2_exists": true,
+          "cdn_formula_ok": true,
+          "issues": []
+        },
+        "person": {
+          "doc_id": "CgadNFQCI8okHl5PWlXbe7",
+          "issues": [
+            "person_tag_mismatch"
+          ],
+          "action": "review",
+          "reason": "MMXIX clip \u2014 VIDEO_MAP expected slugs ['maria-sofia'] are not all present in featuredIn slugs ['maria-alexandra-sheppard', 'Hector H. Lopez']"
+        }
+      }
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWlXbmn",
+      "title": "Futuro MMXIX \u2014 HB_Male \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXIX/clips/HB_Male/SPEAKER_00_00m00s-00m23s.mp4",
+      "issues": [
+        "person_tag_mismatch"
+      ],
+      "details": {
+        "url": {
+          "doc_id": "CgadNFQCI8okHl5PWlXbmn",
+          "b2_exists": true,
+          "cdn_formula_ok": true,
+          "issues": []
+        },
+        "person": {
+          "doc_id": "CgadNFQCI8okHl5PWlXbmn",
+          "issues": [
+            "person_tag_mismatch"
+          ],
+          "action": "review",
+          "reason": "MMXIX clip \u2014 VIDEO_MAP expected slugs ['mark-franklin'] are not all present in featuredIn slugs ['Hector H. Lopez', 'mariana-vlieg']"
+        }
+      }
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWlXcPq",
+      "title": "Futuro MMXIX \u2014 HB_puebla \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXIX/clips/HB_puebla/SPEAKER_00_00m00s-00m36s.mp4",
+      "issues": [
+        "person_tag_mismatch"
+      ],
+      "details": {
+        "url": {
+          "doc_id": "CgadNFQCI8okHl5PWlXcPq",
+          "b2_exists": true,
+          "cdn_formula_ok": true,
+          "issues": []
+        },
+        "person": {
+          "doc_id": "CgadNFQCI8okHl5PWlXcPq",
+          "issues": [
+            "person_tag_mismatch"
+          ],
+          "action": "review",
+          "reason": "MMXIX clip \u2014 VIDEO_MAP expected slugs ['santiago-ramirez-anguiano'] are not all present in featuredIn slugs ['Hector H. Lopez', 'maria-sofia']"
+        }
+      }
+    },
+    {
+      "doc_id": "c152d3c5-b458-4a0e-a045-a5ecc1c7c177",
+      "title": "Maria Alexandra Sheppard \u2014 Futuro MMXIX Testimonial",
+      "b2Key": "Futuro MMXIX/edited/HB_Male.mp4",
+      "issues": [
+        "person_tag_mismatch"
+      ],
+      "details": {
+        "url": {
+          "doc_id": "c152d3c5-b458-4a0e-a045-a5ecc1c7c177",
+          "b2_exists": true,
+          "cdn_formula_ok": true,
+          "issues": []
+        },
+        "person": {
+          "doc_id": "c152d3c5-b458-4a0e-a045-a5ecc1c7c177",
+          "issues": [
+            "person_tag_mismatch"
+          ],
+          "action": "review",
+          "reason": "MMXIX longform \u2014 VIDEO_MAP expected slugs ['mark-franklin'] are not all present in featuredIn slugs ['maria-alexandra-sheppard']"
+        }
+      }
+    }
+  ],
+  "manual_review": [
+    {
+      "doc_id": "22675bc7-7808-4133-b185-c7777cba374c",
+      "title": "Futuro MMXXV \u2014 Alistair & Alejandra at Staff Meeting",
+      "b2Key": "Futuro MMXXV/edited/card-1/Day 1/C3467_processed.mp4",
+      "reason": "MMXXV longform has MMXIX-era alumni reference: ['alistair-coll']"
+    },
+    {
+      "doc_id": "4929718f-a6be-4fce-b1ca-4e8cb20922d5",
+      "title": "Futuro MMXXV \u2014 Participants Entering Opening Ceremony",
+      "b2Key": "Futuro MMXXV/edited/card-1/Day 1/C3503_processed.mp4",
+      "reason": "MMXXV longform has MMXIX-era alumni reference: ['mateo-porras-bermudez', 'alistair-coll', 'santiago-ramirez-anguiano']"
+    },
+    {
+      "doc_id": "6e521972-6df0-45d6-8de3-e595b425378e",
+      "title": "Futuro MMXXV \u2014 Arrival Coordination",
+      "b2Key": "Futuro MMXXV/edited/card-1/Day 1/C3502_processed.mp4",
+      "reason": "MMXXV longform has MMXIX-era alumni reference: ['mateo-porras-bermudez', 'alistair-coll', 'santiago-ramirez-anguiano']"
+    },
+    {
+      "doc_id": "7d0a7471-a7d9-4a88-a7f9-5ead95506c93",
+      "title": "Futuro MMXXV \u2014 Staff Walking Tour",
+      "b2Key": "Futuro MMXXV/edited/card-1/Day 1/C3462_processed.mp4",
+      "reason": "MMXXV longform has MMXIX-era alumni reference: ['alistair-coll']"
+    },
+    {
+      "doc_id": "9d6c1937-6462-4c38-8e7f-06081ea82d18",
+      "title": "Futuro MMXXV \u2014 Staff Orientation Walk",
+      "b2Key": "Futuro MMXXV/edited/card-1/Day 1/C3461_processed.mp4",
+      "reason": "MMXXV longform has MMXIX-era alumni reference: ['alistair-coll']"
+    },
+    {
+      "doc_id": "a9c03c96-40f7-42dc-8a99-fe6a96277dfd",
+      "title": "Futuro MMXXV \u2014 Day 1 Evening Session: Ideas, Identity & Quantum Futures",
+      "b2Key": "Futuro MMXXV/edited/card-1/Day 1/C3513_processed.mp4",
+      "reason": "MMXXV longform has MMXIX-era alumni reference: ['alistair-coll']"
+    },
+    {
+      "doc_id": "b4b2b87c-d44e-44c0-a254-e9df8b81b765",
+      "title": "Futuro MMXXV \u2014 Claudia Vlogging",
+      "b2Key": "Futuro MMXXV/edited/card-1/Day 1/C3463_processed.mp4",
+      "reason": "MMXXV longform has MMXIX-era alumni reference: ['alistair-coll']"
+    },
+    {
+      "doc_id": "e53c3059-2462-40bf-a005-4e7f73505f78",
+      "title": "Futuro MMXXV \u2014 Setup & Preparation Notes",
+      "b2Key": "Futuro MMXXV/edited/card-1/Day 1/C3465_processed.mp4",
+      "reason": "MMXXV longform has MMXIX-era alumni reference: ['alistair-coll']"
+    },
+    {
+      "doc_id": "f97718fb-eadd-4748-972b-49779a02fb90",
+      "title": "Futuro MMXXV \u2014 Top Secret Dispatch 1",
+      "b2Key": "Futuro MMXXV/edited/card-1/Day 1/Futuro MMXXV - Top Secret - Dispatch 1.mp4",
+      "reason": "MMXXV longform has MMXIX-era alumni reference: ['diego-hernandez', 'laura-miller', 'mark-franklin', 'mateo-porras-bermudez', 'diego-gordon', 'felipe-eleta', 'maria-sofia', 'nestor-gaytan', 'alistair-coll', 'samuel-rios', 'pierina-diana', 'ricardo-adames', 'santiago-ramirez-anguiano']"
+    }
+  ],
+  "informational": [
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4ISA",
+      "title": "Futuro MMXXV \u2014 C3460 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3460/SPEAKER_00_00m00s-00m30s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3460')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4IWV",
+      "title": "Futuro MMXXV \u2014 C3465 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3465/SPEAKER_00_00m00s-00m32s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3465')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4Iaq",
+      "title": "Futuro MMXXV \u2014 C3466 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3466/SPEAKER_00_00m00s-00m06s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3466')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4IfB",
+      "title": "Futuro MMXXV \u2014 C3467 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3467/SPEAKER_00_00m05s-00m15s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3467')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4IjW",
+      "title": "Futuro MMXXV \u2014 C3468 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3468/SPEAKER_00_00m00s-00m18s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3468')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4Inr",
+      "title": "Futuro MMXXV \u2014 C3468 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3468/SPEAKER_00_00m19s-00m45s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3468')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4IsC",
+      "title": "Futuro MMXXV \u2014 C3469 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3469/SPEAKER_00_00m00s-00m12s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3469')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4IwX",
+      "title": "Futuro MMXXV \u2014 C3469 \u2014 SPEAKER_01",
+      "b2Key": "Futuro MMXXV/clips/C3469/SPEAKER_01_00m12s-00m19s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3469')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4J0s",
+      "title": "Futuro MMXXV \u2014 C3469 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3469/SPEAKER_00_00m19s-00m32s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3469')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4J5D",
+      "title": "Futuro MMXXV \u2014 C3469 \u2014 SPEAKER_01",
+      "b2Key": "Futuro MMXXV/clips/C3469/SPEAKER_01_00m33s-01m37s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3469')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4J9Y",
+      "title": "Futuro MMXXV \u2014 C3469 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3469/SPEAKER_00_01m38s-01m48s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3469')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4JDt",
+      "title": "Futuro MMXXV \u2014 C3469 \u2014 SPEAKER_01",
+      "b2Key": "Futuro MMXXV/clips/C3469/SPEAKER_01_01m48s-05m20s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3469')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4JIE",
+      "title": "Futuro MMXXV \u2014 C3469 \u2014 SPEAKER_01",
+      "b2Key": "Futuro MMXXV/clips/C3469/SPEAKER_01_05m23s-06m12s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3469')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4JMZ",
+      "title": "Futuro MMXXV \u2014 C3470 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3470/SPEAKER_00_00m08s-00m18s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3470')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4JQu",
+      "title": "Futuro MMXXV \u2014 C3471 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3471/SPEAKER_00_00m00s-00m15s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3471')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4JVF",
+      "title": "Futuro MMXXV \u2014 C3475 \u2014 SPEAKER_01",
+      "b2Key": "Futuro MMXXV/clips/C3475/SPEAKER_01_00m10s-00m15s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3475')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4JZa",
+      "title": "Futuro MMXXV \u2014 C3479 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3479/SPEAKER_00_00m00s-00m06s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3479')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4Jdv",
+      "title": "Futuro MMXXV \u2014 C3480 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3480/SPEAKER_00_00m00s-00m22s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3480')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4JiG",
+      "title": "Futuro MMXXV \u2014 C3482 \u2014 SPEAKER_01",
+      "b2Key": "Futuro MMXXV/clips/C3482/SPEAKER_01_00m09s-00m19s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3482')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4Jmb",
+      "title": "Futuro MMXXV \u2014 C3483 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3483/SPEAKER_00_00m00s-00m07s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3483')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4Jqw",
+      "title": "Futuro MMXXV \u2014 C3488 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3488/SPEAKER_00_00m00s-00m06s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3488')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4JvH",
+      "title": "Futuro MMXXV \u2014 C3489 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3489/SPEAKER_00_00m05s-00m13s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3489')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4Jzc",
+      "title": "Futuro MMXXV \u2014 C3496 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3496/SPEAKER_00_00m00s-00m10s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3496')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4K3x",
+      "title": "Futuro MMXXV \u2014 C3499 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3499/SPEAKER_00_00m03s-00m08s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3499')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4K8I",
+      "title": "Futuro MMXXV \u2014 C3502 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3502/SPEAKER_00_00m00s-00m14s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3502')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4KCd",
+      "title": "Futuro MMXXV \u2014 C3502 \u2014 SPEAKER_02",
+      "b2Key": "Futuro MMXXV/clips/C3502/SPEAKER_02_00m42s-00m54s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3502')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4KGy",
+      "title": "Futuro MMXXV \u2014 C3504 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3504/SPEAKER_00_00m37s-00m59s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3504')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4KLJ",
+      "title": "Futuro MMXXV \u2014 C3504 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3504/SPEAKER_00_01m15s-03m18s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3504')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4KPe",
+      "title": "Futuro MMXXV \u2014 C3505 \u2014 SPEAKER_01",
+      "b2Key": "Futuro MMXXV/clips/C3505/SPEAKER_01_00m20s-01m09s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3505')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4KTz",
+      "title": "Futuro MMXXV \u2014 C3505 \u2014 SPEAKER_01",
+      "b2Key": "Futuro MMXXV/clips/C3505/SPEAKER_01_01m12s-01m39s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3505')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4KYK",
+      "title": "Futuro MMXXV \u2014 C3506 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3506/SPEAKER_00_00m00s-01m47s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3506')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4Kcf",
+      "title": "Futuro MMXXV \u2014 C3507 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3507/SPEAKER_00_00m00s-01m34s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3507')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4Kh0",
+      "title": "Futuro MMXXV \u2014 C3507 \u2014 SPEAKER_01",
+      "b2Key": "Futuro MMXXV/clips/C3507/SPEAKER_01_01m36s-02m12s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3507')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4KlL",
+      "title": "Futuro MMXXV \u2014 C3510 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3510/SPEAKER_00_00m51s-01m01s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3510')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4Kpg",
+      "title": "Futuro MMXXV \u2014 C3510 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3510/SPEAKER_00_01m04s-03m09s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3510')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4Ku1",
+      "title": "Futuro MMXXV \u2014 C3510 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3510/SPEAKER_00_03m12s-04m05s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3510')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4KyM",
+      "title": "Futuro MMXXV \u2014 C3510 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3510/SPEAKER_00_04m07s-04m18s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3510')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4L2h",
+      "title": "Futuro MMXXV \u2014 C3510 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3510/SPEAKER_00_04m21s-07m39s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3510')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4L72",
+      "title": "Futuro MMXXV \u2014 C3510 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3510/SPEAKER_00_07m42s-08m38s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3510')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4LBN",
+      "title": "Futuro MMXXV \u2014 C3512 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3512/SPEAKER_00_00m00s-01m03s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3512')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4LFi",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_01",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_01_00m05s-01m23s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4LK3",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_01",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_01_01m28s-02m47s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4LOO",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_00_02m51s-04m07s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4LSj",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_00_04m10s-05m21s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4LX4",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_02",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_02_05m22s-06m21s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4LbP",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_02",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_02_06m22s-07m09s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4Lfk",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_02",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_02_07m20s-09m42s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4Lk5",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_02",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_02_09m44s-10m32s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4LoQ",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_02",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_02_10m34s-11m55s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4Lsl",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_02",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_02_11m56s-12m04s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4Lx6",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_02",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_02_12m05s-12m21s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4M1R",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_00",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_00_12m21s-13m02s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4M5m",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_02",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_02_13m07s-13m23s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4MA7",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_04",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_04_13m23s-14m47s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4MES",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_03",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_03_14m51s-16m16s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4MIn",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_02",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_02_16m17s-19m34s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4MN8",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_03",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_03_19m37s-19m48s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4MRT",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_02",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_02_19m49s-20m07s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4MVo",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_03",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_03_20m09s-21m47s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4Ma9",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_02",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_02_21m47s-22m18s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4MeU",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_02",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_02_22m19s-30m29s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4Mip",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_02",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_02_30m34s-35m09s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4MnA",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_02",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_02_35m12s-35m19s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4MrV",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_02",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_02_35m22s-36m02s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4Mvq",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_02",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_02_36m04s-36m30s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4N0B",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_02",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_02_36m34s-39m44s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4N4W",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_02",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_02_39m46s-43m57s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    },
+    {
+      "doc_id": "CgadNFQCI8okHl5PWm4N8r",
+      "title": "Futuro MMXXV \u2014 C3513 \u2014 SPEAKER_02",
+      "b2Key": "Futuro MMXXV/clips/C3513/SPEAKER_02_44m00s-46m55s.mp4",
+      "issues": [
+        "pending_identification"
+      ],
+      "reason": "MMXXV clip \u2014 featuredIn cleared, awaiting speaker identification (no named_speakers in enriched JSON for 'C3513')"
+    }
+  ]
+}
