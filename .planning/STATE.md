@@ -1,69 +1,89 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.3
-milestone_name: Media Pipeline Integrity
+milestone: v1.1
+milestone_name: Content Production & Media Pipeline
 status: executing
-stopped_at: Completed 14-02-PLAN.md — transcription chain credential and format fixes
-last_updated: "2026-03-27T00:53:55.514Z"
-last_activity: 2026-03-27
+stopped_at: Completed 14-01-PLAN.md
+last_updated: "2026-03-27T00:52:34.996Z"
+last_activity: 2026-03-16 — Phase 6 Plan 01 complete — person tagging schema foundation
 progress:
-  total_phases: 8
+  total_phases: 5
   completed_phases: 3
-  total_plans: 11
-  completed_plans: 10
+  total_plans: 6
+  completed_plans: 6
+  percent: 83
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-03-26)
+See: .planning/PROJECT.md (updated 2026-03-16)
 
 **Core value:** Every component must either work correctly or be gracefully disabled — no silent failures, no orphaned experiments, no schema ambiguity.
-**Current focus:** Phase 14 — script-correctness
+**Current focus:** Phase 4 — Tech Debt + Shared Infrastructure
 
 ## Current Position
 
-Phase: 14 (script-correctness) — EXECUTING
-Plan: 3 of 3
-Status: Ready to execute
-Last activity: 2026-03-27
+Phase: 6 of 8 (Person Tagging + Data Entry)
+Plan: 01 complete — ready for Plan 02
+Status: In progress
+Last activity: 2026-03-16 — Phase 6 Plan 01 complete — person tagging schema foundation
 
-```
-Progress: [░░░░] 0/4 phases complete
-```
+Progress: [████████░░] 83%
 
 ## Performance Metrics
 
-**Velocity (v1.0 + v1.1 + v1.2):**
+**Velocity (v1.0 baseline):**
 
-- Total plans completed: 16 (6 in v1.0, 10 in v1.1) + 4 in v1.2 = 20 total
+- Total plans completed: 6
+- Total execution time: ~24 min
 - Average duration: ~4 min/plan
+
+**By Phase:**
+
+| Phase | Plans | Total | Avg/Plan |
+|-------|-------|-------|----------|
+| Phase 01 P01 | 1 | 2min | 2min |
+| Phase 02 P01-02 | 2 | 15min | 7.5min |
+| Phase 03 P01-03 | 3 | 9min | 3min |
+| Phase 04 P01 | 2 | 2 tasks | 4 files |
+| Phase 04 P02 | 3min | 2 tasks | 7 files |
+| Phase 05-enrichment-tooling P01 | 1 | 2 tasks | 2 files |
+| Phase 05-enrichment-tooling P02 | 2 | 3 tasks | 5 files |
+| Phase 06-person-tagging-data-entry P01 | ~15min | 2 tasks | 15 files |
+| Phase 06 P02 | 2min | 1 tasks | 9 files |
+| Phase 06-person-tagging-data-entry P02 | 5min | 2 tasks | 9 files |
+| Phase 14-script-correctness P01 | 3min | 2 tasks | 3 files |
 
 ## Accumulated Context
 
 ### Decisions
 
-All prior decisions archived in PROJECT.md Key Decisions table and milestones/v1.1-ROADMAP.md.
+All decisions logged in PROJECT.md Key Decisions table. Key patterns for v1.1:
 
-v1.3 starting context:
-
-- Pipeline scripts exist in scripts/: process-raw-video.py, extract-speaker-clips.py, extract-dialogue-clips.py, populate-sanity-videos.py, ingest-transcripts.ts
-- 26 MMXIX HB videos + 53 MMXXV videos already in Sanity (all as drafts)
-- Clip documents exist in Sanity but have wrong CDN URLs (mismatch with actual B2 filenames)
-- Existing processed files may lack faststart encoding (MOOV atom not at file start)
-- v1.2 Phases 11-12 are blocked until v1.3 completes and pipeline produces reliable output
-- Phase 13 is the highest-priority fix: bad URLs in Sanity must be corrected before any further content work
-- [Phase 10]: All 26 B2 video documents are draft-only — created by populate-sanity-videos.py as drafts pending review
-- [Phase 10]: GROQ count() CDN cache artifact can return stale numbers — use direct fetch to confirm state
-- [Phase 13-sanity-data-integrity]: apply_fixes dry_run mode does not call patch_sanity_document — prints [DRY RUN] inline; keeps guard testable
-- [Phase 13-sanity-data-integrity]: build_fix_plan skips manual_review entirely per D-08 — MMXXV longform with MMXIX alumni not auto-patched
-- [Phase 13-sanity-data-integrity]: pending_identification fires only when featuredIn AND named_speakers are both empty — unverifiable refs (non-empty featuredIn, no speakers) remain wrong_person_tags
-- [Phase 13-sanity-data-integrity]: MMXIX issubset comparison: extra refs like hector-as-host are acceptable; only flag when VIDEO_MAP expected people are absent from featuredIn
-- [Phase 13-sanity-data-integrity]: 7 genuine MMXIX person_tag_mismatch failures remain after Plan 03 fixes — VIDEO_MAP expected slugs absent from featuredIn; require human decision to accept or patch
-- [Phase 13-sanity-data-integrity]: D-12 criterion partially met: 0 URL failures, 68 MMXXV clips confirmed empty via GROQ; 7 MMXIX mismatches are genuine data quality issues, not false positives
-- [Phase 14-script-correctness]: Binary MP4 box parsing (stdlib struct) over ffprobe — ffprobe does not expose atom order
-- [Phase 14-02]: _require_hf_token() deferred to get_diarization_pipeline() call site so scripts are importable without HF_TOKEN set
+- B2 + Bunny CDN pull zone (not Bunny Stream) — keep Worker as event bridge only
+- surfaceOn as string array (not references) — matches existing essay pattern, no join needed
+- Enrichment tooling before data entry — build tools first so data entry is trackable
+- aws4fetch (not @aws-sdk) in Cloudflare Worker — AWS SDK broken in Workers since Jan 2025
+- [Phase 04-01]: GOVERNED_TYPES merged superset: deskStructure.ts had alumniContinuum, sanity.config.ts did not — canonical set includes it
+- [Phase 04-01]: lib/constants.ts single source of truth for GOVERNED_TYPES, BILINGUAL_TYPES, SURFACE_SITES — SEO_TYPES and groupedDocTypes remain local to deskStructure.ts
+- [Phase 04-02]: surfaceOnField placed before governanceFields in all 6 schemas — distribution fields appear above governance in form
+- [Phase 04-02]: alumniContinuum GROQ audit: 0 docs in production — no patch script needed, initialValue update sufficient
+- [Phase 04-02]: alumniContinuum defaults corrected: narrativeOwner benext, platformTier canonical, archivalStatus archival per CONTEXT.md
+- [Phase 05-01]: S.documentList().filter() used for Needs Enrichment desk lists — NOT S.documentTypeList().filter() which silently ignores the filter
+- [Phase 05-01]: lib/completeness.ts kept pure TypeScript with no Studio imports for Node.js batch script compatibility
+- [Phase 05-01]: ENRICHMENT_TYPES defined separately from GOVERNED_TYPES — collaborator and ledgerPerson are enrichment-tracked but not governance-governed
+- [Phase 05-02]: document.components.unstable_layout used for banner registration — @sanity/assist already uses it and Sanity 5 chains multiple registrations via renderDefault
+- [Phase 05-02]: CompletenessInput guards internally via COMPLETENESS_CONFIG so global registration is safe — returns renderDefault for non-tracked types
+- [Phase 06-01]: featuredIn targets 4 people types (alumni, person, ledgerPerson, collaborator); featuredContent targets 7 content types
+- [Phase 06-01]: alumni featuredEssays + featuredVideos removed and replaced by unified featuredContent field
+- [Phase 06-02]: Migration uses --live opt-in flag (not --dry-run opt-out) for safety on destructive unset operations
+- [Phase 06-02]: populate-* scripts use set() to overwrite vs batch-enrich.ts setIfMissing — intentional for real vs placeholder data
+- [Phase 06-person-tagging-data-entry]: Data population execution deferred to post-B2/Bunny CDN milestone — user approved closing phase with tooling complete
+- [Phase 14-01]: CRF 18 only encoding — no bitrate override flags (D-01)
+- [Phase 14-01]: argparse CLI with --camera, --anamorphic, --skip-transcribe replacing sys.argv (D-05)
+- [Phase 14-01]: detect_anamorphic() removed — explicit --anamorphic flag is safer opt-in (D-08)
 
 ### Pending Todos
 
@@ -71,7 +91,8 @@ None.
 
 ### Blockers/Concerns
 
-None.
+- Phase 8 (Worker): Audit existing Wistia field names in video schema before finalizing Phase 7 schema plan (gap from research)
+- Phase 8 (Worker): May need /gsd:research-phase before planning — HMAC validation specifics and B2 bucket notification rule config are uncharted
 
 ### Quick Tasks Completed
 
@@ -79,19 +100,9 @@ None.
 |---|-------------|------|--------|-----------|
 | 1 | Add Es-suffixed bilingual fields to all siteSettings schemas | 2026-03-09 | c98a065 | [1-add-es-suffixed-bilingual-fields-to-all-](./quick/1-add-es-suffixed-bilingual-fields-to-all-/) |
 | 2 | Add navLinks array field to all siteSettings schemas | 2026-03-09 | 3286d85 | [2-add-navlinks-array-field-to-all-sitesett](./quick/2-add-navlinks-array-field-to-all-sitesett/) |
-| Phase 09 P02 | 1 | 1 tasks | 1 files |
-| Phase 09-transcript-podcast-schema P01 | 8 | 3 tasks | 6 files |
-| Phase 10 P01 | 2 | 2 tasks | 2 files |
-| Phase 10 P02 | 45 | 3 tasks | 1 files |
-| Phase 13-sanity-data-integrity P02 | 6 | 1 tasks | 2 files |
-| Phase 13-sanity-data-integrity P03 | 14 | 2 tasks | 5 files |
-| Phase 13-sanity-data-integrity P04 | 8 | 1 tasks | 1 files |
-| Phase 14-script-correctness P03 | 97s | 1 tasks | 2 files |
-| Phase 14-script-correctness P02 | 319 | 2 tasks | 6 files |
 
 ## Session Continuity
 
-Last session: 2026-03-27T00:53:55.512Z
-Stopped at: Completed 14-02-PLAN.md — transcription chain credential and format fixes
-Resume with: /gsd:plan-phase 13
+Last session: 2026-03-27T00:52:34.994Z
+Stopped at: Completed 14-01-PLAN.md
 Resume file: None

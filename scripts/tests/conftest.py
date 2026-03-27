@@ -9,6 +9,16 @@ from pathlib import Path
 
 
 @pytest.fixture
+def lut_dir(tmp_path):
+    """Temporary directory with fake .cube LUT files for encoding tests."""
+    cube = tmp_path / "sony-a6700-slog3.cube"
+    cube.write_text("# fake LUT\nLUT_3D_SIZE 2\n0 0 0\n1 1 1\n0 0 0\n1 1 1\n0 0 0\n1 1 1\n0 0 0\n1 1 1\n")
+    canon = tmp_path / "canon-r5-clog3.cube"
+    canon.write_text("# fake LUT\nLUT_3D_SIZE 2\n0 0 0\n1 1 1\n0 0 0\n1 1 1\n0 0 0\n1 1 1\n0 0 0\n1 1 1\n")
+    return tmp_path
+
+
+@pytest.fixture
 def mock_b2_inventory():
     """Set of known B2 paths (relative to bucket root, no bucket name prefix)."""
     return {
