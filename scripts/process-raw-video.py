@@ -19,7 +19,7 @@ import subprocess
 import time
 from pathlib import Path
 
-HF_TOKEN = "hf_REDACTED_OLD_TOKEN"
+HF_TOKEN = os.environ.get("HF_TOKEN")
 BUCKET = "hector-ecosystem-archive-prod"
 WORK_DIR = Path("/tmp/b2-raw-process")
 OUTPUT_DIR = Path("/Users/hectorhlopez/projects/clean-studio/transcripts")
@@ -66,9 +66,17 @@ def parse_args(argv=None):
     return parser.parse_args(argv)
 
 
+def _require_hf_token():
+    if not HF_TOKEN:
+        print("ERROR: HF_TOKEN environment variable not set.", file=sys.stderr)
+        print("  export HF_TOKEN='hf_...'", file=sys.stderr)
+        sys.exit(1)
+
+
 def get_diarization_pipeline():
     global _pipeline
     if _pipeline is None:
+        _require_hf_token()
         import torch
         from pyannote.audio import Pipeline
         print("  Loading speaker diarization model...")
