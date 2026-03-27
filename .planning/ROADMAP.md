@@ -133,7 +133,7 @@ Plans:
 **Plans**: 3 plans
 Plans:
 - [ ] 14-01-PLAN.md — Fix FFmpeg encoding (pure CRF 18), argparse CLI (--camera, --anamorphic, --skip-transcribe), dead code removal
-- [ ] 14-02-PLAN.md — HF_TOKEN env var, transcribe output format alignment, faststart on clip extraction
+- [x] 14-02-PLAN.md — HF_TOKEN env var, transcribe output format alignment, faststart on clip extraction
 - [x] 14-03-PLAN.md — Standalone faststart audit script (has_faststart binary parser + CLI)
 **UI hint**: no
 
@@ -176,6 +176,6 @@ Plans:
 | 11. Video Metadata Completion | v1.2 | 0/? | Blocked (v1.3) | - |
 | 12. Podcast Data + Content Tagging | v1.2 | 0/? | Blocked (v1.3) | - |
 | 13. Sanity Data Integrity | v1.3 | 4/4 | Complete    | 2026-03-27 |
-| 14. Script Correctness | v1.3 | 1/3 | In Progress|  |
+| 14. Script Correctness | v1.3 | 2/3 | In Progress|  |
 | 15. Pipeline Automation | v1.3 | 0/? | Not started | - |
 | 16. Pipeline Documentation | v1.3 | 0/? | Not started | - |

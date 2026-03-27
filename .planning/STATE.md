@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.3
 milestone_name: Media Pipeline Integrity
 status: executing
-stopped_at: Completed 14-03-PLAN.md — faststart audit script
-last_updated: "2026-03-27T00:49:07.969Z"
+stopped_at: Completed 14-02-PLAN.md — transcription chain credential and format fixes
+last_updated: "2026-03-27T00:53:55.514Z"
 last_activity: 2026-03-27
 progress:
   total_phases: 8
   completed_phases: 3
   total_plans: 11
-  completed_plans: 9
+  completed_plans: 10
 ---
 
 # Project State
@@ -25,7 +25,7 @@ See: .planning/PROJECT.md (updated 2026-03-26)
 ## Current Position
 
 Phase: 14 (script-correctness) — EXECUTING
-Plan: 2 of 3
+Plan: 3 of 3
 Status: Ready to execute
 Last activity: 2026-03-27
 
@@ -63,6 +63,7 @@ v1.3 starting context:
 - [Phase 13-sanity-data-integrity]: 7 genuine MMXIX person_tag_mismatch failures remain after Plan 03 fixes — VIDEO_MAP expected slugs absent from featuredIn; require human decision to accept or patch
 - [Phase 13-sanity-data-integrity]: D-12 criterion partially met: 0 URL failures, 68 MMXXV clips confirmed empty via GROQ; 7 MMXIX mismatches are genuine data quality issues, not false positives
 - [Phase 14-script-correctness]: Binary MP4 box parsing (stdlib struct) over ffprobe — ffprobe does not expose atom order
+- [Phase 14-02]: _require_hf_token() deferred to get_diarization_pipeline() call site so scripts are importable without HF_TOKEN set
 
 ### Pending Todos
 
@@ -86,10 +87,11 @@ None.
 | Phase 13-sanity-data-integrity P03 | 14 | 2 tasks | 5 files |
 | Phase 13-sanity-data-integrity P04 | 8 | 1 tasks | 1 files |
 | Phase 14-script-correctness P03 | 97s | 1 tasks | 2 files |
+| Phase 14-script-correctness P02 | 319 | 2 tasks | 6 files |
 
 ## Session Continuity
 
-Last session: 2026-03-27T00:49:07.966Z
-Stopped at: Completed 14-03-PLAN.md — faststart audit script
+Last session: 2026-03-27T00:53:55.512Z
+Stopped at: Completed 14-02-PLAN.md — transcription chain credential and format fixes
 Resume with: /gsd:plan-phase 13
 Resume file: None
