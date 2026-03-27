@@ -1,182 +1,13 @@
 {
-  "generated": "2026-03-26T23:41:25.512554+00:00",
+  "generated": "2026-03-27T00:04:47.270615+00:00",
   "summary": {
     "total_docs": 240,
     "url_failures": 0,
-    "person_tag_issues": 84,
+    "person_tag_issues": 77,
     "manual_review_count": 9,
     "informational_count": 68
   },
-  "failures": [
-    {
-      "doc_id": "002f5d2c-55b3-492c-b12a-0ec8f7b43160",
-      "title": "Diego Gracia \u2014 Futuro MMXIX Testimonial",
-      "b2Key": "Futuro MMXIX/edited/HB_DIEGOMTY_ahq12.mp4",
-      "issues": [
-        "person_tag_mismatch"
-      ],
-      "details": {
-        "url": {
-          "doc_id": "002f5d2c-55b3-492c-b12a-0ec8f7b43160",
-          "b2_exists": true,
-          "cdn_formula_ok": true,
-          "issues": []
-        },
-        "person": {
-          "doc_id": "002f5d2c-55b3-492c-b12a-0ec8f7b43160",
-          "issues": [
-            "person_tag_mismatch"
-          ],
-          "action": "review",
-          "reason": "MMXIX longform \u2014 VIDEO_MAP expected slugs ['diego-hernandez'] are not all present in featuredIn slugs ['diego-gracia']"
-        }
-      }
-    },
-    {
-      "doc_id": "CgadNFQCI8okHl5PWlXYzF",
-      "title": "Futuro MMXIX \u2014 HB2_paisa \u2014 SPEAKER_00",
-      "b2Key": "Futuro MMXIX/clips/HB2_paisa/SPEAKER_00_00m00s-00m34s.mp4",
-      "issues": [
-        "person_tag_mismatch"
-      ],
-      "details": {
-        "url": {
-          "doc_id": "CgadNFQCI8okHl5PWlXYzF",
-          "b2_exists": true,
-          "cdn_formula_ok": true,
-          "issues": []
-        },
-        "person": {
-          "doc_id": "CgadNFQCI8okHl5PWlXYzF",
-          "issues": [
-            "person_tag_mismatch"
-          ],
-          "action": "review",
-          "reason": "MMXIX clip \u2014 VIDEO_MAP expected slugs ['mateo-porras-bermudez'] are not all present in featuredIn slugs ['Hector H. Lopez', 'santiago-ramirez-anguiano']"
-        }
-      }
-    },
-    {
-      "doc_id": "CgadNFQCI8okHl5PWlXZgd",
-      "title": "Futuro MMXIX \u2014 HB_DIEGOMTY_ahq12 \u2014 SPEAKER_00",
-      "b2Key": "Futuro MMXIX/clips/HB_DIEGOMTY_ahq12/SPEAKER_00_00m00s-00m11s.mp4",
-      "issues": [
-        "person_tag_mismatch"
-      ],
-      "details": {
-        "url": {
-          "doc_id": "CgadNFQCI8okHl5PWlXZgd",
-          "b2_exists": true,
-          "cdn_formula_ok": true,
-          "issues": []
-        },
-        "person": {
-          "doc_id": "CgadNFQCI8okHl5PWlXZgd",
-          "issues": [
-            "person_tag_mismatch"
-          ],
-          "action": "review",
-          "reason": "MMXIX clip \u2014 VIDEO_MAP expected slugs ['diego-hernandez'] are not all present in featuredIn slugs ['diego-gracia', 'Hector H. Lopez']"
-        }
-      }
-    },
-    {
-      "doc_id": "CgadNFQCI8okHl5PWlXbe7",
-      "title": "Futuro MMXIX \u2014 HB_MASO_ahq12 \u2014 SPEAKER_00",
-      "b2Key": "Futuro MMXIX/clips/HB_MASO_ahq12/SPEAKER_00_00m00s-00m18s.mp4",
-      "issues": [
-        "person_tag_mismatch"
-      ],
-      "details": {
-        "url": {
-          "doc_id": "CgadNFQCI8okHl5PWlXbe7",
-          "b2_exists": true,
-          "cdn_formula_ok": true,
-          "issues": []
-        },
-        "person": {
-          "doc_id": "CgadNFQCI8okHl5PWlXbe7",
-          "issues": [
-            "person_tag_mismatch"
-          ],
-          "action": "review",
-          "reason": "MMXIX clip \u2014 VIDEO_MAP expected slugs ['maria-sofia'] are not all present in featuredIn slugs ['maria-alexandra-sheppard', 'Hector H. Lopez']"
-        }
-      }
-    },
-    {
-      "doc_id": "CgadNFQCI8okHl5PWlXbmn",
-      "title": "Futuro MMXIX \u2014 HB_Male \u2014 SPEAKER_00",
-      "b2Key": "Futuro MMXIX/clips/HB_Male/SPEAKER_00_00m00s-00m23s.mp4",
-      "issues": [
-        "person_tag_mismatch"
-      ],
-      "details": {
-        "url": {
-          "doc_id": "CgadNFQCI8okHl5PWlXbmn",
-          "b2_exists": true,
-          "cdn_formula_ok": true,
-          "issues": []
-        },
-        "person": {
-          "doc_id": "CgadNFQCI8okHl5PWlXbmn",
-          "issues": [
-            "person_tag_mismatch"
-          ],
-          "action": "review",
-          "reason": "MMXIX clip \u2014 VIDEO_MAP expected slugs ['mark-franklin'] are not all present in featuredIn slugs ['Hector H. Lopez', 'mariana-vlieg']"
-        }
-      }
-    },
-    {
-      "doc_id": "CgadNFQCI8okHl5PWlXcPq",
-      "title": "Futuro MMXIX \u2014 HB_puebla \u2014 SPEAKER_00",
-      "b2Key": "Futuro MMXIX/clips/HB_puebla/SPEAKER_00_00m00s-00m36s.mp4",
-      "issues": [
-        "person_tag_mismatch"
-      ],
-      "details": {
-        "url": {
-          "doc_id": "CgadNFQCI8okHl5PWlXcPq",
-          "b2_exists": true,
-          "cdn_formula_ok": true,
-          "issues": []
-        },
-        "person": {
-          "doc_id": "CgadNFQCI8okHl5PWlXcPq",
-          "issues": [
-            "person_tag_mismatch"
-          ],
-          "action": "review",
-          "reason": "MMXIX clip \u2014 VIDEO_MAP expected slugs ['santiago-ramirez-anguiano'] are not all present in featuredIn slugs ['Hector H. Lopez', 'maria-sofia']"
-        }
-      }
-    },
-    {
-      "doc_id": "c152d3c5-b458-4a0e-a045-a5ecc1c7c177",
-      "title": "Maria Alexandra Sheppard \u2014 Futuro MMXIX Testimonial",
-      "b2Key": "Futuro MMXIX/edited/HB_Male.mp4",
-      "issues": [
-        "person_tag_mismatch"
-      ],
-      "details": {
-        "url": {
-          "doc_id": "c152d3c5-b458-4a0e-a045-a5ecc1c7c177",
-          "b2_exists": true,
-          "cdn_formula_ok": true,
-          "issues": []
-        },
-        "person": {
-          "doc_id": "c152d3c5-b458-4a0e-a045-a5ecc1c7c177",
-          "issues": [
-            "person_tag_mismatch"
-          ],
-          "action": "review",
-          "reason": "MMXIX longform \u2014 VIDEO_MAP expected slugs ['mark-franklin'] are not all present in featuredIn slugs ['maria-alexandra-sheppard']"
-        }
-      }
-    }
-  ],
+  "failures": [],
   "manual_review": [
     {
       "doc_id": "22675bc7-7808-4133-b185-c7777cba374c",
@@ -188,13 +19,13 @@
       "doc_id": "4929718f-a6be-4fce-b1ca-4e8cb20922d5",
       "title": "Futuro MMXXV \u2014 Participants Entering Opening Ceremony",
       "b2Key": "Futuro MMXXV/edited/card-1/Day 1/C3503_processed.mp4",
-      "reason": "MMXXV longform has MMXIX-era alumni reference: ['mateo-porras-bermudez', 'alistair-coll', 'santiago-ramirez-anguiano']"
+      "reason": "MMXXV longform has MMXIX-era alumni reference: ['santiago-ramirez-anguiano', 'mateo-porras-bermudez', 'alistair-coll']"
     },
     {
       "doc_id": "6e521972-6df0-45d6-8de3-e595b425378e",
       "title": "Futuro MMXXV \u2014 Arrival Coordination",
       "b2Key": "Futuro MMXXV/edited/card-1/Day 1/C3502_processed.mp4",
-      "reason": "MMXXV longform has MMXIX-era alumni reference: ['mateo-porras-bermudez', 'alistair-coll', 'santiago-ramirez-anguiano']"
+      "reason": "MMXXV longform has MMXIX-era alumni reference: ['santiago-ramirez-anguiano', 'mateo-porras-bermudez', 'alistair-coll']"
     },
     {
       "doc_id": "7d0a7471-a7d9-4a88-a7f9-5ead95506c93",
@@ -230,7 +61,7 @@
       "doc_id": "f97718fb-eadd-4748-972b-49779a02fb90",
       "title": "Futuro MMXXV \u2014 Top Secret Dispatch 1",
       "b2Key": "Futuro MMXXV/edited/card-1/Day 1/Futuro MMXXV - Top Secret - Dispatch 1.mp4",
-      "reason": "MMXXV longform has MMXIX-era alumni reference: ['diego-hernandez', 'laura-miller', 'mark-franklin', 'mateo-porras-bermudez', 'diego-gordon', 'felipe-eleta', 'maria-sofia', 'nestor-gaytan', 'alistair-coll', 'samuel-rios', 'pierina-diana', 'ricardo-adames', 'santiago-ramirez-anguiano']"
+      "reason": "MMXXV longform has MMXIX-era alumni reference: ['alistair-coll', 'laura-miller', 'felipe-eleta', 'santiago-ramirez-anguiano', 'diego-hernandez', 'pierina-diana', 'diego-gordon', 'maria-sofia', 'mark-franklin', 'nestor-gaytan', 'ricardo-adames', 'mateo-porras-bermudez', 'samuel-rios']"
     }
   ],
   "informational": [
