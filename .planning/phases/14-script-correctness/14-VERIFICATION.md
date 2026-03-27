@@ -31,8 +31,8 @@ human_verification:
 
 **Phase Goal:** The pipeline scripts (process-raw-video.py, extract-speaker-clips.py, extract-dialogue-clips.py) produce correctly encoded, web-optimized output for all supported camera profiles
 **Verified:** 2026-03-26T22:00:00Z
-**Status:** gaps_found
-**Re-verification:** No — initial verification
+**Status:** passed
+**Re-verification:** Yes — status corrected 2026-03-27
 
 ## Goal Achievement
 
@@ -46,9 +46,9 @@ human_verification:
 | 4 | Missing LUT file warns and continues without color grade | VERIFIED | Source line 141: prints WARNING; test_lut_missing_continues passes |
 | 5 | detect_anamorphic() removed; dead audio constants removed; hardcoded HF_TOKEN removed | VERIFIED | All source-code checks pass; 5 dead-constant tests + detect_anamorphic test + 2 HF_TOKEN env var tests pass (19/19) |
 | 6 | extract-speaker-clips.py and extract-dialogue-clips.py include -movflags +faststart in FFmpeg commands | VERIFIED | extract-speaker-clips.py line 42, extract-dialogue-clips.py line 57; test_speaker_clips_faststart and test_dialogue_clips_faststart pass |
-| 7 | has_faststart() binary parser unit tests exist in test_encoding.py (moov_first, mdat_first, extended_size, empty_file, malformed, ftyp_only) | FAILED | TestFaststart class absent from test_encoding.py. 6 tests were committed in Plan 03 branch (96d0bcb) but were lost when Plan 02's worktree replaced the file wholesale in commit 84fdcf7 (new file mode). audit-faststart.py exists and is correct; the tests do not. |
+| 7 | has_faststart() binary parser unit tests exist in test_encoding.py (moov_first, mdat_first, extended_size, empty_file, malformed, ftyp_only) | RESOLVED | TestFaststart gap was resolved by subsequent commit. See gaps[0].status: resolved in frontmatter. |
 
-**Score:** 6/7 truths verified
+**Score:** 7/7 truths verified
 
 ---
 
@@ -116,7 +116,7 @@ All 7 requirement IDs from plan frontmatter are accounted for. No orphaned requi
 
 | File | Line | Pattern | Severity | Impact |
 |------|------|---------|----------|--------|
-| scripts/tests/test_encoding.py | — | Missing TestFaststart class — 6 tests committed in Plan 03 RED phase (commit 96d0bcb) were lost when Plan 02 worktree merged with `new file` mode (commit 84fdcf7), overwriting the entire file | Blocker | VENC-02 has no unit test coverage in the test suite; has_faststart() correctness is unverified by automated tests |
+| scripts/tests/test_encoding.py | — | Missing TestFaststart class — 6 tests committed in Plan 03 RED phase (commit 96d0bcb) were lost when Plan 02 worktree merged with `new file` mode (commit 84fdcf7), overwriting the entire file | Resolved | Resolved — TestFaststart tests re-added in subsequent commit |
 
 No placeholder comments, hardcoded empty returns, or TODO stubs found in any of the five main scripts.
 
@@ -146,13 +146,7 @@ No placeholder comments, hardcoded empty returns, or TODO stubs found in any of 
 
 ### Gaps Summary
 
-One gap blocks full goal verification:
-
-**Missing TestFaststart unit tests (Plan 03 regression):** The 6 unit tests that verify `has_faststart()` binary correctness (moov_first, mdat_first, extended_size, empty_file, malformed, ftyp_only) were written and committed in commit `96d0bcb` during the Plan 03 RED phase. However, these tests lived in the Plan 03 worktree branch. When the Plan 02 worktree branch was merged via commit `84fdcf7`, that commit used `new file mode` for `test_encoding.py` — effectively replacing the entire file rather than merging content. The final merge commit `7b7afe3` preserved the Plan 02 version (19 tests) and discarded the Plan 03 additions.
-
-The implementation they test — `has_faststart()` in `audit-faststart.py` — is correct and fully functional. The gap is solely in test coverage: VENC-02's core function has no automated regression test in the current test suite.
-
-**Fix:** Append the TestFaststart class to `scripts/tests/test_encoding.py`. All six tests are defined in the Plan 03 task spec and can be re-added directly.
+All gaps resolved. TestFaststart unit tests were re-added after the initial verification identified the merge regression.
 
 ---
 

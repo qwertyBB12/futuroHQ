@@ -99,6 +99,16 @@ python3 scripts/pipeline.py "Kah Foundry XXVI/raw/screen-recording.mp4" --camera
 python3 scripts/pipeline.py "path/to/anamorphic.MP4" --anamorphic --live
 ```
 
+### How clip paths are derived
+
+The pipeline extracts the event prefix from the input B2 path (everything before `/raw/`) and uses it for clip uploads:
+
+| Input Path | Clips Upload To |
+|-----------|----------------|
+| `Futuro MMXXV/raw/card-1/Day 1/C3460.MP4` | `Futuro MMXXV/clips/C3460/` |
+| `Kah Foundry XXVI/raw/135A3217.MP4` | `Kah Foundry XXVI/clips/135A3217/` |
+| `Futuro MMXIX/raw/confessional.MP4` | `Futuro MMXIX/clips/confessional/` |
+
 ### Prerequisites
 
 - Python 3.10+
