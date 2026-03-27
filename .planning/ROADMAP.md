@@ -130,7 +130,11 @@ Plans:
   3. Processing a 1.33x anamorphic source file produces output at the correct desqueezed aspect ratio (e.g. 16:9 from 4:3 anamorphic source)
   4. Running the pipeline on a raw video file produces a .enriched.json transcript with speaker-labeled segments alongside the processed video
   5. All processed output uses CRF 18, H.264, slow preset — confirmed by ffprobe on output files
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 14-01-PLAN.md — Fix FFmpeg encoding (pure CRF 18), argparse CLI (--camera, --anamorphic, --skip-transcribe), dead code removal
+- [ ] 14-02-PLAN.md — HF_TOKEN env var, transcribe output format alignment, faststart on clip extraction
+- [ ] 14-03-PLAN.md — Standalone faststart audit script (has_faststart binary parser + CLI)
 **UI hint**: no
 
 ### Phase 15: Pipeline Automation
@@ -172,6 +176,6 @@ Plans:
 | 11. Video Metadata Completion | v1.2 | 0/? | Blocked (v1.3) | - |
 | 12. Podcast Data + Content Tagging | v1.2 | 0/? | Blocked (v1.3) | - |
 | 13. Sanity Data Integrity | v1.3 | 4/4 | Complete    | 2026-03-27 |
-| 14. Script Correctness | v1.3 | 0/? | Not started | - |
+| 14. Script Correctness | v1.3 | 0/3 | Planning complete | - |
 | 15. Pipeline Automation | v1.3 | 0/? | Not started | - |
 | 16. Pipeline Documentation | v1.3 | 0/? | Not started | - |
