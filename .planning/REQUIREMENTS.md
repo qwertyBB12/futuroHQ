@@ -35,8 +35,8 @@ Requirements for Media Pipeline Integrity milestone. Each maps to roadmap phases
 
 ### Documentation
 
-- [ ] **DOCS-01**: Full pipeline architecture documented: which script does what, data flow, where each component runs
-- [ ] **DOCS-02**: Pipeline includes clear instructions for processing new raw video (step-by-step or single-command)
+- [x] **DOCS-01**: Full pipeline architecture documented: which script does what, data flow, where each component runs
+- [x] **DOCS-02**: Pipeline includes clear instructions for processing new raw video (step-by-step or single-command)
 
 ## v1.2 Carried Requirements (blocked until v1.3 completes)
 
@@ -93,8 +93,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | AUTO-02 | Phase 15 | Complete |
 | AUTO-03 | Phase 15 | Complete |
 | AUTO-04 | Phase 15 | Complete |
-| DOCS-01 | Phase 16 | Pending |
-| DOCS-02 | Phase 16 | Pending |
+| DOCS-01 | Phase 16 | Complete (2026-03-26) |
+| DOCS-02 | Phase 16 | Complete (2026-03-26) |
 
 **Coverage:**
 - v1.3 requirements: 16 total

@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.3
 milestone_name: Media Pipeline Integrity
-status: verifying
-stopped_at: Phase 16 context gathered
-last_updated: "2026-03-27T03:52:39.677Z"
-last_activity: 2026-03-27
+status: complete
+stopped_at: Completed 16-01-PLAN.md — Phase 16 fully closed
+last_updated: "2026-03-26T00:08:00Z"
+last_activity: 2026-03-26 — Phase 16 Plan 01 complete — pipeline documentation
 progress:
   total_phases: 8
-  completed_phases: 5
-  total_plans: 13
-  completed_plans: 13
-  percent: 83
+  completed_phases: 6
+  total_plans: 14
+  completed_plans: 14
+  percent: 100
 ---
 
 # Project State
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-16)
 
 **Core value:** Every component must either work correctly or be gracefully disabled — no silent failures, no orphaned experiments, no schema ambiguity.
-**Current focus:** Phase 15 — pipeline-automation
+**Current focus:** Phase 16 — pipeline-documentation
 
 ## Current Position
 
-Phase: 16
-Plan: Not started
-Status: Phase complete — ready for verification
-Last activity: 2026-03-27
+Phase: 16 (pipeline-documentation) — COMPLETE
+Plan: 1 of 1 complete
+Status: v1.3 milestone complete
+Last activity: 2026-03-26 — Phase 16 Plan 01 complete — pipeline documentation
 
 Progress: [████████░░] 83%
 
@@ -57,6 +57,7 @@ Progress: [████████░░] 83%
 | Phase 14-script-correctness P01 | 3min | 2 tasks | 3 files |
 | Phase 15 P01 | 4 | 1 tasks | 4 files |
 | Phase 15-pipeline-automation P02 | 2min | 1 tasks | 2 files |
+| Phase 16-pipeline-documentation P01 | 8min | 2 tasks | 1 file |
 
 ## Accumulated Context
 
@@ -92,6 +93,8 @@ All decisions logged in PROJECT.md Key Decisions table. Key patterns for v1.1:
 - [Phase 15-pipeline-automation]: sanity_mutate() always creates drafts. — editorial review required before publish (D-11)
 - [Phase 15-pipeline-automation]: featuredIn=[] on clip docs — SPEAKER_00/01 labels can't be auto-matched to person docs (D-08)
 - [Phase 15-pipeline-automation]: urllib.request used for Sanity API (not subprocess curl) — Python stdlib REST API per D-10
+- [Phase 16-01]: Combined Task 1 and Task 2 into single file write — both tasks modify same file, content inseparable
+- [Phase 16-01]: Preserved Current State table and Pending Work checklist — useful operational context for collaborators
 
 ### Pending Todos
 
@@ -111,6 +114,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-27T03:52:39.673Z
-Stopped at: Phase 16 context gathered
-Resume file: .planning/phases/16-pipeline-documentation/16-CONTEXT.md
+Last session: 2026-03-26T00:08:00Z
+Stopped at: Completed 16-01-PLAN.md — Phase 16 fully closed
+Resume file: None

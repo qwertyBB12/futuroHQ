@@ -52,7 +52,7 @@ See: `.planning/milestones/v1.1-ROADMAP.md` for full details.
 - [x] **Phase 13: Sanity Data Integrity** - Fix clip CDN URL mismatches and person tag references in existing Sanity documents (gap closure in progress) (completed 2026-03-26)
 - [x] **Phase 14: Script Correctness** - Fix encoding, camera profiles, anamorphic desqueeze, and transcription chain in pipeline scripts (completed 2026-03-27)
 - [x] **Phase 15: Pipeline Automation** - Wire all scripts into a single end-to-end command with correct B2 upload structure and Sanity sync (completed 2026-03-27)
-- [ ] **Phase 16: Pipeline Documentation** - Document full architecture and step-by-step usage guide
+- [x] **Phase 16: Pipeline Documentation** - Document full architecture and step-by-step usage guide (completed 2026-03-26)
 
 ## Phase Details
 
@@ -160,7 +160,7 @@ Plans:
   2. Following the documented steps (or single command) for a new raw video produces a correct Sanity document with working CDN URL — no debugging required
 **Plans**: 1 plan
 Plans:
-- [ ] 16-01-PLAN.md — Update MEDIA-PIPELINE.md with architecture overview, usage guide, flags reference, and troubleshooting
+- [x] 16-01-PLAN.md — Update MEDIA-PIPELINE.md with architecture overview, usage guide, flags reference, and troubleshooting
 
 ## Progress
 
@@ -183,4 +183,4 @@ Plans:
 | 13. Sanity Data Integrity | v1.3 | 4/4 | Complete    | 2026-03-27 |
 | 14. Script Correctness | v1.3 | 2/3 | Complete    | 2026-03-27 |
 | 15. Pipeline Automation | v1.3 | 2/2 | Complete    | 2026-03-27 |
-| 16. Pipeline Documentation | v1.3 | 0/? | Not started | - |
+| 16. Pipeline Documentation | v1.3 | 1/1 | Complete | 2026-03-26 |
