@@ -1,8 +1,8 @@
 ---
 phase: 13-sanity-data-integrity
 plan: 04
-subsystem: testing
-tags: [python, audit, sanity, integrity, groq, mmxix, mmxxv]
+subsystem: data-integrity
+tags: [python, audit, sanity, integrity, groq, mmxix, mmxxv, person-tags]
 
 # Dependency graph
 requires:
@@ -10,127 +10,141 @@ requires:
     provides: updated audit logic — pending_identification for MMXXV clips, issubset for MMXIX
 
 provides:
-  - "Live re-audit results: 0 url_failures, 68 informational (MMXXV pending_identification), 9 manual_review, 7 genuine person_tag_mismatch"
+  - "Zero-failure integrity audit across all 240 B2 video documents"
+  - "Corrected VIDEO_MAP entries for 5 MMXIX videos"
+  - "Patched 6 Sanity documents with correct alumni featuredIn refs"
   - "GROQ confirmation: all 68 MMXXV clips have featuredInCount == 0"
-  - "7 genuine MMXIX data mismatches identified for human decision (not auto-fixable)"
 
 affects:
-  - 13-05 (fix script must handle 7 genuine MMXIX person_tag_mismatch — human approval needed)
-  - any VERIFICATION.md updates for D-12 criterion
+  - populate-sanity-videos (VIDEO_MAP now authoritative for all MMXIX videos)
+  - content-pipeline (integrity baseline established)
 
 # Tech tracking
 tech-stack:
   added: []
   patterns:
-    - "Live re-audit pattern: run audit script, parse JSON output, verify failure count meets acceptance criteria"
+    - "Live re-audit pattern: run audit script, parse JSON output, verify failure count"
     - "GROQ verification: direct API call to confirm Sanity document field state"
+    - "Human video identification: open local clips when CDN auth blocks browser access"
 
 key-files:
   created: []
   modified:
+    - scripts/populate-sanity-videos.py
     - transcripts/integrity-audit.json
 
 key-decisions:
-  - "7 genuine MMXIX person_tag_mismatch failures remain after Plan 03 logic fixes — these are real data mismatches (VIDEO_MAP expected slugs absent from featuredIn), not false positives"
-  - "D-12 criterion partially met: 0 URL failures confirmed; MMXXV clips confirmed empty via GROQ; genuine MMXIX mismatches require separate human decision on how to resolve"
+  - "7 MMXIX person tag mismatches resolved via human video identification — VIDEO_MAP was source of error for most"
+  - "6 Sanity documents patched via Mutations API to correct featuredIn references"
+  - "Javier Lezcano confirmed as javier-lezcano (with z) from Sanity alumni records"
+  - "CDN token auth workaround: opened local clip files via macOS QuickTime for identification"
 
 patterns-established:
-  - "GROQ verification pattern: use python3 urllib.parse.quote() + curl + python3 json parsing to confirm Sanity document field state"
+  - "GROQ verification: python3 urllib.parse.quote() + curl for Sanity field state confirmation"
 
-requirements-completed: [DINT-01, DINT-02]
+requirements-completed: [DINT-01, DINT-02, DINT-03]
 
 # Metrics
-duration: 8min
+duration: 25min
 completed: 2026-03-26
 ---
 
-# Phase 13 Plan 04: Live Re-audit and GROQ Verification Summary
+# Phase 13 Plan 04: Live Re-audit Summary
 
-**Re-audit with updated Plan 03 logic confirms 0 URL failures and 68 MMXXV clips as pending_identification (GROQ-verified empty); 7 genuine MMXIX person_tag_mismatch failures remain — real data mismatches requiring human decision**
+**Zero-failure integrity audit achieved — 7 MMXIX person tag mismatches resolved via human video identification and Sanity/VIDEO_MAP corrections**
 
 ## Performance
 
-- **Duration:** 8 min
-- **Started:** 2026-03-26T23:40:00Z
-- **Completed:** 2026-03-26T23:48:00Z
-- **Tasks:** 1 (Task 2 is checkpoint — awaiting human verification)
-- **Files modified:** 1
+- **Duration:** ~25 min
+- **Started:** 2026-03-26T23:41:00Z
+- **Completed:** 2026-03-27T00:06:00Z
+- **Tasks:** 2 (1 automated + 1 human-verify checkpoint)
+- **Files modified:** 2
 
 ## Accomplishments
 
-- Live re-audit executed against production Sanity data with updated Plan 03 audit logic
-- 0 URL failures confirmed — all 240 B2 video documents have valid CDN URLs
-- 68 MMXXV clips correctly classified as `pending_identification` (informational, not failures) — GROQ confirms all 68 have `featuredInCount == 0`
-- 9 MMXXV longform manual_review items identified (MMXXV longform with MMXIX-era alumni references per D-08)
-- 7 genuine `person_tag_mismatch` failures surfaced — VIDEO_MAP expected slugs absent from actual `featuredIn` refs in Sanity
+- Re-audit produces **0 failures** across all 240 B2 video documents
+- GROQ query confirms all 68 MMXXV clip documents have featuredInCount == 0
+- VIDEO_MAP corrected for 5 entries: HB2_paisa→javier-lezcano, HB_DIEGOMTY→diego-gracia, HB_Male→maria-alexandra-sheppard, HB_puebla→claudia-concepcion
+- 6 Sanity documents patched with correct alumni references (3 clips + 2 longforms + 1 clip)
+- **D-12 criterion fully met**
 
 ## Task Commits
 
-Each task was committed atomically:
+1. **Task 1: Live re-audit and GROQ verification** - `b103eed` (initial audit by executor agent — revealed 7 genuine mismatches)
+2. **Task 2: Human verification + data corrections** - `6b092bf` (VIDEO_MAP fixes, Sanity patches, clean re-audit)
 
-1. **Task 1: Run live re-audit and GROQ verification** - `b103eed` (feat)
-
-_Task 2 is checkpoint:human-verify — awaiting human review before proceeding_
-
-## Re-audit Results Summary
+## Re-audit Final Results
 
 | Category | Count | Classification |
 |----------|-------|----------------|
 | Total docs audited | 240 | — |
-| URL failures | 0 | PASS |
-| MMXXV clips (pending_identification) | 68 | Informational (not failures) |
-| Manual review (MMXXV longform with MMXIX alumni) | 9 | Expected per D-08 |
-| Genuine person_tag_mismatch | 7 | Failures requiring decision |
+| URL failures | **0** | PASS |
+| MMXIX person tag issues | **0** | PASS (all 7 resolved) |
+| MMXXV clips (pending_identification) | 68 | Informational |
+| Manual review (MMXXV longform + MMXIX alumni) | 9 | Expected per D-08 |
 
-## GROQ Verification Result
+## GROQ Verification
 
-Query: `*[_type=="video" && videoSource=="b2" && b2Key match "Futuro MMXXV/clips/*"] | order(b2Key) { _id, title, b2Key, "featuredInCount": count(featuredIn) }`
+All **68 MMXXV clips** returned with `featuredInCount == 0` — confirmed empty in Sanity production.
 
-Result: **68 MMXXV clips returned, all with `featuredInCount == 0`** — CONFIRMED EMPTY
+## Data Corrections Applied
 
-## 7 Genuine Failures (Person Tag Mismatch)
-
-These are MMXIX documents where the VIDEO_MAP expected person is absent from the document's actual `featuredIn` field in Sanity. Not false positives — actual data mismatches:
-
-1. `Diego Gracia — Futuro MMXIX Testimonial` — expected `diego-hernandez`, found `diego-gracia`
-2. `Futuro MMXIX — HB2_paisa — SPEAKER_00` — expected `mateo-porras-bermudez`, found `santiago-ramirez-anguiano`
-3. `Futuro MMXIX — HB_DIEGOMTY_ahq12 — SPEAKER_00` — expected `diego-hernandez`, found `diego-gracia`
-4. `Futuro MMXIX — HB_MASO_ahq12 — SPEAKER_00` — expected `maria-sofia`, found `maria-alexandra-sheppard`
-5. `Futuro MMXIX — HB_Male — SPEAKER_00` — expected `mark-franklin`, found `mariana-vlieg`
-6. `Futuro MMXIX — HB_puebla — SPEAKER_00` — expected `santiago-ramirez-anguiano`, found `maria-sofia`
-7. `Maria Alexandra Sheppard — Futuro MMXIX Testimonial` — expected `mark-franklin`, found `maria-alexandra-sheppard`
+| Video | VIDEO_MAP Fix | Sanity Fix |
+|-------|--------------|------------|
+| HB2_paisa | mateo-porras-bermudez → javier-lezcano | clip + longform patched |
+| HB_DIEGOMTY | diego-hernandez → diego-gracia | Already correct in Sanity |
+| HB_MASO | Already correct (maria-sofia) | clip patched (had maria-alexandra-sheppard) |
+| HB_Male | mark-franklin → maria-alexandra-sheppard | clip patched (had mariana-vlieg) |
+| HB_puebla | santiago-ramirez-anguiano → claudia-concepcion | clip + longform patched |
 
 ## Files Created/Modified
 
-- `transcripts/integrity-audit.json` - Updated with live re-audit results (post-Plan-03 logic)
+- `scripts/populate-sanity-videos.py` - Corrected 5 VIDEO_MAP alumni entries
+- `transcripts/integrity-audit.json` - Clean audit output with 0 failures
 
 ## Decisions Made
 
-- 7 genuine MMXIX `person_tag_mismatch` failures are real data mismatches — the VIDEO_MAP slug expectations don't match what was actually tagged in Sanity when populating documents. These require human decision: either correct the VIDEO_MAP expectations (if Sanity data is correct) or patch the Sanity documents (if VIDEO_MAP is authoritative).
-- D-12 criterion is partially met: URL integrity confirmed (0 failures), MMXXV clips confirmed empty via GROQ. The 7 MMXIX mismatches were pre-existing data quality issues surfaced by the correct audit logic.
+- Human identified all 7 mismatched people by viewing local clip files (CDN token auth prevented browser playback)
+- VIDEO_MAP was the source of truth error for most mismatches — Sanity already had correct data for 4 of 7
+- 2 videos required both VIDEO_MAP and Sanity corrections (HB2_paisa, HB_puebla)
 
 ## Deviations from Plan
 
-### Outcome Differed from Expected
+### Auto-fixed Issues
 
-**Re-audit produced 7 failures, not 0 as planned**
+**1. Initial re-audit revealed 7 genuine failures (not zero as expected)**
+- **Found during:** Task 1 (live re-audit)
+- **Issue:** Plan 03 fixed false positives but exposed 7 real MMXIX person tag mismatches hidden underneath
+- **Fix:** Human-identified correct people via local video clips, updated VIDEO_MAP + patched Sanity docs
+- **Verification:** Final re-audit shows 0 failures
 
-- **Found during:** Task 1 (live re-audit execution)
-- **Issue:** Plan acceptance criteria required `len(failures) == 0` but re-audit found 7 genuine `person_tag_mismatch` failures in MMXIX documents. These are actual data mismatches where VIDEO_MAP expected slugs (e.g., `diego-hernandez`) differ from the actual `featuredIn` references in Sanity (e.g., `diego-gracia`).
-- **Not a script bug:** The 7 failures are correctly detected by the updated audit logic. They represent real data quality issues — either the VIDEO_MAP is wrong, or the Sanity data was entered incorrectly.
-- **Resolution:** Documented as genuine findings. Human decision required — accept as-is (D-12 partial) or queue a fix-script run to patch the 7 documents.
+**2. CDN token auth blocked browser video playback**
+- **Found during:** Task 2 (human verification)
+- **Issue:** Bunny CDN returned 401 expired_auth_token on direct URLs
+- **Fix:** Opened local clip files via macOS QuickTime instead
+- **Verification:** Human successfully identified all 3 uncertain people
+
+---
+
+**Total deviations:** 2 (1 data correction, 1 access workaround)
+**Impact on plan:** Data corrections were necessary to achieve zero failures. No scope creep.
 
 ## Issues Encountered
 
-Plan expected zero failures after Plan 03 logic fixes eliminated 146 false positives. However, 7 genuine MMXIX `person_tag_mismatch` failures surfaced — these were hidden in the original 146 false positives and only became visible once the false positive logic was corrected. The re-audit is working correctly; the data quality issues are real.
+- Bunny CDN token authentication prevents direct URL access — used local clip files as workaround
+- `javier-lescano` vs `javier-lezcano` spelling difference caught by querying Sanity alumni records
+
+## User Setup Required
+
+None - no external service configuration required.
 
 ## Next Phase Readiness
 
-- integrity-audit.json is accurate and trustworthy with updated logic
-- 0 URL failures — CDN pipeline is clean
-- 68 MMXXV clips confirmed empty in Sanity via GROQ — no incorrect person tags
-- 7 MMXIX mismatches documented — human needs to decide: accept as known data debt or run fix script to patch
-- D-12 criterion partially met; full sign-off depends on human decision about the 7 MMXIX mismatches
+- Phase 13 D-12 criterion fully met: zero failures on re-audit
+- 9 manual_review items (MMXXV longform with MMXIX alumni) are expected per D-08
+- 68 MMXXV clips pending speaker identification are informational, not failures
+- VIDEO_MAP and Sanity data are now consistent and accurate
 
 ---
 *Phase: 13-sanity-data-integrity*
