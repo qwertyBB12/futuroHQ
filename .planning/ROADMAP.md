@@ -53,6 +53,7 @@ See: `.planning/milestones/v1.1-ROADMAP.md` for full details.
 - [x] **Phase 14: Script Correctness** - Fix encoding, camera profiles, anamorphic desqueeze, and transcription chain in pipeline scripts (completed 2026-03-27)
 - [x] **Phase 15: Pipeline Automation** - Wire all scripts into a single end-to-end command with correct B2 upload structure and Sanity sync (completed 2026-03-27)
 - [x] **Phase 16: Pipeline Documentation** - Document full architecture and step-by-step usage guide (completed 2026-03-26)
+- [ ] **Phase 17: Pipeline Path Fix & Tracking Cleanup** - Fix hardcoded CLIPS_B2_PREFIX, update docs, fix stale tracking artifacts (gap closure)
 
 ## Phase Details
 
@@ -162,9 +163,21 @@ Plans:
 Plans:
 - [x] 16-01-PLAN.md — Update MEDIA-PIPELINE.md with architecture overview, usage guide, flags reference, and troubleshooting
 
+### Phase 17: Pipeline Path Fix & Tracking Cleanup
+**Goal**: Fix hardcoded CLIPS_B2_PREFIX so non-MMXXV clip uploads route to correct B2 paths, update documentation, and fix stale tracking artifacts
+**Depends on**: Phase 16
+**Requirements**: AUTO-03, DOCS-02
+**Gap Closure**: Closes gaps from v1.3 milestone audit
+**Success Criteria** (what must be TRUE):
+  1. Running pipeline.py against a Kah Foundry path routes clips to `Kah Foundry XXVI/clips/` (not `Futuro MMXXV/clips/`)
+  2. docs/MEDIA-PIPELINE.md Quick Start examples are accurate for all event types
+  3. Phase 14 VERIFICATION.md status reflects actual passed state (7/7)
+  4. REQUIREMENTS.md checkboxes match actual verification results
+**Plans**: TBD
+
 ## Progress
 
-**Execution Order:** 9 -> 10 -> [11-12 blocked] -> 13 -> 14 -> 15 -> 16 -> [resume 11 -> 12]
+**Execution Order:** 9 -> 10 -> [11-12 blocked] -> 13 -> 14 -> 15 -> 16 -> 17 -> [resume 11 -> 12]
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
@@ -184,3 +197,4 @@ Plans:
 | 14. Script Correctness | v1.3 | 2/3 | Complete    | 2026-03-27 |
 | 15. Pipeline Automation | v1.3 | 2/2 | Complete    | 2026-03-27 |
 | 16. Pipeline Documentation | v1.3 | 1/1 | Complete    | 2026-03-27 |
+| 17. Pipeline Path Fix & Tracking Cleanup | v1.3 | 0/? | Not started | - |

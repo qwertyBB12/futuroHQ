@@ -15,15 +15,15 @@ Requirements for Media Pipeline Integrity milestone. Each maps to roadmap phases
 
 ### Video Encoding
 
-- [ ] **VENC-01**: process-raw-video.py outputs files with faststart encoding (MOOV atom at file start for progressive streaming)
+- [x] **VENC-01**: process-raw-video.py outputs files with faststart encoding (MOOV atom at file start for progressive streaming)
 - [x] **VENC-02**: Existing processed files that lack faststart are re-encoded or flagged for re-processing
-- [ ] **VENC-03**: All pipeline output files use consistent, correct FFmpeg settings (CRF 18, H.264, slow preset, web-optimized)
+- [x] **VENC-03**: All pipeline output files use consistent, correct FFmpeg settings (CRF 18, H.264, slow preset, web-optimized)
 
 ### Pipeline Processing
 
-- [ ] **PIPE-01**: process-raw-video.py correctly applies LUT, vignette, brightness adjustment, and audio passthrough for each camera profile
-- [ ] **PIPE-02**: Pipeline handles multiple camera profiles (Sony A6700 S-Log 3, Canon R5 Canon Log 3, GoPro ProTune Flat) with correct LUT selection
-- [ ] **PIPE-03**: Pipeline detects and applies anamorphic desqueeze (1.33x) when needed
+- [x] **PIPE-01**: process-raw-video.py correctly applies LUT, vignette, brightness adjustment, and audio passthrough for each camera profile
+- [x] **PIPE-02**: Pipeline handles multiple camera profiles (Sony A6700 S-Log 3, Canon R5 Canon Log 3, GoPro ProTune Flat) with correct LUT selection
+- [x] **PIPE-03**: Pipeline detects and applies anamorphic desqueeze (1.33x) when needed
 - [x] **PIPE-04**: Processed video is automatically transcribed (Whisper) and diarized (pyannote) with enriched JSON output
 
 ### Pipeline Automation
@@ -82,12 +82,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DINT-01 | Phase 13 | Complete |
 | DINT-02 | Phase 13 | Complete |
 | DINT-03 | Phase 13 | Complete |
-| VENC-01 | Phase 14 | Pending |
+| VENC-01 | Phase 14 | Complete |
 | VENC-02 | Phase 14 | Complete |
-| VENC-03 | Phase 14 | Pending |
-| PIPE-01 | Phase 14 | Pending |
-| PIPE-02 | Phase 14 | Pending |
-| PIPE-03 | Phase 14 | Pending |
+| VENC-03 | Phase 14 | Complete |
+| PIPE-01 | Phase 14 | Complete |
+| PIPE-02 | Phase 14 | Complete |
+| PIPE-03 | Phase 14 | Complete |
 | PIPE-04 | Phase 14 | Complete |
 | AUTO-01 | Phase 15 | Complete |
 | AUTO-02 | Phase 15 | Complete |
@@ -95,6 +95,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | AUTO-04 | Phase 15 | Complete |
 | DOCS-01 | Phase 16 | Complete (2026-03-26) |
 | DOCS-02 | Phase 16 | Complete (2026-03-26) |
+| AUTO-03 (gap) | Phase 17 | Pending |
+| DOCS-02 (gap) | Phase 17 | Pending |
 
 **Coverage:**
 - v1.3 requirements: 16 total
