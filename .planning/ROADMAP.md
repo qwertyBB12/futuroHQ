@@ -143,7 +143,7 @@ Plans:
 **Requirements**: AUTO-01, AUTO-02, AUTO-03, AUTO-04
 **Plans**: 2 plans
 Plans:
-- [ ] 15-01-PLAN.md — Refactor scripts for importability + create pipeline orchestrator with B2 upload
+- [x] 15-01-PLAN.md — Refactor scripts for importability + create pipeline orchestrator with B2 upload
 - [ ] 15-02-PLAN.md — Sanity document creation (video + clip docs) with --dry-run/--live
 **Success Criteria** (what must be TRUE):
   1. Running one command (or script) on a raw video file produces processed video, transcript, clips, B2 uploads, and draft Sanity documents — no intermediate manual steps required
@@ -180,5 +180,5 @@ Plans:
 | 12. Podcast Data + Content Tagging | v1.2 | 0/? | Blocked (v1.3) | - |
 | 13. Sanity Data Integrity | v1.3 | 4/4 | Complete    | 2026-03-27 |
 | 14. Script Correctness | v1.3 | 2/3 | Complete    | 2026-03-27 |
-| 15. Pipeline Automation | v1.3 | 0/2 | Not started | - |
+| 15. Pipeline Automation | v1.3 | 1/2 | In Progress|  |
 | 16. Pipeline Documentation | v1.3 | 0/? | Not started | - |

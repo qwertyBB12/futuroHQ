@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.3
 milestone_name: Media Pipeline Integrity
 status: executing
-stopped_at: Phase 15 context gathered
-last_updated: "2026-03-27T02:58:05.578Z"
+stopped_at: Completed 15-01-PLAN.md — pipeline orchestrator created
+last_updated: "2026-03-27T03:17:06.881Z"
 last_activity: 2026-03-27
 progress:
   total_phases: 8
   completed_phases: 4
-  total_plans: 11
-  completed_plans: 11
+  total_plans: 13
+  completed_plans: 12
   percent: 83
 ---
 
@@ -21,13 +21,13 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-16)
 
 **Core value:** Every component must either work correctly or be gracefully disabled — no silent failures, no orphaned experiments, no schema ambiguity.
-**Current focus:** Phase 4 — Tech Debt + Shared Infrastructure
+**Current focus:** Phase 15 — pipeline-automation
 
 ## Current Position
 
-Phase: 15 of 8 (pipeline automation)
-Plan: Not started
-Status: In progress
+Phase: 15 (pipeline-automation) — EXECUTING
+Plan: 2 of 2
+Status: Ready to execute
 Last activity: 2026-03-27
 
 Progress: [████████░░] 83%
@@ -55,6 +55,7 @@ Progress: [████████░░] 83%
 | Phase 06 P02 | 2min | 1 tasks | 9 files |
 | Phase 06-person-tagging-data-entry P02 | 5min | 2 tasks | 9 files |
 | Phase 14-script-correctness P01 | 3min | 2 tasks | 3 files |
+| Phase 15 P01 | 4 | 1 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -84,6 +85,9 @@ All decisions logged in PROJECT.md Key Decisions table. Key patterns for v1.1:
 - [Phase 14-01]: CRF 18 only encoding — no bitrate override flags (D-01)
 - [Phase 14-01]: argparse CLI with --camera, --anamorphic, --skip-transcribe replacing sys.argv (D-05)
 - [Phase 14-01]: detect_anamorphic() removed — explicit --anamorphic flag is safer opt-in (D-08)
+- [Phase 15]: importlib.util.spec_from_file_location for loading hyphenated Python filenames without renaming
+- [Phase 15]: skip_cleanup=True passed by orchestrator so processed file survives into clip extraction
+- [Phase 15]: process_transcript tracks _downloaded_video flag to only delete files it owns
 
 ### Pending Todos
 
@@ -103,6 +107,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-27T02:58:05.575Z
-Stopped at: Phase 15 context gathered
-Resume file: .planning/phases/15-pipeline-automation/15-CONTEXT.md
+Last session: 2026-03-27T03:17:06.878Z
+Stopped at: Completed 15-01-PLAN.md — pipeline orchestrator created
+Resume file: None
