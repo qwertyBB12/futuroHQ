@@ -100,18 +100,72 @@
 
 ---
 
+## Milestone: v1.3 — Media Pipeline Integrity
+
+**Shipped:** 2026-03-27
+**Phases:** 5 (13-17) | **Plans:** 11 | **Tasks:** 22 | **Sessions:** ~4
+**Timeline:** 2 days (2026-03-26 → 2026-03-27)
+**Scope:** 54 files changed, +12,004 / -88 lines
+
+### What Was Built
+- B2/Sanity integrity audit + fix scripts with TDD test suite (26+ tests) — zero failures across 240 video documents
+- CRF-18-only FFmpeg encoding with per-camera LUT profiles (Sony A6700 S-Log 3, Canon R5 Canon Log 3, GoPro ProTune Flat)
+- Anamorphic desqueeze (1.33x) via explicit --anamorphic flag
+- Standalone faststart audit script with binary MP4 box parsing
+- pipeline.py single-command orchestrator: encode → transcribe → diarize → clip extract → B2 upload → Sanity draft creation
+- Sanity document creation via urllib.request mutations API with dry-run/live modes
+- Full pipeline documentation (docs/MEDIA-PIPELINE.md): architecture, Quick Start, flags reference, troubleshooting
+- Dynamic clip B2 path routing via event prefix extraction from raw input path
+
+### What Worked
+- TDD for audit/fix scripts — caught subtle issues (MMXXV pending_identification, MMXIX subset comparison) that would have been hard to debug in production
+- Gap closure phases (Phase 17) — milestone audit identified real issues that were fixed before shipping
+- Milestone audit → gap closure → re-audit cycle proved effective as a quality gate
+- Binary MP4 box parsing (stdlib struct) over ffprobe for faststart detection — ffprobe doesn't expose atom order
+- importlib.util.spec_from_file_location pattern for loading hyphenated Python filenames without renaming
+
+### What Was Inefficient
+- Phase 14 Plan 01 SUMMARY.md marked as `[ ]` in ROADMAP despite being complete — stale checkbox issue recurred from v1.0/v1.1
+- MILESTONES.md auto-extraction from SUMMARY files included raw "One-liner:" artifacts — needed manual cleanup
+- Phases 9-10 (v1.2) executed before v1.3 was defined — cross-milestone phase ordering adds complexity to tracking
+
+### Patterns Established
+- `importlib.util.spec_from_file_location` for dynamic Python module loading of hyphenated filenames
+- `_extract_event_prefix()` with `split('/raw/')[0]` for deriving B2 path components
+- `skip_cleanup=True` parameter threading through orchestrator to retain intermediate files
+- `--dry-run` / `--live` flag convention for all scripts touching production data
+- Binary box parsing (struct module) for MP4 atom inspection
+- Subset comparison (`issubset()`) for validating person tags where extra refs are acceptable
+
+### Key Lessons
+1. Milestone audit is essential before shipping — v1.3 audit found real gaps (hardcoded CLIPS_B2_PREFIX, stale VERIFICATION.md) that Phase 17 fixed
+2. Stale checkboxes in ROADMAP.md continue to be a recurring issue across all milestones — need process improvement
+3. Cross-milestone phase ordering (v1.2 phases 9-10 executing, then v1.3 phases 13-17, then v1.2 phases 11-12 resuming) works but adds tracking complexity
+4. `sanity_mutate()` creating drafts-only is the right default for automated pipelines — editorial review before publish
+5. Dynamic path derivation (not hardcoded constants) is critical when pipeline supports multiple event types
+
+### Cost Observations
+- Model mix: ~25% opus (planning, milestone completion), ~75% sonnet (execution agents)
+- Sessions: ~4 across 2 days
+- Notable: 11 plans in 2 days — fastest milestone yet. Pipeline scripts are well-scoped and testable.
+
+---
+
 ## Cross-Milestone Trends
 
 ### Process Evolution
 
-| Milestone | Sessions | Phases | Plans | Key Change |
-|-----------|----------|--------|-------|------------|
-| v1.0 | ~3 | 3 | 6 | Initial milestone — established baseline |
-| v1.1 | ~5 | 5 | 10 | Wave-based parallel execution, cross-repo Worker |
+| Milestone | Sessions | Phases | Plans | Timeline | Key Change |
+|-----------|----------|--------|-------|----------|------------|
+| v1.0 | ~3 | 3 | 6 | 1 day | Initial milestone — established baseline |
+| v1.1 | ~5 | 5 | 10 | 13 days | Wave-based parallel execution, cross-repo Worker |
+| v1.3 | ~4 | 5 | 11 | 2 days | TDD pipeline scripts, milestone audit as quality gate |
 
 ### Top Lessons (Verified Across Milestones)
 
 1. Dual registration points resolved — lib/constants.ts is now the single source of truth (v1.0 lesson → v1.1 fix)
-2. Update checkboxes in ROADMAP.md and REQUIREMENTS.md during execution, not after (still recurring in v1.1)
+2. **Stale checkboxes in ROADMAP.md** — recurring across all 3 milestones. Needs process-level fix, not just diligence.
 3. Pure TypeScript for shared logic enables Studio + CLI reuse (v1.1 pattern)
-4. Human-action checkpoints work well for infrastructure setup — clear protocol across both milestones
+4. Human-action checkpoints work well for infrastructure setup — clear protocol across all milestones
+5. **Milestone audit → gap closure → re-audit** is an effective quality gate (v1.3 — caught real issues before shipping)
+6. `--dry-run` / `--live` convention for production-touching scripts reduces risk (v1.1 Worker, v1.3 pipeline)

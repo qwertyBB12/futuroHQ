@@ -1,5 +1,27 @@
 # Milestones
 
+## v1.3 Media Pipeline Integrity (Shipped: 2026-03-27)
+
+**Phases completed:** 5 phases (13-17), 11 plans, 22 tasks
+**Timeline:** 2 days (2026-03-26 → 2026-03-27)
+**Git range:** 41a9689..a721950 (63 commits, 54 files changed, +12,004/-88)
+
+**Key accomplishments:**
+
+1. Zero-failure B2/Sanity integrity audit across all 240 video documents — audit + fix scripts with TDD test suites (16 tests)
+2. CRF-18-only FFmpeg encoding with per-camera LUT profiles (Sony A6700, Canon R5, GoPro), anamorphic desqueeze, and faststart on all outputs
+3. Single-command pipeline orchestrator (pipeline.py) chains encode → transcribe → diarize → clip extract → B2 upload → Sanity draft creation
+4. Full pipeline documentation: architecture overview, Quick Start guide, flags reference, troubleshooting (docs/MEDIA-PIPELINE.md)
+5. Dynamic clip B2 path routing — event prefix derived from raw input path, supporting all event types correctly
+
+**Known tech debt (accepted):**
+
+- gopro-hero7-protune.cube LUT file not yet created (registered but absent — graceful fallback tested)
+
+**Archives:** `.planning/milestones/v1.3-ROADMAP.md`, `.planning/milestones/v1.3-REQUIREMENTS.md`, `.planning/milestones/v1.3-MILESTONE-AUDIT.md`
+
+---
+
 ## v1.1 Content Production & Media Pipeline (Shipped: 2026-03-21)
 
 **Phases completed:** 5 phases, 10 plans, 18 tasks

@@ -37,27 +37,23 @@ Every component in the studio must either work correctly or be gracefully disabl
 - ✓ Media pipeline: B2 + Bunny CDN + Cloudflare Worker sync into Sanity — v1.1
 - ✓ Bunny CDN asset source browser in Studio — v1.1
 - ✓ Data entry tooling: batch population scripts with JSON-driven templates — v1.1
+- ✓ Zero-failure B2/Sanity integrity audit across 240 video documents — v1.3
+- ✓ CRF-18-only FFmpeg encoding with per-camera LUT profiles and faststart — v1.3
+- ✓ Single-command pipeline orchestrator (encode → transcribe → diarize → clip → B2 → Sanity) — v1.3
+- ✓ Dynamic clip B2 path routing for all event types — v1.3
+- ✓ Full pipeline documentation (architecture, usage guide, troubleshooting) — v1.3
 
 ### Active
 
-(Defined in REQUIREMENTS.md — v1.3 Media Pipeline Integrity)
+- [ ] Video metadata completion: descriptions, thumbnails, tags (v1.2 Phase 11)
+- [ ] Podcast episode metadata population (v1.2 Phase 12)
+- [ ] Content tag taxonomy audit and cleanup (v1.2 Phase 12)
 
-## Current Milestone: v1.3 Media Pipeline Integrity
+## Current State
 
-**Goal:** Fix all data integrity issues in the B2-to-Sanity video pipeline and automate the end-to-end flow from raw video to tagged, streamable Sanity documents.
+Shipped v1.3 Media Pipeline Integrity on 2026-03-27. The B2-to-Sanity video pipeline is now fully automated and verified.
 
-**Target features:**
-- Fix clip CDN URL mismatches in Sanity (re-read manifests, match actual B2 filenames)
-- Add faststart encoding to processed videos (MOOV atom at front for streaming)
-- Audit and optimize the full processing chain (raw → compress/filter/LUT/vignette/audio → diarize → clip extract)
-- Complete remaining ~370 MMXXV raw files across cards 2-3
-- Wire pipeline scripts into one automated end-to-end flow
-- Validate all existing Sanity video documents have correct and working CDN URLs
-- Document the full pipeline architecture (processing scripts vs. CF Worker vs. B2 storage)
-
-**Blocked work (resumes after v1.3):**
-- v1.2 Phase 11: Video Metadata Completion (descriptions, thumbnails, tags)
-- v1.2 Phase 12: Podcast Data + Content Tagging
+**Ready to resume:** v1.2 Phases 11-12 (Video Metadata Completion + Podcast Data & Content Tagging) — previously blocked by v1.3, now unblocked.
 
 ### Out of Scope
 
@@ -70,18 +66,18 @@ Every component in the studio must either work correctly or be gracefully disabl
 
 ## Context
 
-**Current State (post-v1.1):**
+**Current State (post-v1.3):**
 - Sanity Studio v5.13.0, React 19, TypeScript
 - Deployed at hq.benextglobal.com (Netlify)
 - Content lake: project `fo6n8ceo`, datasets `production` + `staging`
 - 6 active sites: hectorhlopez.com, benextglobal.com, futuro.ngo, next.ngo, arkah.co, mitikah
-- 90 files changed across v1.1, +18,063 / -2,523 lines
-- Enrichment system: 5 tracked types with completeness indicators and filtered desk lists (transcript + externalLinks tracked since Phase 09)
-- Media pipeline: B2 → Bunny CDN → Cloudflare Worker → Sanity draft documents
-- Pipeline automation: single-command orchestrator (pipeline.py) chains encode → transcribe → diarize → clip extract → B2 upload → Sanity doc creation
-- Pipeline scripts: CRF-only encoding, per-camera LUT profiles, argparse CLI, HF_TOKEN from env, faststart on all outputs (Phase 14 complete)
-- Pipeline documentation: full architecture doc, Quick Start guide, flags reference, troubleshooting (Phase 16 complete — docs/MEDIA-PIPELINE.md)
-- Pipeline clip paths: dynamic event prefix derivation — clips route to correct B2 prefix for all events (Phase 17 gap closure)
+- 144 files changed across v1.1-v1.3, +30,067 / -2,611 lines
+- Enrichment system: 5 tracked types with completeness indicators and filtered desk lists
+- Media pipeline: fully automated B2 → Bunny CDN → Cloudflare Worker → Sanity draft documents
+- Pipeline orchestrator: `pipeline.py` single command (encode → transcribe → diarize → clip extract → B2 upload → Sanity doc creation)
+- Pipeline scripts: CRF-18-only encoding, per-camera LUT profiles (Sony A6700, Canon R5, GoPro), argparse CLI, faststart on all outputs
+- Pipeline integrity: zero-failure audit across 240 B2 video documents, TDD test suite (26+ tests)
+- Pipeline documentation: full architecture doc, Quick Start guide, flags reference, troubleshooting (docs/MEDIA-PIPELINE.md)
 - Batch tooling: populate-alumni.ts, populate-collaborators.ts, populate-ledger.ts, batch-enrich.ts, ingest-transcripts.ts
 - Cross-site surfacing: surfaceOn on all content types, bidirectional person tagging
 
@@ -95,6 +91,7 @@ Every component in the studio must either work correctly or be gracefully disabl
 - Pre-existing TypeScript errors in `migrations/` and `scripts/` directories
 - `seoBlock.ts` InitialValueResolverContext.document type error (pre-existing)
 - `@portabletext/editor` broken source map crashes Vite dev server (workaround: delete .map file)
+- gopro-hero7-protune.cube LUT file not yet created (registered in CAMERA_LUTS but absent — graceful fallback)
 
 ## Constraints
 
@@ -123,6 +120,11 @@ Every component in the studio must either work correctly or be gracefully disabl
 | aws4fetch (not @aws-sdk) in CF Worker | AWS SDK broken in Workers since Jan 2025 | ✓ Good — lightweight, working |
 | S.documentList().filter() for desk lists | S.documentTypeList().filter() silently ignores the filter | ✓ Good — critical Sanity API distinction |
 | lib/completeness.ts kept pure TypeScript | No Studio imports for Node.js batch script compatibility | ✓ Good — shared between Studio and CLI |
+| CRF 18 only encoding (no bitrate flags) | Simpler, consistent quality; bitrate overrides caused issues | ✓ Good — clean output across camera profiles |
+| Explicit --anamorphic flag (no auto-detect) | Auto-detection was unreliable; explicit opt-in is safer | ✓ Good — clear user intent |
+| importlib for hyphenated Python filenames | Avoids renaming existing scripts; preserves CLI ergonomics | ✓ Good — clean module loading |
+| Sanity drafts only (no auto-publish) | Editorial review required before pipeline output goes live | ✓ Good — safe default for automation |
+| Dynamic event prefix from B2 path | Hardcoded CLIPS_B2_PREFIX broke non-MMXXV events | ✓ Good — all events route correctly |
 
 ## Evolution
 
@@ -142,4 +144,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-27 after Phase 17 completion*
+*Last updated: 2026-03-27 after v1.3 milestone*
