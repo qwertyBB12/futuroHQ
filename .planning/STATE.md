@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.3
 milestone_name: Media Pipeline Integrity
 status: executing
-stopped_at: Phase 14 context gathered
-last_updated: "2026-03-27T00:26:51.570Z"
+stopped_at: Completed 14-03-PLAN.md — faststart audit script
+last_updated: "2026-03-27T00:49:07.969Z"
 last_activity: 2026-03-27
 progress:
   total_phases: 8
   completed_phases: 3
-  total_plans: 8
-  completed_plans: 8
+  total_plans: 11
+  completed_plans: 9
 ---
 
 # Project State
@@ -20,12 +20,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-26)
 
 **Core value:** Every component must either work correctly or be gracefully disabled — no silent failures, no orphaned experiments, no schema ambiguity.
-**Current focus:** Phase 13 — sanity-data-integrity
+**Current focus:** Phase 14 — script-correctness
 
 ## Current Position
 
-Phase: 14
-Plan: Not started
+Phase: 14 (script-correctness) — EXECUTING
+Plan: 2 of 3
 Status: Ready to execute
 Last activity: 2026-03-27
 
@@ -62,6 +62,7 @@ v1.3 starting context:
 - [Phase 13-sanity-data-integrity]: MMXIX issubset comparison: extra refs like hector-as-host are acceptable; only flag when VIDEO_MAP expected people are absent from featuredIn
 - [Phase 13-sanity-data-integrity]: 7 genuine MMXIX person_tag_mismatch failures remain after Plan 03 fixes — VIDEO_MAP expected slugs absent from featuredIn; require human decision to accept or patch
 - [Phase 13-sanity-data-integrity]: D-12 criterion partially met: 0 URL failures, 68 MMXXV clips confirmed empty via GROQ; 7 MMXIX mismatches are genuine data quality issues, not false positives
+- [Phase 14-script-correctness]: Binary MP4 box parsing (stdlib struct) over ffprobe — ffprobe does not expose atom order
 
 ### Pending Todos
 
@@ -84,10 +85,11 @@ None.
 | Phase 13-sanity-data-integrity P02 | 6 | 1 tasks | 2 files |
 | Phase 13-sanity-data-integrity P03 | 14 | 2 tasks | 5 files |
 | Phase 13-sanity-data-integrity P04 | 8 | 1 tasks | 1 files |
+| Phase 14-script-correctness P03 | 97s | 1 tasks | 2 files |
 
 ## Session Continuity
 
-Last session: 2026-03-27T00:26:51.567Z
-Stopped at: Phase 14 context gathered
+Last session: 2026-03-27T00:49:07.966Z
+Stopped at: Completed 14-03-PLAN.md — faststart audit script
 Resume with: /gsd:plan-phase 13
-Resume file: .planning/phases/14-script-correctness/14-CONTEXT.md
+Resume file: None
