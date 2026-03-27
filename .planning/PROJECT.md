@@ -78,6 +78,7 @@ Every component in the studio must either work correctly or be gracefully disabl
 - 90 files changed across v1.1, +18,063 / -2,523 lines
 - Enrichment system: 5 tracked types with completeness indicators and filtered desk lists (transcript + externalLinks tracked since Phase 09)
 - Media pipeline: B2 → Bunny CDN → Cloudflare Worker → Sanity draft documents
+- Pipeline automation: single-command orchestrator (pipeline.py) chains encode → transcribe → diarize → clip extract → B2 upload → Sanity doc creation
 - Pipeline scripts: CRF-only encoding, per-camera LUT profiles, argparse CLI, HF_TOKEN from env, faststart on all outputs (Phase 14 complete)
 - Batch tooling: populate-alumni.ts, populate-collaborators.ts, populate-ledger.ts, batch-enrich.ts, ingest-transcripts.ts
 - Cross-site surfacing: surfaceOn on all content types, bidirectional person tagging
@@ -139,4 +140,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-27 after Phase 14 completion*
+*Last updated: 2026-03-27 after Phase 15 completion*
