@@ -221,14 +221,15 @@ def format_srt_time(seconds: float) -> str:
 
 
 def process_video(b2_path: str, camera: str = "sony-a6700-slog3",
-                  anamorphic: bool = False, skip_transcribe: bool = False):
+                  anamorphic: bool = False, skip_transcribe: bool = False,
+                  skip_upload: bool = False, skip_cleanup: bool = False):
     filename = os.path.basename(b2_path)
     stem = os.path.splitext(filename)[0]
 
     output_file = OUTPUT_DIR / f"{stem}.enriched.json"
     if output_file.exists():
         print(f"SKIP: {filename} (already processed)")
-        return
+        return {"stem": stem, "skipped": True}
 
     print(f"\n{'='*60}")
     print(f"RAW PIPELINE: {filename}")
@@ -247,7 +248,7 @@ def process_video(b2_path: str, camera: str = "sony-a6700-slog3",
     t = time.time()
     if not download_from_b2(b2_path, video_path):
         print(f"  ✗ Download failed")
-        return
+        return None
     print(f"  Downloaded in {time.time()-t:.0f}s")
 
     # Step 2: Analyze
@@ -272,26 +273,44 @@ def process_video(b2_path: str, camera: str = "sony-a6700-slog3",
     if result.returncode != 0:
         print(f"  ✗ FFmpeg failed: {result.stderr[-200:]}")
         video_path.unlink(missing_ok=True)
-        return
+        return None
     proc_time = time.time() - t
     orig_size = video_path.stat().st_size / (1024**2)
     proc_size = processed_path.stat().st_size / (1024**2)
     print(f"  Processed in {proc_time:.0f}s — {orig_size:.0f}MB → {proc_size:.0f}MB "
           f"({proc_size/orig_size*100:.0f}%)")
 
+    # Derive the B2 upload path for the processed video
+    edited_b2_path = b2_path.replace("/raw/", "/edited/").replace(filename, f"{stem}_processed.mp4")
+
     if skip_transcribe:
         # Upload processed video and skip transcription steps
-        edited_b2_path = b2_path.replace("/raw/", "/edited/").replace(filename, f"{stem}_processed.mp4")
-        print(f"  [4/7] Uploading to B2 (--skip-transcribe): {edited_b2_path}")
-        t = time.time()
-        if upload_to_b2(processed_path, edited_b2_path):
-            print(f"  Uploaded in {time.time()-t:.0f}s")
+        upload_success = None
+        if not skip_upload:
+            print(f"  [4/7] Uploading to B2 (--skip-transcribe): {edited_b2_path}")
+            t = time.time()
+            upload_success = upload_to_b2(processed_path, edited_b2_path)
+            if upload_success:
+                print(f"  Uploaded in {time.time()-t:.0f}s")
+            else:
+                print(f"  ✗ Upload failed — processed file saved locally")
         else:
-            print(f"  ✗ Upload failed — processed file saved locally")
-        video_path.unlink(missing_ok=True)
-        processed_path.unlink(missing_ok=True)
+            print(f"  [4/7] Skipping B2 upload (--skip-upload)")
+        if not skip_cleanup:
+            video_path.unlink(missing_ok=True)
+            processed_path.unlink(missing_ok=True)
         print(f"\n  ✓ Complete (encode only, transcription skipped)")
-        return
+        return {
+            "stem": stem,
+            "processed_path": processed_path,
+            "enriched_path": None,
+            "edited_b2_path": edited_b2_path,
+            "upload_success": upload_success,
+            "duration": None,
+            "speakers": [],
+            "orig_size_mb": round(orig_size),
+            "proc_size_mb": round(proc_size),
+        }
 
     # Step 4: Extract audio for transcription
     print(f"  [4/7] Extracting audio for transcription...")
@@ -324,14 +343,17 @@ def process_video(b2_path: str, camera: str = "sony-a6700-slog3",
     enriched = assign_speakers(whisper_result, diar_segments)
 
     # Step 7: Upload processed video to edited/
-    # Derive edited path from raw path
-    edited_b2_path = b2_path.replace("/raw/", "/edited/").replace(filename, f"{stem}_processed.mp4")
-    print(f"  [7/7] Uploading to B2: {edited_b2_path}")
-    t = time.time()
-    if upload_to_b2(processed_path, edited_b2_path):
-        print(f"  Uploaded in {time.time()-t:.0f}s")
+    upload_success = None
+    if not skip_upload:
+        print(f"  [7/7] Uploading to B2: {edited_b2_path}")
+        t = time.time()
+        upload_success = upload_to_b2(processed_path, edited_b2_path)
+        if upload_success:
+            print(f"  Uploaded in {time.time()-t:.0f}s")
+        else:
+            print(f"  ✗ Upload failed — processed file saved locally")
     else:
-        print(f"  ✗ Upload failed — processed file saved locally")
+        print(f"  [7/7] Skipping B2 upload (--skip-upload)")
 
     # Save enriched transcript
     speaker_segments = []
@@ -395,14 +417,30 @@ def process_video(b2_path: str, camera: str = "sony-a6700-slog3",
             f.write(f"{i}\n{format_srt_time(seg['start'])} --> {format_srt_time(seg['end'])}\n"
                     f"[{seg['speaker']}] {seg['text']}\n\n")
 
-    # Clean up
-    video_path.unlink(missing_ok=True)
-    processed_path.unlink(missing_ok=True)
-    audio_path.unlink(missing_ok=True)
+    # Clean up (unless skip_cleanup — orchestrator needs the processed file for clip extraction)
+    if not skip_cleanup:
+        video_path.unlink(missing_ok=True)
+        processed_path.unlink(missing_ok=True)
+        audio_path.unlink(missing_ok=True)
+    else:
+        audio_path.unlink(missing_ok=True)
 
     total_words = sum(len(s.get("words", [])) for s in output["segments"])
     print(f"\n  ✓ Complete: {total_words} words, {len(speakers)} speakers")
     print(f"  {orig_size:.0f}MB → {proc_size:.0f}MB ({proc_size/orig_size*100:.0f}%)")
+
+    result = {
+        "stem": stem,
+        "processed_path": processed_path,
+        "enriched_path": output_file,
+        "edited_b2_path": edited_b2_path,
+        "upload_success": upload_success,
+        "duration": round(duration, 2),
+        "speakers": speakers,
+        "orig_size_mb": round(orig_size),
+        "proc_size_mb": round(proc_size),
+    }
+    return result
 
 
 def list_videos(folder: str) -> list:

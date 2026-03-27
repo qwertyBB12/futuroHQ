@@ -52,11 +52,11 @@ def format_time(seconds: float) -> str:
     return f"{m:02d}m{s:02d}s"
 
 
-def process_transcript(stem: str):
+def process_transcript(stem: str, video_path: Path = None):
     enriched_path = TRANSCRIPT_DIR / f"{stem}.enriched.json"
     if not enriched_path.exists():
         print(f"No enriched transcript found: {enriched_path}")
-        return
+        return None
 
     with open(enriched_path) as f:
         data = json.load(f)
@@ -88,14 +88,20 @@ def process_transcript(stem: str):
     video_clips_dir = CLIPS_DIR / stem
     video_clips_dir.mkdir(parents=True, exist_ok=True)
 
-    # Download video
-    video_path = WORK_DIR / os.path.basename(source_file)
-    if not video_path.exists():
-        print(f"\n  Downloading video from B2...")
-        if not download_video(source_file, video_path):
-            print(f"  ✗ Download failed")
-            return
-        print(f"  ✓ Downloaded")
+    # Download video (or use provided local path if available)
+    _downloaded_video = False
+    if video_path is not None and Path(video_path).exists():
+        video_path = Path(video_path)
+        print(f"\n  Using provided local video: {video_path}")
+    else:
+        video_path = WORK_DIR / os.path.basename(source_file)
+        if not video_path.exists():
+            print(f"\n  Downloading video from B2...")
+            if not download_video(source_file, video_path):
+                print(f"  ✗ Download failed")
+                return None
+            _downloaded_video = True
+            print(f"  ✓ Downloaded")
 
     # Extract clips per speaker
     clips_manifest = []
@@ -164,8 +170,10 @@ def process_transcript(stem: str):
     with open(manifest_path, "w") as f:
         json.dump(manifest, f, indent=2, ensure_ascii=False)
 
-    # Clean up video
-    video_path.unlink(missing_ok=True)
+    # Clean up video only if we downloaded it (not if caller provided the path)
+    # The _downloaded_video variable tracks whether we own this file
+    if _downloaded_video:
+        video_path.unlink(missing_ok=True)
 
     # Report
     print(f"\n  ✓ {len(clips_manifest)} clips extracted to {video_clips_dir}")
@@ -173,6 +181,8 @@ def process_transcript(stem: str):
     for speaker, info in manifest["speaker_summary"].items():
         print(f"    {speaker}: {info['clip_count']} clips, "
               f"{info['total_duration']:.0f}s total")
+
+    return manifest
 
 
 def main():

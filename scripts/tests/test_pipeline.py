@@ -262,9 +262,11 @@ def test_process_raw_video_returns_dict():
 def test_extract_speaker_clips_video_path_param():
     """
     extract-speaker-clips.py process_transcript() must accept optional video_path param.
+    Accepts both typed (video_path: Path = None) and untyped (video_path=None) forms.
     """
     source = (SCRIPTS_DIR / "extract-speaker-clips.py").read_text()
-    assert "video_path=None" in source, (
+    has_video_path_param = "video_path=None" in source or "video_path: Path = None" in source
+    assert has_video_path_param, (
         "extract-speaker-clips.py process_transcript() must accept video_path=None parameter"
     )
 
