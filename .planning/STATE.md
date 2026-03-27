@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.3
 milestone_name: Media Pipeline Integrity
-status: completed
-stopped_at: Completed 16-01-PLAN.md — Phase 16 fully closed
-last_updated: "2026-03-27T04:12:49.684Z"
+status: verifying
+stopped_at: Completed 17-01-PLAN.md — Phase 17 fully closed
+last_updated: "2026-03-27T04:38:57.421Z"
 last_activity: 2026-03-27
 progress:
-  total_phases: 8
-  completed_phases: 6
-  total_plans: 14
-  completed_plans: 14
+  total_phases: 9
+  completed_phases: 7
+  total_plans: 15
+  completed_plans: 15
   percent: 83
 ---
 
@@ -21,13 +21,13 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-16)
 
 **Core value:** Every component must either work correctly or be gracefully disabled — no silent failures, no orphaned experiments, no schema ambiguity.
-**Current focus:** Phase 16 — pipeline-documentation
+**Current focus:** Phase 17 — pipeline-path-fix
 
 ## Current Position
 
-Phase: 16
-Plan: Not started
-Status: v1.3 milestone complete
+Phase: 17 (pipeline-path-fix) — EXECUTING
+Plan: 1 of 1
+Status: Phase complete — ready for verification
 Last activity: 2026-03-27
 
 Progress: [████████░░] 83%
@@ -58,6 +58,7 @@ Progress: [████████░░] 83%
 | Phase 15 P01 | 4 | 1 tasks | 4 files |
 | Phase 15-pipeline-automation P02 | 2min | 1 tasks | 2 files |
 | Phase 16-pipeline-documentation P01 | 8min | 2 tasks | 1 file |
+| Phase 17-pipeline-path-fix P01 | 10 | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -95,6 +96,8 @@ All decisions logged in PROJECT.md Key Decisions table. Key patterns for v1.1:
 - [Phase 15-pipeline-automation]: urllib.request used for Sanity API (not subprocess curl) — Python stdlib REST API per D-10
 - [Phase 16-01]: Combined Task 1 and Task 2 into single file write — both tasks modify same file, content inseparable
 - [Phase 16-01]: Preserved Current State table and Pending Work checklist — useful operational context for collaborators
+- [Phase 17-pipeline-path-fix]: Extract event prefix via split('/raw/')[0] with fallback to split('/')[0] — consistent with derive_b2_upload_path pattern
+- [Phase 17-pipeline-path-fix]: Pass event_prefix through full call chain (run_pipeline -> upload_clips_to_b2 -> derive_clips_b2_path) rather than re-extracting at each level
 
 ### Pending Todos
 
@@ -114,6 +117,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-26T00:08:00Z
-Stopped at: Completed 16-01-PLAN.md — Phase 16 fully closed
+Last session: 2026-03-27T04:38:57.418Z
+Stopped at: Completed 17-01-PLAN.md — Phase 17 fully closed
 Resume file: None

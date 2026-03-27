@@ -53,7 +53,7 @@ See: `.planning/milestones/v1.1-ROADMAP.md` for full details.
 - [x] **Phase 14: Script Correctness** - Fix encoding, camera profiles, anamorphic desqueeze, and transcription chain in pipeline scripts (completed 2026-03-27)
 - [x] **Phase 15: Pipeline Automation** - Wire all scripts into a single end-to-end command with correct B2 upload structure and Sanity sync (completed 2026-03-27)
 - [x] **Phase 16: Pipeline Documentation** - Document full architecture and step-by-step usage guide (completed 2026-03-26)
-- [ ] **Phase 17: Pipeline Path Fix & Tracking Cleanup** - Fix hardcoded CLIPS_B2_PREFIX, update docs, fix stale tracking artifacts (gap closure)
+- [x] **Phase 17: Pipeline Path Fix & Tracking Cleanup** - Fix hardcoded CLIPS_B2_PREFIX, update docs, fix stale tracking artifacts (gap closure) (completed 2026-03-27)
 
 ## Phase Details
 
@@ -175,7 +175,7 @@ Plans:
   4. REQUIREMENTS.md checkboxes match actual verification results
 **Plans**: 1 plan
 Plans:
-- [ ] 17-01-PLAN.md — Fix CLIPS_B2_PREFIX, update docs clip path examples, fix Phase 14 VERIFICATION.md stale status
+- [x] 17-01-PLAN.md — Fix CLIPS_B2_PREFIX, update docs clip path examples, fix Phase 14 VERIFICATION.md stale status
 
 ## Progress
 
@@ -199,4 +199,4 @@ Plans:
 | 14. Script Correctness | v1.3 | 2/3 | Complete    | 2026-03-27 |
 | 15. Pipeline Automation | v1.3 | 2/2 | Complete    | 2026-03-27 |
 | 16. Pipeline Documentation | v1.3 | 1/1 | Complete    | 2026-03-27 |
-| 17. Pipeline Path Fix & Tracking Cleanup | v1.3 | 0/1 | Not started | - |
+| 17. Pipeline Path Fix & Tracking Cleanup | v1.3 | 1/1 | Complete   | 2026-03-27 |
