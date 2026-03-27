@@ -95,8 +95,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | AUTO-04 | Phase 15 | Complete |
 | DOCS-01 | Phase 16 | Complete (2026-03-26) |
 | DOCS-02 | Phase 16 | Complete (2026-03-26) |
-| AUTO-03 (gap) | Phase 17 | Pending |
-| DOCS-02 (gap) | Phase 17 | Pending |
+| AUTO-03 (gap) | Phase 17 | Complete (2026-03-27) |
+| DOCS-02 (gap) | Phase 17 | Complete (2026-03-27) |
 
 **Coverage:**
 - v1.3 requirements: 16 total

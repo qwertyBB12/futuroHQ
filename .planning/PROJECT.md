@@ -81,6 +81,7 @@ Every component in the studio must either work correctly or be gracefully disabl
 - Pipeline automation: single-command orchestrator (pipeline.py) chains encode → transcribe → diarize → clip extract → B2 upload → Sanity doc creation
 - Pipeline scripts: CRF-only encoding, per-camera LUT profiles, argparse CLI, HF_TOKEN from env, faststart on all outputs (Phase 14 complete)
 - Pipeline documentation: full architecture doc, Quick Start guide, flags reference, troubleshooting (Phase 16 complete — docs/MEDIA-PIPELINE.md)
+- Pipeline clip paths: dynamic event prefix derivation — clips route to correct B2 prefix for all events (Phase 17 gap closure)
 - Batch tooling: populate-alumni.ts, populate-collaborators.ts, populate-ledger.ts, batch-enrich.ts, ingest-transcripts.ts
 - Cross-site surfacing: surfaceOn on all content types, bidirectional person tagging
 
@@ -141,4 +142,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-27 after Phase 16 completion*
+*Last updated: 2026-03-27 after Phase 17 completion*
