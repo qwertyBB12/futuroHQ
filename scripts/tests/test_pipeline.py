@@ -137,12 +137,17 @@ def test_derive_b2_upload_path_lowercase_extension():
 
 def test_derive_clips_b2_path():
     """
-    Test 7: derive_clips_b2_path("C3460", "SPEAKER_00_00m00s-00m30s.mp4")
-    returns "Futuro MMXXV/clips/C3460/SPEAKER_00_00m00s-00m30s.mp4"
+    Test 7: derive_clips_b2_path with event_prefix parameter
+    returns "{event_prefix}/clips/{stem}/{clip_filename}"
     """
-    result = pipeline.derive_clips_b2_path("C3460", "SPEAKER_00_00m00s-00m30s.mp4")
+    result = pipeline.derive_clips_b2_path("C3460", "SPEAKER_00_00m00s-00m30s.mp4", "Futuro MMXXV")
     expected = "Futuro MMXXV/clips/C3460/SPEAKER_00_00m00s-00m30s.mp4"
     assert result == expected, f"Expected: {expected!r}, got: {result!r}"
+
+    # Verify non-MMXXV event routes correctly
+    result_kah = pipeline.derive_clips_b2_path("135A3217", "SPEAKER_00_00m00s-00m30s.mp4", "Kah Foundry XXVI")
+    expected_kah = "Kah Foundry XXVI/clips/135A3217/SPEAKER_00_00m00s-00m30s.mp4"
+    assert result_kah == expected_kah, f"Expected: {expected_kah!r}, got: {result_kah!r}"
 
 
 # ============================================================
