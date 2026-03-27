@@ -50,7 +50,7 @@ See: `.planning/milestones/v1.1-ROADMAP.md` for full details.
 **Milestone Goal:** Fix all data integrity issues in the B2-to-Sanity video pipeline and automate the end-to-end flow from raw video to tagged, streamable Sanity documents.
 
 - [x] **Phase 13: Sanity Data Integrity** - Fix clip CDN URL mismatches and person tag references in existing Sanity documents (gap closure in progress) (completed 2026-03-26)
-- [ ] **Phase 14: Script Correctness** - Fix encoding, camera profiles, anamorphic desqueeze, and transcription chain in pipeline scripts
+- [x] **Phase 14: Script Correctness** - Fix encoding, camera profiles, anamorphic desqueeze, and transcription chain in pipeline scripts (completed 2026-03-27)
 - [ ] **Phase 15: Pipeline Automation** - Wire all scripts into a single end-to-end command with correct B2 upload structure and Sanity sync
 - [ ] **Phase 16: Pipeline Documentation** - Document full architecture and step-by-step usage guide
 
@@ -176,6 +176,6 @@ Plans:
 | 11. Video Metadata Completion | v1.2 | 0/? | Blocked (v1.3) | - |
 | 12. Podcast Data + Content Tagging | v1.2 | 0/? | Blocked (v1.3) | - |
 | 13. Sanity Data Integrity | v1.3 | 4/4 | Complete    | 2026-03-27 |
-| 14. Script Correctness | v1.3 | 2/3 | In Progress|  |
+| 14. Script Correctness | v1.3 | 2/3 | Complete    | 2026-03-27 |
 | 15. Pipeline Automation | v1.3 | 0/? | Not started | - |
 | 16. Pipeline Documentation | v1.3 | 0/? | Not started | - |
