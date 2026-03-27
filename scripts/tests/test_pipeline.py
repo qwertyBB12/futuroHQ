@@ -279,3 +279,141 @@ def test_extract_speaker_clips_returns_manifest():
     assert "return manifest" in source, (
         "extract-speaker-clips.py process_transcript() must return manifest"
     )
+
+
+# ============================================================
+# Plan 02 Tests: Sanity document creation
+# ============================================================
+
+# Shared test fixtures
+_ENRICHED_DATA = {
+    "pipeline": "raw",
+    "source_file": "Futuro MMXXV/raw/card-1/Day 1/C3460.MP4",
+    "processed_file": "Futuro MMXXV/edited/card-1/Day 1/C3460_processed.mp4",
+    "duration_seconds": 30.54,
+    "language": "en",
+    "speakers": ["SPEAKER_00", "SPEAKER_01"],
+    "full_text": "Hello world, this is a test transcript.",
+    "speaker_segments": [
+        {"speaker": "SPEAKER_00", "start": 0.0, "end": 15.0, "text": "Hello world"},
+        {"speaker": "SPEAKER_01", "start": 15.0, "end": 30.0, "text": "This is a test"},
+    ],
+}
+
+_PIPELINE_RESULT = {
+    "b2_path": "Futuro MMXXV/raw/card-1/Day 1/C3460.MP4",
+    "stem": "C3460",
+    "edited_b2_path": "Futuro MMXXV/edited/card-1/Day 1/C3460_processed.mp4",
+    "edited_cdn_url": "https://benext.b-cdn.net/Futuro%20MMXXV/edited/card-1/Day%201/C3460_processed.mp4",
+    "clips": [],
+    "steps_completed": ["encode", "transcribe"],
+    "error": None,
+}
+
+_CDN_URL = "https://benext.b-cdn.net/Futuro%20MMXXV/edited/card-1/Day%201/C3460_processed.mp4"
+
+_CLIP_DATA = {
+    "file": "SPEAKER_00_00m00s-00m30s.mp4",
+    "speaker": "SPEAKER_00",
+    "start": 0.0,
+    "end": 30.38,
+    "duration": 30.4,
+    "text": "Not only do they come to everything...",
+    "cdn_url": "https://benext.b-cdn.net/Futuro%20MMXXV/clips/C3460/SPEAKER_00_00m00s-00m30s.mp4",
+    "b2_key": "Futuro MMXXV/clips/C3460/SPEAKER_00_00m00s-00m30s.mp4",
+}
+
+
+def test_build_video_doc_fields():
+    """
+    Test 1: build_video_doc() returns dict with all required governance and storage fields.
+    """
+    doc = pipeline.build_video_doc(_PIPELINE_RESULT, _ENRICHED_DATA, _CDN_URL)
+    assert doc["_type"] == "video", f"Expected _type='video', got: {doc.get('_type')}"
+    assert doc["videoSource"] == "b2", f"Expected videoSource='b2', got: {doc.get('videoSource')}"
+    assert doc["b2Key"] == _PIPELINE_RESULT["edited_b2_path"], f"b2Key mismatch"
+    assert doc["cdnUrl"] == _CDN_URL, f"cdnUrl mismatch"
+    assert doc["narrativeOwner"] == "hector", f"Expected narrativeOwner='hector', got: {doc.get('narrativeOwner')}"
+    assert doc["platformTier"] == "canonical", f"Expected platformTier='canonical', got: {doc.get('platformTier')}"
+    assert doc["archivalStatus"] == "archival", f"Expected archivalStatus='archival', got: {doc.get('archivalStatus')}"
+    assert doc["bunnyStatus"] == "ready", f"Expected bunnyStatus='ready', got: {doc.get('bunnyStatus')}"
+    assert "_id" not in doc, "build_video_doc must NOT set _id — sanity_mutate adds it"
+
+
+def test_build_video_doc_language_array():
+    """
+    Test 2: build_video_doc() sets language as array (not string), title from stem, duration from duration_seconds.
+    """
+    doc = pipeline.build_video_doc(_PIPELINE_RESULT, _ENRICHED_DATA, _CDN_URL)
+    assert isinstance(doc["language"], list), f"Expected language to be a list, got: {type(doc['language'])}"
+    assert "en" in doc["language"], f"Expected 'en' in language, got: {doc['language']}"
+    assert doc.get("duration") == 30.54, f"Expected duration=30.54, got: {doc.get('duration')}"
+    # Title should reference Day 1 and clip number C3460
+    assert "Day 1" in doc.get("title", "") or "C3460" in doc.get("title", ""), (
+        f"Expected title to reference Day 1 or C3460, got: {doc.get('title')}"
+    )
+
+
+def test_build_video_doc_transcript():
+    """
+    Test 3: build_video_doc() sets fullText from enriched JSON full_text,
+    speakerSegments from enriched JSON speaker_segments (with _key added).
+    """
+    doc = pipeline.build_video_doc(_PIPELINE_RESULT, _ENRICHED_DATA, _CDN_URL)
+    assert doc.get("fullText") == _ENRICHED_DATA["full_text"], (
+        f"Expected fullText to match enriched full_text, got: {doc.get('fullText')}"
+    )
+    segs = doc.get("speakerSegments", [])
+    assert len(segs) == 2, f"Expected 2 speakerSegments, got: {len(segs)}"
+    assert all("_key" in s for s in segs), "Each speakerSegment must have a _key field"
+    assert segs[0]["speaker"] == "SPEAKER_00", f"Expected first speaker=SPEAKER_00, got: {segs[0]['speaker']}"
+
+
+def test_build_clip_doc_fields():
+    """
+    Test 4: build_clip_doc() returns dict with _type='video', videoFormat='shortform',
+    b2Key and cdnUrl from clip data, duration from clip duration.
+    """
+    doc = pipeline.build_clip_doc(_CLIP_DATA, "C3460", _ENRICHED_DATA)
+    assert doc["_type"] == "video", f"Expected _type='video', got: {doc.get('_type')}"
+    assert doc["videoFormat"] == "shortform", f"Expected videoFormat='shortform', got: {doc.get('videoFormat')}"
+    assert doc["b2Key"] == _CLIP_DATA["b2_key"], f"b2Key mismatch"
+    assert doc["cdnUrl"] == _CLIP_DATA["cdn_url"], f"cdnUrl mismatch"
+    assert doc["duration"] == _CLIP_DATA["duration"], f"Expected duration={_CLIP_DATA['duration']}, got: {doc.get('duration')}"
+    assert "_id" not in doc, "build_clip_doc must NOT set _id — sanity_mutate adds it"
+
+
+def test_build_clip_doc_featured_in_empty():
+    """
+    Test 5: build_clip_doc() sets featuredIn as empty array when speaker label is generic (SPEAKER_00).
+    Per D-08: speakers are generic labels that can't be auto-matched to person docs.
+    """
+    doc = pipeline.build_clip_doc(_CLIP_DATA, "C3460", _ENRICHED_DATA)
+    assert "featuredIn" in doc, "build_clip_doc must include featuredIn key"
+    assert doc["featuredIn"] == [], f"Expected featuredIn=[], got: {doc.get('featuredIn')}"
+
+
+def test_sanity_mutate_dry_run():
+    """
+    Test 6: sanity_mutate() with dry_run=True returns a doc_id starting with 'drafts.'
+    without making any HTTP request.
+    """
+    doc = {"_type": "video", "title": "Test Video", "videoSource": "b2"}
+    doc_id = pipeline.sanity_mutate(doc, dry_run=True)
+    assert doc_id is not None, "sanity_mutate(dry_run=True) must return a doc_id"
+    assert doc_id.startswith("drafts."), f"Expected doc_id to start with 'drafts.', got: {doc_id}"
+    assert doc.get("_id") == doc_id, "sanity_mutate must set _id on the doc"
+
+
+def test_create_clip_documents_count():
+    """
+    Test 8: create_clip_documents() creates one document per clip in the clips list.
+    Uses dry_run=True to avoid HTTP calls.
+    """
+    clips = [
+        {**_CLIP_DATA},
+        {**_CLIP_DATA, "file": "SPEAKER_01_00m30s-01m00s.mp4", "speaker": "SPEAKER_01"},
+    ]
+    ids = pipeline.create_clip_documents(clips, "C3460", _ENRICHED_DATA, dry_run=True)
+    assert len(ids) == 2, f"Expected 2 doc_ids, got: {len(ids)}"
+    assert all(i.startswith("drafts.") for i in ids), "All clip doc ids must start with 'drafts.'"
