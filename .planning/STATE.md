@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.3
 milestone_name: Media Pipeline Integrity
-status: executing
-stopped_at: Completed 15-01-PLAN.md — pipeline orchestrator created
-last_updated: "2026-03-27T03:17:06.881Z"
+status: verifying
+stopped_at: Completed 15-02-PLAN.md — Sanity document creation added to pipeline
+last_updated: "2026-03-27T03:22:05.104Z"
 last_activity: 2026-03-27
 progress:
   total_phases: 8
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 13
-  completed_plans: 12
+  completed_plans: 13
   percent: 83
 ---
 
@@ -27,7 +27,7 @@ See: .planning/PROJECT.md (updated 2026-03-16)
 
 Phase: 15 (pipeline-automation) — EXECUTING
 Plan: 2 of 2
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-03-27
 
 Progress: [████████░░] 83%
@@ -56,6 +56,7 @@ Progress: [████████░░] 83%
 | Phase 06-person-tagging-data-entry P02 | 5min | 2 tasks | 9 files |
 | Phase 14-script-correctness P01 | 3min | 2 tasks | 3 files |
 | Phase 15 P01 | 4 | 1 tasks | 4 files |
+| Phase 15-pipeline-automation P02 | 2min | 1 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -88,6 +89,9 @@ All decisions logged in PROJECT.md Key Decisions table. Key patterns for v1.1:
 - [Phase 15]: importlib.util.spec_from_file_location for loading hyphenated Python filenames without renaming
 - [Phase 15]: skip_cleanup=True passed by orchestrator so processed file survives into clip extraction
 - [Phase 15]: process_transcript tracks _downloaded_video flag to only delete files it owns
+- [Phase 15-pipeline-automation]: sanity_mutate() always creates drafts. — editorial review required before publish (D-11)
+- [Phase 15-pipeline-automation]: featuredIn=[] on clip docs — SPEAKER_00/01 labels can't be auto-matched to person docs (D-08)
+- [Phase 15-pipeline-automation]: urllib.request used for Sanity API (not subprocess curl) — Python stdlib REST API per D-10
 
 ### Pending Todos
 
@@ -107,6 +111,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-27T03:17:06.878Z
-Stopped at: Completed 15-01-PLAN.md — pipeline orchestrator created
+Last session: 2026-03-27T03:22:05.102Z
+Stopped at: Completed 15-02-PLAN.md — Sanity document creation added to pipeline
 Resume file: None

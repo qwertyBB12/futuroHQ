@@ -31,7 +31,7 @@ Requirements for Media Pipeline Integrity milestone. Each maps to roadmap phases
 - [x] **AUTO-01**: Single command processes raw video through the full chain: compress → LUT/filter → transcode → transcribe → diarize → clip extract
 - [x] **AUTO-02**: Clip extraction uses per-manifest filenames (no assumptions about speaker numbering)
 - [x] **AUTO-03**: Processed files and clips are uploaded to B2 in correct folder structure
-- [ ] **AUTO-04**: Sanity documents are created/updated from pipeline output with correct CDN URLs and person tags
+- [x] **AUTO-04**: Sanity documents are created/updated from pipeline output with correct CDN URLs and person tags
 
 ### Documentation
 
@@ -92,7 +92,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | AUTO-01 | Phase 15 | Complete |
 | AUTO-02 | Phase 15 | Complete |
 | AUTO-03 | Phase 15 | Complete |
-| AUTO-04 | Phase 15 | Pending |
+| AUTO-04 | Phase 15 | Complete |
 | DOCS-01 | Phase 16 | Pending |
 | DOCS-02 | Phase 16 | Pending |
 

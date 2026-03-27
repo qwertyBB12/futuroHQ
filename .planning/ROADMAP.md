@@ -51,7 +51,7 @@ See: `.planning/milestones/v1.1-ROADMAP.md` for full details.
 
 - [x] **Phase 13: Sanity Data Integrity** - Fix clip CDN URL mismatches and person tag references in existing Sanity documents (gap closure in progress) (completed 2026-03-26)
 - [x] **Phase 14: Script Correctness** - Fix encoding, camera profiles, anamorphic desqueeze, and transcription chain in pipeline scripts (completed 2026-03-27)
-- [ ] **Phase 15: Pipeline Automation** - Wire all scripts into a single end-to-end command with correct B2 upload structure and Sanity sync
+- [x] **Phase 15: Pipeline Automation** - Wire all scripts into a single end-to-end command with correct B2 upload structure and Sanity sync (completed 2026-03-27)
 - [ ] **Phase 16: Pipeline Documentation** - Document full architecture and step-by-step usage guide
 
 ## Phase Details
@@ -144,7 +144,7 @@ Plans:
 **Plans**: 2 plans
 Plans:
 - [x] 15-01-PLAN.md — Refactor scripts for importability + create pipeline orchestrator with B2 upload
-- [ ] 15-02-PLAN.md — Sanity document creation (video + clip docs) with --dry-run/--live
+- [x] 15-02-PLAN.md — Sanity document creation (video + clip docs) with --dry-run/--live
 **Success Criteria** (what must be TRUE):
   1. Running one command (or script) on a raw video file produces processed video, transcript, clips, B2 uploads, and draft Sanity documents — no intermediate manual steps required
   2. Clip extraction reads filenames from the per-video manifest file — no speaker numbering assumptions are hardcoded
@@ -180,5 +180,5 @@ Plans:
 | 12. Podcast Data + Content Tagging | v1.2 | 0/? | Blocked (v1.3) | - |
 | 13. Sanity Data Integrity | v1.3 | 4/4 | Complete    | 2026-03-27 |
 | 14. Script Correctness | v1.3 | 2/3 | Complete    | 2026-03-27 |
-| 15. Pipeline Automation | v1.3 | 1/2 | In Progress|  |
+| 15. Pipeline Automation | v1.3 | 2/2 | Complete   | 2026-03-27 |
 | 16. Pipeline Documentation | v1.3 | 0/? | Not started | - |
