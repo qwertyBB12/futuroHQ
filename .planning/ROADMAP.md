@@ -158,7 +158,9 @@ Plans:
 **Success Criteria** (what must be TRUE):
   1. A written document describes what each script does, what inputs it takes, what outputs it produces, and where each component runs (local machine vs. B2 vs. CF Worker vs. Sanity)
   2. Following the documented steps (or single command) for a new raw video produces a correct Sanity document with working CDN URL — no debugging required
-**Plans**: TBD
+**Plans**: 1 plan
+Plans:
+- [ ] 16-01-PLAN.md — Update MEDIA-PIPELINE.md with architecture overview, usage guide, flags reference, and troubleshooting
 
 ## Progress
 
