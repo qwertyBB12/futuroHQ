@@ -180,5 +180,5 @@ Plans:
 | 12. Podcast Data + Content Tagging | v1.2 | 0/? | Blocked (v1.3) | - |
 | 13. Sanity Data Integrity | v1.3 | 4/4 | Complete    | 2026-03-27 |
 | 14. Script Correctness | v1.3 | 2/3 | Complete    | 2026-03-27 |
-| 15. Pipeline Automation | v1.3 | 2/2 | Complete   | 2026-03-27 |
+| 15. Pipeline Automation | v1.3 | 2/2 | Complete    | 2026-03-27 |
 | 16. Pipeline Documentation | v1.3 | 0/? | Not started | - |
