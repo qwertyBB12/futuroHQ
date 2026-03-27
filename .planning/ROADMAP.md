@@ -173,7 +173,9 @@ Plans:
   2. docs/MEDIA-PIPELINE.md Quick Start examples are accurate for all event types
   3. Phase 14 VERIFICATION.md status reflects actual passed state (7/7)
   4. REQUIREMENTS.md checkboxes match actual verification results
-**Plans**: TBD
+**Plans**: 1 plan
+Plans:
+- [ ] 17-01-PLAN.md — Fix CLIPS_B2_PREFIX, update docs clip path examples, fix Phase 14 VERIFICATION.md stale status
 
 ## Progress
 
@@ -197,4 +199,4 @@ Plans:
 | 14. Script Correctness | v1.3 | 2/3 | Complete    | 2026-03-27 |
 | 15. Pipeline Automation | v1.3 | 2/2 | Complete    | 2026-03-27 |
 | 16. Pipeline Documentation | v1.3 | 1/1 | Complete    | 2026-03-27 |
-| 17. Pipeline Path Fix & Tracking Cleanup | v1.3 | 0/? | Not started | - |
+| 17. Pipeline Path Fix & Tracking Cleanup | v1.3 | 0/1 | Not started | - |
