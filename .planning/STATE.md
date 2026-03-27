@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Content Production & Media Pipeline
 status: executing
-stopped_at: Completed 06-02-PLAN.md — Phase 6 fully closed
-last_updated: "2026-03-17T00:12:09.428Z"
+stopped_at: Completed 14-01-PLAN.md
+last_updated: "2026-03-27T00:52:34.996Z"
 last_activity: 2026-03-16 — Phase 6 Plan 01 complete — person tagging schema foundation
 progress:
   total_phases: 5
@@ -35,6 +35,7 @@ Progress: [████████░░] 83%
 ## Performance Metrics
 
 **Velocity (v1.0 baseline):**
+
 - Total plans completed: 6
 - Total execution time: ~24 min
 - Average duration: ~4 min/plan
@@ -53,12 +54,14 @@ Progress: [████████░░] 83%
 | Phase 06-person-tagging-data-entry P01 | ~15min | 2 tasks | 15 files |
 | Phase 06 P02 | 2min | 1 tasks | 9 files |
 | Phase 06-person-tagging-data-entry P02 | 5min | 2 tasks | 9 files |
+| Phase 14-script-correctness P01 | 3min | 2 tasks | 3 files |
 
 ## Accumulated Context
 
 ### Decisions
 
 All decisions logged in PROJECT.md Key Decisions table. Key patterns for v1.1:
+
 - B2 + Bunny CDN pull zone (not Bunny Stream) — keep Worker as event bridge only
 - surfaceOn as string array (not references) — matches existing essay pattern, no join needed
 - Enrichment tooling before data entry — build tools first so data entry is trackable
@@ -78,6 +81,9 @@ All decisions logged in PROJECT.md Key Decisions table. Key patterns for v1.1:
 - [Phase 06-02]: Migration uses --live opt-in flag (not --dry-run opt-out) for safety on destructive unset operations
 - [Phase 06-02]: populate-* scripts use set() to overwrite vs batch-enrich.ts setIfMissing — intentional for real vs placeholder data
 - [Phase 06-person-tagging-data-entry]: Data population execution deferred to post-B2/Bunny CDN milestone — user approved closing phase with tooling complete
+- [Phase 14-01]: CRF 18 only encoding — no bitrate override flags (D-01)
+- [Phase 14-01]: argparse CLI with --camera, --anamorphic, --skip-transcribe replacing sys.argv (D-05)
+- [Phase 14-01]: detect_anamorphic() removed — explicit --anamorphic flag is safer opt-in (D-08)
 
 ### Pending Todos
 
@@ -97,6 +103,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-17T00:06:29.852Z
-Stopped at: Completed 06-02-PLAN.md — Phase 6 fully closed
+Last session: 2026-03-27T00:52:34.994Z
+Stopped at: Completed 14-01-PLAN.md
 Resume file: None
