@@ -60,10 +60,6 @@ BUCKET = _proc_raw_video.BUCKET
 # Constants
 # ============================================================
 
-# Futuro MMXXV project prefix — used in B2 path construction for clips
-# Clips are stored at: Futuro MMXXV/clips/{stem}/{clip_filename}
-CLIPS_B2_PREFIX = "Futuro MMXXV"
-
 # Video file extensions for folder detection
 VIDEO_EXTENSIONS = [".mp4", ".mov", ".mkv", ".webm", ".avi"]
 
@@ -363,17 +359,37 @@ def derive_b2_upload_path(raw_b2_path: str) -> str:
     return edited_path
 
 
-def derive_clips_b2_path(stem: str, clip_filename: str) -> str:
+def _extract_event_prefix(raw_b2_path: str) -> str:
+    """
+    Extract the event prefix from a raw B2 path.
+
+    Example:
+        _extract_event_prefix("Kah Foundry XXVI/raw/135A3217.MP4")
+        -> "Kah Foundry XXVI"
+
+        _extract_event_prefix("Futuro MMXXV/raw/card-1/Day 1/C3460.MP4")
+        -> "Futuro MMXXV"
+    """
+    if "/raw/" in raw_b2_path:
+        return raw_b2_path.split("/raw/")[0]
+    # Fallback: use first path segment
+    return raw_b2_path.split("/")[0]
+
+
+def derive_clips_b2_path(stem: str, clip_filename: str, event_prefix: str) -> str:
     """
     Derive the B2 upload path for a speaker clip.
 
-    Clips go under: {CLIPS_B2_PREFIX}/clips/{stem}/{clip_filename}
+    Clips go under: {event_prefix}/clips/{stem}/{clip_filename}
 
     Example:
-        derive_clips_b2_path("C3460", "SPEAKER_00_00m00s-00m30s.mp4")
+        derive_clips_b2_path("C3460", "SPEAKER_00_00m00s-00m30s.mp4", "Futuro MMXXV")
         -> "Futuro MMXXV/clips/C3460/SPEAKER_00_00m00s-00m30s.mp4"
+
+        derive_clips_b2_path("135A3217", "SPEAKER_00_00m00s-00m30s.mp4", "Kah Foundry XXVI")
+        -> "Kah Foundry XXVI/clips/135A3217/SPEAKER_00_00m00s-00m30s.mp4"
     """
-    return f"{CLIPS_B2_PREFIX}/clips/{stem}/{clip_filename}"
+    return f"{event_prefix}/clips/{stem}/{clip_filename}"
 
 
 def derive_cdn_url(b2_path: str) -> str:
@@ -392,7 +408,7 @@ def derive_cdn_url(b2_path: str) -> str:
 # Upload helpers
 # ============================================================
 
-def upload_clips_to_b2(stem: str, clips_dir: Path) -> list:
+def upload_clips_to_b2(stem: str, clips_dir: Path, event_prefix: str) -> list:
     """
     Upload all clip files listed in the manifest to B2.
 
@@ -417,7 +433,7 @@ def upload_clips_to_b2(stem: str, clips_dir: Path) -> list:
     for clip in clips:
         clip_filename = clip["file"]
         clip_local_path = clips_dir / stem / clip_filename
-        clips_b2_path = derive_clips_b2_path(stem, clip_filename)
+        clips_b2_path = derive_clips_b2_path(stem, clip_filename, event_prefix)
 
         print(f"  Uploading clip: {clip_filename} -> {clips_b2_path}")
         success = upload_to_b2(clip_local_path, clips_b2_path)
@@ -470,6 +486,8 @@ def run_pipeline(b2_path: str, args: Namespace) -> dict:
         "edited_cdn_url": None,
         "clips": [],
     }
+
+    event_prefix = _extract_event_prefix(b2_path)
 
     # Step 1: Encode + transcribe + diarize
     print(f"\n[STEP 1] Encode + Transcribe + Diarize")
@@ -533,7 +551,7 @@ def run_pipeline(b2_path: str, args: Namespace) -> dict:
     if not args.skip_upload and not args.skip_clips and result["clips"]:
         print(f"\n[STEP 3] Upload Clips to B2")
         try:
-            updated_clips = upload_clips_to_b2(stem, CLIPS_DIR)
+            updated_clips = upload_clips_to_b2(stem, CLIPS_DIR, event_prefix)
             result["clips"] = updated_clips
             result["steps_completed"].append("clip-upload")
         except Exception as e:
