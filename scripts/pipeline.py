@@ -17,6 +17,9 @@ import importlib.util
 import json
 import sys
 import os
+import uuid
+import urllib.request
+import urllib.parse
 from argparse import Namespace
 from pathlib import Path
 
@@ -63,6 +66,213 @@ CLIPS_B2_PREFIX = "Futuro MMXXV"
 
 # Video file extensions for folder detection
 VIDEO_EXTENSIONS = [".mp4", ".mov", ".mkv", ".webm", ".avi"]
+
+# Sanity API constants
+SANITY_PROJECT = "fo6n8ceo"
+SANITY_DATASET = "production"
+SANITY_API = f"https://{SANITY_PROJECT}.api.sanity.io/v2024-01-01"
+SANITY_TOKEN = os.environ.get("SANITY_TOKEN")
+
+# Transcript directory for enriched JSON
+OUTPUT_DIR = Path(__file__).parent.parent / "transcripts"
+
+
+# ============================================================
+# Sanity integration
+# ============================================================
+
+def format_clip_time(seconds: float) -> str:
+    """Format seconds as mm:ss for clip title."""
+    m = int(seconds) // 60
+    s = int(seconds) % 60
+    return f"{m:02d}m{s:02d}s"
+
+
+def sanity_mutate(doc: dict, dry_run: bool = True) -> str | None:
+    """
+    Create a document in Sanity via Mutations API.
+
+    Generates a drafts. prefixed _id and sets it on the doc.
+    If dry_run=True, prints what would be created without HTTP request.
+    Returns doc_id on success, None on failure.
+    """
+    doc_id = f"drafts.{uuid.uuid4()}"
+    doc["_id"] = doc_id
+
+    if dry_run:
+        print(f"  [DRY RUN] Would create: {doc_id} — {doc.get('title', 'untitled')}")
+        return doc_id
+
+    if not SANITY_TOKEN:
+        print(f"  ERROR: SANITY_TOKEN not set — cannot create document")
+        return None
+
+    try:
+        mutations = json.dumps({"mutations": [{"create": doc}]}).encode()
+        req = urllib.request.Request(
+            f"{SANITY_API}/data/mutate/{SANITY_DATASET}",
+            data=mutations,
+            headers={
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {SANITY_TOKEN}",
+            },
+            method="POST",
+        )
+        with urllib.request.urlopen(req) as response:
+            data = json.loads(response.read())
+            if "results" in data:
+                print(f"  ✓ Created: {doc_id} — {doc.get('title', 'untitled')}")
+                return doc_id
+            else:
+                print(f"  ✗ Failed: {data.get('error', data)}")
+                return None
+    except Exception as e:
+        print(f"  ✗ Sanity mutation error: {e}")
+        return None
+
+
+def check_existing_b2key(b2_key: str) -> bool:
+    """Check if a video document already exists in Sanity with this b2Key."""
+    query = f'count(*[_type == "video" && b2Key == "{b2_key}"])'
+    url = f"{SANITY_API}/data/query/{SANITY_DATASET}?query={urllib.parse.quote(query)}"
+    try:
+        req = urllib.request.Request(
+            url,
+            headers={"Authorization": f"Bearer {SANITY_TOKEN}"} if SANITY_TOKEN else {},
+        )
+        with urllib.request.urlopen(req) as response:
+            data = json.loads(response.read())
+            return data.get("result", 0) > 0
+    except Exception:
+        return False
+
+
+def build_video_doc(pipeline_result: dict, enriched_data: dict, cdn_url: str) -> dict:
+    """
+    Build a Sanity video document from pipeline result and enriched JSON data.
+
+    Does NOT set _id — sanity_mutate() assigns the drafts. prefixed id.
+    """
+    source_file = enriched_data.get("source_file", "")
+
+    # Extract day from source_file path (e.g., "Futuro MMXXV/raw/card-1/Day 1/C3460.MP4" -> "Day 1")
+    day = "Unknown"
+    for part in source_file.split("/"):
+        if part.startswith("Day "):
+            day = part
+            break
+
+    # Extract clip number from stem (e.g., "C3460_processed" -> "C3460")
+    edited_b2_path = pipeline_result.get("edited_b2_path", "")
+    stem = os.path.splitext(os.path.basename(edited_b2_path))[0].replace("_processed", "")
+    if not stem:
+        stem = pipeline_result.get("stem", "unknown")
+
+    title = f"Futuro MMXXV — {day}, {stem}"
+
+    # Transform speaker_segments to Sanity format with _key
+    speaker_segments = [
+        {
+            "_key": str(uuid.uuid4())[:8],
+            "speaker": s["speaker"],
+            "start": s["start"],
+            "end": s["end"],
+            "text": s["text"],
+        }
+        for s in enriched_data.get("speaker_segments", [])
+    ]
+
+    return {
+        "_type": "video",
+        "title": title,
+        "videoSource": "b2",
+        "b2Key": pipeline_result["edited_b2_path"],
+        "cdnUrl": cdn_url,
+        "bunnyStatus": "ready",
+        "language": [enriched_data.get("language", "es")],
+        "videoFormat": "longform",
+        "duration": enriched_data.get("duration_seconds"),
+        "narrativeOwner": "hector",
+        "platformTier": "canonical",
+        "archivalStatus": "archival",
+        "fullText": enriched_data.get("full_text", ""),
+        "speakerSegments": speaker_segments,
+    }
+
+
+def build_clip_doc(clip: dict, parent_stem: str, enriched_data: dict) -> dict:
+    """
+    Build a Sanity video document for a speaker clip.
+
+    Does NOT set _id — sanity_mutate() assigns the drafts. prefixed id.
+    featuredIn is always empty — generic speaker labels can't be auto-matched.
+    """
+    start_fmt = format_clip_time(clip["start"])
+    end_fmt = format_clip_time(clip["end"])
+    title = f"{parent_stem} — {clip['speaker']} ({start_fmt}–{end_fmt})"
+
+    doc = {
+        "_type": "video",
+        "title": title,
+        "videoSource": "b2",
+        "b2Key": clip["b2_key"],
+        "cdnUrl": clip["cdn_url"],
+        "bunnyStatus": "ready",
+        "language": [enriched_data.get("language", "es")],
+        "videoFormat": "shortform",
+        "duration": clip["duration"],
+        "narrativeOwner": "hector",
+        "platformTier": "canonical",
+        "archivalStatus": "archival",
+        "featuredIn": [],  # Per D-08: generic speaker labels can't be auto-matched to person docs
+    }
+
+    # Add clip text as description if present
+    if clip.get("text"):
+        doc["description"] = clip["text"][:500]
+
+    return doc
+
+
+def create_video_document(
+    pipeline_result: dict,
+    enriched_data: dict,
+    cdn_url: str,
+    dry_run: bool = True,
+) -> str | None:
+    """
+    Create a Sanity draft video document from pipeline result.
+
+    Skips creation if b2Key already exists in Sanity.
+    Returns doc_id on success, None if skipped or failed.
+    """
+    b2_key = pipeline_result.get("edited_b2_path", "")
+    if not dry_run and check_existing_b2key(b2_key):
+        print(f"  ⏭ Already exists in Sanity (b2Key: {b2_key}) — skipping")
+        return None
+
+    doc = build_video_doc(pipeline_result, enriched_data, cdn_url)
+    return sanity_mutate(doc, dry_run=dry_run)
+
+
+def create_clip_documents(
+    clips: list,
+    parent_stem: str,
+    enriched_data: dict,
+    dry_run: bool = True,
+) -> list:
+    """
+    Create Sanity draft video documents for each speaker clip.
+
+    Returns list of created doc_ids.
+    """
+    doc_ids = []
+    for clip in clips:
+        doc = build_clip_doc(clip, parent_stem, enriched_data)
+        doc_id = sanity_mutate(doc, dry_run=dry_run)
+        if doc_id:
+            doc_ids.append(doc_id)
+    return doc_ids
 
 
 # ============================================================
@@ -329,10 +539,60 @@ def run_pipeline(b2_path: str, args: Namespace) -> dict:
         except Exception as e:
             print(f"  ✗ Clip upload failed: {e}")
 
-    # Step 4: Clean up local temp files
+    # Step 4: Create Sanity draft documents
+    if not args.skip_sanity:
+        if args.dry_run or args.live:
+            dry_run = not args.live
+            mode_label = "DRY RUN" if dry_run else "LIVE"
+            print(f"\n[STEP 4] Create Sanity Documents ({mode_label})")
+
+            # Read enriched JSON for transcript data
+            enriched_path = OUTPUT_DIR / f"{stem}.enriched.json"
+            enriched_data = {}
+            if enriched_path.exists():
+                try:
+                    with open(enriched_path) as f:
+                        enriched_data = json.load(f)
+                except Exception as e:
+                    print(f"  WARNING: Could not read enriched JSON: {e}")
+            else:
+                print(f"  WARNING: No enriched JSON found at {enriched_path}")
+
+            cdn_url = result.get("edited_cdn_url", "")
+
+            # Create main video document
+            if result.get("edited_b2_path"):
+                try:
+                    video_doc_id = create_video_document(
+                        result, enriched_data, cdn_url, dry_run=dry_run
+                    )
+                    if video_doc_id:
+                        result["sanity_video_doc_id"] = video_doc_id
+                        result["steps_completed"].append("sanity-video-doc")
+                except Exception as e:
+                    print(f"  ✗ Video document creation failed: {e}")
+
+            # Create clip documents
+            if result["clips"]:
+                try:
+                    clip_doc_ids = create_clip_documents(
+                        result["clips"], stem, enriched_data, dry_run=dry_run
+                    )
+                    result["sanity_clip_doc_ids"] = clip_doc_ids
+                    if clip_doc_ids:
+                        result["steps_completed"].append("sanity-clip-docs")
+                    print(f"  ✓ {len(clip_doc_ids)} clip document(s) {('would be created' if dry_run else 'created')}")
+                except Exception as e:
+                    print(f"  ✗ Clip document creation failed: {e}")
+        else:
+            print(f"\n[STEP 4] Sanity document creation skipped (pass --dry-run or --live)")
+    else:
+        print(f"\n[STEP 4] Skipping Sanity document creation (--skip-sanity)")
+
+    # Step 5: Clean up local temp files
     if processed_path and processed_path.exists():
         processed_path.unlink(missing_ok=True)
-        print(f"\n[STEP 4] Cleaned up: {processed_path.name}")
+        print(f"\n[STEP 5] Cleaned up: {processed_path.name}")
 
     # Summary
     print(f"\n{'='*70}")
