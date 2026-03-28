@@ -172,16 +172,18 @@ def collect_speaker_embeddings() -> dict[str, list[list[float]]]:
 def resolve_sanity_ids(person_names: list[str]) -> dict[str, dict]:
     """Look up Sanity document IDs for person names."""
     results = sanity_query("""
-        *[_type in ['alumni', 'person'] && !(_id match 'drafts.*')]{
-            _id, _type, name
+        *[_type in ['alumni', 'person', 'ledgerPerson'] && !(_id match 'drafts.*')]{
+            _id, _type, name, fullName
         }
     """)
 
     name_to_doc = {}
     for doc in results:
-        name = doc.get("name", "")
-        if name in person_names:
-            name_to_doc[name] = {"_id": doc["_id"], "_type": doc["_type"]}
+        # Match on name or fullName
+        for field in ("name", "fullName"):
+            n = doc.get(field, "")
+            if n and n in person_names and n not in name_to_doc:
+                name_to_doc[n] = {"_id": doc["_id"], "_type": doc["_type"]}
 
     return name_to_doc
 
