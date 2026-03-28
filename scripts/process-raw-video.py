@@ -83,8 +83,10 @@ def get_diarization_pipeline():
         _pipeline = Pipeline.from_pretrained(
             "pyannote/speaker-diarization-3.1", token=HF_TOKEN
         )
-        if torch.backends.mps.is_available():
-            _pipeline.to(torch.device("mps"))
+        # MPS disabled — Metal validation crash on PyTorch 2.10 + Python 3.14
+        # Re-enable when torch MPS backend stabilizes:
+        #   if torch.backends.mps.is_available():
+        #       _pipeline.to(torch.device("mps"))
     return _pipeline
 
 
@@ -140,9 +142,8 @@ def build_ffmpeg_command(input_path: Path, output_path: Path, lut_path: Path,
     else:
         print(f"WARNING: LUT not found for {lut_path.name}, processing without color grade")
 
-    # Slight exposure reduction + vignette for cinematic look
-    vf_filters.append("eq=brightness=-0.05:gamma=0.95")
-    vf_filters.append("vignette=angle=PI/5")
+    # Cinematic vignette — LUT handles exposure, no additional eq adjustment
+    vf_filters.append("vignette=angle=PI/4")
 
     vf_string = ",".join(vf_filters) if vf_filters else None
 
@@ -407,6 +408,18 @@ def process_video(b2_path: str, camera: str = "sony-a6700-slog3",
             } for w in s.get("words", [])]
         } for s in enriched.get("segments", [])]
     }
+
+    # Language guard — reject nonsense transcriptions
+    full_text = output.get("full_text", "")
+    detected_lang = output.get("language", "en")
+    word_count = len(full_text.split()) if full_text else 0
+
+    if word_count < 3 or detected_lang not in ("en", "es"):
+        print(f"  ⚠ Language guard triggered: lang={detected_lang}, words={word_count}")
+        output["full_text"] = ""
+        output["speaker_segments"] = []
+        output["language"] = "en"  # Default fallback
+        output["no_speech"] = True
 
     with open(output_file, "w") as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
