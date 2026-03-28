@@ -125,8 +125,15 @@ export default defineType({
       name: 'institutionalDesignation',
       title: 'Institutional Designation',
       type: 'string',
-      description: 'Dashboard dossier card title. E.g., "Founder | Legacy Architect", "Project Author | Emerging"',
+      description: 'Controls dashboard access and dossier card title. Known values: "founder" (full admin), "ecosystem-director" (Directors\' Circle access). Free-text also accepted for display titles like "Project Author | Emerging".',
       fieldset: 'companion',
+      options: {
+        list: [
+          { title: 'Founder', value: 'founder' },
+          { title: 'Ecosystem Director', value: 'ecosystem-director' },
+        ],
+        layout: 'dropdown',
+      },
     }),
     defineField({
       name: 'cohortYear',
@@ -272,6 +279,25 @@ export default defineType({
         defineField({ name: 'kajabi', title: 'Kajabi Contact ID', type: 'string' }),
       ],
       options: { collapsible: true, collapsed: true },
+    }),
+
+    // --- Voice Identification ---
+    defineField({
+      name: 'voiceSignature',
+      title: 'Voice Signature',
+      type: 'array',
+      of: [{ type: 'number' }],
+      readOnly: true,
+      hidden: true,
+      description: 'Speaker embedding from pyannote diarization (512-dim). Auto-populated by pipeline.',
+    }),
+    defineField({
+      name: 'hasVoiceSignature',
+      title: 'Voice Enrolled',
+      type: 'boolean',
+      readOnly: true,
+      initialValue: false,
+      description: 'Whether this person has a voice signature for auto-identification.',
     }),
 
     // --- Governance ---
