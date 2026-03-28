@@ -1,5 +1,5 @@
 import { defineType, defineField } from 'sanity'
-import { governanceFields } from './blocks/governanceBlock'
+import { governanceCoreFields } from './blocks/governanceBlock'
 import {surfaceOnField} from './blocks/surfaceOnField'
 import {featuredInField} from './blocks/featuredInField'
 import { transcriptFields, transcriptGroup } from './blocks/transcriptBlock'
@@ -21,21 +21,27 @@ export default defineType({
     videoSource: 'b2',
   },
   groups: [
-    {name: 'distribution', title: 'Distribution'},
+    {name: 'content', title: 'Content', default: true},
     {name: 'storage', title: 'B2/Bunny Storage'},
     transcriptGroup,
+    {name: 'distribution', title: 'Distribution'},
+    {name: 'seo', title: 'SEO'},
+    {name: 'legacy', title: 'Legacy'},
   ],
   fields: [
+    // ── Content tab ──────────────────────────────────────────────
     defineField({
       name: 'title',
       title: 'Title',
       type: 'string',
+      group: 'content',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
+      group: 'content',
       options: { source: 'title', maxLength: 96 },
       validation: (Rule) => Rule.required(),
     }),
@@ -43,6 +49,7 @@ export default defineType({
       name: 'language',
       title: 'Language',
       type: 'array',
+      group: 'content',
       of: [{ type: 'string' }],
       options: {
         list: [
@@ -58,6 +65,7 @@ export default defineType({
       name: 'titleEs',
       title: 'Title (Spanish)',
       type: 'string',
+      group: 'content',
       description: 'Spanish title for bilingual videos',
       hidden: ({ document }) => !document?.language || !(document.language as string[]).includes('es'),
     }),
@@ -65,13 +73,47 @@ export default defineType({
       name: 'descriptionEs',
       title: 'Description (Spanish)',
       type: 'text',
+      group: 'content',
       description: 'Spanish description for bilingual videos',
       hidden: ({ document }) => !document?.language || !(document.language as string[]).includes('es'),
+    }),
+    defineField({
+      name: 'description',
+      title: 'Description',
+      type: 'text',
+      group: 'content',
+    }),
+    defineField({
+      name: 'thumbnailImage',
+      title: 'Thumbnail Image',
+      type: 'image',
+      group: 'content',
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: 'contentCategory',
+      title: 'Content Category',
+      type: 'string',
+      group: 'content',
+      description: 'Determines which section this video appears in on hectorhlopez.com',
+      options: {
+        list: [
+          { title: 'Reflection', value: 'reflection' },
+          { title: 'Interview', value: 'interview' },
+          { title: 'Documentary', value: 'documentary' },
+          { title: 'Presentation', value: 'presentation' },
+          { title: 'B-Roll', value: 'b-roll' },
+          { title: 'Source Footage', value: 'source' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'reflection',
     }),
     defineField({
       name: 'videoFormat',
       title: 'Video Format',
       type: 'string',
+      group: 'content',
       options: {
         list: [
           { title: 'Longform', value: 'longform' },
@@ -82,10 +124,28 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'publishDate',
+      title: 'Publish Date',
+      type: 'datetime',
+      group: 'content',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      group: 'content',
+      of: [{ type: 'reference', to: [{ type: 'tag' }] }],
+    }),
+    featuredInField,
+
+    // ── Storage tab ──────────────────────────────────────────────
+    defineField({
       name: 'videoSource',
       title: 'Video Source',
       type: 'string',
       description: 'Where this video is hosted. New videos default to B2/Bunny CDN.',
+      group: 'storage',
       options: {
         list: [
           {title: 'Wistia (Legacy)', value: 'wistia'},
@@ -95,35 +155,6 @@ export default defineType({
       },
       initialValue: 'b2',
       validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'platform',
-      title: 'Platform',
-      type: 'string',
-      options: {
-        list: [
-          { title: 'YouTube', value: 'YouTube' },
-          { title: 'TikTok', value: 'TikTok' },
-          { title: 'Instagram Reels', value: 'Instagram Reels' },
-          { title: 'LinkedIn', value: 'LinkedIn' },
-        ],
-      },
-      hidden: ({document}) => document?.videoSource === 'b2',
-    }),
-    defineField({
-      name: 'videoUrl',
-      title: 'Video URL',
-      type: 'url',
-      hidden: ({document}) => document?.videoSource === 'b2',
-      validation: (Rule) =>
-        Rule.custom((value, context) => {
-          const doc = context?.document
-          // Required for wistia or null (existing docs without videoSource)
-          if (doc?.videoSource !== 'b2' && !value) {
-            return 'Video URL is required for Wistia videos'
-          }
-          return true
-        }),
     }),
     defineField({
       name: 'b2Key',
@@ -146,6 +177,7 @@ export default defineType({
       title: 'Resolution',
       type: 'string',
       description: 'Video resolution (e.g., 1080p, 4K)',
+      group: 'storage',
       options: {
         list: [
           {title: '720p', value: '720p'},
@@ -154,7 +186,6 @@ export default defineType({
           {title: '2160p (4K)', value: '2160p'},
         ],
       },
-      group: 'storage',
       hidden: ({document}) => document?.videoSource !== 'b2',
     }),
     defineField({
@@ -170,6 +201,7 @@ export default defineType({
       title: 'Pipeline Status',
       type: 'string',
       description: 'Set by the media pipeline Worker. processing = upload received, ready = CDN validated, error = pipeline failure.',
+      group: 'storage',
       options: {
         list: [
           {title: 'Processing', value: 'processing'},
@@ -178,41 +210,8 @@ export default defineType({
         ],
         layout: 'radio',
       },
-      group: 'storage',
       readOnly: true,
       hidden: ({document}) => document?.videoSource !== 'b2',
-    }),
-    defineField({
-      name: 'thumbnailImage',
-      title: 'Thumbnail Image',
-      type: 'image',
-      options: { hotspot: true },
-    }),
-    defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'text',
-    }),
-    defineField({
-      name: 'contentCategory',
-      title: 'Content Category',
-      type: 'string',
-      description: 'Determines which section this video appears in on hectorhlopez.com',
-      options: {
-        list: [
-          { title: 'Reflection', value: 'reflection' },
-          { title: 'Interview', value: 'interview' },
-          { title: 'Documentary', value: 'documentary' },
-        ],
-        layout: 'radio',
-      },
-      initialValue: 'reflection',
-    }),
-    defineField({
-      name: 'publishDate',
-      title: 'Publish Date',
-      type: 'datetime',
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'duration',
@@ -220,24 +219,101 @@ export default defineType({
       type: 'number',
       group: 'storage',
     }),
-    ...transcriptFields,
     defineField({
-      name: 'tags',
-      title: 'Tags',
-      type: 'array',
-      of: [{ type: 'reference', to: [{ type: 'tag' }] }],
+      name: 'needsVisualProcessing',
+      title: 'Needs Visual Processing',
+      type: 'boolean',
+      group: 'storage',
+      description: 'Clip was cut from raw footage — LUT and vignette not yet applied.',
+      initialValue: false,
     }),
-    featuredInField,
+    defineField({
+      name: 'needsColorCorrection',
+      title: 'Needs Color Correction',
+      type: 'boolean',
+      group: 'storage',
+      description: 'Video is too dark or has exposure issues requiring manual correction.',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'doNotDisclose',
+      title: 'Do Not Disclose',
+      type: 'boolean',
+      group: 'content',
+      description: 'Participant has a do-not-disclose clause in their agreement. This video must not be published externally.',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'speakerConfidence',
+      title: 'Speaker Match Confidence',
+      type: 'number',
+      group: 'storage',
+      readOnly: true,
+      hidden: true,
+      description: 'Cosine similarity score (0-1) from voice signature matching.',
+    }),
+    defineField({
+      name: 'needsReview',
+      title: 'Needs Review',
+      type: 'boolean',
+      group: 'content',
+      readOnly: true,
+      initialValue: false,
+      description: 'Flagged for manual review — speaker match confidence below 0.80.',
+    }),
+    defineField({
+      name: 'platform',
+      title: 'Platform',
+      type: 'string',
+      group: 'storage',
+      options: {
+        list: [
+          { title: 'YouTube', value: 'YouTube' },
+          { title: 'TikTok', value: 'TikTok' },
+          { title: 'Instagram Reels', value: 'Instagram Reels' },
+          { title: 'LinkedIn', value: 'LinkedIn' },
+        ],
+      },
+      hidden: ({document}) => document?.videoSource === 'b2',
+    }),
+    defineField({
+      name: 'videoUrl',
+      title: 'Video URL',
+      type: 'url',
+      group: 'storage',
+      hidden: ({document}) => document?.videoSource === 'b2',
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const doc = context?.document
+          if (doc?.videoSource !== 'b2' && !value) {
+            return 'Video URL is required for Wistia videos'
+          }
+          return true
+        }),
+    }),
+
+    // ── Transcript tab ───────────────────────────────────────────
+    ...transcriptFields,
+
+    // ── Distribution tab ─────────────────────────────────────────
+    surfaceOnField,
+    ...governanceCoreFields.map(field => ({...field, group: 'distribution'})),
+
+    // ── SEO tab ──────────────────────────────────────────────────
     defineField({
       name: 'seo',
       title: 'SEO',
       type: 'seoBlock',
+      group: 'seo',
     }),
+
+    // ── Legacy tab ───────────────────────────────────────────────
     defineField({
       name: 'legacyVlog',
       title: 'Legacy Vlog Data',
       type: 'object',
       readOnly: true,
+      group: 'legacy',
       options: { collapsible: true, collapsed: true },
       fields: [
         defineField({
@@ -363,8 +439,6 @@ export default defineType({
         }),
       ],
     }),
-    surfaceOnField,
-    ...governanceFields,
   ],
   preview: {
     select: {
