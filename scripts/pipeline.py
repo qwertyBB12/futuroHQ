@@ -74,6 +74,84 @@ OUTPUT_DIR = Path(__file__).parent.parent / "transcripts"
 
 
 # ============================================================
+# Voice signature matching
+# ============================================================
+
+def cosine_similarity(a: list, b: list) -> float:
+    """Compute cosine similarity between two vectors."""
+    dot = sum(x * y for x, y in zip(a, b))
+    norm_a = sum(x * x for x in a) ** 0.5
+    norm_b = sum(x * x for x in b) ** 0.5
+    if norm_a == 0 or norm_b == 0:
+        return 0.0
+    return dot / (norm_a * norm_b)
+
+
+_voice_signatures = None
+
+
+def load_voice_signatures() -> list[dict]:
+    """Query Sanity for all people with voice signatures. Cached per session."""
+    global _voice_signatures
+    if _voice_signatures is not None:
+        return _voice_signatures
+
+    query = '*[defined(voiceSignature) && !(_id match "drafts.*")]{_id, _type, name, voiceSignature}'
+    url = f"{SANITY_API}/data/query/{SANITY_DATASET}?" + urllib.parse.urlencode({"query": query})
+    req = urllib.request.Request(url, headers={"Authorization": f"Bearer {SANITY_TOKEN}"})
+    try:
+        with urllib.request.urlopen(req) as resp:
+            _voice_signatures = json.loads(resp.read()).get("result", [])
+    except Exception as e:
+        print(f"  WARNING: Could not load voice signatures: {e}")
+        _voice_signatures = []
+
+    print(f"  Loaded {len(_voice_signatures)} voice signature(s)")
+    return _voice_signatures
+
+
+def match_speakers(enriched_data: dict) -> dict:
+    """
+    Match speaker embeddings against known voice signatures.
+    Returns dict mapping SPEAKER_XX -> {name, sanity_id, confidence, needs_review}
+    """
+    signatures = load_voice_signatures()
+    if not signatures:
+        return {}
+
+    speaker_embeddings = enriched_data.get("speaker_embeddings", {})
+    if not speaker_embeddings:
+        return {}
+
+    matches = {}
+    for speaker_label, embedding in speaker_embeddings.items():
+        best_match = None
+        best_score = 0.0
+
+        for sig in signatures:
+            score = cosine_similarity(embedding, sig.get("voiceSignature", []))
+            if score > best_score:
+                best_score = score
+                best_match = sig
+
+        if best_match and best_score >= 0.50:
+            matches[speaker_label] = {
+                "name": best_match["name"],
+                "sanity_id": best_match["_id"],
+                "sanity_type": best_match["_type"],
+                "confidence": round(best_score, 3),
+                "needs_review": best_score < 0.80,
+            }
+            status = "✓" if best_score >= 0.80 else "⚠ review"
+            print(f"    {speaker_label} -> {best_match['name']} ({best_score:.2f}) {status}")
+        else:
+            score_str = f" (best: {best_score:.2f})" if best_match else ""
+            print(f"    {speaker_label} -> unmatched{score_str}")
+
+    return matches
+
+
+# ============================================================
 # Sanity integration
 # ============================================================
 
@@ -143,12 +221,14 @@ def check_existing_b2key(b2_key: str) -> bool:
         return False
 
 
-def build_video_doc(pipeline_result: dict, enriched_data: dict, cdn_url: str) -> dict:
+def build_video_doc(pipeline_result: dict, enriched_data: dict, cdn_url: str, speaker_matches: dict = None) -> dict:
     """
     Build a Sanity video document from pipeline result and enriched JSON data.
 
     Does NOT set _id — sanity_mutate() assigns the drafts. prefixed id.
     """
+    if speaker_matches is None:
+        speaker_matches = {}
     source_file = enriched_data.get("source_file", "")
 
     # Extract day from source_file path (e.g., "Futuro MMXXV/raw/card-1/Day 1/C3460.MP4" -> "Day 1")
@@ -167,18 +247,33 @@ def build_video_doc(pipeline_result: dict, enriched_data: dict, cdn_url: str) ->
     title = f"Futuro MMXXV — {day}, {stem}"
 
     # Transform speaker_segments to Sanity format with _key
-    speaker_segments = [
-        {
+    # Replace generic SPEAKER_XX with matched real names
+    speaker_segments = []
+    for s in enriched_data.get("speaker_segments", []):
+        speaker_label = s["speaker"]
+        match = speaker_matches.get(speaker_label)
+        display_name = match["name"] if match else speaker_label
+        speaker_segments.append({
             "_key": str(uuid.uuid4())[:8],
-            "speaker": s["speaker"],
+            "speaker": display_name,
             "start": s["start"],
             "end": s["end"],
             "text": s["text"],
-        }
-        for s in enriched_data.get("speaker_segments", [])
-    ]
+        })
 
-    return {
+    # Build featuredIn from all matched speakers (deduplicated)
+    seen_ids = set()
+    featured_in = []
+    for match in speaker_matches.values():
+        if match["sanity_id"] not in seen_ids:
+            seen_ids.add(match["sanity_id"])
+            featured_in.append({
+                "_key": str(uuid.uuid4())[:8],
+                "_type": "reference",
+                "_ref": match["sanity_id"],
+            })
+
+    doc = {
         "_type": "video",
         "title": title,
         "videoSource": "b2",
@@ -195,17 +290,51 @@ def build_video_doc(pipeline_result: dict, enriched_data: dict, cdn_url: str) ->
         "speakerSegments": speaker_segments,
     }
 
+    if featured_in:
+        doc["featuredIn"] = featured_in
 
-def build_clip_doc(clip: dict, parent_stem: str, enriched_data: dict) -> dict:
+    return doc
+
+
+def build_clip_doc(clip: dict, parent_stem: str, enriched_data: dict, speaker_matches: dict = None) -> dict:
     """
     Build a Sanity video document for a speaker clip.
 
     Does NOT set _id — sanity_mutate() assigns the drafts. prefixed id.
-    featuredIn is always empty — generic speaker labels can't be auto-matched.
+    Uses voice signature matches to set real names, featuredIn, and confidence.
     """
-    start_fmt = format_clip_time(clip["start"])
-    end_fmt = format_clip_time(clip["end"])
-    title = f"{parent_stem} — {clip['speaker']} ({start_fmt}–{end_fmt})"
+    if speaker_matches is None:
+        speaker_matches = {}
+
+    speaker_label = clip.get("speaker", "")
+    match = speaker_matches.get(speaker_label)
+    display_name = match["name"] if match else speaker_label
+
+    # Build descriptive title from transcript excerpt + speaker name
+    clip_text = clip.get("text", "")
+    if clip_text:
+        words = clip_text.split()[:7]
+        desc = " ".join(words)
+        if len(clip_text.split()) > 7:
+            desc += "..."
+    else:
+        start_fmt = format_clip_time(clip["start"])
+        end_fmt = format_clip_time(clip["end"])
+        desc = f"{start_fmt}–{end_fmt}"
+
+    # Extract program and day from source_file for suffix
+    source_file = enriched_data.get("source_file", "")
+    program = ""
+    day = ""
+    for part in source_file.split("/"):
+        if "Futuro" in part or "Kah" in part or "NeXT" in part:
+            program = part
+        if part.startswith("Day "):
+            day = part
+
+    title = f"{desc} — {display_name}"
+    if program and day:
+        title += f" — {program} — {day}"
 
     doc = {
         "_type": "video",
@@ -220,12 +349,23 @@ def build_clip_doc(clip: dict, parent_stem: str, enriched_data: dict) -> dict:
         "narrativeOwner": "hector",
         "platformTier": "canonical",
         "archivalStatus": "archival",
-        "featuredIn": [],  # Per D-08: generic speaker labels can't be auto-matched to person docs
     }
 
+    # featuredIn from match data
+    if match:
+        doc["featuredIn"] = [{
+            "_key": str(uuid.uuid4())[:8],
+            "_type": "reference",
+            "_ref": match["sanity_id"],
+        }]
+        doc["speakerConfidence"] = match["confidence"]
+        doc["needsReview"] = match["needs_review"]
+    else:
+        doc["featuredIn"] = []
+
     # Add clip text as description if present
-    if clip.get("text"):
-        doc["description"] = clip["text"][:500]
+    if clip_text:
+        doc["description"] = clip_text[:500]
 
     return doc
 
@@ -235,6 +375,7 @@ def create_video_document(
     enriched_data: dict,
     cdn_url: str,
     dry_run: bool = True,
+    speaker_matches: dict = None,
 ) -> str | None:
     """
     Create a Sanity draft video document from pipeline result.
@@ -247,7 +388,7 @@ def create_video_document(
         print(f"  ⏭ Already exists in Sanity (b2Key: {b2_key}) — skipping")
         return None
 
-    doc = build_video_doc(pipeline_result, enriched_data, cdn_url)
+    doc = build_video_doc(pipeline_result, enriched_data, cdn_url, speaker_matches=speaker_matches)
     return sanity_mutate(doc, dry_run=dry_run)
 
 
@@ -256,15 +397,23 @@ def create_clip_documents(
     parent_stem: str,
     enriched_data: dict,
     dry_run: bool = True,
+    speaker_matches: dict = None,
 ) -> list:
     """
     Create Sanity draft video documents for each speaker clip.
 
+    Skips clips whose b2Key already exists in Sanity.
     Returns list of created doc_ids.
     """
     doc_ids = []
     for clip in clips:
-        doc = build_clip_doc(clip, parent_stem, enriched_data)
+        # Duplicate prevention — skip if b2Key already exists
+        b2_key = clip.get("b2_key", "")
+        if not dry_run and b2_key and check_existing_b2key(b2_key):
+            print(f"  ⏭ Clip already exists (b2Key: {b2_key}) — skipping")
+            continue
+
+        doc = build_clip_doc(clip, parent_stem, enriched_data, speaker_matches=speaker_matches)
         doc_id = sanity_mutate(doc, dry_run=dry_run)
         if doc_id:
             doc_ids.append(doc_id)
@@ -578,11 +727,20 @@ def run_pipeline(b2_path: str, args: Namespace) -> dict:
 
             cdn_url = result.get("edited_cdn_url", "")
 
+            # Voice matching — identify speakers from signatures
+            speaker_matches = {}
+            if enriched_data.get("speaker_embeddings"):
+                print(f"\n  [STEP 4a] Speaker Identification")
+                speaker_matches = match_speakers(enriched_data)
+                if speaker_matches:
+                    print(f"  ✓ Matched {len(speaker_matches)} speaker(s)")
+
             # Create main video document
             if result.get("edited_b2_path"):
                 try:
                     video_doc_id = create_video_document(
-                        result, enriched_data, cdn_url, dry_run=dry_run
+                        result, enriched_data, cdn_url, dry_run=dry_run,
+                        speaker_matches=speaker_matches,
                     )
                     if video_doc_id:
                         result["sanity_video_doc_id"] = video_doc_id
@@ -594,7 +752,8 @@ def run_pipeline(b2_path: str, args: Namespace) -> dict:
             if result["clips"]:
                 try:
                     clip_doc_ids = create_clip_documents(
-                        result["clips"], stem, enriched_data, dry_run=dry_run
+                        result["clips"], stem, enriched_data, dry_run=dry_run,
+                        speaker_matches=speaker_matches,
                     )
                     result["sanity_clip_doc_ids"] = clip_doc_ids
                     if clip_doc_ids:
