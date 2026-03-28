@@ -63,6 +63,25 @@ export default defineType({
       type: 'string',
       description: 'Alternative text for screen readers and SEO',
     }),
+
+    // --- Voice Identification ---
+    defineField({
+      name: 'voiceSignature',
+      title: 'Voice Signature',
+      type: 'array',
+      of: [{ type: 'number' }],
+      readOnly: true,
+      hidden: true,
+      description: 'Speaker embedding from pyannote diarization (512-dim). Auto-populated by pipeline.',
+    }),
+    defineField({
+      name: 'hasVoiceSignature',
+      title: 'Voice Enrolled',
+      type: 'boolean',
+      readOnly: true,
+      initialValue: false,
+      description: 'Whether this person has a voice signature for auto-identification.',
+    }),
   ],
 
   preview: {
