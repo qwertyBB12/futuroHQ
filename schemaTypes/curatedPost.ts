@@ -61,7 +61,7 @@ export default defineType({
       name: 'media',
       title: 'Optional Media/Embed',
       type: 'array',
-      of: [{ type: 'mediaBlock' }, { type: 'image' }],
+      of: [{ type: 'mediaBlock' }, { type: 'image', options: { hotspot: true } }],
     }),
 
     // --- Meta ---

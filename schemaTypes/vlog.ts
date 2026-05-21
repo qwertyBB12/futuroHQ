@@ -103,7 +103,7 @@ export default defineType({
       name: 'gallery',
       title: 'Gallery (optional)',
       type: 'array',
-      of: [{ type: 'mediaBlock' }, { type: 'image' }],
+      of: [{ type: 'mediaBlock' }, { type: 'image', options: { hotspot: true } }],
       description: 'Any supporting clips or images',
     }),
 

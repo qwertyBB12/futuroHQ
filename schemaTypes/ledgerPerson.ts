@@ -34,6 +34,21 @@ export default defineType({
       type: 'string',
       validation: Rule => Rule.required(),
     }),
+    defineField({
+      name: 'portrait',
+      title: 'Portrait',
+      type: 'image',
+      options: { hotspot: true },
+      description: 'Portrait image for the ledger person — cropable via hotspot.',
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description: 'Accessible description of the portrait',
+        }),
+      ],
+    }),
     defineField({ name: 'alias', title: 'Alias / Cinematic Tagline', type: 'string' }),
     defineField({ name: 'currentTitle', title: 'Current Title / Role', type: 'string' }),
     defineField({ name: 'organization', title: 'Organization', type: 'string' }),
@@ -82,7 +97,7 @@ export default defineType({
       type: 'array',
       of: [
         { type: 'mediaBlock' },   // Videos hosted on Wistia, YouTube, Vimeo
-        { type: 'image' },        // Still images
+        { type: 'image', options: { hotspot: true } },        // Still images
         {
           type: 'object',         // Custom embeds like iframes
           name: 'customEmbed',

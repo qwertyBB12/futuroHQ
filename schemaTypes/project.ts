@@ -106,7 +106,7 @@ export default defineType({
       name: 'projectMedia',
       title: 'Project Media',
       type: 'array',
-      of: [{ type: 'mediaBlock' }, { type: 'image' }],
+      of: [{ type: 'mediaBlock' }, { type: 'image', options: { hotspot: true } }],
     }),
 
     // --- Links ---

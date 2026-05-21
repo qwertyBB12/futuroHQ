@@ -118,7 +118,7 @@ export default defineType({
       name: 'media',
       title: 'Attached Media',
       type: 'array',
-      of: [{ type: 'mediaBlock' }, { type: 'image' }],
+      of: [{ type: 'mediaBlock' }, { type: 'image', options: { hotspot: true } }],
     }),
 
     // --- Dates ---

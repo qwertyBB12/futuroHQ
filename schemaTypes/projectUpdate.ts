@@ -59,7 +59,7 @@ export default defineType({
       name: 'evidence',
       title: 'Evidence',
       type: 'array',
-      of: [{ type: 'image' }, { type: 'mediaBlock' }],
+      of: [{ type: 'image', options: { hotspot: true } }, { type: 'mediaBlock' }],
     }),
     defineField({
       name: 'metrics',

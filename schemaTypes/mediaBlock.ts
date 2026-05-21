@@ -67,6 +67,7 @@ export default defineType({
       name: 'customPlayButton',
       title: 'Custom Play Button',
       type: 'image',
+      options: { hotspot: true },
       description: 'Optional override for play button overlay'
     }),
 

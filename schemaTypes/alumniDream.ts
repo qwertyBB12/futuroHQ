@@ -140,7 +140,7 @@ export default defineType({
               name: 'evidence',
               title: 'Evidence',
               type: 'array',
-              of: [{ type: 'image' }],
+              of: [{ type: 'image', options: { hotspot: true } }],
             }),
           ],
           preview: {
