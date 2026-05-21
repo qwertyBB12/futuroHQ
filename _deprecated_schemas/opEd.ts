@@ -1,7 +1,7 @@
 import { defineType, defineField } from 'sanity'
-import { commonMeta } from '../blocks/commonMeta'
-import { governanceFields } from '../blocks/governanceBlock'
-import {featuredInField} from '../blocks/featuredInField'
+import { commonMeta } from '../schemaTypes/blocks/commonMeta'
+import { governanceFields } from '../schemaTypes/blocks/governanceBlock'
+import {featuredInField} from '../schemaTypes/blocks/featuredInField'
 
 export default defineType({
   name: 'opEd',

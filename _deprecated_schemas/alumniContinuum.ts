@@ -1,6 +1,6 @@
 import { defineType, defineField } from 'sanity'
-import { commonMeta } from '../blocks/commonMeta'
-import { governanceFields } from '../blocks/governanceBlock'
+import { commonMeta } from '../schemaTypes/blocks/commonMeta'
+import { governanceFields } from '../schemaTypes/blocks/governanceBlock'
 
 export default defineType({
   name: 'alumniContinuum',

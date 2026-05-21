@@ -48,8 +48,10 @@ import pricingTier from './pricingTier'
 import usageRecord from './usageRecord'
 
 // --- Archived (2026-05-20) ---
-// The following schemas were moved to ./_deprecated/ after a usage audit
-// showed zero reads in any app or query and zero writes from any code path:
+// The following schemas were moved to ../_deprecated_schemas/ (outside the
+// schemaTypes/ tree so Sanity's manifest extractor doesn't scan them) after
+// a usage audit showed zero reads in any app or query and zero writes from
+// any code path:
 //   alumniContinuum, curatedPost, decision, opEd, recruitmentAsset,
 //   keynote (superseded by `video.contentCategory == "keynote"`),
 //   vlog (superseded by `video.videoFormat == "shortform"`).

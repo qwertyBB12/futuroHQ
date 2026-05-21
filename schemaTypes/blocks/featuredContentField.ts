@@ -16,9 +16,9 @@ export const featuredContentField = defineField({
         {type: 'essay'},
         {type: 'podcast'},
         {type: 'podcastEpisode'},
-        {type: 'keynote'},
-        {type: 'opEd'},
         {type: 'news'},
+        // `keynote` and `opEd` were archived (2026-05-20); use `video` with
+        // contentCategory='keynote' and `essay` with category='op-ed' instead.
       ],
     },
   ],

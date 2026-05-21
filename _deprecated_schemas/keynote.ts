@@ -1,7 +1,7 @@
 import {defineType, defineField} from 'sanity'
-import {governanceFields} from '../blocks/governanceBlock'
-import {surfaceOnField} from '../blocks/surfaceOnField'
-import {featuredInField} from '../blocks/featuredInField'
+import {governanceFields} from '../schemaTypes/blocks/governanceBlock'
+import {surfaceOnField} from '../schemaTypes/blocks/surfaceOnField'
+import {featuredInField} from '../schemaTypes/blocks/featuredInField'
 
 export default defineType({
   name: 'keynote',
