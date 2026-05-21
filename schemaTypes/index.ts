@@ -22,9 +22,6 @@ import podcast from './podcast'
 import podcastEpisode from './podcastEpisode'
 import video from './video'
 import socialPost from './socialPost'
-import opEd from './opEd'
-import curatedPost from './curatedPost'
-import keynote from './keynote'
 import tag from './tag'
 
 // --- Shared Objects ---
@@ -34,10 +31,8 @@ import seoBlock from './seoBlock'
 
 // --- Enrollment ---
 import enrollee from './enrollee'
-import recruitmentAsset from './recruitmentAsset'
 
 // --- Companion Platform ---
-import alumniContinuum from './alumniContinuum'
 import alumniDream from './alumniDream'
 import alumniConversation from './alumniConversation'
 import projectUpdate from './projectUpdate'
@@ -52,11 +47,15 @@ import accreditationHourLog from './accreditationHourLog'
 import pricingTier from './pricingTier'
 import usageRecord from './usageRecord'
 
-// --- Institutional Memory ---
-import decision from './decision'
-
-// --- Legacy (registered but hidden from desk) ---
-import vlog from './vlog'
+// --- Archived (2026-05-20) ---
+// The following schemas were moved to ./_deprecated/ after a usage audit
+// showed zero reads in any app or query and zero writes from any code path:
+//   alumniContinuum, curatedPost, decision, opEd, recruitmentAsset,
+//   keynote (superseded by `video.contentCategory == "keynote"`),
+//   vlog (superseded by `video.videoFormat == "shortform"`).
+// See .planning/notes/audit-sanity-schema-2026-05-20.md in hector-ecosystem.
+// Existing documents of these types are preserved in the dataset — only the
+// schema definitions are unregistered so they stop appearing in the Studio.
 
 // --- Export combined schema array ---
 export const schemaTypes = [
@@ -79,22 +78,17 @@ export const schemaTypes = [
   impactMetric,
   pageContent_hhl_about,
 
-  // Enrollment (archive candidates — used by external enrollment system)
+  // Enrollment
   enrollee,
-  recruitmentAsset,
 
   // Media / Publishing
   podcast,
   podcastEpisode,
   video,
   socialPost,
-  opEd,
-  curatedPost,
-  keynote,
   tag,
 
   // Companion Platform
-  alumniContinuum,
   alumniDream,
   alumniConversation,
   projectUpdate,
@@ -108,12 +102,6 @@ export const schemaTypes = [
   // Platform Business
   pricingTier,
   usageRecord,
-
-  // Institutional Memory
-  decision,
-
-  // Legacy (hidden from desk)
-  vlog,
 
   // Shared Objects
   mediaBlock,

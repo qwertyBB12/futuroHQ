@@ -1,6 +1,6 @@
 import { defineType, defineField } from 'sanity'
-import { commonMeta } from './blocks/commonMeta'
-import { governanceFields } from './blocks/governanceBlock'
+import { commonMeta } from '../blocks/commonMeta'
+import { governanceFields } from '../blocks/governanceBlock'
 
 export default defineType({
   name: 'curatedPost',
