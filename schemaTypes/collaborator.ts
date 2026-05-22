@@ -117,7 +117,7 @@ export default defineType({
           type: 'string',
           options: { list: [{ title: 'Wistia', value: 'wistia' }, { title: 'YouTube', value: 'youtube' }] },
         }),
-        defineField({ name: 'mediaId', title: 'Media ID', type: 'string', description: 'Wistia hashed ID or YouTube video ID.' }),
+        defineField({ name: 'platformId', title: 'Platform ID', type: 'string', description: 'Wistia hashed ID or YouTube video ID. Matches the platformId convention used elsewhere in the schema.' }),
         defineField({ name: 'speakerName', title: 'Speaker Name', type: 'string' }),
         defineField({ name: 'title', title: 'Video Title', type: 'string' }),
         defineField({ name: 'durationSeconds', title: 'Duration (seconds)', type: 'number' }),
