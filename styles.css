@@ -123,13 +123,43 @@ body {
 
 /* Navbar children — kill any inherited cream backgrounds, force dark-on-dark.
    The `Card` wrappers inside navbar buttons leak our parchment color if we
-   only target `Button` — sweep Card + button-shaped containers too. */
+   only target `Button`. Sweep ALL Card/button/anchor descendants of the
+   navbar, regardless of nesting depth or data-as variant. */
 [data-ui="Navbar"] [data-ui="Card"],
-[data-ui="Navbar"] [data-ui="Card"][data-as="button"],
-[data-ui="Navbar"] [data-as="button"] {
+[data-ui="Navbar"] [data-ui="Card"] [data-ui="Card"],
+[data-ui="Navbar"] [data-ui="Box"],
+[data-ui="Navbar"] [data-as="button"],
+[data-ui="Navbar"] [data-as="a"],
+[data-ui="Navbar"] [data-as="div"] {
   background: transparent !important;
   background-color: transparent !important;
   color: #FAF8F5 !important;
+}
+
+[data-ui="Navbar"] [data-ui="Text"],
+[data-ui="Navbar"] [data-ui="Label"],
+[data-ui="Navbar"] [data-ui="Heading"],
+[data-ui="Navbar"] code,
+[data-ui="Navbar"] kbd {
+  color: #FAF8F5 !important;
+}
+
+/* Workspace pill / tool tabs hover affordance */
+[data-ui="Navbar"] [data-ui="Card"]:hover,
+[data-ui="Navbar"] [data-as="button"]:hover,
+[data-ui="Navbar"] [data-as="a"]:hover {
+  background: rgba(250, 248, 245, 0.10) !important;
+  background-color: rgba(250, 248, 245, 0.10) !important;
+}
+
+/* Active workspace tool tab (e.g. "Dashboard") */
+[data-ui="Navbar"] [data-ui="Card"][data-selected],
+[data-ui="Navbar"] [data-as="a"][data-selected],
+[data-ui="Navbar"] [aria-current="true"] {
+  background: rgba(196, 114, 90, 0.22) !important;
+  background-color: rgba(196, 114, 90, 0.22) !important;
+  color: #FAF8F5 !important;
+  box-shadow: inset 0 -2px 0 #C4725A !important;
 }
 
 /* Navbar inputs (workspace switcher, search) — dark-on-dark, copper focus */

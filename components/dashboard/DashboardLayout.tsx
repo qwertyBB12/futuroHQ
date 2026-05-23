@@ -9,9 +9,9 @@ import PendingTasksWidget from './PendingTasksWidget'
 import SeoHealthWidget from './SeoHealthWidget'
 import EnrichmentProgressWidget from './EnrichmentProgressWidget'
 
-// ─── Copper / Vermillion palette ───
-const COPPER = '#B17E68'
-const VERMILLION = '#C4725A'
+// ─── BeNeXT palette — burnished copper as the dominant accent ───
+const COPPER = '#C4725A'      // Burnished copper (was rose-gold #B17E68)
+const VERMILLION = '#A85E45'  // Darker copper for "acquire" phase contrast
 const SANDSTONE = '#F2E5D5'
 const SLATE = '#8B8985'
 
@@ -108,7 +108,7 @@ function CommandMark({boot}: {boot: boolean}) {
           position: 'absolute',
           inset: 0,
           borderRadius: '50%',
-          border: `1px solid ${phase === 'acquire' ? `${VERMILLION}33` : `${COPPER}22`}`,
+          border: `1px solid ${phase === 'acquire' ? `${VERMILLION}66` : `${COPPER}55`}`,
           overflow: 'hidden',
           transition: 'border-color 0.6s ease',
         }}
@@ -118,7 +118,7 @@ function CommandMark({boot}: {boot: boolean}) {
             position: 'absolute',
             inset: 0,
             borderRadius: '50%',
-            background: `conic-gradient(from 0deg, transparent 0deg, transparent 330deg, ${COPPER}40 345deg, ${COPPER}66 355deg, ${COPPER}80 360deg)`,
+            background: `conic-gradient(from 0deg, transparent 0deg, transparent 330deg, ${COPPER}66 345deg, ${COPPER}99 355deg, ${COPPER} 360deg)`,
             animation: phase === 'acquire' ? 'am-radar-sweep 2s linear infinite' : 'am-radar-sweep 8s linear infinite',
             transition: 'animation-duration 1s',
           }}
@@ -131,7 +131,7 @@ function CommandMark({boot}: {boot: boolean}) {
           position: 'absolute',
           inset: 8,
           borderRadius: '50%',
-          border: `1px solid ${COPPER}18`,
+          border: `1px solid ${COPPER}44`,
         }}
       />
 
@@ -142,7 +142,7 @@ function CommandMark({boot}: {boot: boolean}) {
           width: 80,
           height: 80,
           borderRadius: '50%',
-          background: `radial-gradient(circle, ${COPPER}33 0%, transparent 70%)`,
+          background: `radial-gradient(circle, ${COPPER}55 0%, transparent 70%)`,
           filter: 'blur(16px)',
           pointerEvents: 'none',
           animation: phase === 'locked' ? 'am-phosphor-breathe 4s ease-in-out infinite' : 'none',
@@ -161,7 +161,7 @@ function CommandMark({boot}: {boot: boolean}) {
           position: 'relative',
           zIndex: 1,
           objectFit: 'contain',
-          filter: `drop-shadow(0 0 12px ${COPPER}40)`,
+          filter: `drop-shadow(0 0 14px ${COPPER}77)`,
           animation:
             phase === 'acquire'
               ? 'am-signal-acquire 2.4s step-end forwards'
