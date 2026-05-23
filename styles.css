@@ -162,13 +162,23 @@ body {
   box-shadow: inset 0 -2px 0 #C4725A !important;
 }
 
-/* Navbar inputs (workspace switcher, search) — dark-on-dark, copper focus */
+/* Navbar inputs (workspace switcher, search) — dark-on-dark, copper focus.
+   Note: the border-on-every-button was creating "odd outlines" on every
+   nav tab. Borders are now reserved for the workspace switcher and the
+   search input only (the actual input fields), not navigation tabs. */
 [data-ui="Navbar"] [data-ui="TextInput"],
-[data-ui="Navbar"] [data-ui="Select"],
-[data-ui="Navbar"] button:not([data-tone="primary"]):not([data-tone="positive"]):not([data-tone="critical"]) {
+[data-ui="Navbar"] [data-ui="Select"] {
   background: rgba(250, 248, 245, 0.06) !important;
   background-color: rgba(250, 248, 245, 0.06) !important;
   border: 1px solid rgba(250, 248, 245, 0.14) !important;
+  color: #FAF8F5 !important;
+  box-shadow: none !important;
+}
+
+[data-ui="Navbar"] button:not([data-tone="primary"]):not([data-tone="positive"]):not([data-tone="critical"]) {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 1px solid transparent !important;
   color: #FAF8F5 !important;
   box-shadow: none !important;
 }

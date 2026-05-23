@@ -1,9 +1,9 @@
 export default function StudioLogo() {
   return (
     <img
-      src="/static/favicon-32x32.png"
+      src="/static/benext-mark-copper.png"
       alt="Autori Mandatum"
-      style={{height: 24, width: 'auto'}}
+      style={{height: 26, width: 26, objectFit: 'contain'}}
     />
   )
 }
