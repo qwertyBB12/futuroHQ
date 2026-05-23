@@ -155,12 +155,13 @@ export default defineType({
       title: 'fullName',
       subtitle: 'alias',
       media: 'seo.socialImage',
+      portrait: 'portrait',
     },
-    prepare({ title, subtitle, media }) {
+    prepare({ title, subtitle, media, portrait }) {
       return {
         title: title || 'Unnamed Leader',
         subtitle: subtitle || '—',
-        media,
+        media: media || portrait,
       }
     }
   }
