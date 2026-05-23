@@ -177,8 +177,7 @@ export const deskStructure = (S: StructureBuilder) => {
               listWithEnrichment('podcast', 'Podcasts'),
               listWithEnrichment('podcastEpisode', 'Podcast Episodes'),
               listWithPreview('socialPost', 'Social Posts'),
-              listWithEnrichment('opEd', 'Op-Eds'),
-              listWithPreview('curatedPost', 'Curated Posts'),
+              // opEd, curatedPost — archived to schemaTypes/_deprecated/ in 5cfbec7.
               listWithEnrichment('news', 'News'),
             ]),
         ),
@@ -200,9 +199,7 @@ export const deskStructure = (S: StructureBuilder) => {
               listWithEnrichment('alumni', 'Alumni'),
               S.documentTypeListItem('enrollee').title('Enrollees'),
               S.divider(),
-              listWithEnrichment('keynote', 'Keynotes'),
-              S.documentTypeListItem('recruitmentAsset').title('Recruitment Assets'),
-              S.divider(),
+              // keynote, recruitmentAsset — archived to schemaTypes/_deprecated/ in 5cfbec7.
               listWithPreview('person', 'People'),
               listWithEnrichment('collaborator', 'Collaborators & Organizations'),
               listWithEnrichment('ledgerPerson', 'Ledger People'),
@@ -211,7 +208,7 @@ export const deskStructure = (S: StructureBuilder) => {
               listWithPreview('alumniConversation', 'Conversations'),
               listWithPreview('projectUpdate', 'Project Updates'),
               S.documentTypeListItem('participantConnection').title('Participant Connections'),
-              listWithPreview('alumniContinuum', 'Alumni Continuum'),
+              // alumniContinuum — archived to schemaTypes/_deprecated/ in 5cfbec7.
               S.divider(),
               S.documentTypeListItem('accreditationRecord').title('Accreditation Records'),
               S.documentTypeListItem('credential').title('Credentials'),
@@ -293,8 +290,7 @@ export const deskStructure = (S: StructureBuilder) => {
               S.divider(),
               S.documentTypeListItem('pricingTier').title('Pricing Tiers'),
               S.documentTypeListItem('usageRecord').title('Usage Records'),
-              S.divider(),
-              S.documentTypeListItem('decision').title('Decisions'),
+              // decision — archived to schemaTypes/_deprecated/ in 5cfbec7.
             ]),
         ),
 

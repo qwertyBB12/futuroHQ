@@ -199,6 +199,37 @@ clean-studio/
 
 ---
 
+## Deployment
+
+**Studio host:** Cloudflare Pages, project `clean-studio` → `hq.benextglobal.com`.
+**Git auto-deploy is OFF** for this project — pushes to `main` do NOT trigger a rebuild.
+
+### Deploy steps (every schema or deskStructure change)
+
+```bash
+cd /Users/hectorhlopez/projects/clean-studio
+pnpm run build                                          # sanity build → dist/
+npx wrangler pages deploy dist --project-name=clean-studio --commit-dirty=true
+```
+
+That's it. The CF dashboard will return a deployment URL like `https://<hash>.clean-studio.pages.dev`; the custom domain `hq.benextglobal.com` updates within seconds.
+
+### What NOT to do
+
+- **Do NOT** run `sanity deploy` and call it shipped. That deploys to `futuro-hub-studio.sanity.studio` — a secondary Studio that Hector does not edit on. The canonical Studio is hq.benextglobal.com.
+- **Do NOT** push to GitHub and assume Netlify will rebuild. Netlify has been retired; the `netlify.toml` and `SANITY_STUDIO_NETLIFY_BUILD_HOOK_URL` are historical only.
+- **Do NOT** skip the build step. Wrangler deploys whatever is in `dist/` — without a fresh build, your changes won't ship.
+
+### Confirm the deploy landed
+
+```bash
+curl -sSI https://hq.benextglobal.com | grep -i 'cf-ray'    # should return a fresh ray ID
+```
+
+If the Studio shows "Structure tool has crashed: Schema type with name X not found", a doc-type was referenced in `deskStructure.ts` (or elsewhere) but isn't registered in `schemaTypes/index.ts`. Most common cause: a schema archived to `schemaTypes/_deprecated/` without removing its desk reference.
+
+---
+
 ## Environment Variables
 
 | Variable | Purpose | Required |
