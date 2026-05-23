@@ -456,6 +456,27 @@ select:focus-visible,
   box-shadow: 0 0 0 2px rgba(196, 114, 90, 0.45) !important;
 }
 
+/* Navbar: lighter focus treatment — the dark ground means a 2px ring reads
+   as a chunky rectangle behind round elements like the avatar. Drop to 1px
+   and use border-radius inherit so it conforms to the underlying shape. */
+[data-ui="Navbar"] button:focus-visible,
+[data-ui="Navbar"] [role="button"]:focus-visible,
+[data-ui="Navbar"] [data-as="button"]:focus-visible {
+  box-shadow: 0 0 0 1px rgba(196, 114, 90, 0.40) !important;
+}
+
+/* Avatar button wrappers — match the round shape so the focus ring is
+   circular, not a rectangle around the photo. */
+[data-ui="Navbar"] button:has([data-ui="Avatar"]),
+[data-ui="Navbar"] [data-as="button"]:has([data-ui="Avatar"]) {
+  border-radius: 50% !important;
+}
+[data-ui="Navbar"] button:has([data-ui="Avatar"]):focus-visible,
+[data-ui="Navbar"] [data-as="button"]:has([data-ui="Avatar"]):focus-visible {
+  border-radius: 50% !important;
+  box-shadow: 0 0 0 1px rgba(196, 114, 90, 0.50) !important;
+}
+
 /* ---------------------------------------------------------------------------
    MENU ITEMS
    --------------------------------------------------------------------------- */
