@@ -219,10 +219,17 @@ body {
   color: #FAF8F5 !important;
 }
 
-/* Avatars in navbar (presence dots, user pic) — let their backgrounds render */
-[data-ui="Navbar"] [data-ui="Avatar"] {
-  background: revert !important;
-  background-color: revert !important;
+/* Avatars in navbar — kill the square Card background that bleeds behind
+   the round photo. The Avatar component renders a square <Card> wrapper
+   with a circular SVG/img masked on top. We want the round photo + pink
+   presence stroke (SVG) visible, NOT the square background card. */
+[data-ui="Navbar"] [data-ui="Avatar"],
+[data-ui="Navbar"] [data-ui="Avatar"] > * {
+  background: transparent !important;
+  background-color: transparent !important;
+  --card-bg-color: transparent !important;
+  --card-fg-color: inherit !important;
+  box-shadow: none !important;
 }
 
 [data-ui="Navbar"] [data-ui="Avatar"] img,
