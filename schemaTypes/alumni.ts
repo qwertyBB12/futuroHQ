@@ -1,5 +1,4 @@
 import { defineType, defineField } from 'sanity'
-import { governanceFields } from './blocks/governanceBlock'
 import {featuredContentField} from './blocks/featuredContentField'
 
 export default defineType({
@@ -295,6 +294,11 @@ export default defineType({
       name: 'narrative',
       title: 'Narrative Development',
       type: 'narrativeBlock',
+      description:
+        'Differentiator fields for editorial enrichment (Opening Portrait, Origin Signal, ' +
+        "Strategic Identity, Anima Key, etc.). Collapsed by default — only `strategicIdentity` " +
+        'is queried by benextglobal.com today; the rest are deferred enrichment scaffolding.',
+      options: { collapsible: true, collapsed: true },
     }),
 
     // --- External Identity ---
@@ -319,7 +323,6 @@ export default defineType({
           type: 'string',
           description: 'e.g. may-2026 — the edition the buyer enrolled in.',
         }),
-        defineField({ name: 'kajabi', title: 'Kajabi Contact ID', type: 'string' }),
       ],
       options: { collapsible: true, collapsed: false },
     }),
@@ -343,8 +346,27 @@ export default defineType({
       description: 'Whether this person has a voice signature for auto-identification.',
     }),
 
-    // --- Governance ---
-    ...governanceFields,
+    // --- Entity attribution (narrativeOwner only — alumni are people, not
+    //     content, so platformTier / archivalStatus / conversionTracking /
+    //     postingEntity from governanceFields were never populated here and
+    //     don't apply to a person doc). ---
+    defineField({
+      name: 'narrativeOwner',
+      title: 'Narrative Owner',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Hector (Personal Voice)', value: 'hector' },
+          { title: 'BeNeXT (Institutional)', value: 'benext' },
+          { title: 'Futuro (Program)', value: 'futuro' },
+          { title: 'NeXT (Platform)', value: 'next' },
+          { title: 'Mitikah (Advisory)', value: 'mitikah' },
+          { title: 'Medikah (Healthcare)', value: 'medikah' },
+        ],
+        layout: 'dropdown',
+      },
+      description: 'Which entity attributes this person (BeNeXT / Futuro / NeXT / etc.)',
+    }),
   ],
 
   preview: {
