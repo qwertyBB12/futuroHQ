@@ -61,6 +61,13 @@ export default defineType({
       description: 'Controls sorting priority (lower = higher priority)',
     }),
     defineField({
+      name: 'cornerstoneNumber',
+      title: 'Cornerstone Number',
+      type: 'number',
+      description: 'Stable sequence number for the Hemispheric Cornerstone OG card eyebrow ("Hemispheric Cornerstone · № NNN"). Assign once and do not change.',
+      validation: Rule => Rule.integer().positive(),
+    }),
+    defineField({
       name: 'isFuturoHost',
       title: 'Is Futuro Summit Host?',
       type: 'boolean',

@@ -126,6 +126,29 @@ export default defineType({
       description: 'Controls sorting priority (lower = higher priority)',
     }),
 
+    // --- Futuro Corps OG card fields ("Futuro Corps · [Posture] · № NNN") ---
+    defineField({
+      name: 'futuroPosture',
+      title: 'Futuro Posture',
+      type: 'string',
+      description: 'Vocational posture for the Futuro Corps OG eyebrow. Anyone of any age can claim any posture — this is NOT an age tier.',
+      options: {
+        list: [
+          { title: 'Architect', value: 'architect' },
+          { title: 'Catalyst', value: 'catalyst' },
+          { title: 'Steward', value: 'steward' },
+        ],
+        layout: 'radio',
+      },
+    }),
+    defineField({
+      name: 'ledgerNumber',
+      title: 'Ledger Number',
+      type: 'number',
+      description: 'Stable sequence number for this alumni in the Futuro Corps. Renders as "№ NNN" in the OG card eyebrow. Assign once and do not change.',
+      validation: Rule => Rule.integer().positive(),
+    }),
+
     // --- Companion Platform (new fields — all optional) ---
     defineField({
       name: 'institutionalDesignation',
@@ -279,12 +302,26 @@ export default defineType({
       name: 'externalIds',
       title: 'External IDs',
       type: 'object',
-      description: 'Deduplication keys for external system imports',
+      description:
+        'Identity links to external systems. Populated by the Stripe webhook + ' +
+        'enrollment pipeline (Phase 62) — do not edit by hand unless reconciling.',
       fields: [
         defineField({ name: 'supabase', title: 'Supabase User ID', type: 'string' }),
+        defineField({
+          name: 'stripeSessionId',
+          title: 'Stripe Session ID',
+          type: 'string',
+          description: 'cs_live_… from the Author × AI checkout that created this stub.',
+        }),
+        defineField({
+          name: 'editionSlug',
+          title: 'Author × AI Edition',
+          type: 'string',
+          description: 'e.g. may-2026 — the edition the buyer enrolled in.',
+        }),
         defineField({ name: 'kajabi', title: 'Kajabi Contact ID', type: 'string' }),
       ],
-      options: { collapsible: true, collapsed: true },
+      options: { collapsible: true, collapsed: false },
     }),
 
     // --- Voice Identification ---

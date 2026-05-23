@@ -27,6 +27,15 @@ export default defineType({
       description: 'Controls sorting priority (lower = higher priority)'
     }),
 
+    // --- Vanguard Ledger identifier (used in OG cards: "Vanguard Ledger · № NNN") ---
+    defineField({
+      name: 'ledgerNumber',
+      title: 'Ledger Number',
+      type: 'number',
+      description: 'Stable sequence number for this Ledger entry. Renders as "№ NNN" in the OG card eyebrow. Assign once and do not change.',
+      validation: Rule => Rule.integer().positive(),
+    }),
+
     // --- Identifier ---
     defineField({
       name: 'fullName',
