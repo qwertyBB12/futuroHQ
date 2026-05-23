@@ -5,6 +5,7 @@ import {
   ProjectsIcon,
   CogIcon,
   DocumentsIcon,
+  UsersIcon,
 } from '@sanity/icons'
 import LivePreview from './components/previews/LivePreview'
 import GovernanceView from './components/views/GovernanceView'
@@ -153,7 +154,7 @@ export const deskStructure = (S: StructureBuilder) => {
             .params({
               writerTypes: [
                 'essay', 'video', 'podcast', 'podcastEpisode',
-                'socialPost', 'opEd', 'curatedPost', 'news', 'keynote',
+                'socialPost', 'news',
               ],
               thirtyDaysAgo,
             })
@@ -185,7 +186,27 @@ export const deskStructure = (S: StructureBuilder) => {
       S.divider(),
 
       // =====================================================================
-      // TIER 3 — Programs & Projects
+      // TIER 3 — People (Vanguard Ledger, Futuro Corps, Hemispheric Anchors)
+      // =====================================================================
+      S.listItem()
+        .title('People')
+        .icon(UsersIcon)
+        .child(
+          S.list()
+            .title('People')
+            .items([
+              listWithEnrichment('ledgerPerson', 'Vanguard Ledger'),
+              listWithEnrichment('alumni', 'Futuro Corps'),
+              listWithEnrichment('collaborator', 'Hemispheric Anchors'),
+              S.divider(),
+              listWithPreview('person', 'Founders'),
+            ]),
+        ),
+
+      S.divider(),
+
+      // =====================================================================
+      // TIER 4 — Programs & Projects (operational + companion + accreditation)
       // =====================================================================
       S.listItem()
         .title('Programs & Projects')
@@ -196,23 +217,31 @@ export const deskStructure = (S: StructureBuilder) => {
             .items([
               listWithPreview('futuroSummit', 'Futuro Summits'),
               listWithPreview('project', 'Projects'),
-              listWithEnrichment('alumni', 'Alumni'),
               S.documentTypeListItem('enrollee').title('Enrollees'),
               S.divider(),
-              // keynote, recruitmentAsset — archived to schemaTypes/_deprecated/ in 5cfbec7.
-              listWithPreview('person', 'People'),
-              listWithEnrichment('collaborator', 'Collaborators & Organizations'),
-              listWithEnrichment('ledgerPerson', 'Ledger People'),
-              S.divider(),
-              listWithPreview('alumniDream', 'Alumni Dreams'),
-              listWithPreview('alumniConversation', 'Conversations'),
-              listWithPreview('projectUpdate', 'Project Updates'),
-              S.documentTypeListItem('participantConnection').title('Participant Connections'),
-              // alumniContinuum — archived to schemaTypes/_deprecated/ in 5cfbec7.
-              S.divider(),
-              S.documentTypeListItem('accreditationRecord').title('Accreditation Records'),
-              S.documentTypeListItem('credential').title('Credentials'),
-              S.documentTypeListItem('accreditationHourLog').title('Hour Logs'),
+              S.listItem()
+                .title('Companion Platform')
+                .child(
+                  S.list()
+                    .title('Companion Platform')
+                    .items([
+                      listWithPreview('alumniDream', 'Alumni Dreams'),
+                      listWithPreview('alumniConversation', 'Conversations'),
+                      listWithPreview('projectUpdate', 'Project Updates'),
+                      S.documentTypeListItem('participantConnection').title('Participant Connections'),
+                    ]),
+                ),
+              S.listItem()
+                .title('NeXT Accreditation')
+                .child(
+                  S.list()
+                    .title('NeXT Accreditation')
+                    .items([
+                      S.documentTypeListItem('accreditationRecord').title('Accreditation Records'),
+                      S.documentTypeListItem('credential').title('Credentials'),
+                      S.documentTypeListItem('accreditationHourLog').title('Hour Logs'),
+                    ]),
+                ),
             ]),
         ),
 
