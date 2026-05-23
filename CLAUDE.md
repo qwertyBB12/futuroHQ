@@ -86,7 +86,7 @@ Entity badges appear automatically on all governed document types.
 - **LanguageBadge** — EN/ES on bilingual types
 
 ### Document Actions (ecosystem workflows)
-- **TriggerDeployAction** — Fires Netlify build hook (env: `SANITY_STUDIO_NETLIFY_BUILD_HOOK_URL`)
+- **TriggerDeployAction** — Fires Netlify build hook (env: `SANITY_STUDIO_NETLIFY_BUILD_HOOK_URL`). NOTE: Studio itself now deploys to Cloudflare Pages (`hq.benextglobal.com`) — this hook may also need to be re-pointed at a Cloudflare deploy hook.
 - **GenerateAIDerivativesAction** — AI summary/quotes/captions (env: `SANITY_STUDIO_AI_ENDPOINT`)
 - **ArchiveAction** — One-click archive to alumni-only
 - **SocialDistributeAction** — Send to social automation (env: `SANITY_STUDIO_SOCIAL_WEBHOOK_URL`)
@@ -203,7 +203,7 @@ clean-studio/
 
 | Variable | Purpose | Required |
 |----------|---------|----------|
-| `SANITY_STUDIO_NETLIFY_BUILD_HOOK_URL` | Netlify deploy trigger | For deploy action |
+| `SANITY_STUDIO_NETLIFY_BUILD_HOOK_URL` | (Legacy) Netlify deploy trigger | Deprecated — Studio now deploys to Cloudflare Pages at hq.benextglobal.com. `netlify.toml` left for historical reference only. |
 | `SANITY_STUDIO_SOCIAL_WEBHOOK_URL` | Social media automation (Make.com) | For social action |
 | `SANITY_STUDIO_AI_ENDPOINT` | AI derivatives generation | For AI action |
 | `AI_SEO_GENERATOR_ENDPOINT` | SEO metadata generation | For SEO input |
