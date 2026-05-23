@@ -193,6 +193,11 @@ export default defineType({
       name: 'narrative',
       title: 'Narrative Development',
       type: 'narrativeBlock',
+      description:
+        'Editorial enrichment fields. Queried wholesale by the collaborator profile ' +
+        'page on benextglobal.com but not rendered field-by-field today. Collapsed ' +
+        'by default — expand when enriching a specific collaborator.',
+      options: { collapsible: true, collapsed: true },
     }),
 
     // --- SEO (shared block) ---
