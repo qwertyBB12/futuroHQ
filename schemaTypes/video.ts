@@ -43,7 +43,11 @@ export default defineType({
       type: 'slug',
       group: 'content',
       options: { source: 'title', maxLength: 96 },
-      validation: (Rule) => Rule.required(),
+      description:
+        'URL slug for public surfaces. Required to render on a public site — ' +
+        'public video listings (`videoListBySiteQuery`) filter with `defined(slug.current)`, ' +
+        'so videos without a slug are silently excluded. Warning, not blocking.',
+      validation: (Rule) => Rule.warning('No slug — this video will not appear on any public site listing.'),
     }),
     defineField({
       name: 'language',
