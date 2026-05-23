@@ -536,9 +536,14 @@ select:focus-visible,
   box-shadow: 0 0 0 1px rgba(196, 114, 90, 0.20);
 }
 
-/* On midnight navbar — single hairline copper, no sandstone halo */
+/* On midnight navbar — drop the ring from the outer Avatar div (it has
+   border-radius:12.5px, a rounded square — the ring would render as the
+   "weird outline behind the circle"). The inner Box has border-radius:50%
+   and IS the round shape; put any decorative ring there instead. We're
+   leaving the ring off entirely since Sanity's presence-color stroke
+   already provides visual treatment. */
 [data-ui="Navbar"] [data-ui="Avatar"] {
-  box-shadow: 0 0 0 1px rgba(196, 114, 90, 0.45) !important;
+  box-shadow: none !important;
 }
 
 /* Workspace badge — burnished copper */
