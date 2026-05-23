@@ -69,6 +69,12 @@ export default defineType({
       type: 'url',
       description: 'Direct MP4 URL for the full-bleed profile hero background. Plays silently on loop. Use Bunny CDN, Cloudflare Stream, or any direct video link.',
     }),
+    defineField({
+      name: 'featuredClipUrl',
+      title: 'Featured Clip URL',
+      type: 'url',
+      description: 'Direct MP4 URL of a single featured clip (with audio) shown in the In Their Words section of the alumni profile page. Bunny CDN preferred. Plural refactor (featuredClips array + isPrimary flag) is queued as a follow-on phase.',
+    }),
 
     // --- Project Links ---
     defineField({
