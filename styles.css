@@ -250,13 +250,21 @@ button[data-ui="PaneItem"]:hover {
 [data-ui="TextInput"],
 [data-ui="TextArea"],
 [data-ui="Select"] {
-  background: #FFFFFF !important;
-  border: 1px solid rgba(143, 98, 73, 0.18) !important;
-  border-top-color: rgba(143, 98, 73, 0.14) !important;
+  background: #FBF6F0 !important;
+  border: 1px solid rgba(143, 98, 73, 0.20) !important;
+  border-top-color: rgba(143, 98, 73, 0.16) !important;
   border-radius: 8px !important;
   color: #162931 !important;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02) inset !important;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: none !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+[data-ui="TextInput"] input,
+[data-ui="TextArea"] textarea,
+[data-ui="Select"] select {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #162931 !important;
 }
 
 [data-ui="TextInput"]:focus-within,
@@ -398,14 +406,22 @@ button[data-ui="PaneItem"]:hover {
 }
 
 /* ---------------------------------------------------------------------------
-   FOCUS RING — Burnished copper
+   FOCUS RING — Quiet copper, only on keyboard-focusable interactive elements.
+   The previous `*:focus-visible` global was too greedy — it stuck rings
+   on cards/divs after click, reading as "odd outlines".
    --------------------------------------------------------------------------- */
 
-*:focus-visible {
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[role="button"]:focus-visible,
+[role="link"]:focus-visible,
+[role="menuitem"]:focus-visible,
+[role="tab"]:focus-visible {
   outline: none !important;
-  box-shadow:
-    0 0 0 2px rgba(196, 114, 90, 0.45),
-    0 0 14px rgba(196, 114, 90, 0.08) !important;
+  box-shadow: 0 0 0 2px rgba(196, 114, 90, 0.45) !important;
 }
 
 /* ---------------------------------------------------------------------------

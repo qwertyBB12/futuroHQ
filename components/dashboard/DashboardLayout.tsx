@@ -153,7 +153,7 @@ function CommandMark({boot}: {boot: boolean}) {
       {/* Arrow mark */}
       <img
         ref={imgRef}
-        src="/static/logo-benext.png"
+        src="/static/benext-mark-copper.png"
         alt=""
         width={36}
         height={36}
