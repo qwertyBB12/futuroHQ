@@ -331,11 +331,35 @@ const LivePreview: ComponentType<LivePreviewProps> = ({ document, schemaType }) 
           <Stack space={4}>
             {defaultHeader}
             {governanceBadges}
+            {(data.cdnUrl || data.videoUrl) && (
+              <Card padding={3} radius={2} tone="transparent" style={{background: '#0E0E0E'}}>
+                <video
+                  src={(data.cdnUrl || data.videoUrl) as string}
+                  controls
+                  playsInline
+                  preload="metadata"
+                  poster={data.thumbnailUrl as string || undefined}
+                  style={{width: '100%', maxHeight: 400, borderRadius: 4}}
+                />
+              </Card>
+            )}
             <Grid columns={[1, 2, 3]} gap={4}>
               <PreviewField label="Format">
                 <Badge tone={data.videoFormat === 'longform' ? 'primary' : 'caution'}>
                   {(data.videoFormat as string || '—').toUpperCase()}
                 </Badge>
+              </PreviewField>
+              <PreviewField label="Tier">
+                {data.tierRating ? (
+                  <Badge tone={data.tierRating === 'S' || data.tierRating === 'A' ? 'positive' : data.tierRating === 'D' ? 'critical' : 'caution'}>
+                    {data.tierRating as string}
+                  </Badge>
+                ) : <Text size={2} muted>Unrated</Text>}
+              </PreviewField>
+              <PreviewField label="Review Status">
+                {data.reviewStatus ? (
+                  <Badge mode="outline">{(data.reviewStatus as string).toUpperCase()}</Badge>
+                ) : <Text size={2} muted>—</Text>}
               </PreviewField>
               <PreviewField label="Platform">{data.platform}</PreviewField>
               <PreviewField label="Category">{data.contentCategory}</PreviewField>
@@ -343,6 +367,7 @@ const LivePreview: ComponentType<LivePreviewProps> = ({ document, schemaType }) 
               <PreviewField label="Duration">{data.duration ? `${Math.floor(data.duration as number / 60)}m ${(data.duration as number) % 60}s` : '—'}</PreviewField>
               <PreviewField label="Slug">{data.slug?.current || '—'}</PreviewField>
             </Grid>
+            {data.adminNotes && <PreviewField label="Admin Notes"><Text size={2}>{data.adminNotes as string}</Text></PreviewField>}
             {data.videoUrl && <PreviewField label="Video URL"><Text size={1} muted>{data.videoUrl as string}</Text></PreviewField>}
             {data.linkedEssayTitle && <PreviewField label="Linked Essay">{data.linkedEssayTitle}</PreviewField>}
             {data.keynoteVenue && <PreviewField label="Keynote Venue">{data.keynoteVenue}</PreviewField>}
