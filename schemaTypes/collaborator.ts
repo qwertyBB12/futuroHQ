@@ -138,7 +138,13 @@ export default defineType({
       of: [{
         type: 'object',
         fields: [
-          defineField({ name: 'year', title: 'Year', type: 'number', validation: Rule => Rule.required().min(1900).max(2100).integer() }),
+          defineField({
+            name: 'year',
+            title: 'Year',
+            type: 'number',
+            description: 'Year of the engagement. Recommended for chronological ordering on the public page.',
+            validation: Rule => Rule.min(1900).max(2100).integer().warning('Year is missing — the public page will sort this entry to the end and show "—" instead of a date.'),
+          }),
           defineField({
             name: 'engagementType',
             title: 'Type',
@@ -151,7 +157,12 @@ export default defineType({
               { title: 'Other', value: 'other' },
             ]},
           }),
-          defineField({ name: 'title', title: 'Title', type: 'string', validation: Rule => Rule.required() }),
+          defineField({
+            name: 'title',
+            title: 'Title',
+            type: 'string',
+            validation: Rule => Rule.required().error('Each shared work entry needs a title — it labels the card on the public page.'),
+          }),
           defineField({ name: 'description', title: 'Short description', type: 'text', rows: 2 }),
           defineField({ name: 'whatHappened', title: 'What Happened', type: 'text', rows: 2 }),
           defineField({ name: 'whatItProduced', title: 'What It Produced', type: 'text', rows: 2 }),
