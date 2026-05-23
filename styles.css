@@ -1,6 +1,7 @@
 /* =============================================================================
-   AUTORI MANDATUM — Civic Modern + Liquid Glass
-   Theme --black raised to #1C1916 for bright cards. Body stays #0E0E0E.
+   BENEXT STUDIO — Parchment + Midnight + Burnished Copper
+   Matches benextglobal.com: cream ground, midnight navbar, copper accents.
+   Editor pane is the brightest cream — the writing surface IS the focal point.
    ============================================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
@@ -13,6 +14,7 @@
 
 body {
   font-family: 'Mulish', sans-serif !important;
+  color: #162931 !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -35,97 +37,91 @@ body {
 }
 
 /* ---------------------------------------------------------------------------
-   BODY — Darker than card surfaces so depth is visible
-   The ambient gradient provides texture for glass overlays
+   BODY — Parchment with the faintest copper warmth
    --------------------------------------------------------------------------- */
 
 body {
   background:
-    radial-gradient(ellipse 90% 70% at 10% 5%, rgba(200, 72, 65, 0.14) 0%, transparent 55%),
-    radial-gradient(ellipse 70% 60% at 90% 90%, rgba(177, 126, 104, 0.12) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 50% at 50% 40%, rgba(200, 72, 65, 0.06) 0%, transparent 50%),
-    radial-gradient(ellipse 80% 40% at 75% 15%, rgba(177, 126, 104, 0.08) 0%, transparent 50%),
-    #0E0E0E !important;
+    radial-gradient(ellipse 90% 70% at 10% 5%, rgba(196, 114, 90, 0.04) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 60% at 90% 90%, rgba(177, 126, 104, 0.035) 0%, transparent 50%),
+    #FAF8F5 !important;
   background-attachment: fixed !important;
 }
 
 /* ---------------------------------------------------------------------------
-   WRITER'S SANCTUARY — Editor pane (rightmost)
-   Visibly brighter than sidebar/list (#201D19). The lit desk.
+   PANES — Cream surfaces, lit-desk hierarchy
+   Sidebar (first):  parchment tint  #F5F2ED
+   List panes:       parchment       #FAF8F5
+   Editor (last):    warm cream      #FBF6F0  ← the writing surface
    --------------------------------------------------------------------------- */
 
+[data-ui="Pane"],
+[data-ui="Pane"] > [data-ui="Card"],
+[data-ui="Pane"] [data-ui="PaneContent"] > [data-ui="Card"] {
+  background: #FAF8F5 !important;
+  background-color: #FAF8F5 !important;
+  color: #162931 !important;
+}
+
+[data-ui="Pane"]:first-child,
+[data-ui="Pane"]:first-child > [data-ui="Card"] {
+  background: #F5F2ED !important;
+  background-color: #F5F2ED !important;
+  border-right: 1px solid rgba(143, 98, 73, 0.10) !important;
+}
+
+/* WRITER'S SANCTUARY — Editor pane, brightest surface */
 [data-ui="Pane"]:last-child,
 [data-ui="Pane"]:last-child > [data-ui="Card"],
 [data-ui="Pane"]:last-child [data-ui="PaneContent"] > [data-ui="Card"],
 [data-ui="Pane"]:last-child [data-ui="PaneContent"] > div > [data-ui="Card"] {
-  background: #2A2624 !important;
-  background-color: #2A2624 !important;
+  background: #FBF6F0 !important;
+  background-color: #FBF6F0 !important;
 }
 
-/* Sanctuary ambient glow — subtle copper warmth radiating from center */
 [data-ui="Pane"]:last-child [data-ui="PaneContent"] {
   background:
-    radial-gradient(ellipse 90% 50% at 50% 15%, rgba(177, 126, 104, 0.045) 0%, transparent 65%),
-    radial-gradient(ellipse 60% 40% at 50% 85%, rgba(177, 126, 104, 0.025) 0%, transparent 50%),
+    radial-gradient(ellipse 90% 50% at 50% 15%, rgba(196, 114, 90, 0.025) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 40% at 50% 85%, rgba(177, 126, 104, 0.018) 0%, transparent 50%),
     transparent !important;
   position: relative;
 }
 
-/* Warm inner edge — like lamplight at the top of the writing surface */
+/* Pane headers — thin copper rule under, matching the public site eyebrows */
+[data-ui="PaneHeader"] {
+  background: #FBF6F0 !important;
+  border-bottom: 1px solid rgba(196, 114, 90, 0.18) !important;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset !important;
+}
+
 [data-ui="Pane"]:last-child [data-ui="PaneHeader"] {
-  background: #2D2926 !important;
-  border-bottom: 1px solid rgba(177, 126, 104, 0.10) !important;
-  box-shadow:
-    0 1px 0 rgba(242, 229, 213, 0.04) inset,
-    0 4px 20px rgba(177, 126, 104, 0.03) !important;
-}
-
-/* Editor inputs — warmer borders, copper focus glow */
-[data-ui="Pane"]:last-child [data-ui="TextInput"],
-[data-ui="Pane"]:last-child [data-ui="TextArea"] {
-  border-color: rgba(177, 126, 104, 0.12) !important;
-  border-top-color: rgba(242, 229, 213, 0.10) !important;
-}
-
-[data-ui="Pane"]:last-child [data-ui="TextInput"]:focus-within,
-[data-ui="Pane"]:last-child [data-ui="TextArea"]:focus-within {
-  border-color: rgba(177, 126, 104, 0.30) !important;
-  box-shadow:
-    0 0 0 1px rgba(177, 126, 104, 0.18),
-    0 0 24px rgba(177, 126, 104, 0.08),
-    0 0 60px rgba(177, 126, 104, 0.03),
-    0 1px 0 rgba(242, 229, 213, 0.04) inset !important;
+  background: #FBF6F0 !important;
+  border-bottom: 1px solid rgba(196, 114, 90, 0.22) !important;
 }
 
 /* ---------------------------------------------------------------------------
-   LIQUID GLASS — Navbar
+   NAVBAR — Midnight inset (matches Earthjustice card)
    --------------------------------------------------------------------------- */
 
 [data-ui="Navbar"] {
-  backdrop-filter: blur(40px) saturate(1.8) brightness(1.1) !important;
-  -webkit-backdrop-filter: blur(40px) saturate(1.8) brightness(1.1) !important;
-  background: rgba(21, 19, 17, 0.7) !important;
-  border-bottom: 1px solid rgba(242, 229, 213, 0.08) !important;
-  box-shadow:
-    0 1px 0 rgba(242, 229, 213, 0.04) inset,
-    0 4px 30px rgba(0, 0, 0, 0.35) !important;
+  background: #162931 !important;
+  border-bottom: 1px solid rgba(196, 114, 90, 0.30) !important;
+  box-shadow: 0 1px 0 rgba(196, 114, 90, 0.15) inset !important;
+  color: #FAF8F5 !important;
+}
+
+[data-ui="Navbar"] [data-ui="Text"],
+[data-ui="Navbar"] button,
+[data-ui="Navbar"] span {
+  color: #FAF8F5 !important;
+}
+
+[data-ui="Navbar"] button[aria-haspopup="menu"] span {
+  color: #FAF8F5 !important;
 }
 
 /* ---------------------------------------------------------------------------
-   LIQUID GLASS — Pane headers
-   --------------------------------------------------------------------------- */
-
-[data-ui="PaneHeader"] {
-  backdrop-filter: blur(32px) saturate(1.5) !important;
-  -webkit-backdrop-filter: blur(32px) saturate(1.5) !important;
-  border-bottom: 1px solid rgba(242, 229, 213, 0.06) !important;
-  box-shadow:
-    0 1px 0 rgba(242, 229, 213, 0.03) inset,
-    0 2px 12px rgba(0, 0, 0, 0.10) !important;
-}
-
-/* ---------------------------------------------------------------------------
-   SELECTED PANE ITEM — Vermillion accent bar
+   PANE ITEMS — Selected = burnished copper accent
    --------------------------------------------------------------------------- */
 
 [data-ui="PaneItem"][data-selected],
@@ -134,132 +130,128 @@ body {
 [data-ui="PaneItem"][aria-selected="true"] > *,
 button[data-ui="PaneItem"][data-selected="true"],
 button[data-ui="PaneItem"][data-selected="true"] > * {
-  background: rgba(200, 72, 65, 0.12) !important;
-  background-color: rgba(200, 72, 65, 0.12) !important;
+  background: rgba(196, 114, 90, 0.10) !important;
+  background-color: rgba(196, 114, 90, 0.10) !important;
+  color: #162931 !important;
 }
 
 [data-ui="PaneItem"][data-selected],
 [data-ui="PaneItem"][aria-selected="true"],
 button[data-ui="PaneItem"][data-selected="true"] {
-  background: rgba(200, 72, 65, 0.12) !important;
-  box-shadow: inset 3px 0 0 rgba(200, 72, 65, 0.8) !important;
-  border-radius: 12px !important;
+  background: rgba(196, 114, 90, 0.10) !important;
+  box-shadow: inset 3px 0 0 #C4725A !important;
+  border-radius: 8px !important;
 }
 
 [data-ui="PaneItem"],
 button[data-ui="PaneItem"] {
-  border-radius: 12px !important;
+  border-radius: 8px !important;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
   margin: 2px 6px !important;
+  color: #162931 !important;
 }
 
 [data-ui="PaneItem"]:hover,
 button[data-ui="PaneItem"]:hover {
-  background: rgba(242, 229, 213, 0.07) !important;
+  background: rgba(143, 98, 73, 0.06) !important;
 }
 
 /* ---------------------------------------------------------------------------
-   STATUS BADGES — Glass pills
+   STATUS BADGES
    --------------------------------------------------------------------------- */
 
 [data-ui="Badge"] {
   border-radius: 24px !important;
-  backdrop-filter: blur(12px) saturate(1.3) !important;
-  -webkit-backdrop-filter: blur(12px) saturate(1.3) !important;
   transition: all 0.2s ease !important;
 }
 
 /* ---------------------------------------------------------------------------
-   INPUT FIELDS — Recessed glass with specular edges
+   INPUT FIELDS — Cream surface, copper focus ring
    --------------------------------------------------------------------------- */
 
 [data-ui="TextInput"],
 [data-ui="TextArea"],
 [data-ui="Select"] {
-  background: rgba(14, 12, 10, 0.3) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  border: 1px solid rgba(242, 229, 213, 0.10) !important;
-  border-top-color: rgba(242, 229, 213, 0.14) !important;
-  border-left-color: rgba(242, 229, 213, 0.12) !important;
-  border-bottom-color: rgba(0, 0, 0, 0.15) !important;
-  border-right-color: rgba(0, 0, 0, 0.10) !important;
-  border-radius: 14px !important;
-  box-shadow: 0 1px 0 rgba(242, 229, 213, 0.03) inset !important;
+  background: #FFFFFF !important;
+  border: 1px solid rgba(143, 98, 73, 0.18) !important;
+  border-top-color: rgba(143, 98, 73, 0.14) !important;
+  border-radius: 8px !important;
+  color: #162931 !important;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02) inset !important;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 [data-ui="TextInput"]:focus-within,
 [data-ui="TextArea"]:focus-within,
 [data-ui="Select"]:focus-within {
-  border-color: rgba(200, 72, 65, 0.30) !important;
-  border-top-color: rgba(200, 72, 65, 0.35) !important;
+  border-color: rgba(196, 114, 90, 0.55) !important;
   box-shadow:
-    0 1px 0 rgba(242, 229, 213, 0.04) inset,
-    0 0 0 1px rgba(200, 72, 65, 0.20),
-    0 0 20px rgba(200, 72, 65, 0.10),
-    0 0 48px rgba(200, 72, 65, 0.04) !important;
+    0 0 0 1px rgba(196, 114, 90, 0.30),
+    0 0 16px rgba(196, 114, 90, 0.10) !important;
+}
+
+[data-ui="TextInput"] input,
+[data-ui="TextArea"] textarea {
+  color: #162931 !important;
 }
 
 /* ---------------------------------------------------------------------------
-   LIQUID GLASS — Dialogs
+   DIALOGS — White card on parchment ground
    --------------------------------------------------------------------------- */
 
 [data-ui="Dialog"] [data-ui="Card"] {
-  backdrop-filter: blur(48px) saturate(1.8) brightness(1.05) !important;
-  -webkit-backdrop-filter: blur(48px) saturate(1.8) brightness(1.05) !important;
-  background: rgba(34, 30, 27, 0.90) !important;
-  border: 1px solid rgba(242, 229, 213, 0.12) !important;
-  border-top-color: rgba(242, 229, 213, 0.18) !important;
-  border-left-color: rgba(242, 229, 213, 0.14) !important;
-  border-radius: 24px !important;
+  background: #FBF6F0 !important;
+  border: 1px solid rgba(143, 98, 73, 0.20) !important;
+  border-radius: 12px !important;
   box-shadow:
-    0 1px 0 rgba(242, 229, 213, 0.06) inset,
-    0 32px 100px rgba(0, 0, 0, 0.6) !important;
+    0 1px 0 rgba(255, 255, 255, 0.6) inset,
+    0 32px 100px rgba(22, 41, 49, 0.18) !important;
+  color: #162931 !important;
 }
 
 /* ---------------------------------------------------------------------------
-   LIQUID GLASS — Popovers & Menus
+   POPOVERS & MENUS — Light, with copper hairline
    --------------------------------------------------------------------------- */
 
 [data-ui="Popover"] [data-ui="Card"],
 [data-ui="MenuButton"] [data-ui="Card"],
 [data-ui="Menu"] {
-  backdrop-filter: blur(40px) saturate(1.7) brightness(1.05) !important;
-  -webkit-backdrop-filter: blur(40px) saturate(1.7) brightness(1.05) !important;
-  background: rgba(34, 30, 27, 0.92) !important;
-  border: 1px solid rgba(242, 229, 213, 0.10) !important;
-  border-top-color: rgba(242, 229, 213, 0.16) !important;
-  border-radius: 20px !important;
+  background: #FBF6F0 !important;
+  border: 1px solid rgba(143, 98, 73, 0.20) !important;
+  border-radius: 10px !important;
   box-shadow:
-    0 1px 0 rgba(242, 229, 213, 0.05) inset,
-    0 20px 60px rgba(0, 0, 0, 0.5) !important;
+    0 1px 0 rgba(255, 255, 255, 0.55) inset,
+    0 16px 48px rgba(22, 41, 49, 0.14) !important;
+  color: #162931 !important;
 }
 
 /* ---------------------------------------------------------------------------
-   LIQUID GLASS — Tooltips
+   TOOLTIPS — Midnight on parchment (high-contrast hints)
    --------------------------------------------------------------------------- */
 
 [data-ui="Tooltip"] [data-ui="Card"] {
-  backdrop-filter: blur(24px) saturate(1.5) !important;
-  -webkit-backdrop-filter: blur(24px) saturate(1.5) !important;
-  background: rgba(34, 30, 27, 0.94) !important;
-  border: 1px solid rgba(242, 229, 213, 0.08) !important;
-  border-radius: 14px !important;
+  background: #162931 !important;
+  border: 1px solid rgba(196, 114, 90, 0.30) !important;
+  border-radius: 8px !important;
+  color: #FAF8F5 !important;
+}
+
+[data-ui="Tooltip"] [data-ui="Card"] [data-ui="Text"] {
+  color: #FAF8F5 !important;
 }
 
 /* ---------------------------------------------------------------------------
-   BUTTONS — Glass + glow
+   BUTTONS — Copper primary, restrained motion
    --------------------------------------------------------------------------- */
 
 [data-ui="Button"] {
-  border-radius: 12px !important;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border-radius: 8px !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 [data-ui="Button"]:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 14px rgba(22, 41, 49, 0.12);
 }
 
 [data-ui="Button"]:active {
@@ -267,52 +259,75 @@ button[data-ui="PaneItem"]:hover {
   transition-duration: 0.1s !important;
 }
 
+[data-ui="Button"][data-tone="primary"] {
+  background: #C4725A !important;
+  color: #FAF8F5 !important;
+}
+
 [data-ui="Button"][data-tone="primary"]:hover {
+  background: #A85E45 !important;
   box-shadow:
-    0 4px 20px rgba(200, 72, 65, 0.4),
-    0 0 48px rgba(200, 72, 65, 0.15);
+    0 4px 14px rgba(196, 114, 90, 0.32),
+    0 0 32px rgba(196, 114, 90, 0.10);
+}
+
+[data-ui="Button"][data-tone="positive"] {
+  background: #B17E68 !important;
+  color: #FAF8F5 !important;
 }
 
 [data-ui="Button"][data-tone="positive"]:hover {
+  background: #97644E !important;
   box-shadow:
-    0 4px 20px rgba(177, 126, 104, 0.4),
-    0 0 48px rgba(177, 126, 104, 0.12);
+    0 4px 14px rgba(177, 126, 104, 0.30);
+}
+
+[data-ui="Button"][data-tone="critical"] {
+  background: #A85E45 !important;
+  color: #FAF8F5 !important;
 }
 
 [data-ui="Button"][data-tone="critical"]:hover {
-  box-shadow:
-    0 4px 20px rgba(129, 53, 49, 0.4),
-    0 0 48px rgba(129, 53, 49, 0.12);
+  background: #8A4A36 !important;
+  box-shadow: 0 4px 14px rgba(168, 94, 69, 0.30);
 }
 
 [data-ui="Button"][data-tone="default"] {
-  border: 1px solid rgba(242, 229, 213, 0.10) !important;
-  border-top-color: rgba(242, 229, 213, 0.14) !important;
+  background: #FBF6F0 !important;
+  color: #162931 !important;
+  border: 1px solid rgba(143, 98, 73, 0.20) !important;
+}
+
+[data-ui="Button"][data-tone="default"]:hover {
+  background: #F5F2ED !important;
+  border-color: rgba(143, 98, 73, 0.32) !important;
 }
 
 /* ---------------------------------------------------------------------------
-   TABS — Active glow
+   TABS — Copper underline on active
    --------------------------------------------------------------------------- */
 
 [data-ui="Tab"] {
-  border-radius: 10px !important;
+  border-radius: 6px !important;
   transition: all 0.2s ease !important;
+  color: #162931 !important;
 }
 
 [data-ui="Tab"][data-selected="true"],
 [data-ui="Tab"][aria-selected="true"] {
-  box-shadow: 0 0 16px rgba(200, 72, 65, 0.15) !important;
+  box-shadow: inset 0 -2px 0 #C4725A !important;
+  color: #C4725A !important;
 }
 
 /* ---------------------------------------------------------------------------
-   FOCUS RING — Warm glow
+   FOCUS RING — Burnished copper
    --------------------------------------------------------------------------- */
 
 *:focus-visible {
   outline: none !important;
   box-shadow:
-    0 0 0 2px rgba(200, 72, 65, 0.35),
-    0 0 20px rgba(200, 72, 65, 0.08) !important;
+    0 0 0 2px rgba(196, 114, 90, 0.45),
+    0 0 14px rgba(196, 114, 90, 0.08) !important;
 }
 
 /* ---------------------------------------------------------------------------
@@ -320,29 +335,30 @@ button[data-ui="PaneItem"]:hover {
    --------------------------------------------------------------------------- */
 
 [data-ui="MenuItem"] {
-  border-radius: 10px !important;
-  transition: all 0.2s ease !important;
+  border-radius: 6px !important;
+  transition: all 0.15s ease !important;
+  color: #162931 !important;
 }
 
 [data-ui="MenuItem"]:hover {
-  background: rgba(242, 229, 213, 0.07) !important;
+  background: rgba(143, 98, 73, 0.08) !important;
 }
 
 /* ---------------------------------------------------------------------------
    SCROLLBAR
    --------------------------------------------------------------------------- */
 
-::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(181, 177, 172, 0.25); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(200, 72, 65, 0.35); }
-* { scrollbar-width: thin; scrollbar-color: rgba(181, 177, 172, 0.25) transparent; }
+::-webkit-scrollbar-thumb { background: rgba(143, 98, 73, 0.22); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(196, 114, 90, 0.40); }
+* { scrollbar-width: thin; scrollbar-color: rgba(143, 98, 73, 0.22) transparent; }
 
 /* ---------------------------------------------------------------------------
-   SELECTION — Copper
+   SELECTION — Copper-tinted, dark text stays readable
    --------------------------------------------------------------------------- */
 
-::selection { background: rgba(177, 126, 104, 0.35); color: #FBF6F0; }
+::selection { background: rgba(196, 114, 90, 0.28); color: #162931; }
 
 /* ---------------------------------------------------------------------------
    MICRO-ANIMATIONS
@@ -352,30 +368,27 @@ button[data-ui="PaneItem"]:hover {
 [data-ui="Badge"],
 [data-ui="Tab"],
 [data-ui="MenuItem"] {
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 [data-ui="Spinner"] {
-  filter: drop-shadow(0 0 10px rgba(200, 72, 65, 0.5));
+  filter: drop-shadow(0 0 8px rgba(196, 114, 90, 0.35));
+  color: #C4725A !important;
 }
 
 [data-ui="Avatar"] {
-  box-shadow: 0 0 0 2px rgba(28, 25, 22, 0.8), 0 0 0 3px rgba(200, 72, 65, 0.12);
+  box-shadow: 0 0 0 2px rgba(250, 248, 245, 0.9), 0 0 0 3px rgba(196, 114, 90, 0.18);
   border-radius: 50%;
 }
 
-/* Override Sanity's green workspace badge with ecosystem Vermillion Deep */
+/* Workspace badge — burnished copper */
 [data-ui="Navbar"] [data-ui="Avatar"][data-color="blue"],
 [data-ui="Navbar"] [data-ui="Avatar"][data-color="green"],
 [data-ui="Navbar"] > button:first-child [data-ui="Avatar"] {
-  --card-badge-dot-color: #813531 !important;
-  background-color: #813531 !important;
-  color: #F2E5D5 !important;
+  --card-badge-dot-color: #C4725A !important;
+  background-color: #C4725A !important;
+  color: #FAF8F5 !important;
 }
-
-/* NOTE: Sanity presence ring color (pink/neon) cannot be overridden via CSS.
-   The Avatar SVG stroke is controlled by @sanity/ui internals (styled-components).
-   Accepted as platform limitation. */
 
 /* ---------------------------------------------------------------------------
    Brand utilities
@@ -388,6 +401,7 @@ button[data-ui="PaneItem"]:hover {
   font-size: 1.875rem;
   line-height: 2.25rem;
   text-transform: uppercase;
+  color: #162931;
 }
 
 @media (min-width: 768px) {
