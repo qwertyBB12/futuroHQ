@@ -24,6 +24,14 @@ export default defineType({
       description: 'Archetype, pressure response, differentiator',
     }),
     defineField({
+      name: 'strategicIdentityEs',
+      title: 'Strategic Identity (Español)',
+      type: 'text',
+      description:
+        'Spanish version of the hero quote rendered on alumni/ledger profile pages. ' +
+        'Falls back to English on /es pages if empty.',
+    }),
+    defineField({
       name: 'alignmentGrid',
       title: 'Futuro Alignment Grid',
       type: 'array',

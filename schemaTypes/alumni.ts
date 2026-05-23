@@ -54,6 +54,12 @@ export default defineType({
       description: 'Short project title shown on alumni cards (e.g. "Renewable Energy in the Caribbean")',
     }),
     defineField({ name: 'bio', title: 'Biography', type: 'text' }),
+    defineField({
+      name: 'bioEs',
+      title: 'Biography (Español)',
+      type: 'text',
+      description: 'Spanish biography. Falls back to English on /es pages if empty.',
+    }),
 
     // --- Media ---
     defineField({

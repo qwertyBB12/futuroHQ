@@ -45,6 +45,12 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'titleEs',
+      title: 'Title (Español)',
+      type: 'string',
+      description: 'Spanish title. Falls back to English on /es pages if empty.',
+    }),
+    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
@@ -56,6 +62,12 @@ export default defineType({
       title: 'Summary',
       type: 'text',
       description: 'Concise description of the project',
+    }),
+    defineField({
+      name: 'summaryEs',
+      title: 'Summary (Español)',
+      type: 'text',
+      description: 'Spanish summary. Falls back to English on /es pages if empty.',
     }),
     defineField({
       name: 'publicNarrative',
@@ -70,8 +82,20 @@ export default defineType({
           rows: 2,
         }),
         defineField({
+          name: 'whatItIsEs',
+          title: 'What It Is (Español)',
+          type: 'text',
+          rows: 2,
+        }),
+        defineField({
           name: 'whatHappens',
           title: 'What Happens',
+          type: 'text',
+          rows: 2,
+        }),
+        defineField({
+          name: 'whatHappensEs',
+          title: 'What Happens (Español)',
           type: 'text',
           rows: 2,
         }),
@@ -82,8 +106,19 @@ export default defineType({
           rows: 2,
         }),
         defineField({
+          name: 'whatItProducesEs',
+          title: 'What It Produces (Español)',
+          type: 'text',
+          rows: 2,
+        }),
+        defineField({
           name: 'communityLine',
           title: 'Community Line (Optional)',
+          type: 'string',
+        }),
+        defineField({
+          name: 'communityLineEs',
+          title: 'Community Line (Español)',
           type: 'string',
         }),
       ],
