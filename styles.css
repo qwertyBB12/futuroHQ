@@ -130,11 +130,14 @@ body {
 [data-ui="Navbar"] [data-ui="Box"],
 [data-ui="Navbar"] [data-as="button"],
 [data-ui="Navbar"] [data-as="a"],
-[data-ui="Navbar"] [data-as="div"] {
+[data-ui="Navbar"] [data-as="div"],
+[data-ui="Navbar"] button [data-ui="Card"],
+[data-ui="Navbar"] [data-ui="MenuButton"] [data-ui="Card"] {
   background: transparent !important;
   background-color: transparent !important;
   border: 1px solid transparent !important;
   outline: none !important;
+  box-shadow: none !important;
   color: #FAF8F5 !important;
 }
 
