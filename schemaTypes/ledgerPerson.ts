@@ -35,6 +35,13 @@ export default defineType({
       validation: Rule => Rule.required(),
     }),
     defineField({
+      name: 'slug',
+      title: 'Legacy Slug',
+      type: 'slug',
+      description: 'Legacy top-level slug. New records should set the canonical URL slug under SEO. Some queries (e.g. collaborator → relatedPeople) coalesce this field with seo.slug.',
+      options: { source: 'fullName', maxLength: 96 },
+    }),
+    defineField({
       name: 'portrait',
       title: 'Portrait',
       type: 'image',
@@ -66,6 +73,12 @@ export default defineType({
 
     // --- Narrative Development ---
     defineField({ name: 'openingPortrait', title: 'Opening Portrait', type: 'text' }),
+    defineField({
+      name: 'openingPortraitEs',
+      title: 'Opening Portrait (ES)',
+      type: 'text',
+      description: 'Spanish translation of the Opening Portrait.',
+    }),
     defineField({ name: 'originSignal', title: 'Origin Signal', type: 'text' }),
     defineField({ name: 'strategicIdentity', title: 'Strategic Identity', type: 'text' }),
     defineField({
