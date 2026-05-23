@@ -105,6 +105,7 @@ export const deskStructure = (S: StructureBuilder) => {
               .child(
                 S.documentList()
                   .title('Needs Enrichment')
+                  .apiVersion('2024-10-23')
                   .schemaType(schemaType)
                   .filter(GROQ_FILTERS[schemaType])
                   .child((documentId) =>
@@ -150,6 +151,7 @@ export const deskStructure = (S: StructureBuilder) => {
         .child(
           S.documentList()
             .title("Writer's Desk")
+            .apiVersion('2024-10-23')
             .filter('_type in $writerTypes && _updatedAt > $thirtyDaysAgo')
             .params({
               writerTypes: [
