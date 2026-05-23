@@ -120,6 +120,42 @@ body {
   color: #FAF8F5 !important;
 }
 
+/* Navbar inputs (workspace switcher, search) — dark-on-dark, copper focus */
+[data-ui="Navbar"] [data-ui="TextInput"],
+[data-ui="Navbar"] [data-ui="Select"],
+[data-ui="Navbar"] button:not([data-tone="primary"]):not([data-tone="positive"]):not([data-tone="critical"]) {
+  background: rgba(250, 248, 245, 0.06) !important;
+  background-color: rgba(250, 248, 245, 0.06) !important;
+  border: 1px solid rgba(250, 248, 245, 0.14) !important;
+  color: #FAF8F5 !important;
+  box-shadow: none !important;
+}
+
+[data-ui="Navbar"] [data-ui="TextInput"] input,
+[data-ui="Navbar"] [data-ui="TextInput"] input::placeholder {
+  color: #FAF8F5 !important;
+}
+[data-ui="Navbar"] [data-ui="TextInput"] input::placeholder {
+  color: rgba(250, 248, 245, 0.50) !important;
+}
+
+[data-ui="Navbar"] [data-ui="TextInput"]:focus-within,
+[data-ui="Navbar"] [data-ui="Select"]:focus-within {
+  border-color: rgba(196, 114, 90, 0.65) !important;
+  box-shadow:
+    0 0 0 1px rgba(196, 114, 90, 0.35),
+    0 0 14px rgba(196, 114, 90, 0.12) !important;
+}
+
+[data-ui="Navbar"] button:not([data-tone="primary"]):not([data-tone="positive"]):not([data-tone="critical"]):hover {
+  background: rgba(250, 248, 245, 0.12) !important;
+  border-color: rgba(250, 248, 245, 0.22) !important;
+}
+
+[data-ui="Navbar"] svg {
+  color: #FAF8F5 !important;
+}
+
 /* ---------------------------------------------------------------------------
    PANE ITEMS — Selected = burnished copper accent
    --------------------------------------------------------------------------- */

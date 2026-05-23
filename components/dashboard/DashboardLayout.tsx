@@ -11,7 +11,7 @@ import EnrichmentProgressWidget from './EnrichmentProgressWidget'
 
 // ─── Copper / Vermillion palette ───
 const COPPER = '#B17E68'
-const VERMILLION = '#C84841'
+const VERMILLION = '#C4725A'
 const SANDSTONE = '#F2E5D5'
 const SLATE = '#8B8985'
 

@@ -1,44 +1,34 @@
 import type {CSSProperties} from 'react'
 
-/** Liquid glass panel — visible specular edges, warm inner glow */
+/**
+ * BeNeXT Dashboard surfaces — parchment cards on cream ground.
+ *
+ * Names kept (glassPanel / glassCard / glassButton) for import stability,
+ * but the treatment is no longer liquid glass — it's institutional parchment
+ * with a hairline copper border, matching benextglobal.com cards.
+ */
+
+/** Top-level panel — parchment with subtle elevation */
 export const glassPanel: CSSProperties = {
-  background:
-    'linear-gradient(180deg, rgba(242, 229, 213, 0.03) 0%, transparent 40%), ' +
-    'rgba(22, 19, 16, 0.65)',
-  backdropFilter: 'blur(40px) saturate(1.6) brightness(1.05)',
-  WebkitBackdropFilter: 'blur(40px) saturate(1.6) brightness(1.05)',
-  border: '1px solid rgba(242, 229, 213, 0.10)',
-  borderTopColor: 'rgba(242, 229, 213, 0.18)',
-  borderLeftColor: 'rgba(242, 229, 213, 0.13)',
-  borderBottomColor: 'rgba(0, 0, 0, 0.15)',
-  borderRightColor: 'rgba(0, 0, 0, 0.10)',
-  borderRadius: 24,
+  background: '#FBF6F0',
+  border: '1px solid rgba(143, 98, 73, 0.18)',
+  borderRadius: 12,
   boxShadow:
-    '0 1px 0 rgba(242, 229, 213, 0.06) inset, ' +
-    '0 12px 48px rgba(0, 0, 0, 0.30), ' +
-    '0 0 0 0.5px rgba(242, 229, 213, 0.04)',
+    '0 1px 0 rgba(255, 255, 255, 0.5) inset, ' +
+    '0 4px 18px rgba(22, 41, 49, 0.06), ' +
+    '0 1px 3px rgba(22, 41, 49, 0.04)',
 }
 
-/** Smaller glass card inside a glass panel */
+/** Card inside a panel — slightly recessed cream */
 export const glassCard: CSSProperties = {
-  background:
-    'linear-gradient(180deg, rgba(242, 229, 213, 0.02) 0%, transparent 50%), ' +
-    'rgba(26, 23, 20, 0.45)',
-  backdropFilter: 'blur(20px) saturate(1.3)',
-  WebkitBackdropFilter: 'blur(20px) saturate(1.3)',
-  border: '1px solid rgba(242, 229, 213, 0.08)',
-  borderTopColor: 'rgba(242, 229, 213, 0.14)',
-  borderLeftColor: 'rgba(242, 229, 213, 0.10)',
-  borderBottomColor: 'rgba(0, 0, 0, 0.12)',
-  borderRightColor: 'rgba(0, 0, 0, 0.08)',
-  borderRadius: 16,
-  boxShadow:
-    '0 1px 0 rgba(242, 229, 213, 0.04) inset, ' +
-    '0 4px 20px rgba(0, 0, 0, 0.20)',
-  transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
+  background: '#F5F2ED',
+  border: '1px solid rgba(143, 98, 73, 0.14)',
+  borderRadius: 8,
+  boxShadow: '0 1px 0 rgba(255, 255, 255, 0.4) inset',
+  transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
 }
 
-/** Glass button card (clickable) */
+/** Clickable card — same surface, with copper hover */
 export const glassButton: CSSProperties = {
   ...glassCard,
   cursor: 'pointer',

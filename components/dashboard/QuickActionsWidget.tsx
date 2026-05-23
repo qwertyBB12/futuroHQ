@@ -20,10 +20,10 @@ type QuickAction = {
 
 const ACTIONS: QuickAction[] = [
   {label: 'New Essay', type: 'essay', icon: ComposeIcon, color: '#B17E68'},
-  {label: 'New Video', type: 'video', icon: PlayIcon, color: '#C84841'},
+  {label: 'New Video', type: 'video', icon: PlayIcon, color: '#C4725A'},
   {label: 'New Project', type: 'project', icon: ProjectsIcon, color: '#B17E68'},
   {label: 'New Person', type: 'person', icon: UsersIcon, color: '#8B8985'},
-  {label: 'New Episode', type: 'podcastEpisode', icon: MicrophoneIcon, color: '#C84841'},
+  {label: 'New Episode', type: 'podcastEpisode', icon: MicrophoneIcon, color: '#C4725A'},
   {label: 'New Tag', type: 'tag', icon: TagIcon, color: '#8B8985'},
 ]
 

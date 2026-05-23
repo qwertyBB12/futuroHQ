@@ -121,7 +121,7 @@ export default function PendingTasksWidget() {
                         flexShrink: 0,
                         color:
                           new Date(task.dueBy) < new Date()
-                            ? '#C84841'
+                            ? '#C4725A'
                             : '#8B8985',
                         fontWeight:
                           new Date(task.dueBy) < new Date() ? 600 : 400,

@@ -13,8 +13,8 @@ type RecentDoc = {
 
 const ENTITY_COLORS: Record<string, string> = {
   hector: '#B17E68',
-  benext: '#C84841',
-  futuro: '#C84841',
+  benext: '#C4725A',
+  futuro: '#C4725A',
   next: '#B17E68',
   mitikah: '#8B8985',
   medikah: '#2C7A8C',

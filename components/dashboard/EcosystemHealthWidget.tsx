@@ -13,8 +13,8 @@ type EntityCount = {
 
 const ENTITIES = [
   {entity: 'hector', label: 'Hector', accent: '#B17E68'},
-  {entity: 'benext', label: 'BeNeXT', accent: '#C84841'},
-  {entity: 'futuro', label: 'Futuro', accent: '#C84841'},
+  {entity: 'benext', label: 'BeNeXT', accent: '#C4725A'},
+  {entity: 'futuro', label: 'Futuro', accent: '#C4725A'},
   {entity: 'next', label: 'NeXT', accent: '#B17E68'},
   {entity: 'mitikah', label: 'Mitikah', accent: '#8B8985'},
   {entity: 'medikah', label: 'Medikah', accent: '#2C7A8C'},
@@ -65,7 +65,7 @@ export default function EcosystemHealthWidget() {
         <Flex gap={4}>
           <div style={{...glassCard, padding: 16}}>
             <Stack space={2}>
-              <span style={{fontSize: 28, fontWeight: 700, fontFamily: "'Oswald', sans-serif", color: '#C84841'}}>
+              <span style={{fontSize: 28, fontWeight: 700, fontFamily: "'Oswald', sans-serif", color: '#C4725A'}}>
                 {totalDocs}
               </span>
               <Text size={1} muted>Published</Text>

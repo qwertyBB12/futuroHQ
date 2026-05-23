@@ -24,7 +24,7 @@ const SEO_TYPES = [
 ]
 
 const COPPER = '#B17E68'
-const VERMILLION = '#C84841'
+const VERMILLION = '#C4725A'
 
 function getBarColor(pct: number): string {
   if (pct >= 100) return COPPER
