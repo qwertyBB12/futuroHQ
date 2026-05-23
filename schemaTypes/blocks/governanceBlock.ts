@@ -1,11 +1,18 @@
 import {defineField} from 'sanity'
 
 /**
- * Governance fields for content hierarchy and ownership
- * Import and spread into document schemas: ...governanceFields
+ * Governance fields for content hierarchy and ownership.
+ *
+ * - governanceCoreFields: platformTier, archivalStatus, narrativeOwner
+ *   Use for content types (video, essay, podcast, etc.)
+ *
+ * - governanceSocialFields: conversionTracking, postingEntity
+ *   Use for social distribution types (socialPost)
+ *
+ * - governanceFields: all five fields (backward-compatible)
  */
-export const governanceFields = [
-  // 1. Platform Tier - 4-tier content hierarchy
+
+export const governanceCoreFields = [
   defineField({
     name: 'platformTier',
     title: 'Platform Tier',
@@ -22,7 +29,6 @@ export const governanceFields = [
     description: 'Content hierarchy tier: Canonical > Personal > Distribution > Institutional',
   }),
 
-  // 2. Archival Status - Ephemeral vs permanent content
   defineField({
     name: 'archivalStatus',
     title: 'Archival Status',
@@ -39,7 +45,6 @@ export const governanceFields = [
     description: 'Determines content lifespan and accessibility',
   }),
 
-  // 3. Narrative Owner - Individual vs institutional voice
   defineField({
     name: 'narrativeOwner',
     title: 'Narrative Owner',
@@ -57,8 +62,9 @@ export const governanceFields = [
     },
     description: 'Who owns the narrative voice of this content',
   }),
+]
 
-  // 4. Conversion Tracking - TikTok-to-Substack funnel
+export const governanceSocialFields = [
   defineField({
     name: 'conversionTracking',
     title: 'Conversion Tracking',
@@ -116,7 +122,6 @@ export const governanceFields = [
     description: 'Track conversion paths from discovery to engagement',
   }),
 
-  // 5. Posting Entity - Personal vs institutional posts
   defineField({
     name: 'postingEntity',
     title: 'Posting Entity',
@@ -133,3 +138,5 @@ export const governanceFields = [
     description: 'Which entity/account is posting this content',
   }),
 ]
+
+export const governanceFields = [...governanceCoreFields, ...governanceSocialFields]
