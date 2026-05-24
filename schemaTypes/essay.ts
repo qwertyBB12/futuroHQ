@@ -50,6 +50,13 @@ export default defineType({
       initialValue: 'en',
     }),
     defineField({
+      name: 'translationOf',
+      title: 'Translation Of',
+      type: 'reference',
+      to: [{ type: 'essay' }],
+      description: 'If this essay is a translation, link to its counterpart in the other language. Public profile pages use this to swap to the right-locale version when one exists.',
+    }),
+    defineField({
       name: 'publicationVenue',
       title: 'Publication Venue',
       type: 'string',

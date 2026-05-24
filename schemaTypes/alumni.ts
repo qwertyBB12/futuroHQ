@@ -194,6 +194,25 @@ export default defineType({
       type: 'reference',
       to: [{ type: 'futuroSummit' }],
       fieldset: 'companion',
+      description: 'Primary / originating convening. Use the "Additional Cohorts" array for any further convenings this alumnus has participated in.',
+    }),
+    defineField({
+      name: 'cohorts',
+      title: 'Additional Cohorts',
+      type: 'array',
+      fieldset: 'companion',
+      description: 'For alumni who have participated in more than one convening. Lists secondary cohorts beyond the originating one. Used for display on the public profile.',
+      of: [{
+        type: 'object',
+        fields: [
+          defineField({ name: 'convening', title: 'Convening', type: 'reference', to: [{ type: 'futuroSummit' }], validation: Rule => Rule.required() }),
+          defineField({ name: 'year', title: 'Year', type: 'number', description: 'Year of this cohort (denormalized for display when the convening reference is unresolved).' }),
+          defineField({ name: 'role', title: 'Role in this cohort', type: 'string', description: 'Optional. e.g. "Participant", "Mentor", "Returning author".' }),
+        ],
+        preview: {
+          select: { title: 'convening.title', subtitle: 'year' },
+        },
+      }],
     }),
     defineField({
       name: 'engagementLevel',
