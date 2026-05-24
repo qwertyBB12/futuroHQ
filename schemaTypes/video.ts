@@ -141,6 +141,14 @@ export default defineType({
       group: 'content',
       of: [{ type: 'reference', to: [{ type: 'tag' }] }],
     }),
+    defineField({
+      name: 'participants',
+      title: 'Participants',
+      type: 'array',
+      group: 'content',
+      of: [{ type: 'reference', to: [{ type: 'alumni' }, { type: 'ledgerPerson' }, { type: 'collaborator' }] }],
+      description: 'People who appear in this video. Drives the per-person video gallery on alumni profile pages. Seed via speaker-name heuristic; refine via tag-media review.',
+    }),
     featuredInField,
 
     // ── Storage tab ──────────────────────────────────────────────

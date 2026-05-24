@@ -48,6 +48,20 @@ export default defineType({
     }),
     defineField({ name: 'country', title: 'Country', type: 'string' }),
     defineField({
+      name: 'pronouns',
+      title: 'Pronouns',
+      type: 'string',
+      description: 'Used for natural-language copy like "In her voice / In his voice". Falls back to possessive ({First}\'s voice) if unset.',
+      options: {
+        list: [
+          { title: 'she / her', value: 'she/her' },
+          { title: 'he / him', value: 'he/him' },
+          { title: 'they / them', value: 'they/them' },
+        ],
+        layout: 'radio',
+      },
+    }),
+    defineField({
       name: 'projectTitle',
       title: 'Project Title',
       type: 'string',
@@ -79,6 +93,13 @@ export default defineType({
       title: 'Featured Clip URL',
       type: 'url',
       description: 'Direct MP4 URL of a single featured clip (with audio) shown in the In Their Words section of the alumni profile page. Bunny CDN preferred. Plural refactor (featuredClips array + isPrimary flag) is queued as a follow-on phase.',
+    }),
+    defineField({
+      name: 'featuredVideos',
+      title: 'Featured Videos (manual override)',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'video' }] }],
+      description: 'Optional manual ordering override on top of the participant-based auto-gallery. Items listed here are pinned to the front in the order given; remaining videos (where this alumnus is tagged in participants[]) follow by date.',
     }),
 
     // --- Project Links ---
