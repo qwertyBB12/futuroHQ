@@ -376,6 +376,29 @@ export default defineType({
 
     // ── Transcript tab ───────────────────────────────────────────
     ...transcriptFields,
+    defineField({
+      name: 'transcriptScore',
+      title: 'Transcript Score (LLM)',
+      type: 'object',
+      group: 'transcript',
+      readOnly: true,
+      description: 'Claude-derived signal (Phase 64). Drives the gallery promotion pipeline.',
+      fields: [
+        defineField({ name: 'depth', title: 'Depth (1–5)', type: 'number' }),
+        defineField({ name: 'formality', title: 'Formality (1–5)', type: 'number' }),
+        defineField({
+          name: 'category',
+          title: 'Suggested Category',
+          type: 'string',
+          options: {
+            list: ['project-talk', 'personal-reflection', 'casual', 'logistics', 'unknown'],
+          },
+        }),
+        defineField({ name: 'quote', title: 'Representative Quote', type: 'text' }),
+        defineField({ name: 'scoredAt', title: 'Scored At', type: 'datetime' }),
+        defineField({ name: 'model', title: 'Model', type: 'string' }),
+      ],
+    }),
 
     // ── Distribution tab ─────────────────────────────────────────
     surfaceOnField,
