@@ -377,6 +377,20 @@ export default defineType({
     // ── Transcript tab ───────────────────────────────────────────
     ...transcriptFields,
     defineField({
+      name: 'trimStart',
+      title: 'Trim Start (seconds)',
+      type: 'number',
+      group: 'content',
+      description: 'Offset from clip start to begin playback (drops leading filler). Frontend uses #t= media fragment, no re-encoding required.',
+    }),
+    defineField({
+      name: 'trimEnd',
+      title: 'Trim End (seconds)',
+      type: 'number',
+      group: 'content',
+      description: 'Offset from clip start to end playback. Pair with trimStart for #t=start,end media fragment.',
+    }),
+    defineField({
       name: 'transcriptScore',
       title: 'Transcript Score (LLM)',
       type: 'object',
