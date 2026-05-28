@@ -21,6 +21,9 @@ import pageContent_hhl_about from './pageContent_hhl_about'
 import podcast from './podcast'
 import podcastEpisode from './podcastEpisode'
 import video from './video'
+// --- Moments Model (Phase 71) ---
+import videoSource from './videoSource'
+import videoMoment from './videoMoment'
 import socialPost from './socialPost'
 import tag from './tag'
 
@@ -87,6 +90,9 @@ export const schemaTypes = [
   podcast,
   podcastEpisode,
   video,
+  // Moments Model (Phase 71)
+  videoSource,
+  videoMoment,
   socialPost,
   tag,
 
