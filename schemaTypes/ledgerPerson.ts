@@ -78,6 +78,8 @@ export default defineType({
           options: { hotspot: true },
           fields: [
             defineField({ name: 'alt', title: 'Alt Text', type: 'string' }),
+            defineField({ name: 'quote', title: 'Quote (EN)', type: 'text', rows: 2, description: 'Optional standout quote shown under this still (English). Leave blank for a plain image.' }),
+            defineField({ name: 'quoteEs', title: 'Quote (ES)', type: 'text', rows: 2, description: 'Spanish version of the quote (their actual words). Shown on the ES page.' }),
           ],
         }),
       ],
