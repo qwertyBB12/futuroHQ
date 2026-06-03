@@ -83,6 +83,26 @@ export default defineType({
       of: [{ type: 'mediaBlock' }, { type: 'image', options: { hotspot: true } }],
     }),
     defineField({
+      name: 'stillsQuotes',
+      title: 'Stills Quotes',
+      type: 'array',
+      description: 'Standout quotes that rotate beneath the "Stills" photo gallery on the public profile (mirrors the Vanguard Ledger). Forward-looking, project-and-impact lines in the author\'s own words. Add a few; they crossfade in order.',
+      of: [
+        defineField({
+          name: 'stillsQuote',
+          title: 'Quote',
+          type: 'object',
+          fields: [
+            defineField({ name: 'quote', title: 'Quote (EN)', type: 'text', rows: 2, description: 'English version shown on the EN page.' }),
+            defineField({ name: 'quoteEs', title: 'Quote (ES)', type: 'text', rows: 2, description: 'Spanish version (their actual words). Shown on the ES page.' }),
+          ],
+          preview: {
+            select: { title: 'quote', subtitle: 'quoteEs' },
+          },
+        }),
+      ],
+    }),
+    defineField({
       name: 'heroVideoUrl',
       title: 'Hero Video URL',
       type: 'url',
