@@ -88,6 +88,17 @@ export default defineType({
     defineField({ name: 'currentTitle', title: 'Current Title / Role', type: 'string' }),
     defineField({ name: 'organization', title: 'Organization', type: 'string' }),
     defineField({ name: 'countryOrRegion', title: 'Country or Region', type: 'string' }),
+    defineField({
+      name: 'location',
+      title: 'Location',
+      type: 'object',
+      description: 'Precise city for the situation-room globe (drives map placement). Mirrors the alumni location field.',
+      fields: [
+        defineField({ name: 'city', title: 'City', type: 'string' }),
+        defineField({ name: 'country', title: 'Country', type: 'string' }),
+        defineField({ name: 'region', title: 'Region / State', type: 'string' }),
+      ],
+    }),
 
     // --- Affiliations (link to Collaborator) ---
     defineField({
