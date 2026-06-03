@@ -65,6 +65,23 @@ export default defineType({
         }),
       ],
     }),
+    defineField({
+      name: 'galleryPhotos',
+      title: 'Gallery Photos',
+      type: 'array',
+      description: 'Curated stills shown in the "Stills" photo gallery on the profile (paper-formal coda below the narrative). Distinct from the single Portrait above.',
+      of: [
+        defineField({
+          name: 'galleryPhoto',
+          title: 'Photo',
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            defineField({ name: 'alt', title: 'Alt Text', type: 'string' }),
+          ],
+        }),
+      ],
+    }),
     defineField({ name: 'alias', title: 'Alias / Cinematic Tagline', type: 'string' }),
     defineField({ name: 'currentTitle', title: 'Current Title / Role', type: 'string' }),
     defineField({ name: 'organization', title: 'Organization', type: 'string' }),
@@ -111,6 +128,17 @@ export default defineType({
     defineField({ name: 'countercurrents', title: 'Countercurrents', type: 'text' }),
     defineField({ name: 'ethosValues', title: 'Ethos & Values', type: 'array', of: [{ type: 'string' }] }),
     defineField({ name: 'futuroEcho', title: 'Futuro Echo', type: 'text' }),
+
+    // --- Featured Videos (pin order on the cross-record gallery) ---
+    defineField({
+      name: 'featuredVideos',
+      title: 'Featured Videos (pinned)',
+      type: 'array',
+      description:
+        'Videos to pin to the front of this member\'s "On the record" gallery on the public profile. ' +
+        'Order here = order on the page. Videos not listed appear after, ordered by publishDate desc.',
+      of: [{ type: 'reference', to: [{ type: 'video' }] }],
+    }),
 
     // --- Media Assets ---
     defineField({
