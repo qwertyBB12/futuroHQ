@@ -377,11 +377,18 @@ export default defineType({
     // ── Transcript tab ───────────────────────────────────────────
     ...transcriptFields,
     defineField({
+      name: 'playbackUrl',
+      title: 'Playback URL (override)',
+      type: 'url',
+      group: 'storage',
+      description: 'Optional. When set, frontends should play this URL with the trim window instead of cdnUrl. Used to merge a response clip with its preceding question by pointing at the parent session and trimming to question→answer.',
+    }),
+    defineField({
       name: 'trimStart',
       title: 'Trim Start (seconds)',
       type: 'number',
       group: 'content',
-      description: 'Offset from clip start to begin playback (drops leading filler). Frontend uses #t= media fragment, no re-encoding required.',
+      description: 'Offset from clip start to begin playback (drops leading filler). Applies to playbackUrl if set, else cdnUrl. Frontend uses #t= media fragment, no re-encoding required.',
     }),
     defineField({
       name: 'trimEnd',
@@ -389,6 +396,72 @@ export default defineType({
       type: 'number',
       group: 'content',
       description: 'Offset from clip start to end playback. Pair with trimStart for #t=start,end media fragment.',
+    }),
+    defineField({
+      name: 'globeFeatured',
+      title: 'Globe Featured',
+      type: 'boolean',
+      group: 'content',
+      description:
+        'When true, this clip is the one that plays for its person in the homepage situation-room globe cycler. ' +
+        'Curated via the globe clip picker tool. If any of a person\'s clips is featured, only featured clips cycle for them.',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'globeTrim',
+      title: 'Globe Trim (override for the globe tile)',
+      type: 'object',
+      group: 'content',
+      description:
+        'Optional in/out point JUST for the globe tile, so the face can be framed clear of the lower-third without changing the real clip trim. Falls back to trimStart/trimEnd.',
+      fields: [
+        defineField({ name: 'start', title: 'Start (seconds)', type: 'number' }),
+        defineField({ name: 'end', title: 'End (seconds)', type: 'number' }),
+      ],
+    }),
+    defineField({
+      name: 'speakerOverlays',
+      title: 'Speaker Overlays (lower-third credits)',
+      type: 'array',
+      group: 'content',
+      description:
+        'Documentary-style lower-third credits. Each entry flashes its name/role/organization at the given time. ' +
+        'personRef links the overlay to a ledgerPerson or alumni doc so cross-profile galleries can find this clip.',
+      of: [
+        defineField({
+          name: 'overlayCue',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'time',
+              title: 'Time (seconds)',
+              type: 'number',
+              description: 'Playhead position when the credit appears.',
+              validation: (Rule) => Rule.required().min(0),
+            }),
+            defineField({
+              name: 'personRef',
+              title: 'Person',
+              type: 'reference',
+              to: [{type: 'ledgerPerson'}, {type: 'alumni'}],
+              weak: true,
+              description: 'Optional: link to ledgerPerson or alumni. Drives Vanguard Ledger / collaborator gallery surfacing. Weak reference so editing the target doc never blocks on these.',
+            }),
+            defineField({name: 'name', title: 'Name', type: 'string'}),
+            defineField({name: 'role', title: 'Role / Designation', type: 'string'}),
+            defineField({name: 'organization', title: 'Organization', type: 'string'}),
+            defineField({name: 'country', title: 'Country', type: 'string'}),
+            defineField({name: 'ledgerNo', title: 'Ledger No.', type: 'string'}),
+          ],
+          preview: {
+            select: {time: 'time', name: 'name', role: 'role'},
+            prepare: ({time, name, role}) => ({
+              title: name || '(no name)',
+              subtitle: [typeof time === 'number' ? `${time}s` : null, role].filter(Boolean).join(' · '),
+            }),
+          },
+        }),
+      ],
     }),
     defineField({
       name: 'transcriptScore',
