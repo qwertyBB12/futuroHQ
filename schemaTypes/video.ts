@@ -408,6 +408,24 @@ export default defineType({
       initialValue: false,
     }),
     defineField({
+      name: 'globeOverlayPos',
+      title: 'Globe Overlay Position',
+      type: 'string',
+      group: 'content',
+      description:
+        'Which corner the dossier lower-third sits in on the globe tile, so it can be flipped off the face. The case-number tag goes to the opposite corner. Default: bottom-left.',
+      options: {
+        list: [
+          { title: 'Bottom-left (default)', value: 'bl' },
+          { title: 'Top-left', value: 'tl' },
+          { title: 'Top-right', value: 'tr' },
+          { title: 'Bottom-right', value: 'br' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'bl',
+    }),
+    defineField({
       name: 'globeTrim',
       title: 'Globe Trim (override for the globe tile)',
       type: 'object',
