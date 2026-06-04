@@ -408,6 +408,14 @@ export default defineType({
       initialValue: false,
     }),
     defineField({
+      name: 'globePriority',
+      title: 'Globe Play Order',
+      type: 'number',
+      group: 'content',
+      description:
+        'Play order within this clip\'s tier in the globe cycler (1 = first, then 2, 3…; loops). Alumni and ledger/cornerstone are ordered separately and interleaved 3:1. Unset = plays after the numbered ones. Set via the globe clip picker.',
+    }),
+    defineField({
       name: 'globeOverlayPos',
       title: 'Globe Overlay Position',
       type: 'string',
