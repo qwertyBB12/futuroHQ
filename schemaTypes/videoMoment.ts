@@ -208,6 +208,44 @@ export default defineType({
       description: 'Optional override for gallery sort order (defaults to _createdAt).',
     }),
 
+    // ── Clips pipeline (spec 2026-06-10) ─────────────────────────
+    defineField({
+      name: 'publicApproved',
+      title: 'Public approved',
+      type: 'boolean',
+      group: 'content',
+      initialValue: false,
+      description:
+        'SECOND curation tier — exported ≠ public. Public profiles render a moment ' +
+        'ONLY when this is true (curated via the clip-public-picker tool or here). ' +
+        'False = gated: the clip exists in the system / alumni portal only.',
+    }),
+    defineField({
+      name: 'clipUrl',
+      title: 'Exported clip URL',
+      type: 'url',
+      group: 'trim',
+      readOnly: true,
+      description:
+        'Set by publish-approved-moments.mjs — the per-moment clip file in ' +
+        'published-clips/. The ONLY URL public surfaces play. Do not edit by hand.',
+    }),
+    defineField({
+      name: 'clipExportedAt',
+      title: 'Clip exported at',
+      type: 'datetime',
+      group: 'trim',
+      readOnly: true,
+    }),
+    defineField({
+      name: 'trimHash',
+      title: 'Trim hash',
+      type: 'string',
+      group: 'trim',
+      readOnly: true,
+      description: 'Export bookkeeping — changes when trims/master change, triggering re-export.',
+    }),
+
     // ── Distribution tab ─────────────────────────────────────────
     ...governanceCoreFields.map((field) => ({ ...field, group: 'distribution' as const })),
   ],

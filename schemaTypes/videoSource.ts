@@ -182,6 +182,18 @@ export default defineType({
       description: 'Public CDN URL for video playback, e.g. "https://benext.b-cdn.net/Futuro%20MMXIX/edited/..."',
     }),
     defineField({
+      name: 'publicSource',
+      title: 'Approved-public source',
+      type: 'boolean',
+      group: 'storage',
+      initialValue: false,
+      description:
+        'Clips pipeline (spec 2026-06-10): ONLY pre-edited, fully-approved files ' +
+        '(Smithsonian/OAS). When true, this source\'s moments may play the source ' +
+        'cdnUrl directly with #t= windows. Raw event masters stay false FOREVER — ' +
+        'their moments publish via exported per-clip files only.',
+    }),
+    defineField({
       name: 'duration',
       title: 'Duration (seconds)',
       type: 'number',
