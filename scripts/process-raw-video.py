@@ -100,6 +100,7 @@ def get_whisper_model():
 
 
 def download_from_b2(b2_path: str, local_path: Path) -> bool:
+    local_path.parent.mkdir(parents=True, exist_ok=True)
     result = subprocess.run(
         ["b2", "file", "download", f"b2://{BUCKET}/{b2_path}", str(local_path)],
         capture_output=True, text=True

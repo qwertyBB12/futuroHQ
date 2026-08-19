@@ -25,6 +25,7 @@ MIN_CLIP_DURATION = 5  # seconds
 
 
 def download_video(b2_path: str, local_path: Path) -> bool:
+    local_path.parent.mkdir(parents=True, exist_ok=True)
     result = subprocess.run(
         ["b2", "file", "download", f"b2://{BUCKET}/{b2_path}", str(local_path)],
         capture_output=True, text=True
@@ -33,16 +34,34 @@ def download_video(b2_path: str, local_path: Path) -> bool:
 
 
 def extract_clip(video_path: Path, output_path: Path, start: float, end: float) -> bool:
-    """Extract clip using stream copy (no re-encoding, instant)"""
+    """Extract clip using stream copy, then apply faststart in a second pass.
+
+    Two-step approach because -ss (input seeking) + -c copy + -movflags +faststart
+    in a single pass does not reliably relocate the moov atom.
+    """
     duration = end - start
+    temp_path = output_path.with_suffix(".tmp.mp4")
+
+    # Step 1: Extract clip with stream copy (no faststart yet)
     result = subprocess.run([
         "ffmpeg", "-ss", str(start), "-i", str(video_path),
         "-t", str(duration),
-        "-c", "copy",  # stream copy = no quality loss, instant
-        "-movflags", "+faststart",
+        "-c", "copy",
         "-avoid_negative_ts", "make_zero",
+        "-y", str(temp_path)
+    ], capture_output=True, text=True)
+    if result.returncode != 0:
+        temp_path.unlink(missing_ok=True)
+        return False
+
+    # Step 2: Apply faststart (relocates moov atom to beginning)
+    result = subprocess.run([
+        "ffmpeg", "-i", str(temp_path),
+        "-c", "copy",
+        "-movflags", "+faststart",
         "-y", str(output_path)
     ], capture_output=True, text=True)
+    temp_path.unlink(missing_ok=True)
     return result.returncode == 0
 
 
